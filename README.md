@@ -19,15 +19,15 @@ Sou estudante de Ciência da Computação na Universidade Federal do ABC (UFABC)
 ### Sistemas, backend e redes
 
 - [Linux-and-FreeBSD](https://github.com/felipejunqueira/Linux-and-FreeBSD) — anotações e experimentos sobre sistemas operacionais e ambiente Unix.
-- [Network-Projects](https://github.com/felipejunqueira/Network-Projects) — projetos e exercícios voltados para redes de computadores.
+- [ProjetoRedes](https://github.com/felipejunqueira/ProjetoRedes) — projetos e exercícios voltados para redes de computadores.
 - [WebServer-C-Lua-Pallene](https://github.com/felipejunqueira/WebServer-C-Lua-Pallene) — exploração de servidores web com foco em C, Lua e Pallene.
-- [Windows-Socket-in-C](https://github.com/felipejunqueira/Windows-Socket-in-C) — mini projeto de servidor local usando sockets no Windows com C.
+- [WindowsSocket_in_C](https://github.com/felipejunqueira/WindowsSocket_in_C) — mini projeto de servidor local usando sockets no Windows com C.
 
 ### Algoritmos, estruturas de dados e fundamentos
 
-- [Algorithms-and-Data-Structures](https://github.com/felipejunqueira/Algorithms-and-Data-Structures) — implementações relacionadas a algoritmos e estruturas de dados.
-- [Discrete-Mathematics](https://github.com/felipejunqueira/Discrete-Mathematics) — matemática discreta, teoria dos grafos e implementações relacionadas.
-- [Grokking-Algorithms](https://github.com/felipejunqueira/Grokking-Algorithms) — exercícios e implementações inspirados em estudos de algoritmos.
+- [Algorithms-and-Data-Structure-2](https://github.com/felipejunqueira/Algorithms-and-Data-Structure-2) — implementações relacionadas a algoritmos e estruturas de dados.
+- [Discrete-Math-2](https://github.com/felipejunqueira/Discrete-Math-2) — matemática discreta, teoria dos grafos e implementações relacionadas.
+- [grokkingbook](https://github.com/felipejunqueira/grokkingbook) — exercícios e implementações inspirados em estudos de algoritmos.
 - [OBIcodes](https://github.com/felipejunqueira/OBIcodes) — soluções e estudos para a Olimpíada Brasileira de Informática.
 - [RustSort](https://github.com/felipejunqueira/RustSort) — algoritmos de ordenação implementados em C++.
 
