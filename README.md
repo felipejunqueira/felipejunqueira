@@ -1,40 +1,41 @@
 # Felipe Junqueira
 
-Sou estudante de Ciência da Computação na Universidade Federal do ABC (UFABC) e busco oportunidades em Engenharia de Software, com foco em desenvolvimento backend, estruturas de dados, sistemas e projetos que transformem teoria em soluções reais.
+Estudante de Ciência da Computação na Universidade Federal do ABC (UFABC), com foco em Engenharia de Software e desenvolvimento backend.  
+Tenho interesse em projetos que combinam fundamentos de computação com aplicação prática.
 
-## Áreas de interesse
+## Foco de estudo
 
-- Desenvolvimento backend
+- Backend e desenvolvimento de sistemas
 - Estruturas de dados e algoritmos
-- Redes e sistemas
+- Redes de computadores
 - Computação quântica aplicada
 
-## Repositórios em destaque
+## Projetos em destaque
 
-### Aplicações e projetos completos
+### Aplicações
 
-- [ChurchRankingApp](https://github.com/felipejunqueira/ChurchRankingApp) — calculadora em formato PWA, com versão publicada em [felipejunqueira.github.io/ChurchRankingApp](https://felipejunqueira.github.io/ChurchRankingApp/).
-- [Tic-Tac-Toe](https://github.com/felipejunqueira/Tic-Tac-Toe) — jogo da velha implementado em várias linguagens, reunindo diferentes abordagens de programação em um único repositório.
+- [Church Ranking App](https://github.com/felipejunqueira/ChurchRankingApp) — calculadora em formato PWA, com versão publicada em [felipejunqueira.github.io/ChurchRankingApp](https://felipejunqueira.github.io/ChurchRankingApp/).
+- [Tic-Tac-Toe](https://github.com/felipejunqueira/Tic-Tac-Toe) — implementação do jogo da velha em diferentes linguagens.
 
-### Sistemas, backend e redes
+### Sistemas e redes
 
-- [Linux-and-FreeBSD](https://github.com/felipejunqueira/Linux-and-FreeBSD) — anotações e experimentos sobre sistemas operacionais e ambiente Unix.
-- [ProjetoRedes](https://github.com/felipejunqueira/ProjetoRedes) — projetos e exercícios voltados para redes de computadores.
-- [WebServer-C-Lua-Pallene](https://github.com/felipejunqueira/WebServer-C-Lua-Pallene) — exploração de servidores web com foco em C, Lua e Pallene.
-- [WindowsSocket_in_C](https://github.com/felipejunqueira/WindowsSocket_in_C) — mini projeto de servidor local usando sockets no Windows com C.
+- [Linux and FreeBSD](https://github.com/felipejunqueira/Linux-and-FreeBSD) — anotações e experimentos sobre sistemas operacionais e ambiente Unix.
+- [Projeto Redes](https://github.com/felipejunqueira/ProjetoRedes) — exercícios e projetos de redes de computadores.
+- [Web Server (C, Lua e Pallene)](https://github.com/felipejunqueira/WebServer-C-Lua-Pallene) — estudo de implementação de servidor web com foco em linguagens de baixo nível.
+- [Windows Socket em C](https://github.com/felipejunqueira/WindowsSocket_in_C) — servidor local simples usando sockets no Windows.
 
-### Algoritmos, estruturas de dados e fundamentos
+### Algoritmos e fundamentos
 
-- [Algorithms-and-Data-Structure-2](https://github.com/felipejunqueira/Algorithms-and-Data-Structure-2) — implementações relacionadas a algoritmos e estruturas de dados.
-- [Discrete-Math-2](https://github.com/felipejunqueira/Discrete-Math-2) — matemática discreta, teoria dos grafos e implementações relacionadas.
-- [grokkingbook](https://github.com/felipejunqueira/grokkingbook) — exercícios e implementações inspirados em estudos de algoritmos.
-- [OBIcodes](https://github.com/felipejunqueira/OBIcodes) — soluções e estudos para a Olimpíada Brasileira de Informática.
-- [RustSort](https://github.com/felipejunqueira/RustSort) — algoritmos de ordenação implementados em C++.
+- [Algorithms and Data Structure 2](https://github.com/felipejunqueira/Algorithms-and-Data-Structure-2) — implementações de algoritmos e estruturas de dados.
+- [Discrete Math 2](https://github.com/felipejunqueira/Discrete-Math-2) — estudos de matemática discreta e teoria dos grafos.
+- [Grokking Book](https://github.com/felipejunqueira/grokkingbook) — exercícios e implementações baseados em estudos de algoritmos.
+- [OBI Codes](https://github.com/felipejunqueira/OBIcodes) — soluções e estudos para a Olimpíada Brasileira de Informática.
+- [Rust Sort](https://github.com/felipejunqueira/RustSort) — algoritmos de ordenação implementados em C++.
 
 ### Computação quântica
 
-- [Quantum-Algorithms](https://github.com/felipejunqueira/Quantum-Algorithms) — experimentos e estudos em Python com Qiskit para algoritmos quânticos.
+- [Quantum Algorithms](https://github.com/felipejunqueira/Quantum-Algorithms) — experimentos em Python com Qiskit para estudo de algoritmos quânticos.
 
-## Objetivo deste repositório
+## Sobre este repositório
 
-Este repositório funciona como um ponto de entrada para meu perfil, reunindo uma apresentação rápida e conectando os principais projetos públicos que desenvolvi ou estudo.
+Este repositório funciona como página de apresentação do meu perfil no GitHub, reunindo uma visão geral da minha trajetória e dos principais projetos públicos.
