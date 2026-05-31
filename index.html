@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Felipe Junqueira Leite - Portfólio de Desenvolvedor, IA, C++ e Projetos de Inovação.">
+    <title>Felipe Junqueira Leite | Desenvolvedor & Inovador</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
+
+        :root {
+            --bg-color: #0b0f19;
+            --surface-color: #111827;
+            --text-main: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+        }
+
+        .quantum-theme {
+            --bg-color: #000500;
+            --surface-color: #001a00;
+            --text-main: #00ff00;
+            --text-secondary: #00cc00;
+            --accent-primary: #ff00ff;
+            --accent-secondary: #00ff00;
+            --accent-glow: rgba(0, 255, 0, 0.5);
+            font-family: 'Fira Code', monospace !important;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease;
+        }
+
+        h1, h2, h3 { font-weight: 800; line-height: 1.2; }
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-family: 'Fira Code', monospace; font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text-main); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 600;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-primary); }
+
+        section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .hero { position: relative; text-align: center; align-items: center; }
+        .hero h1 { font-size: clamp(3rem, 5vw, 5rem); margin-bottom: 1rem; cursor: pointer; user-select: none; }
+        .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem; }
+        .terminal-box {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Fira Code', monospace;
+            color: #0f0;
+            display: inline-block;
+            margin-bottom: 2rem;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none;
+            transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;
+        }
+        .btn-primary { background: var(--accent-primary); color: #fff; box-shadow: 0 4px 15px var(--accent-glow); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+        .btn-outline { border: 2px solid var(--text-secondary); color: var(--text-main); }
+        .btn-outline:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
+            .nav-links { display: none; }
+        }
+
+        .section-title { font-size: 2.5rem; margin-bottom: 3rem; text-align: center; }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 4px; background: var(--accent-primary);
+            margin: 1rem auto 0; border-radius: 2px;
+        }
+
+        .card {
+            background: var(--surface-color); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); }
+        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent-primary); }
+        .card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tag { background: rgba(255,255,255,0.05); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-family: 'Fira Code'; }
+
+        .skill-bar { margin-bottom: 1.5rem; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-family: 'Fira Code', monospace; font-size: 0.9rem; }
+        .progress-line { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+        .progress-line span { display: block; height: 100%; background: var(--accent-primary); border-radius: 4px; transform: scaleX(0); transform-origin: left; transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 4rem; color: var(--text-secondary); }
+        .fuel-btn {
+            background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-top: 1rem;
+            transition: transform 0.3s;
+        }
+        .fuel-btn:hover { transform: scale(1.2) rotate(10deg); }
+
+        #toast {
+            position: fixed; bottom: 20px; right: 20px; background: var(--surface-color); border-left: 4px solid var(--accent-primary);
+            padding: 1rem 1.5rem; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: translateX(150%); transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2000; font-family: 'Fira Code', monospace; font-size: 0.9rem;
+        }
+        #toast.show { transform: translateX(0); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">> felipe_leite</a>
+            <div class="nav-links">
+                <a href="#about">Sobre</a>
+                <a href="#skills">Habilidades</a>
+                <a href="#projects">Projetos</a>
+                <a href="#contact">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="terminal-box reveal">
+            <span style="color:#ff0055">root@felipe</span>:<span style="color:#00aaff">~</span>$ ./iniciar_portfolio.sh<br>
+            > Carregando módulos de IA... [OK]<br>
+            > Compilando algoritmos em C++... [OK]<br>
+            > Estabelecendo conexão...
+        </div>
+        <h1 class="gradient-text reveal" id="hero-title" title="Clique 5 vezes para uma surpresa">Felipe Junqueira Leite</h1>
+        <p class="reveal">Transformando lógica abstrata em soluções concretas. Foco no desenvolvimento de software de alta performance, pesquisa acadêmica e inteligência artificial generativa.</p>
+        <div class="btn-group reveal">
+            <a href="#projects" class="btn btn-primary">Explorar Projetos</a>
+            <a href="curriculo.pdf" class="btn btn-outline" target="_blank" rel="noopener">Baixar Currículo</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title reveal">Sobre Mim</h2>
+        <div class="grid-2 reveal">
+            <div>
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+                    Sou um desenvolvedor e pesquisador imerso no ecossistema de tecnologia e inovação de São Paulo. Minha trajetória transita desde a estrutura fundamental das estruturas de dados até a fronteira da criação digital e comunicação científica.
+                </p>
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+                    Seja modelando sistemas via API do Gemini no Google AI Studio, prototipando lógicas de jogos, ou estruturando equações matemáticas e algoritmos complexos, minha abordagem é sempre fundamentada em construir bases sólidas e arquiteturas eficientes.
+                </p>
+                <p style="font-size: 1.1rem;">
+                    Tenho um perfil extensionista forte, acreditando que a tecnologia deve ser democratizada — visão que aplico em projetos de museologia de TI e inclusão digital.
+                </p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">👨‍💻</div>
+                <h3 style="color: var(--text-main)">Mindset Técnico</h3>
+                <p>Eterno estudante e construtor. Não busco apenas escrever código, mas desenhar a solução estrutural ótima para o problema, seja em ambientes cloud corporativos ou em hackathons de computação quântica.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title reveal">Arsenal Técnico</h2>
+        <div class="grid-2 reveal">
+            <div>
+                <div class="skill-bar">
+                    <div class="skill-info"><span>C++ & Estruturas de Dados</span><span>90%</span></div>
+                    <div class="progress-line"><span style="width: 90%;"></span></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info"><span>IA Generativa (Gemini API)</span><span>85%</span></div>
+                    <div class="progress-line"><span style="width: 85%;"></span></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info"><span>Game Development</span><span>75%</span></div>
+                    <div class="progress-line"><span style="width: 75%;"></span></div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info"><span>Lógica Matemática & Algoritmos</span><span>88%</span></div>
+                    <div class="progress-line"><span style="width: 88%;"></span></div>
+                </div>
+            </div>
+            <div class="grid-3" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="card" style="padding: 1.5rem;">
+                    <h4 style="margin-bottom: 0.5rem; color: var(--accent-primary);">Ferramentas</h4>
+                    <p style="font-size: 0.85rem;">Google AI Studio, GDB Online, GitHub Pages, Moodle/SIPAC.</p>
+                </div>
+                <div class="card" style="padding: 1.5rem;">
+                    <h4 style="margin-bottom: 0.5rem; color: var(--accent-secondary);">Áreas de Pesquisa</h4>
+                    <p style="font-size: 0.85rem;">Computação Quântica, Divulgação Científica, Prototipagem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title reveal">Iniciativas & Projetos</h2>
+        <div class="grid-3 reveal">
+            <div class="card">
+                <h3>PolarCasters 2025</h3>
+                <p>Desenvolvimento e produção de videoensaios e videoaulas com foco em comunicação e divulgação científica de alto impacto.</p>
+                <div class="tags">
+                    <span class="tag">Comunicação Científica</span>
+                    <span class="tag">Pesquisa</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Diversão Séria</h3>
+                <p>Workshop imersivo voltado para a prototipagem rápida de jogos, focando na aplicação de mecânicas divertidas para fins educacionais e sérios.</p>
+                <div class="tags">
+                    <span class="tag">Game Design</span>
+                    <span class="tag">Prototipagem</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Qiskit Fall Fest</h3>
+                <p>Participação em hackathon focado no ecossistema de computação quântica da IBM, aplicando lógica algorítmica não-clássica na resolução de problemas.</p>
+                <div class="tags">
+                    <span class="tag">Computação Quântica</span>
+                    <span class="tag">Hackathon</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Inovação Contínua</h3>
+                <p>Engajamento ativo no ecossistema de São Paulo, incluindo SP2B e iniciativas de curadoria tecnológica visando inclusão digital profunda.</p>
+                <div class="tags">
+                    <span class="tag">Ecossistema SP</span>
+                    <span class="tag">Inclusão Digital</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="min-height: auto; padding-bottom: 4rem;">
+        <h2 class="section-title reveal">Vamos Conectar</h2>
+        <div class="card reveal" style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <p style="margin-bottom: 2rem;">Interessado em colaborar em projetos de software, hackathons ou pesquisas acadêmicas? Minha caixa de entrada está aberta.</p>
+            <a href="mailto:seu-email@gmail.com" class="btn btn-primary" style="margin-bottom: 2rem;">Enviar Email</a>
+            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="https://github.com/seu-usuario" target="_blank" rel="noopener" style="color: var(--text-main); text-decoration: none;">GitHub</a>
+                <a href="https://linkedin.com/in/seu-usuario" target="_blank" rel="noopener" style="color: var(--text-main); text-decoration: none;">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Felipe Junqueira Leite. Desenvolvido com precisão algorítmica.</p>
+        <button class="fuel-btn" onclick="abastecerDev()" title="Combustível do Desenvolvedor">☕</button>
+    </footer>
+
+    <div id="toast"></div>
+
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+        const progressBars = document.querySelectorAll('.progress-line span');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+
+            const skillsSection = document.getElementById('skills');
+            if (skillsSection.getBoundingClientRect().top < windowHeight - 100) {
+                progressBars.forEach(bar => {
+                    bar.style.transform = 'scaleX(1)';
+                });
+            }
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        let clickCount = 0;
+        const heroTitle = document.getElementById('hero-title');
+        const toast = document.getElementById('toast');
+
+        const showToast = (msg, duration = 3000) => {
+            toast.innerHTML = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), duration);
+        };
+
+        heroTitle.addEventListener('click', () => {
+            clickCount++;
+            heroTitle.style.transform = `scale(${1 + (clickCount * 0.02)})`;
+            setTimeout(() => heroTitle.style.transform = 'scale(1)', 150);
+
+            if (clickCount === 5) {
+                document.body.classList.toggle('quantum-theme');
+                const isQuantum = document.body.classList.contains('quantum-theme');
+                showToast(isQuantum ? "⚛️ Qiskit Fall Fest Mode: ATIVADO" : "Modo Clássico Restaurado", 4000);
+                clickCount = 0;
+            }
+        });
+
+        const snacks = [
+            "Carregando Bolo de Pote... Energia +50%", 
+            "Injetando Palha Italiana Oreo... Foco Máximo Atingido!",
+            "Vatapá detectado no sistema. Compilação acelerada em 200%!"
+        ];
+
+        window.abastecerDev = () => {
+            const randomSnack = snacks[Math.floor(Math.random() * snacks.length)];
+            showToast(`🔋 ${randomSnack}`, 4000);
+        };
+    </script>
+</body>
+</html>
