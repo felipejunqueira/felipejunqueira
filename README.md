@@ -1,43 +1,65 @@
-# Felipe Junqueira Leite 👨‍💻
+# E aí, eu sou o Felipe Junqueira! 👾
 
-Sou estudante de Ciência da Computação na Universidade Federal do ABC (UFABC) e busco oportunidades em Engenharia de Software, com foco em desenvolvimento backend, estruturas de dados, sistemas e inteligência artificial generativa. Sou apaixonado por transformar lógica abstrata em soluções eficientes de alta performance.
+Estudante de Ciência da Computação na Universidade Federal do ABC (UFABC). Sou fascinado por resolver problemas complexos através de código limpo, focado em desenvolvimento backend de alta performance, estruturas de dados, redes e engenharia de software no mundo real.
 
----
-
-## 🛠️ Portfólio & Apresentação
-
-* **[Currículo Interativo (HTML)](./index.html)** — Um portfólio web moderno e responsivo com temas interativos.
-* **[Currículo Técnico (PDF)](./curriculo.pdf)** — Meu currículo resumido em formato PDF pronto para download.
-* **[Iniciação Científica (IC)](./IC.txt)** — Registro acadêmico sobre minha pesquisa e interesses científicos.
+Acredito fortemente em transformar teoria algorítmica rigorosa em aplicações práticas e comerciais que gerem valor de verdade.
 
 ---
 
-## 📚 Repositórios em Destaque
+## 📊 Métricas e Performance
+
+<div align="center">
+  <table border="0">
+    <tr>
+      <td align="center" valign="top">
+        <a href="https://github.com/felipejunqueira">
+          <img src="https://github-readme-stats.vercel.app/api?username=felipejunqueira&show_icons=true&theme=radical&include_all_commits=true&count_private=true" alt="GitHub Stats" />
+        </a>
+      </td>
+      <td align="center" valign="top">
+        <a href="https://github.com/felipejunqueira">
+          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=felipejunqueira&layout=compact&langs_count=6&theme=radical&hide=html,css" alt="Top Languages" />
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+---
+
+## 🛠️ Meu Arsenal Técnico e Interesses
+
+* **💻 Linguagens:** C, C++, Python, Rust, Java, Lua e TypeScript.
+* **🧠 Inteligência Artificial (Generative AI):** Modelagem de sistemas inteligentes com foco na **Gemini API** e prototipagem no **Google AI Studio**.
+* **⚙️ Algoritmos & Grafos:** Pesquisa e implementação de Teoria dos Grafos, Matemática Discreta e Otimização Combinatória próxima ao metal.
+* **🌐 Redes & Baixo Nível:** Desenvolvimento de servidores locais, sockets (FreeBSD/Windows) e exploração de tráfego web nativo.
+* **🚀 Software no Mundo Real:** Criação e venda de produtos digitais comerciais (minha própria fábrica de software).
+
+---
+
+## 📚 Meu Laboratório Pessoal
+
+Uso o GitHub como meu ecossistema de criação e experimentação. Veja os principais destaques:
 
 ### 🧠 Algoritmos & Estruturas de Dados
-* **[algorithms-playbook](https://github.com/felipejunqueira/algorithms-playbook)** 🌟 — Meu repositório unificado contendo toda a minha jornada em algoritmos e estruturas de dados.
-  * Estruturas de dados avançadas em C (tabelas hash, listas, árvores do AED II).
-  * Algoritmos de coloração e ordenação da Teoria dos Grafos e Matemática Discreta.
-  * Soluções de algoritmos gulosos e programação dinâmica em C++ (Katana Slasher, LIS).
-  * Estudos práticos em Rust (`rust-implementations`) e implementações do livro "Entendendo Algoritmos" em Python.
+* **[algorithms-playbook](https://github.com/felipejunqueira/algorithms-playbook)** 🌟 — Repositório definitivo compilando meu progresso acadêmico e pessoal.
+  * Estruturas de dados complexas em C (AED II - tabelas hash dinâmicas, pilhas, árvores).
+  * Heurísticas de coloração e métricas de Teoria dos Grafos.
+  * Algoritmos gulosos e programação dinâmica em C++ (Katana Thrower, LIS).
+  * Implementações do clássico livro *Entendendo Algoritmos* em Python e algoritmos de ordenação eficientes em Rust.
 
 ### 🎮 Jogos
-* **[tic-tac-toe](https://github.com/felipejunqueira/tic-tac-toe)** — Jogo da velha clássico implementado de forma modular em uma ampla variedade de linguagens (**C**, **Python**, **Java** e **Lua**), permitindo a comparação estrutural entre os ecossistemas.
+* **[tic-tac-toe](https://github.com/felipejunqueira/tic-tac-toe)** — Jogo da velha clássico implementado em **C**, **Python** (Procedural & POO), **Java** e **Lua**, desenhado para comparar a sintaxe e filosofia de cada ecossistema.
 
-### 🖥️ Sistemas, Backend & Redes
-* **[Linux-and-FreeBSD](https://github.com/felipejunqueira/Linux-and-FreeBSD)** — Anotações, configurações e experimentos sobre sistemas operacionais e ambiente Unix.
-* **[ProjetoRedes](https://github.com/felipejunqueira/ProjetoRedes)** — Projetos e exercícios acadêmicos focados em redes de computadores.
-* **[WebServer-C-Lua-Pallene](https://github.com/felipejunqueira/WebServer-C-Lua-Pallene)** — Servidor web de alto desempenho explorando C, Lua e Pallene.
-* **[WindowsSocket_in_C](https://github.com/felipejunqueira/WindowsSocket_in_C)** — Servidor local básico em C com sockets do Windows.
-
-### ⚛️ Computação Avançada & Pesquisa
-* **[Quantum-Algorithms](https://github.com/felipejunqueira/Quantum-Algorithms)** — Estudos práticos de algoritmos quânticos e simulações em Python utilizando Qiskit.
-* **[Project_Bioblocks](https://github.com/felipejunqueira/Project_Bioblocks)** — Aplicativo desenvolvido em equipe em parceria com o professor da UFABC para a disciplina de Bioquímica.
-* **[ChurchRankingApp](https://github.com/felipejunqueira/ChurchRankingApp)** — Calculadora PWA voltada para adolescentes, publicada online.
+### 👥 Projetos Acadêmicos & Sociais
+* **[Project_Bioblocks](https://github.com/felipejunqueira/Project_Bioblocks)** — Aplicativo voltado à disciplina de Bioquímica, desenvolvido em parceria direta com meu professor da UFABC.
+* **[ChurchRankingApp](https://github.com/felipejunqueira/ChurchRankingApp)** — Calculadora em formato PWA focada em engajamento de adolescentes.
 
 ---
 
-## 📫 Vamos Conectar?
+## 💼 Portfólio & Contato
 
+* **[Currículo Interativo (HTML)](./index.html)** — Meu portfólio web moderno e animado hospedado diretamente aqui.
+* **[Currículo Técnico (PDF)](./curriculo.pdf)** — Versão em PDF pronta para leitura e download.
 * **LinkedIn:** [in/felipe-j-135531262](https://www.linkedin.com/in/felipe-j-135531262)
 * **Instagram:** [@psslipe](https://www.instagram.com/psslipe/)
