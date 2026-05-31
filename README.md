@@ -2,7 +2,7 @@
 
 ### 💻 Software Engineer & AI Developer | UFABC
 
-Construindo soluções robustas que unem a eficiência estrutural dos algoritmos clássicos com a vanguarda da Inteligência Artificial Generativa. Além do meio acadêmico, atuo no mercado real desenvolvendo produtos sob medida para negócios e clientes.
+Construindo soluções robustas que unem a eficiência estrutural dos algoritmos clássicos com a vanguarda da Inteligência Artificial Generativa. Sou apaixonado por transformar lógica abstrata em soluções de software eficientes e de alta performance.
 
 ---
 
@@ -16,12 +16,12 @@ Construindo soluções robustas que unem a eficiência estrutural dos algoritmos
 
 ---
 
-## 💼 Linha de Produção & Fábrica de Software
+## 🎮 Desafio: Jogue Jogo da Velha Contra Minha IA! 🕹️
 
-Diferente da computação puramente teórica, sou fundador de uma fábrica de software pessoal onde projeto e entrego sistemas comerciais robustos:
+Como unifiquei meus códigos de Jogo da Velha em várias linguagens, criei uma versão **totalmente interativa** com uma Inteligência Artificial local! Você pode jogar uma partida rápida direto no seu navegador:
 
-* **[box](https://github.com/felipejunqueira/box)** *(Privado)* — Meu cofre central de produtos prontos e em desenvolvimento para lojistas, comerciantes e empresários.
-* **[SiteFernandaFono](https://github.com/felipejunqueira/SiteFernandaFono)** *(Privado)* — Landing page profissional desenvolvida sob medida, otimizada e publicada para cliente real do setor de fonoaudiologia.
+### 👉 **[CLIQUE AQUI PARA JOGAR JOGO DA VELHA ONLINE!](https://felipejunqueira.github.io/felipejunqueira/#game)** 🤖
+*(Desafie o computador e tente vencer!)*
 
 ---
 
@@ -38,7 +38,7 @@ Desenvolvimento científico e acadêmico focado em estruturas de dados eficiente
 
 ---
 
-## 🧪 Experimentos, Hackathons & Jogos
+## 🧪 Experimentos, Hackathons & PWA
 
 Onde a criatividade se encontra com a lógica em projetos e maratonas:
 

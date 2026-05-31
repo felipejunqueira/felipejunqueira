@@ -150,6 +150,22 @@
             z-index: 2000; font-family: 'Fira Code', monospace; font-size: 0.9rem;
         }
         #toast.show { transform: translateX(0); }
+        .cell:hover {
+            background: rgba(59, 130, 246, 0.15) !important;
+            border-color: var(--accent-primary) !important;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+        .cell.win {
+            background: rgba(139, 92, 246, 0.3) !important;
+            border-color: var(--accent-secondary) !important;
+            color: #fff !important;
+            animation: pulse-glow 1s infinite alternate;
+        }
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 10px rgba(139, 92, 246, 0.3); }
+            to { box-shadow: 0 0 20px rgba(139, 92, 246, 0.7); }
+        }
     </style>
 </head>
 <body>
@@ -161,6 +177,7 @@
                 <a href="#about">Sobre</a>
                 <a href="#skills">Habilidades</a>
                 <a href="#projects">Projetos</a>
+                <a href="#game">Jogo da Velha</a>
                 <a href="#contact">Contato</a>
             </div>
         </div>
@@ -275,6 +292,30 @@
         </div>
     </section>
 
+    <section id="game" class="reveal">
+        <h2 class="section-title">Jogo da Velha Contra a IA</h2>
+        <div class="card" style="max-width: 450px; margin: 0 auto; text-align: center;">
+            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+                Desafie o meu algoritmo de Inteligência Artificial local para uma partida clássica direto no navegador!
+            </p>
+            <div id="game-status" style="font-family: 'Fira Code', monospace; margin-bottom: 1.5rem; font-weight: bold; color: var(--accent-primary);">
+                Sua vez! (Você é o X)
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 280px; margin: 0 auto 2rem;">
+                <button class="cell" onclick="makePlay(0)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
+                <button class="cell" onclick="makePlay(1)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
+                <button class="cell" onclick="makePlay(2)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
+                <button class="cell" onclick="makePlay(3)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
+                <button class="cell" onclick="makePlay(4)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
+                <button class="cell" onclick="makePlay(5)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
+                <button class="cell" onclick="makePlay(6)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
+                <button class="cell" onclick="makePlay(7)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
+                <button class="cell" onclick="makePlay(8)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
+            </div>
+            <button class="btn btn-outline" onclick="resetBoard()">Resetar Tabuleiro</button>
+        </div>
+    </section>
+
     <section id="contact" style="min-height: auto; padding-bottom: 4rem;">
         <h2 class="section-title reveal">Vamos Conectar</h2>
         <div class="card reveal" style="max-width: 600px; margin: 0 auto; text-align: center;">
@@ -350,6 +391,106 @@
         window.abastecerDev = () => {
             const randomSnack = snacks[Math.floor(Math.random() * snacks.length)];
             showToast(`🔋 ${randomSnack}`, 4000);
+        };
+
+        // Jogo da Velha Logic
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let isGameActive = true;
+        const cells = document.querySelectorAll('.cell');
+        const gameStatus = document.getElementById('game-status');
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        window.makePlay = (index) => {
+            if (board[index] !== '' || !isGameActive) return;
+            
+            board[index] = 'X';
+            cells[index].innerText = 'X';
+            cells[index].style.color = 'var(--accent-primary)';
+            
+            if (checkWin('X')) {
+                endGame('Você venceu! 🎉');
+                return;
+            }
+            if (board.every(cell => cell !== '')) {
+                endGame('Empate! 🤝');
+                return;
+            }
+            
+            isGameActive = false;
+            gameStatus.innerText = 'IA pensando...';
+            setTimeout(aiMove, 600);
+        };
+
+        const aiMove = () => {
+            if (!board.includes('')) return;
+            
+            let choice = findBestMove('O') ?? findBestMove('X') ?? takeRandom();
+            
+            board[choice] = 'O';
+            cells[choice].innerText = 'O';
+            cells[choice].style.color = 'var(--accent-secondary)';
+            
+            if (checkWin('O')) {
+                endGame('A IA venceu! 🤖');
+                return;
+            }
+            if (board.every(cell => cell !== '')) {
+                endGame('Empate! 🤝');
+                return;
+            }
+            
+            isGameActive = true;
+            gameStatus.innerText = 'Sua vez! (Você é o X)';
+        };
+
+        const findBestMove = (player) => {
+            for (let pattern of winPatterns) {
+                let counts = pattern.map(idx => board[idx]);
+                let emptyCount = counts.filter(val => val === '').length;
+                let playerCount = counts.filter(val => val === player).length;
+                if (emptyCount === 1 && playerCount === 2) {
+                    return pattern[counts.indexOf('')];
+                }
+            }
+            return null;
+        };
+
+        const takeRandom = () => {
+            if (board[4] === '') return 4;
+            const corners = [0, 2, 6, 8].filter(idx => board[idx] === '');
+            if (corners.length > 0) return corners[Math.floor(Math.random() * corners.length)];
+            const empties = board.map((val, idx) => val === '' ? idx : null).filter(val => val !== null);
+            return empties[Math.floor(Math.random() * empties.length)];
+        };
+
+        const checkWin = (player) => {
+            for (let pattern of winPatterns) {
+                if (pattern.every(idx => board[idx] === player)) {
+                    pattern.forEach(idx => cells[idx].classList.add('win'));
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        const endGame = (message) => {
+            gameStatus.innerText = message;
+            isGameActive = false;
+        };
+
+        window.resetBoard = () => {
+            board = ['', '', '', '', '', '', '', '', ''];
+            isGameActive = true;
+            gameStatus.innerText = 'Sua vez! (Você é o X)';
+            cells.forEach(cell => {
+                cell.innerText = '';
+                cell.classList.remove('win');
+                cell.style.color = 'var(--text-main)';
+            });
         };
     </script>
 </body>
