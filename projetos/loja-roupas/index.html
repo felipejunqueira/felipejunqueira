@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Nilo | Moda Feminina</title>
+  <meta name="description" content="Maison Nilo — vitrine digital de moda feminina com lookbook interativo e compra rápida pelo WhatsApp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--ink:#1c1917;--muted:#57534e;--line:#fed7aa;--card:#fff;--brand:#c2410c;--brand2:#ea580c}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Manrope,sans-serif;color:var(--ink);background:linear-gradient(155deg,#ffedd5,#fffbeb);min-height:100vh}
+    .wrap{width:min(1120px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
+    .hero{background:#ffffffe0;border:1px solid #ffffffb0;border-radius:20px;overflow:hidden;box-shadow:0 18px 44px #7c2d1230}
+    .hero-img{height:200px;background:url('https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1600&q=80') center/cover}
+    @media(min-width:640px){.hero-img{height:280px}}
+    .hero-body{padding:1.2rem}
+    @media(min-width:640px){.hero-body{padding:1.4rem 1.8rem}}
+    h1{margin:0 0 .5rem;font:700 clamp(2rem,5vw,3.1rem) 'Cormorant Garamond',serif;line-height:1.1}
+    .lead{max-width:75ch;color:var(--muted);line-height:1.65}
+    .meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+    .badge{border:1px solid #fdba74;background:#fff7ed;padding:.4rem .75rem;border-radius:999px;font-size:.82rem;font-weight:700}
+    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem}
+    .tab-btn{border:1px solid var(--line);background:#fff;padding:.5rem .9rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
+    .tab-btn:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
+    .tab-btn.active{background:var(--brand);color:#fff7ed;border-color:var(--brand)}
+    .panel{display:none;padding:1rem 0}
+    .panel.active{display:block;animation:fadeUp .28s ease}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .grid{display:grid;grid-template-columns:1fr;gap:.8rem}
+    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;transition:.2s ease}
+    .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px #7c2d1218}
+    .card h3{margin:0 0 .4rem;font-size:1rem;color:var(--brand)}
+    .card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
+    .novo{font-size:.7rem;background:#c2410c;color:#fff;padding:.15rem .5rem;border-radius:999px;vertical-align:middle;margin-left:.4rem;font-weight:700}
+    .gallery{display:grid;grid-template-columns:1fr;gap:.7rem}
+    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
+    .gallery img{width:100%;height:200px;object-fit:cover;border-radius:14px;border:1px solid var(--line);transition:.2s ease}
+    .gallery img:hover{transform:scale(1.03)}
+    .cta{background:linear-gradient(130deg,var(--brand),var(--brand2));color:#fff7ed;padding:1.2rem 1.4rem;border-radius:16px;margin-top:1.2rem}
+    .cta a{display:inline-block;margin-top:.5rem;background:#fff7ed;color:#7c2d12;text-decoration:none;padding:.65rem 1.2rem;border-radius:999px;font-weight:800;font-size:.9rem;transition:.2s ease}
+    .cta a:hover{transform:translateY(-2px);box-shadow:0 6px 18px #7c2d1244}
+    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#ffffffb0;border-radius:0 0 20px 20px}
+    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
+    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
+    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
+    .cert{background:var(--brand);color:#fff7ed;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
+    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-img"></div>
+      <div class="hero-body">
+        <h1>Maison Nilo</h1>
+        <p class="lead">Vitrine digital para loja de roupas com foco em desejo, coleções por estação e compra direta pelo WhatsApp. A página foi desenhada para aumentar ticket médio com storytelling de produto.</p>
+        <div class="meta">
+          <span class="badge">✨ Coleção Capsule</span>
+          <span class="badge">📸 Lookbook Interativo</span>
+          <span class="badge">⚡ Compra Rápida</span>
+        </div>
+
+        <nav class="tabs" aria-label="Seções">
+          <button class="tab-btn active" data-tab="visao">Visão Geral</button>
+          <button class="tab-btn" data-tab="colecao">Coleções</button>
+          <button class="tab-btn" data-tab="galeria">Lookbook</button>
+          <button class="tab-btn" data-tab="clientes">Clientes</button>
+          <button class="tab-btn" data-tab="faq">FAQ</button>
+        </nav>
+
+        <section class="panel active" id="visao">
+          <div class="grid">
+            <article class="card"><h3>🎨 Direção de Arte</h3><p>Visual editorial com tipografia de moda e fotos amplas para valorizar tecido, caimento e acabamento.</p></article>
+            <article class="card"><h3>🛒 Jornada de Compra</h3><p>Navegação por abas, CTA constante e caminho curto entre desejo e conversa comercial.</p></article>
+            <article class="card"><h3>📢 Campanhas</h3><p>Base pronta para tráfego pago com seções para promo, lançamento e prova social.</p></article>
+          </div>
+        </section>
+
+        <section class="panel" id="colecao">
+          <div class="grid">
+            <article class="card"><h3>👔 Urban Chic <span class="novo">NOVO</span></h3><p>Alfaiataria leve, tons neutros e peças versáteis para trabalho e eventos.</p></article>
+            <article class="card"><h3>🌞 Resort Glow</h3><p>Tecidos fluidos, estampas solares e modelagens com movimento.</p></article>
+            <article class="card"><h3>🌙 Night Edit</h3><p>Seleção premium para noite com foco em elegância e impacto.</p></article>
+          </div>
+        </section>
+
+        <section class="panel" id="galeria">
+          <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80" alt="Look feminino 1" />
+            <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80" alt="Look feminino 2" />
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Look feminino 3" />
+          </div>
+        </section>
+
+        <section class="panel" id="clientes">
+          <div class="grid">
+            <article class="card"><p>⭐⭐⭐⭐⭐ "Site vende por mim. As clientes chegam no WhatsApp já sabendo o que querem."</p><strong>— Camila, proprietária</strong></article>
+            <article class="card"><p>⭐⭐⭐⭐⭐ "As fotos e descrições passam muito valor. Comprei sem dúvida."</p><strong>— Rebeca, cliente</strong></article>
+            <article class="card"><p>⭐⭐⭐⭐⭐ "A navegação por coleção me ajudou a montar looks completos."</p><strong>— Marina, cliente</strong></article>
+          </div>
+        </section>
+
+        <section class="panel" id="faq">
+          <div class="grid">
+            <article class="card"><h3>📦 Entrega</h3><p>Envio em até 24h para a capital e 3 dias para o interior.</p></article>
+            <article class="card"><h3>🔄 Trocas</h3><p>Primeira troca grátis em até 7 dias corridos após recebimento.</p></article>
+            <article class="card"><h3>🏷️ Atacado</h3><p>Temos tabela especial para revendedoras com pedido mínimo.</p></article>
+          </div>
+        </section>
+
+        <div class="cta">
+          <strong>Quer uma vitrine que converte visita em venda? 👗</strong><br />
+          <a href="#">Montar loja agora</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="footer-name">Felipe Junqueira Leite</p>
+      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
+      <div class="footer-badges">
+        <span class="cert">HTML5</span>
+        <span class="cert">CSS3</span>
+        <span class="cert">JavaScript</span>
+        <span class="cert">Mobile‑First</span>
+        <span class="cert">SEO</span>
+        <span class="cert">UX/UI</span>
+      </div>
+      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
+    </footer>
+  </main>
+  <script>
+    const tabs=[...document.querySelectorAll('.tab-btn')];
+    const panels=[...document.querySelectorAll('.panel')];
+    tabs.forEach(btn=>btn.addEventListener('click',()=>{
+      tabs.forEach(b=>b.classList.remove('active'));
+      panels.forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    }));
+  </script>
+</body>
+</html>

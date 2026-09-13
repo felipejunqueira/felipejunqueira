@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arcade Clássico | Jogo da Velha Deluxe</title>
+  <meta name="description" content="Jogo da Velha com identidade retrô, placar persistente e modo competitivo local." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{--ink:#e2e8f0;--muted:#94a3b8;--line:#334155;--card:#0f172acc;--brand:#22d3ee;--brand2:#f59e0b;--x:#22d3ee;--o:#f59e0b}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Manrope,sans-serif;color:var(--ink);background:linear-gradient(160deg,#0f172a,#020617);min-height:100vh}
+    .wrap{width:min(1080px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
+    .hero{border:1px solid #ffffff2a;border-radius:20px;overflow:hidden;background:#020617d0;box-shadow:0 20px 46px #0008}
+    .hero-img{height:180px;background:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80') center/cover}
+    @media(min-width:640px){.hero-img{height:240px}}
+    .body{padding:1.2rem}
+    @media(min-width:640px){.body{padding:1.4rem 1.8rem}}
+    h1{margin:0 0 .4rem;font:700 clamp(2rem,5vw,3.1rem) VT323,monospace;color:var(--brand);letter-spacing:.04em}
+    .lead{color:var(--muted);max-width:72ch;line-height:1.6}
+    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.8rem}
+    .tab-btn{border:1px solid var(--line);background:#0f172a;color:var(--ink);padding:.5rem .85rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
+    .tab-btn:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
+    .tab-btn.active{background:var(--brand);color:#082f49;border-color:var(--brand)}
+    .panel{display:none;padding:1rem 0}
+    .panel.active{display:block;animation:fadeUp .28s ease}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .grid{display:grid;grid-template-columns:1fr;gap:.75rem}
+    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem;transition:.2s ease}
+    .card:hover{border-color:var(--brand)}
+    .card h3{margin:0 0 .4rem;color:var(--brand);font-size:.95rem}
+    .card p{margin:0;color:var(--muted);font-size:.88rem;line-height:1.55}
+    /* Game */
+    .status{padding:.7rem .9rem;border-radius:12px;border:1px solid var(--line);background:#0f172a;font-weight:700;margin-bottom:.8rem;font-size:1rem;transition:.3s ease}
+    .status.x-turn{border-color:var(--x);color:var(--x)}
+    .status.o-turn{border-color:var(--o);color:var(--o)}
+    .status.win{background:#0f2a1a;border-color:#4ade80;color:#4ade80}
+    .status.draw{border-color:#9ca3af;color:#9ca3af}
+    .board{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;max-width:360px}
+    @media(min-width:640px){.board{max-width:none}}
+    .cell{aspect-ratio:1/1;border:1px solid var(--line);border-radius:12px;background:#111827;color:var(--ink);font:700 clamp(2rem,9vw,4rem) VT323,monospace;cursor:pointer;transition:.15s ease}
+    .cell:hover:not(:disabled){border-color:var(--brand);background:#0f2233}
+    .cell:disabled{cursor:default}
+    .cell.x{color:var(--x);border-color:#22d3ee44}
+    .cell.o{color:var(--o);border-color:#f59e0b44}
+    .cell.winner{background:#0d2a1a;border-color:#4ade80;box-shadow:0 0 12px #4ade8066;animation:pulse .6s ease infinite alternate}
+    @keyframes pulse{from{box-shadow:0 0 6px #4ade8066}to{box-shadow:0 0 18px #4ade80cc}}
+    .actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}
+    button{border:0;border-radius:999px;padding:.65rem .95rem;font:700 .9rem Manrope,sans-serif;cursor:pointer;transition:.15s ease}
+    .reset{background:var(--brand);color:#082f49}
+    .reset:hover{opacity:.85;transform:translateY(-1px)}
+    .clear{background:var(--brand2);color:#1c1002}
+    .clear:hover{opacity:.85;transform:translateY(-1px)}
+    .score{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin-top:.8rem}
+    @media(min-width:640px){.score{max-width:360px}}
+    .score div{border:1px solid var(--line);border-radius:10px;padding:.55rem;text-align:center;background:#0f172a}
+    .score div.active-score{border-color:var(--brand)}
+    .gallery{display:grid;grid-template-columns:1fr;gap:.65rem}
+    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
+    .gallery img{width:100%;height:170px;object-fit:cover;border-radius:10px;border:1px solid var(--line);transition:.2s ease}
+    .gallery img:hover{transform:scale(1.03)}
+    /* Footer */
+    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#0f172a80;border-radius:0 0 20px 20px}
+    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
+    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
+    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
+    .cert{background:var(--brand);color:#082f49;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
+    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-img"></div>
+      <div class="body">
+        <h1>Jogo da Velha Deluxe</h1>
+        <p class="lead">Versão clássica com identidade retrô, placar persistente da sessão e modo competitivo local. Além da jogabilidade, a página traz contexto histórico, regras e apresentação visual mais rica.</p>
+
+        <nav class="tabs" aria-label="Seções">
+          <button class="tab-btn active" data-tab="jogar">Jogar</button>
+          <button class="tab-btn" data-tab="sobre">Sobre</button>
+          <button class="tab-btn" data-tab="historia">História</button>
+          <button class="tab-btn" data-tab="galeria">Galeria</button>
+        </nav>
+
+        <section class="panel active" id="jogar">
+          <div id="status" class="status x-turn">Vez do jogador X</div>
+          <div id="board" class="board" role="grid" aria-label="Tabuleiro">
+            <button class="cell" data-index="0"></button>
+            <button class="cell" data-index="1"></button>
+            <button class="cell" data-index="2"></button>
+            <button class="cell" data-index="3"></button>
+            <button class="cell" data-index="4"></button>
+            <button class="cell" data-index="5"></button>
+            <button class="cell" data-index="6"></button>
+            <button class="cell" data-index="7"></button>
+            <button class="cell" data-index="8"></button>
+          </div>
+          <div class="actions">
+            <button id="resetRound" class="reset">Reiniciar rodada</button>
+            <button id="resetAll"   class="clear">Zerar placar</button>
+          </div>
+          <div class="score">
+            <div id="scoreBoxX">X: <strong id="scoreX">0</strong></div>
+            <div>Empates: <strong id="scoreD">0</strong></div>
+            <div>O: <strong id="scoreO">0</strong></div>
+          </div>
+        </section>
+
+        <section class="panel" id="sobre">
+          <div class="grid">
+            <article class="card"><h3>🎯 Objetivo</h3><p>Formar uma linha com três símbolos iguais em horizontal, vertical ou diagonal.</p></article>
+            <article class="card"><h3>🖥️ Interface</h3><p>Feedback visual claro, estados de turno coloridos e ações rápidas para reinício.</p></article>
+            <article class="card"><h3>📱 Uso</h3><p>Ideal para ativações, mini eventos e experiências casuais no celular.</p></article>
+          </div>
+        </section>
+
+        <section class="panel" id="historia">
+          <div class="grid">
+            <article class="card"><h3>🏛️ Origem</h3><p>O jogo da velha tem registros históricos em civilizações antigas e virou clássico mundial.</p></article>
+            <article class="card"><h3>🌍 Popularidade</h3><p>Poucas regras, partida rápida e alto fator competitivo fazem dele um evergreen.</p></article>
+            <article class="card"><h3>💎 Versão Digital</h3><p>Aqui ele ganha acabamento premium sem perder a simplicidade original.</p></article>
+          </div>
+        </section>
+
+        <section class="panel" id="galeria">
+          <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1553481187-be93c21490a9?auto=format&fit=crop&w=900&q=80" alt="Arcade retrô" />
+            <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=900&q=80" alt="Controles de jogo" />
+            <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&w=900&q=80" alt="Setup gamer" />
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="footer-name">Felipe Junqueira Leite</p>
+      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
+      <div class="footer-badges">
+        <span class="cert">HTML5</span>
+        <span class="cert">CSS3</span>
+        <span class="cert">JavaScript</span>
+        <span class="cert">Mobile‑First</span>
+        <span class="cert">Canvas/Games</span>
+        <span class="cert">UX/UI</span>
+      </div>
+      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
+    </footer>
+  </main>
+
+  <script>
+    // ── Tab navigation ──
+    const tabBtns  = [...document.querySelectorAll('.tab-btn')];
+    const tabPanels = [...document.querySelectorAll('.panel')];
+    tabBtns.forEach(btn => btn.addEventListener('click', () => {
+      tabBtns.forEach(b  => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    }));
+
+    // ── Game logic ──
+    const statusEl    = document.getElementById('status');
+    const boardEl     = document.getElementById('board');
+    const cells       = [...document.querySelectorAll('.cell')];
+    const scoreXEl    = document.getElementById('scoreX');
+    const scoreOEl    = document.getElementById('scoreO');
+    const scoreDEl    = document.getElementById('scoreD');
+    const scoreBoxX   = document.getElementById('scoreBoxX');
+    const resetRoundB = document.getElementById('resetRound');
+    const resetAllB   = document.getElementById('resetAll');
+
+    let board  = Array(9).fill('');
+    let player = 'X';
+    let locked = false;
+    let score  = { X: 0, O: 0, D: 0 };
+    const WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+    function findWinner() {
+      for (const [a,b,c] of WINS) {
+        if (board[a] && board[a] === board[b] && board[b] === board[c]) return { player: board[a], line: [a,b,c] };
+      }
+      return null;
+    }
+
+    function render() {
+      cells.forEach((cell, i) => {
+        cell.textContent = board[i];
+        cell.disabled    = !!board[i] || locked;
+        cell.className   = 'cell' + (board[i] ? ' ' + board[i].toLowerCase() : '');
+      });
+      scoreXEl.textContent = score.X;
+      scoreOEl.textContent = score.O;
+      scoreDEl.textContent = score.D;
+    }
+
+    function move(index) {
+      if (locked || board[index]) return;
+      board[index] = player;
+      const result = findWinner();
+      if (result) {
+        locked = true;
+        score[result.player]++;
+        statusEl.className = 'status win';
+        statusEl.textContent = `🎉 Jogador ${result.player} venceu!`;
+        result.line.forEach(i => cells[i].classList.add('winner'));
+      } else if (board.every(Boolean)) {
+        locked = true;
+        score.D++;
+        statusEl.className = 'status draw';
+        statusEl.textContent = '🤝 Empate!';
+      } else {
+        player = player === 'X' ? 'O' : 'X';
+        statusEl.className = player === 'X' ? 'status x-turn' : 'status o-turn';
+        statusEl.textContent = `Vez do jogador ${player}`;
+      }
+      render();
+    }
+
+    function resetRound() {
+      board  = Array(9).fill('');
+      player = 'X';
+      locked = false;
+      statusEl.className   = 'status x-turn';
+      statusEl.textContent = 'Vez do jogador X';
+      cells.forEach(c => { c.className = 'cell'; c.textContent = ''; c.disabled = false; });
+      render();
+    }
+
+    function resetAll() {
+      score = { X: 0, O: 0, D: 0 };
+      resetRound();
+    }
+
+    boardEl.addEventListener('click', e => {
+      const t = e.target.closest('.cell');
+      if (t) move(Number(t.dataset.index));
+    });
+    resetRoundB.addEventListener('click', resetRound);
+    resetAllB.addEventListener('click', resetAll);
+    render();
+  </script>
+</body>
+</html>

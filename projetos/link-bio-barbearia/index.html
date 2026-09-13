@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Barber Shop Elite - Links</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        .animate-fade-in-down { animation: fadeInDown 0.6s ease-out; }
+        .animate-fade-in-up { animation: fadeInUp 0.6s ease-out 0.2s both; }
+        .animate-shimmer { animation: shimmer 3s ease-in-out infinite; }
+        .link-button-transition {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .gradient-gold {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+        }
+        .modal-backdrop {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Montserrat', 'sans-serif'] },
+                    colors: { 
+                        brand: { 
+                            gold: '#D4AF37', 
+                            dark: '#0A0A0A', 
+                            card: '#171717' 
+                        } 
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-dark text-white min-h-screen flex flex-col items-center py-8 px-4 md:py-12 md:px-5 selection:bg-brand-gold selection:text-black overflow-x-hidden">
+    
+    <div class="w-full max-w-sm space-y-10 text-center flex-1">
+        
+        <div class="space-y-5 animate-fade-in-down">
+            <div class="relative w-28 h-28 md:w-32 md:h-32 mx-auto group">
+                <div class="absolute inset-0 bg-brand-gold/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=400&q=80" alt="Barber Shop Elite" class="rounded-full w-full h-full object-cover border-4 border-brand-gold/40 shadow-2xl shadow-brand-gold/20 relative z-10 transition-transform duration-500 group-hover:scale-105">
+            </div>
+            <div>
+                <h1 class="text-xl md:text-2xl font-extrabold tracking-widest uppercase">Barber Shop <span class="text-brand-gold">Elite</span></h1>
+                <p class="text-gray-400 text-xs md:text-sm mt-2 font-medium">Cortes clássicos, barba e estilo.</p>
+            </div>
+        </div>
+
+        <div class="space-y-3 w-full animate-fade-in-up">
+            
+            <a href="https://wa.me/5511983909578?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio!" target="_blank" class="flex items-center justify-center gap-3 w-full bg-brand-card hover:bg-zinc-800 border border-zinc-800/50 hover:border-brand-gold/50 text-white font-semibold py-4 px-6 rounded-2xl link-button-transition hover:shadow-lg hover:shadow-green-500/20 active:scale-95 group gradient-gold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 group-hover:scale-125 transition-transform"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Agendar Horário
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=Avenida+Paulista,+São+Paulo" target="_blank" class="flex items-center justify-center gap-3 w-full bg-brand-card hover:bg-zinc-800 border border-zinc-800/50 hover:border-brand-gold/50 text-white font-semibold py-4 px-6 rounded-2xl link-button-transition hover:shadow-lg hover:shadow-brand-gold/20 active:scale-95 group gradient-gold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold group-hover:scale-125 transition-transform"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Como Chegar
+            </a>
+
+            <a href="https://instagram.com" target="_blank" class="flex items-center justify-center gap-3 w-full bg-brand-card hover:bg-zinc-800 border border-zinc-800/50 hover:border-brand-gold/50 text-white font-semibold py-4 px-6 rounded-2xl link-button-transition hover:shadow-lg hover:shadow-pink-500/20 active:scale-95 group gradient-gold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-400 group-hover:scale-125 transition-transform"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+                Nosso Instagram
+            </a>
+
+            <button onclick="openModal()" class="flex items-center justify-center gap-3 w-full bg-brand-card hover:bg-zinc-800 border border-zinc-800/50 hover:border-brand-gold/50 text-white font-semibold py-4 px-6 rounded-2xl link-button-transition hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 group gradient-gold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400 group-hover:scale-125 transition-transform"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" x2="8.12" y1="4" y2="15.88"/><line x1="14.47" x2="14.48" y1="14.48" y2="14.47"/><line x1="8.12" x2="20" y1="8.12" y2="20"/></svg>
+                Serviços e Preços
+            </button>
+            
+        </div>
+    </div>
+
+    <footer class="mt-16 text-center w-full">
+        <div class="h-px w-20 bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent mx-auto mb-6"></div>
+        <p class="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold hover:text-brand-gold/60 transition-colors cursor-default">Desenvolvido por Felipe Junqueira Leite</p>
+    </footer>
+
+    <!-- Modal de Serviços -->
+    <div id="servicesModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 modal-backdrop">
+        <div class="bg-gradient-to-br from-brand-card to-zinc-900 border border-zinc-800 rounded-3xl max-w-sm w-full p-6 md:p-8 shadow-2xl shadow-brand-gold/10 relative">
+            
+            <!-- Botão de fechar -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-white transition-colors p-2 rounded-full hover:bg-zinc-800">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+            </button>
+
+            <div class="space-y-6">
+                <div class="space-y-2 text-center">
+                    <h2 class="text-2xl font-extrabold text-brand-gold">Serviços & Preços</h2>
+                    <p class="text-sm text-gray-400">Confira nossos serviços premium</p>
+                </div>
+
+                <div class="space-y-3 max-h-96 overflow-y-auto pr-2 select-none">
+                    <!-- Serviço 1 -->
+                    <div id="srv-corte-classico" onclick="toggleServico('corte-classico', 'Corte Clássico', 45.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
+                        <div class="pr-2">
+                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Corte Clássico</p>
+                            <p class="text-xs text-gray-400">Tesoura/máquina</p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="text-brand-gold font-bold">R$ 45,00</span>
+                            <svg id="chk-corte-classico" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Serviço 2 -->
+                    <div id="srv-corte-barba" onclick="toggleServico('corte-barba', 'Corte + Barba', 65.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
+                        <div class="pr-2">
+                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Corte + Barba</p>
+                            <p class="text-xs text-gray-400">Combo premium</p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="text-brand-gold font-bold">R$ 65,00</span>
+                            <svg id="chk-corte-barba" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Serviço 3 -->
+                    <div id="srv-barba-design" onclick="toggleServico('barba-design', 'Barba Design', 35.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
+                        <div class="pr-2">
+                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Barba Design</p>
+                            <p class="text-xs text-gray-400">Design premium</p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="text-brand-gold font-bold">R$ 35,00</span>
+                            <svg id="chk-barba-design" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Serviço 4 -->
+                    <div id="srv-pigmentacao-barba" onclick="toggleServico('pigmentacao-barba', 'Pigmentação Barba', 40.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
+                        <div class="pr-2">
+                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Pigmentação Barba</p>
+                            <p class="text-xs text-gray-400">Cobertura de fios brancos</p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="text-brand-gold font-bold">R$ 40,00</span>
+                            <svg id="chk-pigmentacao-barba" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Serviço 5 -->
+                    <div id="srv-tratamento-capilar" onclick="toggleServico('tratamento-capilar', 'Tratamento Capilar', 50.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
+                        <div class="pr-2">
+                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Tratamento Capilar</p>
+                            <p class="text-xs text-gray-400">Hidratação premium</p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="text-brand-gold font-bold">R$ 50,00</span>
+                            <svg id="chk-tratamento-capilar" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Serviço 6 -->
+                    <div id="srv-limpeza-pele" onclick="toggleServico('limpeza-pele', 'Limpeza de Pele', 30.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
+                        <div class="pr-2">
+                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Limpeza de Pele</p>
+                            <p class="text-xs text-gray-400">Facial gentlemen</p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="text-brand-gold font-bold">R$ 30,00</span>
+                            <svg id="chk-limpeza-pele" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-zinc-800">
+                    <p class="text-xs text-zinc-500 text-center mb-4">💳 Aceitamos cartão e PIX</p>
+                    <button id="btnAgendarModal" onclick="enviarAgendamento()" class="block text-center w-full bg-brand-gold hover:bg-brand-gold/90 text-black font-bold py-3 px-4 rounded-xl transition-all hover:shadow-lg hover:shadow-brand-gold/30 link-button-transition">
+                        Agendar Agora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const numeroWhatsApp = '5511983909578';
+        let servicosSelecionados = [];
+
+        function openModal() {
+            const modal = document.getElementById('servicesModal');
+            modal.classList.remove('hidden');
+            modal.style.animation = 'fadeIn 0.3s ease-out';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('servicesModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleServico(id, nome, preco) {
+            const index = servicosSelecionados.findIndex(item => item.id === id);
+            const card = document.getElementById(`srv-${id}`);
+            const check = document.getElementById(`chk-${id}`);
+
+            if (index > -1) {
+                // Remove
+                servicosSelecionados.splice(index, 1);
+                card.classList.remove('border-brand-gold', 'bg-brand-gold/10');
+                card.classList.add('border-zinc-700/50', 'bg-zinc-800/50');
+                check.classList.add('hidden');
+            } else {
+                // Adiciona
+                servicosSelecionados.push({ id, nome, preco });
+                card.classList.remove('border-zinc-700/50', 'bg-zinc-800/50');
+                card.classList.add('border-brand-gold', 'bg-brand-gold/10');
+                check.classList.remove('hidden');
+            }
+
+            atualizarBotaoAgendamento();
+        }
+
+        function atualizarBotaoAgendamento() {
+            const btn = document.getElementById('btnAgendarModal');
+            if (servicosSelecionados.length === 0) {
+                btn.textContent = 'Agendar Agora';
+                return;
+            }
+
+            const totalValor = servicosSelecionados.reduce((sum, s) => sum + s.preco, 0);
+            const formatado = totalValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            if (servicosSelecionados.length === 1) {
+                btn.textContent = `Agendar ${servicosSelecionados[0].nome} (${formatado})`;
+            } else {
+                btn.textContent = `Agendar ${servicosSelecionados.length} Serviços (${formatado})`;
+            }
+        }
+
+        function enviarAgendamento() {
+            let mensagem = '';
+            if (servicosSelecionados.length === 0) {
+                mensagem = 'Olá, gostaria de agendar um horário!';
+            } else {
+                let listagem = '';
+                servicosSelecionados.forEach(s => {
+                    listagem += `• ${s.nome} (${s.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })})\n`;
+                });
+                const totalValor = servicosSelecionados.reduce((sum, s) => sum + s.preco, 0);
+                const totalFormatado = totalValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+                mensagem = `Olá! Gostaria de agendar os seguintes serviços no Barber Shop Elite:\n`;
+                mensagem += `---------------------------------\n`;
+                mensagem += `${listagem}`;
+                mensagem += `---------------------------------\n`;
+                mensagem += `Total: ${totalFormatado}\n\n`;
+                mensagem += `Quais horários vocês têm disponíveis para agendamento?`;
+            }
+
+            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+
+        // Fechar modal ao clicar fora
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('servicesModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Adicionar classe de animação aos elementos ao carregar
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.animate-fade-in-down, .animate-fade-in-up').forEach(el => {
+                el.style.opacity = '1';
+            });
+        });
+    </script>
+
+</body>
+</html>

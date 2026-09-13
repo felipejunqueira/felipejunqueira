@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mercado Pulse PDV | Sistema de Gestão</title>
+  <meta name="description" content="Mercado Pulse PDV — sistema de caixa e gestão para mercados. Reduza filas, aumente margem e controle o estoque em tempo real." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--ink:#0b1324;--muted:#334155;--line:#7dd3fc;--card:#fff;--brand:#0369a1;--brand2:#0ea5e9}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Space Grotesk',sans-serif;color:var(--ink);background:linear-gradient(160deg,#cffafe,#dbeafe);min-height:100vh}
+    .wrap{width:min(1120px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
+    .hero{background:#ffffffdd;border:1px solid #ffffffa6;border-radius:20px;overflow:hidden;box-shadow:0 17px 42px #0c4a6e33}
+    .hero-img{height:200px;background:url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=1600&q=80') center/cover}
+    @media(min-width:640px){.hero-img{height:280px}}
+    .hero-body{padding:1.2rem}
+    @media(min-width:640px){.hero-body{padding:1.4rem 1.8rem}}
+    h1{margin:0 0 .5rem;font:700 clamp(2rem,5vw,3rem) 'Space Grotesk',sans-serif;line-height:1.15}
+    .lead{color:var(--muted);max-width:76ch;line-height:1.65}
+    .meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+    .badge{border:1px solid #38bdf8;background:#ecfeff;padding:.4rem .75rem;border-radius:999px;font-size:.82rem;font-weight:700}
+    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem}
+    .tab-btn{border:1px solid var(--line);background:#fff;padding:.5rem .9rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
+    .tab-btn:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
+    .tab-btn.active{background:var(--brand);color:#ecfeff;border-color:var(--brand)}
+    .panel{display:none;padding:1rem 0}
+    .panel.active{display:block;animation:fadeUp .28s ease}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .grid{display:grid;grid-template-columns:1fr;gap:.8rem}
+    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;transition:.2s ease}
+    .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px #0c4a6e18}
+    .card h3{margin:0 0 .4rem;font-size:1rem;color:var(--brand)}
+    .card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
+    .stat{font-size:1.6rem;font-weight:700;color:var(--brand);display:block;margin-bottom:.3rem}
+    .gallery{display:grid;grid-template-columns:1fr;gap:.7rem}
+    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
+    .gallery img{width:100%;height:180px;object-fit:cover;border-radius:14px;border:1px solid var(--line);transition:.2s ease}
+    .gallery img:hover{transform:scale(1.03)}
+    .cta{background:linear-gradient(130deg,var(--brand),var(--brand2));color:#ecfeff;padding:1.2rem 1.4rem;border-radius:16px;margin-top:1.2rem}
+    .cta a{display:inline-block;margin-top:.5rem;background:#ecfeff;color:#0c4a6e;text-decoration:none;padding:.65rem 1.2rem;border-radius:999px;font-weight:800;font-size:.9rem;transition:.2s ease}
+    .cta a:hover{transform:translateY(-2px);box-shadow:0 6px 18px #0c4a6e44}
+    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#ffffffb0;border-radius:0 0 20px 20px}
+    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
+    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
+    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
+    .cert{background:var(--brand);color:#ecfeff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
+    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-img"></div>
+      <div class="hero-body">
+        <h1>Mercado Pulse PDV</h1>
+        <p class="lead">Landing de produto para sistema de caixa e gestão de mercado. Estrutura comercial com foco em dores reais: fila, ruptura de estoque, divergência de caixa e falta de visão de margem.</p>
+        <div class="meta">
+          <span class="badge">🖥️ Frente de Caixa</span>
+          <span class="badge">📦 Estoque em Tempo Real</span>
+          <span class="badge">📊 Relatórios Inteligentes</span>
+        </div>
+
+        <nav class="tabs" aria-label="Seções">
+          <button class="tab-btn active" data-tab="visao">Visão Geral</button>
+          <button class="tab-btn" data-tab="modulos">Módulos</button>
+          <button class="tab-btn" data-tab="galeria">Interface</button>
+          <button class="tab-btn" data-tab="resultados">Resultados</button>
+          <button class="tab-btn" data-tab="faq">FAQ</button>
+        </nav>
+
+        <section class="panel active" id="visao">
+          <div class="grid">
+            <article class="card"><h3>⚡ Produtividade</h3><p>Fluxo de caixa otimizado com atalhos para operação de alta demanda.</p></article>
+            <article class="card"><h3>📊 Gestão</h3><p>Indicadores de venda e margem para tomada de decisão diária.</p></article>
+            <article class="card"><h3>📈 Escalabilidade</h3><p>Base pronta para multi-caixa e multi-loja.</p></article>
+          </div>
+        </section>
+
+        <section class="panel" id="modulos">
+          <div class="grid">
+            <article class="card"><h3>🖥️ PDV</h3><p>Venda com leitor, balança, impressão e fechamento por operador.</p></article>
+            <article class="card"><h3>📦 Estoque</h3><p>Entrada de nota, inventário, alertas de ruptura e curva ABC.</p></article>
+            <article class="card"><h3>💰 Financeiro</h3><p>Fluxo de caixa, contas e conciliação para reduzir perdas.</p></article>
+          </div>
+        </section>
+
+        <section class="panel" id="galeria">
+          <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80" alt="Checkout mercado" />
+            <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?auto=format&fit=crop&w=900&q=80" alt="Prateleiras de mercado" />
+            <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=900&q=80" alt="Equipe em operação" />
+          </div>
+        </section>
+
+        <section class="panel" id="resultados">
+          <div class="grid">
+            <article class="card"><span class="stat">−32%</span><h3>em Filas</h3><p>Mercados parceiros reduziram tempo médio de atendimento no caixa.</p></article>
+            <article class="card"><span class="stat">+18%</span><h3>de Margem</h3><p>Mais controle de compra e menos ruptura geraram ganho de margem.</p></article>
+            <article class="card"><span class="stat">−40%</span><h3>em Perdas</h3><p>Auditoria de estoque e rastreabilidade diminuíram perdas operacionais.</p></article>
+          </div>
+        </section>
+
+        <section class="panel" id="faq">
+          <div class="grid">
+            <article class="card"><h3>🎓 Treinamento</h3><p>Implantação guiada em 7 dias com suporte dedicado.</p></article>
+            <article class="card"><h3>🔌 Integrações</h3><p>Balança, impressora, leitor e TEF homologados.</p></article>
+            <article class="card"><h3>💬 Suporte</h3><p>Atendimento por WhatsApp e painel em horário comercial.</p></article>
+          </div>
+        </section>
+
+        <div class="cta">
+          <strong>Quer transformar seu mercado em operação de alta performance? 🚀</strong><br />
+          <a href="#">Agendar demonstração</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="footer-name">Felipe Junqueira Leite</p>
+      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
+      <div class="footer-badges">
+        <span class="cert">HTML5</span>
+        <span class="cert">CSS3</span>
+        <span class="cert">JavaScript</span>
+        <span class="cert">Mobile‑First</span>
+        <span class="cert">SEO</span>
+        <span class="cert">UX/UI</span>
+      </div>
+      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
+    </footer>
+  </main>
+  <script>
+    const tabs=[...document.querySelectorAll('.tab-btn')];
+    const panels=[...document.querySelectorAll('.panel')];
+    tabs.forEach(btn=>btn.addEventListener('click',()=>{
+      tabs.forEach(b=>b.classList.remove('active'));
+      panels.forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    }));
+  </script>
+</body>
+</html>

@@ -1,497 +1,1421 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Felipe Junqueira Leite - Portfólio de Desenvolvedor, IA, C++ e Projetos de Inovação.">
-    <title>Felipe Junqueira Leite | Desenvolvedor & Inovador</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Felipe Junqueira - Criação de Sites, Landing Pages, Aplicativos e Sistemas para Comércio Local. Estudante de Ciência da Computação na UFABC.">
+  <title>Felipe Junqueira | Cartão de Visitas Digital & Portfólio de Soluções</title>
 
-        :root {
-            --bg-color: #0b0f19;
-            --surface-color: #111827;
-            --text-main: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --accent-primary: #3b82f6;
-            --accent-secondary: #8b5cf6;
-            --accent-glow: rgba(59, 130, 246, 0.5);
-        }
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        .quantum-theme {
-            --bg-color: #000500;
-            --surface-color: #001a00;
-            --text-main: #00ff00;
-            --text-secondary: #00cc00;
-            --accent-primary: #ff00ff;
-            --accent-secondary: #00ff00;
-            --accent-glow: rgba(0, 255, 0, 0.5);
-            font-family: 'Fira Code', monospace !important;
-        }
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #111827;
+      --bg-card-hover: #172033;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-purple: #8b5cf6;
+      --accent-amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-card: rgba(255, 255, 255, 0.08);
+      --border-card-hover: rgba(59, 130, 246, 0.4);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-pill: 9999px;
+      --shadow-glow: 0 0 25px rgba(59, 130, 246, 0.2);
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.5s ease;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        h1, h2, h3 { font-weight: 800; line-height: 1.2; }
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
 
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            background: rgba(11, 15, 25, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo { font-family: 'Fira Code', monospace; font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text-main); }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a {
-            color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 600;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { color: var(--accent-primary); }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
 
-        section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero { position: relative; text-align: center; align-items: center; }
-        .hero h1 { font-size: clamp(3rem, 5vw, 5rem); margin-bottom: 1rem; cursor: pointer; user-select: none; }
-        .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem; }
-        .terminal-box {
-            background: #000;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 1rem;
-            font-family: 'Fira Code', monospace;
-            color: #0f0;
-            display: inline-block;
-            margin-bottom: 2rem;
-            text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+    /* Fundo dinâmico e sutil */
+    .bg-ambient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.12), transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(139, 92, 246, 0.1), transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.08), transparent 40%),
+        #090d16;
+    }
 
-        .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        .btn {
-            padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none;
-            transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center;
-        }
-        .btn-primary { background: var(--accent-primary); color: #fff; box-shadow: 0 4px 15px var(--accent-glow); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
-        .btn-outline { border: 2px solid var(--text-secondary); color: var(--text-main); }
-        .btn-outline:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
 
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    /* Header e Cartão de Visitas Principal */
+    .hero-card {
+      background: linear-gradient(180deg, rgba(17, 24, 39, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 1.75rem;
+      margin-top: 2rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+    }
 
-        @media (max-width: 768px) {
-            .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
-            .nav-links { display: none; }
-        }
+    .avatar-wrapper {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 1.25rem;
+    }
 
-        .section-title { font-size: 2.5rem; margin-bottom: 3rem; text-align: center; }
-        .section-title::after {
-            content: ''; display: block; width: 60px; height: 4px; background: var(--accent-primary);
-            margin: 1rem auto 0; border-radius: 2px;
-        }
+    .avatar-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent-cyan), var(--accent-purple));
+      animation: spinRing 6s linear infinite;
+    }
 
-        .card {
-            background: var(--surface-color); border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 12px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s;
-            position: relative; overflow: hidden;
-        }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); }
-        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent-primary); }
-        .card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
+    @keyframes spinRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
-        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .tag { background: rgba(255,255,255,0.05); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-family: 'Fira Code'; }
+    .avatar {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      border: 3px solid var(--bg-dark);
+      text-shadow: 0 2px 10px rgba(59, 130, 246, 0.5);
+    }
 
-        .skill-bar { margin-bottom: 1.5rem; }
-        .skill-info { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-family: 'Fira Code', monospace; font-size: 0.9rem; }
-        .progress-line { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
-        .progress-line span { display: block; height: 100%; background: var(--accent-primary); border-radius: 4px; transform: scaleX(0); transform-origin: left; transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    .badge-verified {
+      position: absolute;
+      bottom: 2px;
+      right: 4px;
+      background: var(--primary);
+      color: #ffffff;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg-dark);
+    }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+    .hero-name {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      color: #ffffff;
+      margin-bottom: 0.35rem;
+    }
 
-        footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 4rem; color: var(--text-secondary); }
-        .fuel-btn {
-            background: none; border: none; font-size: 1.5rem; cursor: pointer; margin-top: 1rem;
-            transition: transform 0.3s;
-        }
-        .fuel-btn:hover { transform: scale(1.2) rotate(10deg); }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
 
-        #toast {
-            position: fixed; bottom: 20px; right: 20px; background: var(--surface-color); border-left: 4px solid var(--accent-primary);
-            padding: 1rem 1.5rem; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transform: translateX(150%); transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 2000; font-family: 'Fira Code', monospace; font-size: 0.9rem;
-        }
-        #toast.show { transform: translateX(0); }
-        .cell:hover {
-            background: rgba(59, 130, 246, 0.15) !important;
-            border-color: var(--accent-primary) !important;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-        }
-        .cell.win {
-            background: rgba(139, 92, 246, 0.3) !important;
-            border-color: var(--accent-secondary) !important;
-            color: #fff !important;
-            animation: pulse-glow 1s infinite alternate;
-        }
-        @keyframes pulse-glow {
-            from { box-shadow: 0 0 10px rgba(139, 92, 246, 0.3); }
-            to { box-shadow: 0 0 20px rgba(139, 92, 246, 0.7); }
-        }
-    </style>
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .badge-pill.highlight {
+      background: rgba(59, 130, 246, 0.12);
+      border-color: rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+    }
+
+    .hero-pitch {
+      font-size: 1.12rem;
+      color: #cbd5e1;
+      max-width: 680px;
+      margin: 0 auto 1.75rem;
+      line-height: 1.65;
+    }
+
+    .hero-pitch strong {
+      color: #ffffff;
+    }
+
+    /* Botões de Ação Imediata */
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.6rem;
+      border-radius: var(--radius-md);
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text-main);
+      border: 1px solid var(--border-card);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .quick-contacts {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .quick-contacts a {
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+
+    .quick-contacts a:hover {
+      color: var(--primary);
+    }
+
+    /* Seção O Que Eu Faço */
+    .services-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: all 0.25s ease;
+    }
+
+    .service-card:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .service-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .service-title {
+      font-size: 1.15rem;
+      color: #ffffff;
+    }
+
+    .service-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Seção de Projetos e Catálogo */
+    .catalog-section {
+      margin-bottom: 4rem;
+    }
+
+    /* Filtros ultra táteis e fáceis */
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      padding: 0.6rem 1.1rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-card);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+    }
+
+    /* Grid de Projetos */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 25px -8px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .card-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-ecommerce { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .badge-service { background: rgba(139, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.3); }
+    .badge-portal { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-game { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+    .card-body {
+      margin-bottom: 1.25rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    .btn-test {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.65rem 0.9rem;
+      border-radius: var(--radius-sm);
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-test:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-icon-link {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-icon-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    /* Modal de Demonstração Interativa */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-window {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 950px;
+      height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      animation: modalFadeIn 0.2s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-header {
+      padding: 0.9rem 1.25rem;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .modal-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .modal-title {
+      font-size: 1.1rem;
+      color: #ffffff;
+    }
+
+    .modal-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-modal-action {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      text-decoration: none;
+    }
+
+    .btn-modal-action:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+
+    .btn-modal-close {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+
+    .btn-modal-close:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    .modal-body {
+      flex: 1;
+      background: #0b0f19;
+      position: relative;
+    }
+
+    .modal-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Seção Jogo da Velha Embutido */
+    .game-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 1.5rem;
+      margin-bottom: 4rem;
+      text-align: center;
+    }
+
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(3, 85px);
+      grid-template-rows: repeat(3, 85px);
+      gap: 10px;
+      margin: 1.5rem auto;
+      width: fit-content;
+    }
+
+    .game-cell {
+      background: #0f172a;
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .game-cell:hover:not(.taken) {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: var(--primary);
+    }
+
+    .game-cell.cell-x {
+      color: var(--primary);
+      text-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+    }
+
+    .game-cell.cell-o {
+      color: #f43f5e;
+      text-shadow: 0 0 12px rgba(244, 63, 94, 0.5);
+    }
+
+    .game-status-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #93c5fd;
+      min-height: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Footer Final de Contato */
+    .footer-cta {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(11, 15, 25, 0.95) 100%);
+      border-top: 1px solid var(--border-card);
+      padding: 3.5rem 1.25rem 2.5rem;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footer-cta-card {
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .footer-cta-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      color: #ffffff;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-cta-text {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Botão flutuante WhatsApp */
+    .floating-wa {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25d366;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+      z-index: 100;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .floating-wa:hover {
+      transform: scale(1.08) translateY(-3px);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+    }
+
+    @media (max-width: 640px) {
+      .hero-card { padding: 1.75rem 1.25rem; }
+      .cta-buttons { flex-direction: column; width: 100%; }
+      .btn-action { width: 100%; }
+      .game-board { grid-template-columns: repeat(3, 75px); grid-template-rows: repeat(3, 75px); }
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-container">
-            <a href="#home" class="logo">> felipe_leite</a>
-            <div class="nav-links">
-                <a href="#about">Sobre</a>
-                <a href="#skills">Habilidades</a>
-                <a href="#projects">Projetos</a>
-                <a href="#game">Jogo da Velha</a>
-                <a href="#contact">Contato</a>
-            </div>
-        </div>
-    </nav>
+  <div class="bg-ambient"></div>
 
-    <section id="home" class="hero">
-        <div class="terminal-box reveal">
-            <span style="color:#ff0055">root@felipe</span>:<span style="color:#00aaff">~</span>$ ./iniciar_portfolio.sh<br>
-            > Carregando módulos de IA... [OK]<br>
-            > Compilando algoritmos em C++... [OK]<br>
-            > Estabelecendo conexão...
+  <main class="container">
+
+    <!-- CARTÃO DE VISITAS PRINCIPAL -->
+    <header class="hero-card">
+      <div class="avatar-wrapper">
+        <div class="avatar-ring"></div>
+        <div class="avatar">FJ</div>
+        <div class="badge-verified" title="Desenvolvedor Verificado">
+          <i data-lucide="check" style="width: 16px; height: 16px;"></i>
         </div>
-        <h1 class="gradient-text reveal" id="hero-title" title="Clique 5 vezes para uma surpresa">Felipe Junqueira Leite</h1>
-        <p class="reveal">Transformando lógica abstrata em soluções concretas. Foco no desenvolvimento de software de alta performance, pesquisa acadêmica e inteligência artificial generativa.</p>
-        <div class="btn-group reveal">
-            <a href="#projects" class="btn btn-primary">Explorar Projetos</a>
-            <a href="curriculo.pdf" class="btn btn-outline" target="_blank" rel="noopener">Baixar Currículo</a>
+      </div>
+
+      <h1 class="hero-name">Felipe Junqueira</h1>
+
+      <div class="hero-badges">
+        <span class="badge-pill highlight">
+          <i data-lucide="graduation-cap" style="width: 15px; height: 15px;"></i>
+          UFABC • Ciência da Computação
+        </span>
+        <span class="badge-pill">
+          <i data-lucide="code-2" style="width: 15px; height: 15px;"></i>
+          Desenvolvedor Web & Full Stack
+        </span>
+        <span class="badge-pill">
+          <i data-lucide="map-pin" style="width: 15px; height: 15px;"></i>
+          São Paulo - SP
+        </span>
+      </div>
+
+      <p class="hero-pitch">
+        Olá! Eu desenvolvo <strong>sites modernos, catálogos de pedidos no WhatsApp</strong> e 
+        <strong>sistemas práticos</strong> para o seu comércio ou serviço atrair mais clientes e vender todos os dias com tecnologia simples e acessível.
+      </p>
+
+      <!-- Botões de Ação Imediata -->
+      <div class="cta-buttons">
+        <a href="https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Vi%20seu%20cart%C3%A3o%20de%20visitas%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%20para%20o%20meu%20neg%C3%B3cio" target="_blank" class="btn-action btn-whatsapp">
+          <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
+          Conversar no WhatsApp
+        </a>
+        <a href="#catalogo" class="btn-action btn-secondary">
+          <i data-lucide="sparkles" style="width: 20px; height: 20px;"></i>
+          Ver Projetos & Testar Demos
+        </a>
+      </div>
+
+      <div class="quick-contacts">
+        <a href="https://wa.me/5511983909578" target="_blank">
+          <i data-lucide="phone" style="width: 15px; height: 15px;"></i> (11) 98390-9578
+        </a>
+        <a href="https://www.linkedin.com/in/felipe-j-135531262" target="_blank">
+          <i data-lucide="linkedin" style="width: 15px; height: 15px;"></i> LinkedIn
+        </a>
+        <a href="https://github.com/felipejunqueira" target="_blank">
+          <i data-lucide="github" style="width: 15px; height: 15px;"></i> GitHub
+        </a>
+      </div>
+    </header>
+
+    <!-- O QUE POSSO DESENVOLVER PARA VOCÊ -->
+    <section class="services-section">
+      <div class="section-header">
+        <h2 class="section-title">Como Posso Ajudar o Seu Negócio?</h2>
+        <p class="section-subtitle">Soluções digitais pensadas para quem precisa de resultados rápidos e fáceis de operar.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
+            <i data-lucide="globe"></i>
+          </div>
+          <h3 class="service-title">Sites & Landing Pages</h3>
+          <p class="service-desc">Páginas elegantes, rápidas e que abrem perfeitamente no celular para passar credibilidade e atrair novos clientes.</p>
         </div>
+
+        <div class="service-card">
+          <div class="service-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+            <i data-lucide="shopping-cart"></i>
+          </div>
+          <h3 class="service-title">Catálogos & Pedidos no Zap</h3>
+          <p class="service-desc">Cardápios e vitrines onde o cliente escolhe os itens e o pedido chega mastigado no seu WhatsApp, sem pagar comissões.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon" style="background: rgba(139, 92, 246, 0.15); color: #c084fc;">
+            <i data-lucide="scissors"></i>
+          </div>
+          <h3 class="service-title">Link na Bio & Agendamento</h3>
+          <p class="service-desc">Central única para barbearias, salões e profissionais de saúde com horários e atendimento simplificado.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+            <i data-lucide="gift"></i>
+          </div>
+          <h3 class="service-title">Fidelidade & Frente de Caixa</h3>
+          <p class="service-desc">Cartão de fidelidade digital para incentivar o cliente a voltar e sistemas ágeis de registro de vendas.</p>
+        </div>
+      </div>
     </section>
 
-    <section id="about">
-        <h2 class="section-title reveal">Sobre Mim</h2>
-        <div class="grid-2 reveal">
-            <div>
-                <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
-                    Sou um desenvolvedor e pesquisador imerso no ecossistema de tecnologia e inovação de São Paulo. Minha trajetória transita desde a estrutura fundamental das estruturas de dados até a fronteira da criação digital e comunicação científica.
-                </p>
-                <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
-                    Seja modelando sistemas via API do Gemini no Google AI Studio, prototipando lógicas de jogos, ou estruturando equações matemáticas e algoritmos complexos, minha abordagem é sempre fundamentada em construir bases sólidas e arquiteturas eficientes.
-                </p>
-                <p style="font-size: 1.1rem;">
-                    Tenho um perfil extensionista forte, acreditando que a tecnologia deve ser democratizada — visão que aplico em projetos de museologia de TI e inclusão digital.
-                </p>
+    <!-- CATÁLOGO DE PROJETOS UNIFICADOS -->
+    <section id="catalogo" class="catalog-section">
+      <div class="section-header">
+        <h2 class="section-title">Projetos & Modelos Prontos</h2>
+        <p class="section-subtitle">Clique em <strong>"Testar Agora"</strong> para experimentar qualquer modelo interativamente!</p>
+      </div>
+
+      <!-- Filtros com Botões Táteis -->
+      <div class="filter-tabs">
+        <button class="filter-btn active" onclick="filterProjects('all', this)">
+          <i data-lucide="layers" style="width: 16px; height: 16px;"></i> Todos (15)
+        </button>
+        <button class="filter-btn" onclick="filterProjects('comercio', this)">
+          <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Comércio & Lojas
+        </button>
+        <button class="filter-btn" onclick="filterProjects('servicos', this)">
+          <i data-lucide="briefcase" style="width: 16px; height: 16px;"></i> Serviços & Saúde
+        </button>
+        <button class="filter-btn" onclick="filterProjects('institucional', this)">
+          <i data-lucide="building" style="width: 16px; height: 16px;"></i> Sites & Portais
+        </button>
+        <button class="filter-btn" onclick="filterProjects('jogos', this)">
+          <i data-lucide="gamepad-2" style="width: 16px; height: 16px;"></i> Jogos & Lógica
+        </button>
+      </div>
+
+      <!-- Grid de Projetos -->
+      <div class="projects-grid" id="projects-grid">
+
+        <!-- 1. IASD São Mateus -->
+        <div class="project-card" data-category="institucional">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+              <i data-lucide="church"></i>
             </div>
-            <div class="card" style="text-align: center;">
-                <div style="font-size: 4rem; margin-bottom: 1rem;">👨‍💻</div>
-                <h3 style="color: var(--text-main)">Mindset Técnico</h3>
-                <p>Eterno estudante e construtor. Não busco apenas escrever código, mas desenhar a solução estrutural ótima para o problema, seja em ambientes cloud corporativos ou em hackathons de computação quântica.</p>
-            </div>
+            <span class="card-badge badge-portal">Site Oficial</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">IASD São Mateus</h3>
+            <p class="card-desc">Portal completo e bilíngue com 60 anos de história, transmissão de rádio web, bíblia interativa e programação de cultos.</p>
+          </div>
+          <div class="card-actions">
+            <a href="https://github.com/felipejunqueira/iasd-sao-mateus" target="_blank" class="btn-test">
+              <i data-lucide="external-link" style="width: 16px; height: 16px;"></i> Ver Repositório
+            </a>
+            <a href="https://github.com/felipejunqueira/iasd-sao-mateus" target="_blank" class="btn-icon-link" title="GitHub">
+              <i data-lucide="github" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
         </div>
+
+        <!-- 2. Catálogo de Pedidos WhatsApp -->
+        <div class="project-card" data-category="comercio">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
+              <i data-lucide="shopping-cart"></i>
+            </div>
+            <span class="card-badge badge-ecommerce">WhatsApp</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Catálogo Burger Express</h3>
+            <p class="card-desc">Cardápio digital para lanchonetes e lojas: o cliente monta a sacola e o pedido chega formatado direto no WhatsApp.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Catálogo de Pedidos', './projetos/catalogo-pedidos/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
+            </button>
+            <a href="./projetos/catalogo-pedidos/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 3. Vitrine Loja de Roupas -->
+        <div class="project-card" data-category="comercio">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">
+              <i data-lucide="shirt"></i>
+            </div>
+            <span class="card-badge badge-ecommerce">Moda & Vendas</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Vitrine Loja de Roupas</h3>
+            <p class="card-desc">Catálogo virtual de moda com seleção de tamanhos, cores e visual moderno para encantar clientes no Instagram.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Loja de Roupas', './projetos/loja-roupas/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
+            </button>
+            <a href="./projetos/loja-roupas/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 4. Link da Bio para Barbearia & Salão -->
+        <div class="project-card" data-category="servicos">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+              <i data-lucide="scissors"></i>
+            </div>
+            <span class="card-badge badge-service">Agendamento</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Link Bio Barbearia & Salão</h3>
+            <p class="card-desc">Página perfeita para colocar na bio do Instagram: serviços, fotos dos cortes, localização no mapa e agendamento.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Link Bio Barbearia', './projetos/link-bio-barbearia/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
+            </button>
+            <a href="./projetos/link-bio-barbearia/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 5. Site da Fonoaudióloga Fernanda Roberta -->
+        <div class="project-card" data-category="servicos">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(139, 92, 246, 0.15); color: #c084fc;">
+              <i data-lucide="heart-pulse"></i>
+            </div>
+            <span class="card-badge badge-service">Saúde & Clínica</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Fernanda Fonoaudiologia</h3>
+            <p class="card-desc">Site profissional para consultório de fonoaudiologia, focado em agendamento, orientações aos pacientes e tratamentos.</p>
+          </div>
+          <div class="card-actions">
+            <a href="https://github.com/felipejunqueira/SiteFernandaFono" target="_blank" class="btn-test">
+              <i data-lucide="external-link" style="width: 16px; height: 16px;"></i> Ver Repositório
+            </a>
+            <a href="https://github.com/felipejunqueira/SiteFernandaFono" target="_blank" class="btn-icon-link" title="GitHub">
+              <i data-lucide="github" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 6. Cartão Fidelidade Digital -->
+        <div class="project-card" data-category="comercio">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+              <i data-lucide="award"></i>
+            </div>
+            <span class="card-badge badge-ecommerce">Fidelização</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Cartão Fidelidade Digital</h3>
+            <p class="card-desc">Substitui o papelzinho carimbado por um cartão digital moderno no celular do cliente para acumular selos e recompensas.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Sistema de Fidelidade', './projetos/sistema-fidelidade/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
+            </button>
+            <a href="./projetos/sistema-fidelidade/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 7. PDV / Frente de Caixa Simples -->
+        <div class="project-card" data-category="comercio">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(14, 165, 233, 0.15); color: #38bdf8;">
+              <i data-lucide="calculator"></i>
+            </div>
+            <span class="card-badge badge-ecommerce">PDV & Caixa</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Frente de Caixa Mercadinho</h3>
+            <p class="card-desc">Sistema visual e rápido para registrar compras, somar itens e emitir resumo de venda sem complicações nem travamentos.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Frente de Caixa', './projetos/pdv-mercado/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
+            </button>
+            <a href="./projetos/pdv-mercado/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 8. Padaria & Cafeteria -->
+        <div class="project-card" data-category="comercio">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+              <i data-lucide="coffee"></i>
+            </div>
+            <span class="card-badge badge-ecommerce">Cardápio</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Padaria & Confeitaria</h3>
+            <p class="card-desc">Apresentação gastronômica com cardápio de cafés, pães quentinhos e bolos com fotos apetitosas e pedidos práticos.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Padaria & Cafeteria', './projetos/padaria/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
+            </button>
+            <a href="./projetos/padaria/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 9. Portal Advocacia -->
+        <div class="project-card" data-category="servicos">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(148, 163, 184, 0.15); color: #cbd5e1;">
+              <i data-lucide="scale"></i>
+            </div>
+            <span class="card-badge badge-service">Jurídico</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Portal de Advocacia</h3>
+            <p class="card-desc">Landing page corporativa e elegante para advogados e escritórios transmitirem autoridade e receberem contatos de clientes.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Portal Advocacia', './projetos/advocacia/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
+            </button>
+            <a href="./projetos/advocacia/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 10. Portal Clínicas & Saúde -->
+        <div class="project-card" data-category="servicos">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(6, 182, 212, 0.15); color: #22d3ee;">
+              <i data-lucide="stethoscope"></i>
+            </div>
+            <span class="card-badge badge-service">Consultórios</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Consultório Médico & Saúde</h3>
+            <p class="card-desc">Página institucional para médicos, dentistas, psicólogos e terapeutas apresentarem especialidades e facilitarem consultas.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Profissional da Saúde', './projetos/profissional-saude/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
+            </button>
+            <a href="./projetos/profissional-saude/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 11. Catálogo Metalúrgica & Indústria -->
+        <div class="project-card" data-category="institucional">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(100, 116, 139, 0.2); color: #94a3b8;">
+              <i data-lucide="cog"></i>
+            </div>
+            <span class="card-badge badge-portal">Indústria</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Catálogo Metalúrgica</h3>
+            <p class="card-desc">Apresentação corporativa para empresas do setor industrial, usinagem e metalurgia com solicitação rápida de cotações.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Metalúrgica', './projetos/metalurgica/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
+            </button>
+            <a href="./projetos/metalurgica/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 12. Página de Loja (Vitrine Comercial) -->
+        <div class="project-card" data-category="comercio">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(168, 85, 247, 0.15); color: #d8b4fe;">
+              <i data-lucide="store"></i>
+            </div>
+            <span class="card-badge badge-ecommerce">Vitrine</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Página de Loja Comercial</h3>
+            <p class="card-desc">Landing page comercial destacando ofertas, novidades da semana e informações de atendimento da sua loja.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Página de Loja', './projetos/page-loja/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
+            </button>
+            <a href="./projetos/page-loja/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 13. Gestor de Finanças Pessoais -->
+        <div class="project-card" data-category="servicos">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+              <i data-lucide="wallet"></i>
+            </div>
+            <span class="card-badge badge-service">Finanças</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Gestor Financeiro Web</h3>
+            <p class="card-desc">Aplicativo prático para controle de receitas, despesas diárias e saldo mensal com interface limpa e intuitiva.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Finanças Pessoais', './projetos/app-financas-pessoais/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
+            </button>
+            <a href="./projetos/app-financas-pessoais/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 14. Jogo da Velha Moderno (Box) -->
+        <div class="project-card" data-category="jogos">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
+              <i data-lucide="gamepad-2"></i>
+            </div>
+            <span class="card-badge badge-game">Jogo Web</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Jogo da Velha Moderno</h3>
+            <p class="card-desc">Jogo clássico repaginado com efeitos visuais, inteligência artificial e sons para uma experiência divertida.</p>
+          </div>
+          <div class="card-actions">
+            <button class="btn-test" onclick="openDemo('Jogo da Velha Moderno', './projetos/jogo-moderno/')">
+              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Jogar Agora
+            </button>
+            <a href="./projetos/jogo-moderno/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
+              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- 15. Tic-Tac-Toe Multi-Linguagens -->
+        <div class="project-card" data-category="jogos">
+          <div class="card-top">
+            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+              <i data-lucide="cpu"></i>
+            </div>
+            <span class="card-badge badge-game">Multi-Linguagem</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Tic-Tac-Toe Multi-Engine</h3>
+            <p class="card-desc">Estudo comparativo implementando a mesma lógica de jogo em C, Python, Java e Lua compartilhando regras.</p>
+          </div>
+          <div class="card-actions">
+            <a href="https://github.com/felipejunqueira/tic-tac-toe" target="_blank" class="btn-test">
+              <i data-lucide="external-link" style="width: 16px; height: 16px;"></i> Ver Repositório
+            </a>
+            <a href="https://github.com/felipejunqueira/tic-tac-toe" target="_blank" class="btn-icon-link" title="GitHub">
+              <i data-lucide="github" style="width: 18px; height: 18px;"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
     </section>
 
-    <section id="skills">
-        <h2 class="section-title reveal">Arsenal Técnico</h2>
-        <div class="grid-2 reveal">
-            <div>
-                <div class="skill-bar">
-                    <div class="skill-info"><span>C++ & Estruturas de Dados</span><span>90%</span></div>
-                    <div class="progress-line"><span style="width: 90%;"></span></div>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-info"><span>IA Generativa (Gemini API)</span><span>85%</span></div>
-                    <div class="progress-line"><span style="width: 85%;"></span></div>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-info"><span>Game Development</span><span>75%</span></div>
-                    <div class="progress-line"><span style="width: 75%;"></span></div>
-                </div>
-                <div class="skill-bar">
-                    <div class="skill-info"><span>Lógica Matemática & Algoritmos</span><span>88%</span></div>
-                    <div class="progress-line"><span style="width: 88%;"></span></div>
-                </div>
-            </div>
-            <div class="grid-3" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <div class="card" style="padding: 1.5rem;">
-                    <h4 style="margin-bottom: 0.5rem; color: var(--accent-primary);">Ferramentas</h4>
-                    <p style="font-size: 0.85rem;">Google AI Studio, GDB Online, GitHub Pages, Moodle/SIPAC.</p>
-                </div>
-                <div class="card" style="padding: 1.5rem;">
-                    <h4 style="margin-bottom: 0.5rem; color: var(--accent-secondary);">Áreas de Pesquisa</h4>
-                    <p style="font-size: 0.85rem;">Computação Quântica, Divulgação Científica, Prototipagem.</p>
-                </div>
-            </div>
-        </div>
+    <!-- MINIJOGO INTERATIVO EMBUTIDO NA PÁGINA -->
+    <section class="game-section">
+      <h2 class="section-title" style="margin-bottom: 0.3rem;">Desafio Rápido: Jogue Contra Minha IA</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
+        Teste a lógica do computador agora mesmo! Você joga com <strong>X</strong> (Azul) e a IA joga com <strong>O</strong> (Vermelho).
+      </p>
+
+      <div class="game-status-text" id="ai-game-status">Sua vez! Clique em qualquer quadrado.</div>
+
+      <div class="game-board" id="ai-board">
+        <div class="game-cell" onclick="makeMove(0)"></div>
+        <div class="game-cell" onclick="makeMove(1)"></div>
+        <div class="game-cell" onclick="makeMove(2)"></div>
+        <div class="game-cell" onclick="makeMove(3)"></div>
+        <div class="game-cell" onclick="makeMove(4)"></div>
+        <div class="game-cell" onclick="makeMove(5)"></div>
+        <div class="game-cell" onclick="makeMove(6)"></div>
+        <div class="game-cell" onclick="makeMove(7)"></div>
+        <div class="game-cell" onclick="makeMove(8)"></div>
+      </div>
+
+      <button class="btn-action btn-secondary" onclick="resetGame()" style="padding: 0.5rem 1.2rem; font-size: 0.95rem;">
+        <i data-lucide="rotate-ccw" style="width: 16px; height: 16px;"></i> Reiniciar Partida
+      </button>
     </section>
 
-    <section id="projects">
-        <h2 class="section-title reveal">Iniciativas & Projetos</h2>
-        <div class="grid-3 reveal">
-            <div class="card">
-                <h3>PolarCasters 2025</h3>
-                <p>Desenvolvimento e produção de videoensaios e videoaulas com foco em comunicação e divulgação científica de alto impacto.</p>
-                <div class="tags">
-                    <span class="tag">Comunicação Científica</span>
-                    <span class="tag">Pesquisa</span>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Diversão Séria</h3>
-                <p>Workshop imersivo voltado para a prototipagem rápida de jogos, focando na aplicação de mecânicas divertidas para fins educacionais e sérios.</p>
-                <div class="tags">
-                    <span class="tag">Game Design</span>
-                    <span class="tag">Prototipagem</span>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Qiskit Fall Fest</h3>
-                <p>Participação em hackathon focado no ecossistema de computação quântica da IBM, aplicando lógica algorítmica não-clássica na resolução de problemas.</p>
-                <div class="tags">
-                    <span class="tag">Computação Quântica</span>
-                    <span class="tag">Hackathon</span>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Inovação Contínua</h3>
-                <p>Engajamento ativo no ecossistema de São Paulo, incluindo SP2B e iniciativas de curadoria tecnológica visando inclusão digital profunda.</p>
-                <div class="tags">
-                    <span class="tag">Ecossistema SP</span>
-                    <span class="tag">Inclusão Digital</span>
-                </div>
-            </div>
+  </main>
+
+  <!-- MODAL DE DEMONSTRAÇÃO INTERATIVA (LIVE PREVIEW) -->
+  <div class="modal-overlay" id="demo-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <i data-lucide="sparkles" style="color: var(--primary); width: 18px; height: 18px;"></i>
+          <span class="modal-title" id="modal-project-title">Demonstração Interativa</span>
         </div>
-    </section>
-
-    <section id="game" class="reveal">
-        <h2 class="section-title">Jogo da Velha Contra a IA</h2>
-        <div class="card" style="max-width: 450px; margin: 0 auto; text-align: center;">
-            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
-                Desafie o meu algoritmo de Inteligência Artificial local para uma partida clássica direto no navegador!
-            </p>
-            <div id="game-status" style="font-family: 'Fira Code', monospace; margin-bottom: 1.5rem; font-weight: bold; color: var(--accent-primary);">
-                Sua vez! (Você é o X)
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 280px; margin: 0 auto 2rem;">
-                <button class="cell" onclick="makePlay(0)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
-                <button class="cell" onclick="makePlay(1)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
-                <button class="cell" onclick="makePlay(2)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
-                <button class="cell" onclick="makePlay(3)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
-                <button class="cell" onclick="makePlay(4)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
-                <button class="cell" onclick="makePlay(5)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
-                <button class="cell" onclick="makePlay(6)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
-                <button class="cell" onclick="makePlay(7)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
-                <button class="cell" onclick="makePlay(8)" style="aspect-ratio: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; font-size: 2.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; transition: all 0.3s; outline: none;"></button>
-            </div>
-            <button class="btn btn-outline" onclick="resetBoard()">Resetar Tabuleiro</button>
+        <div class="modal-controls">
+          <a href="#" target="_blank" id="modal-external-link" class="btn-modal-action" title="Abrir em Nova Aba">
+            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i> Nova Aba
+          </a>
+          <button class="btn-modal-action btn-modal-close" onclick="closeDemo()">
+            <i data-lucide="x" style="width: 16px; height: 16px;"></i> Fechar
+          </button>
         </div>
-    </section>
+      </div>
+      <div class="modal-body">
+        <iframe src="" class="modal-iframe" id="modal-frame"></iframe>
+      </div>
+    </div>
+  </div>
 
-    <section id="contact" style="min-height: auto; padding-bottom: 4rem;">
-        <h2 class="section-title reveal">Vamos Conectar</h2>
-        <div class="card reveal" style="max-width: 600px; margin: 0 auto; text-align: center;">
-            <p style="margin-bottom: 2rem;">Interessado em colaborar em projetos de software, hackathons ou pesquisas acadêmicas? Minha caixa de entrada está aberta.</p>
-            <a href="mailto:seu-email@gmail.com" class="btn btn-primary" style="margin-bottom: 2rem;">Enviar Email</a>
-            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-                <a href="https://github.com/seu-usuario" target="_blank" rel="noopener" style="color: var(--text-main); text-decoration: none;">GitHub</a>
-                <a href="https://linkedin.com/in/seu-usuario" target="_blank" rel="noopener" style="color: var(--text-main); text-decoration: none;">LinkedIn</a>
-            </div>
-        </div>
-    </section>
+  <!-- RODAPÉ & CHAMADA FINAL -->
+  <footer class="footer-cta">
+    <div class="footer-cta-card">
+      <h2 class="footer-cta-title">Gostou de Algum Modelo?</h2>
+      <p class="footer-cta-text">
+        Vamos criar o site ou aplicativo perfeito para o seu comércio! Me chame no WhatsApp para conversarmos e tirar suas dúvidas sem compromisso.
+      </p>
 
-    <footer>
-        <p>&copy; 2026 Felipe Junqueira Leite. Desenvolvido com precisão algorítmica.</p>
-        <button class="fuel-btn" onclick="abastecerDev()" title="Combustível do Desenvolvedor">☕</button>
-    </footer>
+      <a href="https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Vi%20seus%20projetos%20no%20portf%C3%B3lio%20e%20gostaria%20de%20um%20or%C3%A7amento%20para%20meu%20neg%C3%B3cio" target="_blank" class="btn-action btn-whatsapp" style="font-size: 1.15rem; padding: 1rem 2rem;">
+        <i data-lucide="message-circle" style="width: 24px; height: 24px;"></i>
+        Chamar no WhatsApp: (11) 98390-9578
+      </a>
 
-    <div id="toast"></div>
+      <p style="margin-top: 2rem; font-size: 0.85rem; color: #64748b;">
+        © 2026 Felipe Junqueira Leite • São Paulo, SP • Feito com foco em simplicidade e alta performance
+      </p>
+    </div>
+  </footer>
 
-    <script>
-        const revealElements = document.querySelectorAll('.reveal');
-        const progressBars = document.querySelectorAll('.progress-line span');
+  <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
+  <a href="https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20projeto" target="_blank" class="floating-wa" title="Falar no WhatsApp" aria-label="WhatsApp">
+    <i data-lucide="message-circle" style="width: 30px; height: 30px;"></i>
+  </a>
 
-        const revealOnScroll = () => {
-            const windowHeight = window.innerHeight;
-            revealElements.forEach(el => {
-                const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    el.classList.add('active');
-                }
-            });
+  <!-- SCRIPTS -->
+  <script>
+    // Inicializa ícones Lucide
+    lucide.createIcons();
 
-            const skillsSection = document.getElementById('skills');
-            if (skillsSection.getBoundingClientRect().top < windowHeight - 100) {
-                progressBars.forEach(bar => {
-                    bar.style.transform = 'scaleX(1)';
-                });
-            }
-        };
+    // Filtro de Projetos Simples
+    function filterProjects(category, btn) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
+      const cards = document.querySelectorAll('#projects-grid .project-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
 
-        let clickCount = 0;
-        const heroTitle = document.getElementById('hero-title');
-        const toast = document.getElementById('toast');
+    // Modal de Demonstração
+    function openDemo(title, url) {
+      document.getElementById('modal-project-title').textContent = 'Testando: ' + title;
+      document.getElementById('modal-external-link').href = url;
+      document.getElementById('modal-frame').src = url;
+      document.getElementById('demo-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
 
-        const showToast = (msg, duration = 3000) => {
-            toast.innerHTML = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), duration);
-        };
+    function closeDemo() {
+      document.getElementById('demo-modal').classList.remove('active');
+      document.getElementById('modal-frame').src = '';
+      document.body.style.overflow = 'auto';
+    }
 
-        heroTitle.addEventListener('click', () => {
-            clickCount++;
-            heroTitle.style.transform = `scale(${1 + (clickCount * 0.02)})`;
-            setTimeout(() => heroTitle.style.transform = 'scale(1)', 150);
+    // Fecha modal clicando fora
+    document.getElementById('demo-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeDemo();
+    });
 
-            if (clickCount === 5) {
-                document.body.classList.toggle('quantum-theme');
-                const isQuantum = document.body.classList.contains('quantum-theme');
-                showToast(isQuantum ? "⚛️ Qiskit Fall Fest Mode: ATIVADO" : "Modo Clássico Restaurado", 4000);
-                clickCount = 0;
-            }
-        });
+    // Tecla ESC fecha modal
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeDemo();
+    });
 
-        const snacks = [
-            "Carregando Bolo de Pote... Energia +50%", 
-            "Injetando Palha Italiana Oreo... Foco Máximo Atingido!",
-            "Vatapá detectado no sistema. Compilação acelerada em 200%!"
-        ];
+    // Jogo da Velha contra IA Simples
+    let board = ['', '', '', '', '', '', '', '', ''];
+    let gameActive = true;
 
-        window.abastecerDev = () => {
-            const randomSnack = snacks[Math.floor(Math.random() * snacks.length)];
-            showToast(`🔋 ${randomSnack}`, 4000);
-        };
+    function makeMove(index) {
+      if (!gameActive || board[index] !== '') return;
 
-        // Jogo da Velha Logic
-        let board = ['', '', '', '', '', '', '', '', ''];
-        let isGameActive = true;
-        const cells = document.querySelectorAll('.cell');
-        const gameStatus = document.getElementById('game-status');
-        const winPatterns = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8],
-            [0, 3, 6], [1, 4, 7], [2, 5, 8],
-            [0, 4, 8], [2, 4, 6]
-        ];
+      board[index] = 'X';
+      renderBoard();
 
-        window.makePlay = (index) => {
-            if (board[index] !== '' || !isGameActive) return;
-            
-            board[index] = 'X';
-            cells[index].innerText = 'X';
-            cells[index].style.color = 'var(--accent-primary)';
-            
-            if (checkWin('X')) {
-                endGame('Você venceu! 🎉');
-                return;
-            }
-            if (board.every(cell => cell !== '')) {
-                endGame('Empate! 🤝');
-                return;
-            }
-            
-            isGameActive = false;
-            gameStatus.innerText = 'IA pensando...';
-            setTimeout(aiMove, 600);
-        };
+      if (checkWin('X')) {
+        document.getElementById('ai-game-status').innerHTML = '🎉 <span style="color:#10b981;">Parabéns! Você venceu!</span>';
+        gameActive = false;
+        return;
+      }
 
-        const aiMove = () => {
-            if (!board.includes('')) return;
-            
-            let choice = findBestMove('O') ?? findBestMove('X') ?? takeRandom();
-            
-            board[choice] = 'O';
-            cells[choice].innerText = 'O';
-            cells[choice].style.color = 'var(--accent-secondary)';
-            
-            if (checkWin('O')) {
-                endGame('A IA venceu! 🤖');
-                return;
-            }
-            if (board.every(cell => cell !== '')) {
-                endGame('Empate! 🤝');
-                return;
-            }
-            
-            isGameActive = true;
-            gameStatus.innerText = 'Sua vez! (Você é o X)';
-        };
+      if (board.every(cell => cell !== '')) {
+        document.getElementById('ai-game-status').innerHTML = '🤝 <span style="color:#94a3b8;">Empate técnico!</span>';
+        gameActive = false;
+        return;
+      }
 
-        const findBestMove = (player) => {
-            for (let pattern of winPatterns) {
-                let counts = pattern.map(idx => board[idx]);
-                let emptyCount = counts.filter(val => val === '').length;
-                let playerCount = counts.filter(val => val === player).length;
-                if (emptyCount === 1 && playerCount === 2) {
-                    return pattern[counts.indexOf('')];
-                }
-            }
-            return null;
-        };
+      document.getElementById('ai-game-status').textContent = 'IA pensando...';
+      setTimeout(aiMove, 300);
+    }
 
-        const takeRandom = () => {
-            if (board[4] === '') return 4;
-            const corners = [0, 2, 6, 8].filter(idx => board[idx] === '');
-            if (corners.length > 0) return corners[Math.floor(Math.random() * corners.length)];
-            const empties = board.map((val, idx) => val === '' ? idx : null).filter(val => val !== null);
-            return empties[Math.floor(Math.random() * empties.length)];
-        };
+    function aiMove() {
+      if (!gameActive) return;
 
-        const checkWin = (player) => {
-            for (let pattern of winPatterns) {
-                if (pattern.every(idx => board[idx] === player)) {
-                    pattern.forEach(idx => cells[idx].classList.add('win'));
-                    return true;
-                }
-            }
-            return false;
-        };
+      // 1. Tentar vencer
+      let bestMove = findWinningMove('O');
+      // 2. Bloquear vitória do jogador
+      if (bestMove === null) bestMove = findWinningMove('X');
+      // 3. Pegar o centro
+      if (bestMove === null && board[4] === '') bestMove = 4;
+      // 4. Pegar qualquer espaço livre
+      if (bestMove === null) {
+        const available = board.map((val, idx) => val === '' ? idx : null).filter(val => val !== null);
+        if (available.length > 0) {
+          bestMove = available[Math.floor(Math.random() * available.length)];
+        }
+      }
 
-        const endGame = (message) => {
-            gameStatus.innerText = message;
-            isGameActive = false;
-        };
+      if (bestMove !== null) {
+        board[bestMove] = 'O';
+        renderBoard();
 
-        window.resetBoard = () => {
-            board = ['', '', '', '', '', '', '', '', ''];
-            isGameActive = true;
-            gameStatus.innerText = 'Sua vez! (Você é o X)';
-            cells.forEach(cell => {
-                cell.innerText = '';
-                cell.classList.remove('win');
-                cell.style.color = 'var(--text-main)';
-            });
-        };
-    </script>
+        if (checkWin('O')) {
+          document.getElementById('ai-game-status').innerHTML = '🤖 <span style="color:#f43f5e;">A IA venceu! Tente novamente!</span>';
+          gameActive = false;
+          return;
+        }
+
+        if (board.every(cell => cell !== '')) {
+          document.getElementById('ai-game-status').innerHTML = '🤝 <span style="color:#94a3b8;">Empate técnico!</span>';
+          gameActive = false;
+          return;
+        }
+
+        document.getElementById('ai-game-status').textContent = 'Sua vez! Escolha um quadrado.';
+      }
+    }
+
+    function findWinningMove(player) {
+      const winCombos = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
+      ];
+
+      for (let combo of winCombos) {
+        const [a, b, c] = combo;
+        const line = [board[a], board[b], board[c]];
+        const countPlayer = line.filter(v => v === player).length;
+        const countEmpty = line.filter(v => v === '').length;
+
+        if (countPlayer === 2 && countEmpty === 1) {
+          if (board[a] === '') return a;
+          if (board[b] === '') return b;
+          if (board[c] === '') return c;
+        }
+      }
+      return null;
+    }
+
+    function checkWin(player) {
+      const winCombos = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
+      ];
+      return winCombos.some(combo => combo.every(idx => board[idx] === player));
+    }
+
+    function renderBoard() {
+      const cells = document.querySelectorAll('#ai-board .game-cell');
+      cells.forEach((cell, idx) => {
+        cell.textContent = board[idx];
+        cell.className = 'game-cell';
+        if (board[idx] === 'X') cell.classList.add('cell-x', 'taken');
+        if (board[idx] === 'O') cell.classList.add('cell-o', 'taken');
+      });
+    }
+
+    function resetGame() {
+      board = ['', '', '', '', '', '', '', '', ''];
+      gameActive = true;
+      document.getElementById('ai-game-status').textContent = 'Sua vez! Clique em qualquer quadrado.';
+      renderBoard();
+    }
+  </script>
 </body>
 </html>

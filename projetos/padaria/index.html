@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forno da Vila | Padaria Artesanal</title>
+  <meta name="description" content="Forno da Vila — padaria artesanal com delivery, encomendas e assinatura de café da manhã. Peça pelo WhatsApp!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Bree+Serif&display=swap" rel="stylesheet" />
+  <style>
+    :root{--ink:#292524;--muted:#57534e;--line:#fcd34d;--card:#fff;--brand:#b45309;--brand2:#d97706}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Manrope,sans-serif;color:var(--ink);background:linear-gradient(155deg,#fef9c3,#fff7ed);min-height:100vh}
+    .wrap{width:min(1120px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
+    .hero{background:#ffffffe0;border:1px solid #ffffffa8;border-radius:20px;overflow:hidden;box-shadow:0 16px 40px #78350f2a}
+    .hero-img{height:200px;background:url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80') center/cover}
+    @media(min-width:640px){.hero-img{height:280px}}
+    .hero-body{padding:1.2rem}
+    @media(min-width:640px){.hero-body{padding:1.4rem 1.8rem}}
+    h1{margin:0 0 .5rem;font:700 clamp(2rem,5vw,3rem) 'Bree Serif',serif;line-height:1.15}
+    .lead{color:var(--muted);max-width:76ch;line-height:1.65}
+    .meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+    .badge{border:1px solid #f59e0b;background:#fffbeb;padding:.4rem .75rem;border-radius:999px;font-size:.82rem;font-weight:700}
+    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem}
+    .tab-btn{border:1px solid var(--line);background:#fff;padding:.5rem .9rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
+    .tab-btn:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
+    .tab-btn.active{background:var(--brand);color:#fffbeb;border-color:var(--brand)}
+    .panel{display:none;padding:1rem 0}
+    .panel.active{display:block;animation:fadeUp .28s ease}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .grid{display:grid;grid-template-columns:1fr;gap:.8rem}
+    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;transition:.2s ease}
+    .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px #78350f18}
+    .card h3{margin:0 0 .4rem;font-size:1rem;color:var(--brand)}
+    .card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
+    .gallery{display:grid;grid-template-columns:1fr;gap:.7rem}
+    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
+    .gallery img{width:100%;height:180px;object-fit:cover;border-radius:14px;border:1px solid var(--line);transition:.2s ease}
+    .gallery img:hover{transform:scale(1.03)}
+    .cta{background:linear-gradient(130deg,var(--brand),var(--brand2));color:#fffbeb;padding:1.2rem 1.4rem;border-radius:16px;margin-top:1.2rem}
+    .cta a{display:inline-block;margin-top:.5rem;background:#fffbeb;color:#78350f;text-decoration:none;padding:.65rem 1.2rem;border-radius:999px;font-weight:800;font-size:.9rem;transition:.2s ease}
+    .cta a:hover{transform:translateY(-2px);box-shadow:0 6px 18px #78350f44}
+    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#ffffffb0;border-radius:0 0 20px 20px}
+    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
+    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
+    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
+    .cert{background:var(--brand);color:#fffbeb;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
+    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-img"></div>
+      <div class="hero-body">
+        <h1>Forno da Vila</h1>
+        <p class="lead">Página comercial para padaria artesanal com foco em pedidos recorrentes, encomendas para eventos e assinatura de café da manhã. O site apresenta produtos em destaque, prova social e chamada direta para pedido.</p>
+        <div class="meta">
+          <span class="badge">🛵 Delivery</span>
+          <span class="badge">🎂 Encomendas</span>
+          <span class="badge">☕ Assinatura Semanal</span>
+        </div>
+
+        <nav class="tabs" aria-label="Seções">
+          <button class="tab-btn active" data-tab="visao">Visão Geral</button>
+          <button class="tab-btn" data-tab="menu">Menu</button>
+          <button class="tab-btn" data-tab="galeria">Galeria</button>
+          <button class="tab-btn" data-tab="clientes">Clientes</button>
+          <button class="tab-btn" data-tab="faq">FAQ</button>
+        </nav>
+
+        <section class="panel active" id="visao">
+          <div class="grid">
+            <article class="card"><h3>😍 Experiência</h3><p>Narrativa visual de produto fresco para gerar desejo imediato no usuário.</p></article>
+            <article class="card"><h3>⚙️ Operação</h3><p>Fluxo rápido de atendimento para reduzir filas e aumentar pedidos por mensagem.</p></article>
+            <article class="card"><h3>💰 Receita</h3><p>Seções dedicadas a combos e kits para elevar ticket médio.</p></article>
+          </div>
+        </section>
+
+        <section class="panel" id="menu">
+          <div class="grid">
+            <article class="card"><h3>🍞 Pães da Casa</h3><p>Fermentação natural, integral, australiano e multigrãos.</p></article>
+            <article class="card"><h3>🎂 Confeitaria</h3><p>Bolos artesanais, tortas sazonais e sobremesas de vitrine.</p></article>
+            <article class="card"><h3>🥐 Salgados</h3><p>Esfihas, folhados e combos de café para retirada ou entrega.</p></article>
+          </div>
+        </section>
+
+        <section class="panel" id="galeria">
+          <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&w=900&q=80" alt="Pães artesanais" />
+            <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=900&q=80" alt="Bolo caseiro" />
+            <img src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?auto=format&fit=crop&w=900&q=80" alt="Cesta de café" />
+          </div>
+        </section>
+
+        <section class="panel" id="clientes">
+          <div class="grid">
+            <article class="card"><p>⭐⭐⭐⭐⭐ "A página aumentou muito os pedidos no horário de pico."</p><strong>— Lucas, proprietário</strong></article>
+            <article class="card"><p>⭐⭐⭐⭐⭐ "Agora eu escolho tudo no celular e só retiro na loja."</p><strong>— Ana, cliente</strong></article>
+            <article class="card"><p>⭐⭐⭐⭐⭐ "As fotos venderam por si só. Tudo muito apetitoso!"</p><strong>— Marina, cliente</strong></article>
+          </div>
+        </section>
+
+        <section class="panel" id="faq">
+          <div class="grid">
+            <article class="card"><h3>🛵 Entrega</h3><p>Entregamos em até 7km com janelas de 30 minutos.</p></article>
+            <article class="card"><h3>📅 Encomendas</h3><p>Pedidos para evento com mínimo de 48h de antecedência.</p></article>
+            <article class="card"><h3>💳 Pagamento</h3><p>Pix, cartão e dinheiro na entrega.</p></article>
+          </div>
+        </section>
+
+        <div class="cta">
+          <strong>Quer sua padaria vendendo o dia todo, inclusive fora do balcão? 🥖</strong><br />
+          <a href="#">Pedir consultoria</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="footer-name">Felipe Junqueira Leite</p>
+      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
+      <div class="footer-badges">
+        <span class="cert">HTML5</span>
+        <span class="cert">CSS3</span>
+        <span class="cert">JavaScript</span>
+        <span class="cert">Mobile‑First</span>
+        <span class="cert">SEO</span>
+        <span class="cert">UX/UI</span>
+      </div>
+      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
+    </footer>
+  </main>
+  <script>
+    const tabs=[...document.querySelectorAll('.tab-btn')];
+    const panels=[...document.querySelectorAll('.panel')];
+    tabs.forEach(btn=>btn.addEventListener('click',()=>{
+      tabs.forEach(b=>b.classList.remove('active'));
+      panels.forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    }));
+  </script>
+</body>
+</html>

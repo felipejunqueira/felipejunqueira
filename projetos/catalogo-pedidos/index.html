@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#111827">
+    <title>Burger Express - Pedidos</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(230, 57, 70, 0.16), transparent 30%),
+                radial-gradient(circle at top right, rgba(244, 162, 97, 0.14), transparent 26%),
+                linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.84);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .card-shadow {
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        .rise-in {
+            animation: riseIn 0.7s ease-out both;
+        }
+
+        .delay-1 { animation-delay: 0.08s; }
+        .delay-2 { animation-delay: 0.16s; }
+        .delay-3 { animation-delay: 0.24s; }
+
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .bg-grid {
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            red: '#E63946',
+                            yellow: '#F4A261',
+                            dark: '#1D3557',
+                            ink: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="text-gray-800 antialiased pb-28 overflow-x-hidden">
+
+    <div class="pointer-events-none fixed inset-0 bg-grid opacity-[0.12]"></div>
+    <div class="pointer-events-none fixed -top-24 -left-20 h-64 w-64 rounded-full bg-brand-red/15 blur-3xl"></div>
+    <div class="pointer-events-none fixed top-24 -right-24 h-72 w-72 rounded-full bg-brand-yellow/20 blur-3xl"></div>
+
+    <header class="sticky top-0 z-50 glass border-b border-white/60 shadow-sm">
+        <div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-2xl bg-brand-red text-white flex items-center justify-center shadow-lg shadow-brand-red/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-yellow"><path d="M4 10h16"/><path d="M4 14h16"/><path d="M12 4c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8z"/></svg>
+                </div>
+                <div>
+                    <h1 class="text-lg font-extrabold tracking-tight text-brand-ink leading-none">Burger Express</h1>
+                    <p class="text-[11px] uppercase tracking-[0.24em] text-gray-500 mt-1">Delivery & retirada</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 text-xs md:text-sm font-semibold bg-brand-dark text-white px-3 py-1.5 rounded-full shadow-md shadow-brand-dark/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18H3c-.6 0-1-.4-1-1v-4c0-1.7 1.3-3 3-3h2"/><path d="M19 18h2c.6 0 1-.4 1-1v-3c0-2.2-1.8-4-4-4H9.5a4.5 4.5 0 0 0-4.1 2.8L4 15"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+                30-45 min
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto p-4 space-y-6 relative">
+        <section class="relative overflow-hidden rounded-[2rem] bg-brand-dark text-white p-6 md:p-7 shadow-2xl shadow-brand-dark/20 rise-in">
+            <div class="absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_top_right,_rgba(244,162,97,0.42),_transparent_30%),radial-gradient(circle_at_bottom_left,_rgba(230,57,70,0.45),_transparent_34%)]"></div>
+            <div class="relative space-y-5">
+                <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/80">
+                    <span class="h-2 w-2 rounded-full bg-brand-yellow shadow-[0_0_0_6px_rgba(244,162,97,0.12)]"></span>
+                    Aberto agora
+                </div>
+
+                <div class="space-y-3">
+                    <h2 class="text-3xl md:text-4xl font-black leading-tight tracking-tight">Seu pedido em poucos cliques.</h2>
+                    <p class="text-sm md:text-base text-white/75 leading-relaxed">Escolha seu burger, adicione extras e finalize no WhatsApp sem complicação.</p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3 text-center">
+                    <div class="rounded-2xl bg-white/10 border border-white/10 p-3">
+                        <p class="text-lg font-extrabold text-brand-yellow">12+</p>
+                        <p class="text-[11px] uppercase tracking-widest text-white/65">Opções</p>
+                    </div>
+                    <div class="rounded-2xl bg-white/10 border border-white/10 p-3">
+                        <p class="text-lg font-extrabold text-brand-yellow">24h</p>
+                        <p class="text-[11px] uppercase tracking-widest text-white/65">Feedback</p>
+                    </div>
+                    <div class="rounded-2xl bg-white/10 border border-white/10 p-3">
+                        <p class="text-lg font-extrabold text-brand-yellow">0%</p>
+                        <p class="text-[11px] uppercase tracking-widest text-white/65">Taxa zona</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="glass card-shadow border border-white/70 text-brand-dark p-4 rounded-2xl flex items-center justify-between rise-in delay-1">
+            <div>
+                <p class="text-xs font-bold uppercase tracking-wider opacity-80">Novidade</p>
+                <p class="font-bold">Taxa grátis na região!</p>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+
+        <div class="flex items-end justify-between gap-3 rise-in delay-1">
+            <div>
+                <h2 class="text-2xl font-black text-brand-ink">Nosso Cardápio</h2>
+                <p class="text-sm text-gray-500 mt-1">Burger artesanal, porções e combos para matar a fome.</p>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 rounded-full bg-white/85 border border-white px-3 py-1 text-xs font-semibold text-gray-600 shadow-sm">
+                <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                Pronto para pedir
+            </div>
+        </div>
+
+        <div class="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 rise-in delay-2">
+            <button class="shrink-0 rounded-full bg-brand-red text-white px-4 py-2 text-sm font-semibold shadow-lg shadow-brand-red/20">Todos</button>
+            <button class="shrink-0 rounded-full bg-white/85 border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700">Burgers</button>
+            <button class="shrink-0 rounded-full bg-white/85 border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700">Combos</button>
+            <button class="shrink-0 rounded-full bg-white/85 border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700">Extras</button>
+        </div>
+
+        <div class="grid grid-cols-1 gap-5">
+            <article class="bg-white/90 rounded-[1.75rem] card-shadow border border-white overflow-hidden flex flex-col rise-in delay-1">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Smash Clássico" class="h-48 w-full object-cover">
+                <div class="p-4 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2 gap-3">
+                        <div>
+                            <h3 class="font-bold text-lg leading-tight text-gray-900">Smash Clássico</h3>
+                            <p class="text-xs font-semibold text-brand-red uppercase tracking-widest mt-1">Mais pedido</p>
+                        </div>
+                        <span class="font-black text-brand-red text-lg whitespace-nowrap">R$ 25,90</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4">Pão brioche, blend 160g, queijo cheddar derretido, maionese da casa e bacon crocante.</p>
+                    <button onclick="adicionarAoCarrinho('Smash Clássico')" class="mt-auto w-full bg-brand-red hover:bg-red-700 text-white font-bold py-3.5 px-4 rounded-2xl transition-all active:scale-95 flex justify-center items-center gap-2 shadow-lg shadow-brand-red/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        Pedir Agora
+                    </button>
+                </div>
+            </article>
+
+            <article class="bg-white/90 rounded-[1.75rem] card-shadow border border-white overflow-hidden flex flex-col rise-in delay-2">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Monstro Duplo" class="h-48 w-full object-cover" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1561758033-7e924f619b47?auto=format&fit=crop&w=600&q=80';">
+                <div class="p-4 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2 gap-3">
+                        <div>
+                            <h3 class="font-bold text-lg leading-tight text-gray-900">Monstro Duplo</h3>
+                            <p class="text-xs font-semibold text-brand-yellow uppercase tracking-widest mt-1">Combão</p>
+                        </div>
+                        <span class="font-black text-brand-red text-lg whitespace-nowrap">R$ 38,90</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4">Pão brioche, 2 blends 160g, dobro de cheddar, cebola caramelizada e molho especial.</p>
+                    <button onclick="adicionarAoCarrinho('Monstro Duplo')" class="mt-auto w-full bg-brand-red hover:bg-red-700 text-white font-bold py-3.5 px-4 rounded-2xl transition-all active:scale-95 flex justify-center items-center gap-2 shadow-lg shadow-brand-red/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        Pedir Agora
+                    </button>
+                </div>
+            </article>
+
+            <article class="bg-white/90 rounded-[1.75rem] card-shadow border border-white overflow-hidden flex flex-col rise-in delay-3">
+                <img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600&q=80" alt="Batata Rústica" class="h-48 w-full object-cover">
+                <div class="p-4 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2 gap-3">
+                        <div>
+                            <h3 class="font-bold text-lg leading-tight text-gray-900">Batata Rústica</h3>
+                            <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mt-1">Acompanhamento</p>
+                        </div>
+                        <span class="font-black text-brand-red text-lg whitespace-nowrap">R$ 15,00</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4">Porção individual de batatas rústicas com páprica e maionese verde.</p>
+                    <button onclick="adicionarAoCarrinho('Batata Rústica')" class="mt-auto w-full border-2 border-brand-red text-brand-red hover:bg-red-50 font-bold py-3.5 px-4 rounded-2xl transition-all active:scale-95 flex justify-center items-center gap-2">
+                        Adicionar
+                    </button>
+                </div>
+            </article>
+
+            <article class="bg-white/90 rounded-[1.75rem] card-shadow border border-white overflow-hidden flex flex-col rise-in delay-3">
+                <div class="p-4 flex flex-col flex-1">
+                    <div class="flex justify-between items-start mb-2 gap-3">
+                        <div>
+                            <h3 class="font-bold text-lg leading-tight text-gray-900">Refrigerante Lata</h3>
+                            <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mt-1">Bebidas</p>
+                        </div>
+                        <span class="font-black text-brand-red text-lg whitespace-nowrap">R$ 7,00</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4">Escolha entre Coca-Cola, Guaraná ou Soda para acompanhar seu pedido.</p>
+                    <button onclick="adicionarAoCarrinho('Refrigerante Lata')" class="mt-auto w-full bg-brand-dark hover:bg-slate-800 text-white font-bold py-3.5 px-4 rounded-2xl transition-all active:scale-95 flex justify-center items-center gap-2 shadow-lg shadow-slate-900/20">
+                        Adicionar
+                    </button>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="max-w-md mx-auto px-4 pb-8 text-center mt-8">
+        <div class="glass card-shadow border border-white/70 rounded-[1.75rem] p-6 text-gray-700">
+            <p class="font-black text-brand-ink mb-2">Burger Express Delivery</p>
+            <p class="text-sm mb-5">Apenas delivery e retirada no local.</p>
+            <p class="text-xs uppercase tracking-[0.24em] text-gray-400">Desenvolvido por Felipe Junqueira Leite - Portfólio</p>
+        </div>
+    </footer>
+
+    <!-- Barra do Carrinho Flutuante -->
+    <div id="cart-float-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 p-4 shadow-[0_-10px_30px_rgba(0,0,0,0.08)] transform translate-y-full transition-all duration-300">
+        <div class="max-w-md mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="relative bg-brand-red text-white p-3 rounded-2xl shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-yellow text-brand-ink font-bold text-xs h-5 w-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                </div>
+                <div>
+                    <p class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Sua Sacola</p>
+                    <p id="cart-total" class="font-extrabold text-brand-ink text-base">R$ 0,00</p>
+                </div>
+            </div>
+            <button onclick="abrirCarrinho()" class="bg-brand-red hover:bg-red-700 active:scale-95 text-white font-bold px-6 py-3 rounded-2xl transition-all shadow-md shadow-brand-red/20 flex items-center gap-2">
+                Ver Sacola
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal do Carrinho -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden bg-brand-ink/60 backdrop-blur-sm justify-center items-end sm:items-center p-0 sm:p-4">
+        <div id="cart-modal-container" class="bg-white w-full max-w-md rounded-t-[2rem] sm:rounded-[2rem] max-h-[92vh] sm:max-h-[85vh] flex flex-col shadow-2xl border border-white/40 overflow-hidden transform translate-y-full transition-all duration-300">
+            <!-- Header -->
+            <div class="p-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-red"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <h3 class="font-extrabold text-xl text-brand-ink">Sua Sacola</h3>
+                </div>
+                <button onclick="fecharCarrinho()" class="text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+                </button>
+            </div>
+            
+            <!-- Items & Forms (Scrollable) -->
+            <div class="p-5 overflow-y-auto flex-1 space-y-6">
+                <!-- Lista de Itens -->
+                <div id="cart-items" class="space-y-4">
+                    <!-- Inserido via JS -->
+                </div>
+                
+                <hr class="border-gray-100" />
+                
+                <!-- Opções de Entrega -->
+                <div class="space-y-3">
+                    <label class="block text-sm font-bold text-brand-ink uppercase tracking-wider">Como deseja receber?</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button id="btn-delivery" onclick="setEntrega('delivery')" class="py-3.5 px-4 rounded-2xl border-2 border-brand-red bg-red-50 text-brand-red font-bold text-sm transition-all flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18H3c-.6 0-1-.4-1-1v-4c0-1.7 1.3-3 3-3h2"/><path d="M19 18h2c.6 0 1-.4 1-1v-3c0-2.2-1.8-4-4-4H9.5a4.5 4.5 0 0 0-4.1 2.8L4 15"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+                            Entrega
+                        </button>
+                        <button id="btn-pickup" onclick="setEntrega('retirada')" class="py-3.5 px-4 rounded-2xl border-2 border-gray-200 bg-white text-gray-500 font-bold text-sm transition-all flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Retirada
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Campos do Formulário -->
+                <div class="space-y-4">
+                    <!-- Nome -->
+                    <div>
+                        <label for="cliente-nome" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Seu Nome *</label>
+                        <input type="text" id="cliente-nome" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm focus:bg-white focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red outline-none transition-all" placeholder="Ex: Felipe Silva">
+                    </div>
+                    
+                    <!-- Endereço (Apenas se entrega) -->
+                    <div id="group-endereco" class="space-y-1">
+                        <label for="cliente-endereco" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Endereço de Entrega *</label>
+                        <input type="text" id="cliente-endereco" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm focus:bg-white focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red outline-none transition-all" placeholder="Ex: Av. Paulista, 1000 - Apto 21">
+                    </div>
+                    
+                    <!-- Pagamento -->
+                    <div>
+                        <label for="cliente-pagamento" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Forma de Pagamento</label>
+                        <select id="cliente-pagamento" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm focus:bg-white focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red outline-none transition-all">
+                           <option value="Pix">Pix</option>
+                           <option value="Cartão de Crédito">Cartão de Crédito</option>
+                           <option value="Cartão de Débito">Cartão de Débito</option>
+                           <option value="Dinheiro">Dinheiro</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="p-5 border-t border-gray-100 bg-gray-50 flex flex-col gap-3">
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-semibold text-gray-500">Valor Total:</span>
+                    <span id="modal-total" class="text-2xl font-black text-brand-ink">R$ 0,00</span>
+                </div>
+                <button onclick="enviarPedido()" class="w-full bg-brand-red hover:bg-red-700 active:scale-95 text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-lg shadow-brand-red/20 flex justify-center items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-yellow"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Finalizar no WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed left-1/2 bottom-6 z-50 hidden -translate-x-1/2 rounded-full bg-brand-dark text-white px-4 py-3 text-sm font-semibold shadow-2xl shadow-brand-dark/25"></div>
+
+    <script>
+        const numeroWhatsApp = '5511983909578';
+        
+        // Catálogo de Preços dos Produtos
+        const produtos = {
+            'Smash Clássico': 25.90,
+            'Monstro Duplo': 38.90,
+            'Batata Rústica': 15.00,
+            'Refrigerante Lata': 7.00
+        };
+
+        // Estado do Carrinho
+        let carrinho = [];
+        let metodoEntrega = 'delivery'; // 'delivery' ou 'retirada'
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.remove('hidden');
+            clearTimeout(window.toastTimer);
+            window.toastTimer = setTimeout(() => toast.classList.add('hidden'), 2400);
+        }
+
+        function formatarMoeda(valor) {
+            return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        function atualizarCarrinho() {
+            const floatBar = document.getElementById('cart-float-bar');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+            const modalTotal = document.getElementById('modal-total');
+            
+            // Calcula totalizadores
+            const totalItens = carrinho.reduce((sum, item) => sum + item.quantidade, 0);
+            const totalValor = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+            
+            cartCount.textContent = totalItens;
+            cartTotal.textContent = formatarMoeda(totalValor);
+            modalTotal.textContent = formatarMoeda(totalValor);
+
+            // Controla a visibilidade da barra inferior
+            if (totalItens > 0) {
+                floatBar.classList.remove('translate-y-full');
+            } else {
+                floatBar.classList.add('translate-y-full');
+                fecharCarrinho();
+            }
+
+            // Renderiza os itens no modal
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+
+            if (carrinho.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-sm text-gray-400 text-center py-6 font-semibold">Sua sacola está vazia.</p>';
+                return;
+            }
+
+            carrinho.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'flex items-center justify-between bg-gray-50 border border-gray-100 p-4 rounded-2xl';
+                itemDiv.innerHTML = `
+                    <div class="flex-1 min-w-0 pr-3">
+                        <p class="font-bold text-gray-900 truncate">${item.produto}</p>
+                        <p class="text-sm text-brand-red font-black mt-0.5">${formatarMoeda(item.preco)}</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white border border-gray-100 rounded-xl px-2 py-1 shadow-sm shrink-0">
+                        <button onclick="alterarQuantidade('${item.produto}', -1)" class="w-6 h-6 rounded-lg bg-gray-50 hover:bg-gray-100 font-bold text-gray-600 flex items-center justify-center active:scale-90 transition-transform">-</button>
+                        <span class="font-bold text-sm px-1.5 min-w-[20px] text-center">${item.quantidade}</span>
+                        <button onclick="alterarQuantidade('${item.produto}', 1)" class="w-6 h-6 rounded-lg bg-gray-50 hover:bg-gray-100 font-bold text-gray-600 flex items-center justify-center active:scale-90 transition-transform">+</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemDiv);
+            });
+        }
+
+        function adicionarAoCarrinho(nome) {
+            if (!produtos[nome]) return;
+
+            const itemExistente = carrinho.find(item => item.produto === nome);
+            
+            if (itemExistente) {
+                itemExistente.quantidade++;
+            } else {
+                carrinho.push({
+                    produto: nome,
+                    preco: produtos[nome],
+                    quantidade: 1
+                });
+            }
+
+            atualizarCarrinho();
+            showToast(`${nome} adicionado à sacola!`);
+        }
+
+        function alterarQuantidade(nome, delta) {
+            const item = carrinho.find(item => item.produto === nome);
+            if (!item) return;
+
+            item.quantidade += delta;
+            if (item.quantidade <= 0) {
+                carrinho = carrinho.filter(i => i.produto !== nome);
+                showToast(`${nome} removido da sacola.`);
+            }
+
+            atualizarCarrinho();
+        }
+
+        function abrirCarrinho() {
+            const modal = document.getElementById('cart-modal');
+            const container = document.getElementById('cart-modal-container');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            
+            setTimeout(() => {
+                container.classList.remove('translate-y-full');
+            }, 10);
+        }
+
+        function fecharCarrinho() {
+            const modal = document.getElementById('cart-modal');
+            const container = document.getElementById('cart-modal-container');
+            
+            container.classList.add('translate-y-full');
+            document.body.style.overflow = 'auto';
+            
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function setEntrega(tipo) {
+            metodoEntrega = tipo;
+            const btnDelivery = document.getElementById('btn-delivery');
+            const btnPickup = document.getElementById('btn-pickup');
+            const groupEndereco = document.getElementById('group-endereco');
+
+            if (tipo === 'delivery') {
+                btnDelivery.className = 'py-3.5 px-4 rounded-2xl border-2 border-brand-red bg-red-50 text-brand-red font-bold text-sm transition-all flex items-center justify-center gap-2';
+                btnPickup.className = 'py-3.5 px-4 rounded-2xl border-2 border-gray-200 bg-white text-gray-500 font-bold text-sm transition-all flex items-center justify-center gap-2';
+                groupEndereco.classList.remove('hidden');
+            } else {
+                btnDelivery.className = 'py-3.5 px-4 rounded-2xl border-2 border-gray-200 bg-white text-gray-500 font-bold text-sm transition-all flex items-center justify-center gap-2';
+                btnPickup.className = 'py-3.5 px-4 rounded-2xl border-2 border-brand-red bg-red-50 text-brand-red font-bold text-sm transition-all flex items-center justify-center gap-2';
+                groupEndereco.classList.add('hidden');
+            }
+        }
+
+        function enviarPedido() {
+            if (carrinho.length === 0) {
+                showToast('Adicione itens ao carrinho primeiro.');
+                return;
+            }
+
+            const nomeCliente = document.getElementById('cliente-nome').value.trim();
+            const endereco = document.getElementById('cliente-endereco').value.trim();
+            const pagamento = document.getElementById('cliente-pagamento').value;
+
+            if (!nomeCliente) {
+                showToast('Por favor, informe seu nome.');
+                document.getElementById('cliente-nome').focus();
+                return;
+            }
+
+            if (metodoEntrega === 'delivery' && !endereco) {
+                showToast('Por favor, informe o endereço de entrega.');
+                document.getElementById('cliente-endereco').focus();
+                return;
+            }
+
+            // Compila os itens do pedido
+            let textoItens = '';
+            carrinho.forEach(item => {
+                textoItens += `• ${item.quantidade}x *${item.produto}* (${formatarMoeda(item.preco * item.quantidade)})\n`;
+            });
+
+            const totalValor = carrinho.reduce((sum, item) => sum + (item.preco * item.quantidade), 0);
+
+            // Monta o cabeçalho e corpo da mensagem
+            let mensagem = `🍔 *Novo Pedido - Burger Express* 🍔\n`;
+            mensagem += `---------------------------------\n`;
+            mensagem += `${textoItens}`;
+            mensagem += `---------------------------------\n`;
+            mensagem += `💰 *Total dos Itens: ${formatarMoeda(totalValor)}*\n\n`;
+            mensagem += `👤 *Cliente:* ${nomeCliente}\n`;
+            mensagem += `🛵 *Método:* ${metodoEntrega === 'delivery' ? 'Entrega' : 'Retirada no Local'}\n`;
+            
+            if (metodoEntrega === 'delivery') {
+                mensagem += `🏠 *Endereço:* ${endereco}\n`;
+            }
+            
+            mensagem += `💳 *Pagamento:* ${pagamento}`;
+
+            // Abre o link do WhatsApp
+            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+
+            if (!numeroWhatsApp || numeroWhatsApp.length < 10) {
+                showToast('Número do WhatsApp não configurado.');
+                return;
+            }
+
+            window.open(url, '_blank', 'noopener,noreferrer');
+            showToast('Pedido compilado! Enviando ao WhatsApp...');
+            
+            // Limpa o carrinho e fecha após envio bem sucedido
+            setTimeout(() => {
+                carrinho = [];
+                document.getElementById('cliente-nome').value = '';
+                document.getElementById('cliente-endereco').value = '';
+                atualizarCarrinho();
+                fecharCarrinho();
+            }, 1000);
+        }
+
+        // Fechar modal ao clicar na área de fundo
+        document.getElementById('cart-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharCarrinho();
+            }
+        });
+    </script>
+</body>
+</html>

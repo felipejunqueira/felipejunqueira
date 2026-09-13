@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon Runner X | Futuristic Arcade</title>
+  <meta name="description" content="Neon Runner X — arcade moderno com visual cyber, progressão de velocidade, score em tempo real e replay rápido." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--ink:#e5e7eb;--muted:#9ca3af;--line:#374151;--brand:#22d3ee;--brand2:#34d399;--danger:#fb7185}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Rajdhani,sans-serif;color:var(--ink);background:linear-gradient(150deg,#030712,#111827);min-height:100vh}
+    .wrap{width:min(1120px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
+    .hero{background:#050b17d8;border:1px solid #ffffff2a;border-radius:20px;overflow:hidden;box-shadow:0 18px 44px #0008}
+    .hero-img{height:170px;background:url('https://images.unsplash.com/photo-1511882150382-421056c89033?auto=format&fit=crop&w=1600&q=80') center/cover}
+    @media(min-width:640px){.hero-img{height:230px}}
+    .body{padding:1rem}
+    @media(min-width:640px){.body{padding:1.2rem 1.6rem}}
+    h1{margin:0 0 .4rem;font:700 clamp(1.8rem,5vw,3rem) Orbitron,sans-serif;color:var(--brand)}
+    .lead{color:var(--muted);max-width:74ch;line-height:1.6}
+    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.8rem}
+    .tab-btn{border:1px solid var(--line);background:#0b1220;color:var(--ink);padding:.5rem .85rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
+    .tab-btn:hover{border-color:var(--brand2);color:var(--brand2);transform:translateY(-1px)}
+    .tab-btn.active{background:var(--brand2);color:#022c22;border-color:var(--brand2)}
+    .panel{display:none;padding:.9rem 0}
+    .panel.active{display:block;animation:fadeUp .28s ease}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    /* HUD */
+    .hud{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.6rem}
+    .pill{border:1px solid var(--line);border-radius:999px;padding:.4rem .8rem;background:#0b1220;font-size:.9rem}
+    .pill strong{color:var(--brand)}
+    /* Canvas */
+    canvas{width:100%;height:auto;border-radius:14px;border:1px solid #1f2937;background:linear-gradient(180deg,#031425,#020617);display:block}
+    /* Controls */
+    .controls{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.7rem}
+    button{border:0;border-radius:999px;padding:.65rem 1rem;font:700 .95rem Rajdhani,sans-serif;cursor:pointer;transition:.15s ease}
+    button:hover{transform:translateY(-1px);opacity:.9}
+    .start{background:var(--brand2);color:#022c22}
+    .restart{background:var(--danger);color:#3f1020}
+    /* Touch controls (mobile) */
+    .touch{display:none;grid-template-columns:repeat(2,1fr);gap:.5rem;margin-top:.7rem}
+    .touch button{background:#0ea5e9;color:#082f49}
+    @media(max-width:720px){.touch{display:grid}}
+    /* Info cards */
+    .grid{display:grid;grid-template-columns:1fr;gap:.7rem}
+    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{border:1px solid var(--line);border-radius:12px;padding:.9rem;background:#0b1220;transition:.2s ease}
+    .card:hover{border-color:var(--brand2)}
+    .card h3{margin:0 0 .4rem;color:var(--brand2);font-size:.95rem}
+    .card p{margin:0;color:var(--muted);font-size:.88rem;line-height:1.55}
+    .gallery{display:grid;grid-template-columns:1fr;gap:.65rem}
+    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
+    .gallery img{width:100%;height:170px;object-fit:cover;border-radius:10px;border:1px solid var(--line);transition:.2s ease}
+    .gallery img:hover{transform:scale(1.03)}
+    /* Footer */
+    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#0f172a80;border-radius:0 0 20px 20px}
+    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
+    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
+    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
+    .cert{background:var(--brand);color:#082f49;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
+    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-img"></div>
+      <div class="body">
+        <h1>Neon Runner X</h1>
+        <p class="lead">Arcade moderno com visual cyber, progressão de velocidade, score em tempo real e replay rápido. Projeto pensado para parecer produto pronto para app store e demonstração comercial.</p>
+
+        <nav class="tabs" aria-label="Seções">
+          <button class="tab-btn active" data-tab="jogar">Jogar</button>
+          <button class="tab-btn" data-tab="sobre">Sobre</button>
+          <button class="tab-btn" data-tab="features">Features</button>
+          <button class="tab-btn" data-tab="galeria">Galeria</button>
+        </nav>
+
+        <section class="panel active" id="jogar">
+          <div class="hud">
+            <div class="pill">Pontos: <strong id="score">0</strong></div>
+            <div class="pill">Recorde: <strong id="best">0</strong></div>
+            <div class="pill">Velocidade: <strong id="speed">1.0x</strong></div>
+          </div>
+          <canvas id="game" width="860" height="340"></canvas>
+          <div class="controls">
+            <button id="startBtn"   class="start">Iniciar</button>
+            <button id="restartBtn" class="restart">Reiniciar</button>
+          </div>
+          <div class="touch">
+            <button id="jumpTouch">Pular ↑</button>
+            <button id="startTouch">Iniciar ▶</button>
+          </div>
+        </section>
+
+        <section class="panel" id="sobre">
+          <div class="grid">
+            <article class="card"><h3>🌆 Narrativa</h3><p>Corra por uma metrópole neon desviando de barreiras digitais.</p></article>
+            <article class="card"><h3>📈 Curva de Dificuldade</h3><p>A velocidade cresce gradualmente para manter tensão sem frustrar.</p></article>
+            <article class="card"><h3>🎯 Objetivo</h3><p>Sobreviver o máximo possível e bater seu próprio recorde.</p></article>
+          </div>
+        </section>
+
+        <section class="panel" id="features">
+          <div class="grid">
+            <article class="card"><h3>🎮 Controles</h3><p>Teclado, espaço, seta para cima e suporte touch no mobile.</p></article>
+            <article class="card"><h3>💾 Estado Persistente</h3><p>Recorde salvo localmente no navegador do jogador.</p></article>
+            <article class="card"><h3>⚡ Feedback Instantâneo</h3><p>HUD responsivo com score, best score e fator de velocidade.</p></article>
+          </div>
+        </section>
+
+        <section class="panel" id="galeria">
+          <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80" alt="Setup gamer neon" />
+            <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=900&q=80" alt="Controle de videogame" />
+            <img src="https://images.unsplash.com/photo-1486572788966-cfd3df1f5b42?auto=format&fit=crop&w=900&q=80" alt="Cidade futurista" />
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="footer-name">Felipe Junqueira Leite</p>
+      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
+      <div class="footer-badges">
+        <span class="cert">HTML5</span>
+        <span class="cert">CSS3</span>
+        <span class="cert">JavaScript</span>
+        <span class="cert">Canvas/Games</span>
+        <span class="cert">Mobile‑First</span>
+        <span class="cert">UX/UI</span>
+      </div>
+      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
+    </footer>
+  </main>
+
+  <script>
+    // ── Tab navigation ──
+    const tabBtns   = [...document.querySelectorAll('.tab-btn')];
+    const tabPanels = [...document.querySelectorAll('.panel')];
+    tabBtns.forEach(btn => btn.addEventListener('click', () => {
+      tabBtns.forEach(b  => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    }));
+
+    // ── Game engine ──
+    const canvas     = document.getElementById('game');
+    const ctx        = canvas.getContext('2d');
+    const scoreEl    = document.getElementById('score');
+    const bestEl     = document.getElementById('best');
+    const speedEl    = document.getElementById('speed');
+    const startBtn   = document.getElementById('startBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const jumpTouch  = document.getElementById('jumpTouch');
+    const startTouch = document.getElementById('startTouch');
+
+    const GRAVITY    = 0.6;
+    const JUMP_FORCE = -12;
+    const BASE_SPEED = 4;
+
+    const state = {
+      running: false,
+      over: false,
+      score: 0,
+      best: Number(localStorage.getItem('neonRunnerBest') || 0),
+      speed: BASE_SPEED,
+      obstacles: [],
+      spawnTimer: 30,
+    };
+    const player = { x: 90, y: 0, w: 36, h: 46, vy: 0, onGround: true };
+    const groundY = canvas.height - 58;
+    player.y = groundY - player.h;
+
+    function drawBackground() {
+      ctx.fillStyle = '#031425';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Star particles
+      for (let i = 0; i < 40; i++) {
+        const x = ((i * 73 + state.score * 0.4) % (canvas.width + 10));
+        const y = ((i * 37) % (canvas.height - 90));
+        ctx.fillStyle = i % 2 === 0 ? '#22d3ee44' : '#34d39933';
+        ctx.fillRect(x, y, 2, 2);
+      }
+      // Ground line
+      ctx.strokeStyle = '#22d3ee66';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, groundY + 1);
+      ctx.lineTo(canvas.width, groundY + 1);
+      ctx.stroke();
+      // Ground glow
+      const grd = ctx.createLinearGradient(0, groundY, 0, canvas.height);
+      grd.addColorStop(0, '#22d3ee18');
+      grd.addColorStop(1, 'transparent');
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, groundY, canvas.width, canvas.height - groundY);
+    }
+
+    function drawPlayer() {
+      // Glow
+      ctx.shadowColor = '#22d3ee';
+      ctx.shadowBlur  = player.onGround ? 10 : 20;
+      ctx.fillStyle   = '#22d3ee';
+      ctx.fillRect(player.x, player.y, player.w, player.h);
+      // Eyes
+      ctx.fillStyle  = '#031425';
+      ctx.shadowBlur = 0;
+      ctx.fillRect(player.x + player.w - 10, player.y + 8, 6, 6);
+    }
+
+    function drawObstacles() {
+      state.obstacles.forEach(o => {
+        ctx.shadowColor = '#fb7185';
+        ctx.shadowBlur  = 12;
+        ctx.fillStyle   = '#fb7185';
+        ctx.fillRect(o.x, o.y, o.w, o.h);
+        ctx.shadowBlur = 0;
+      });
+    }
+
+    function hit(a, b) {
+      const margin = 4;
+      return (a.x + margin) < (b.x + b.w) &&
+             (a.x + a.w - margin) > b.x &&
+             (a.y + margin) < (b.y + b.h) &&
+             (a.y + a.h - margin) > b.y;
+    }
+
+    function spawn() {
+      const h = 24 + Math.random() * 44;
+      const w = 16 + Math.random() * 22;
+      state.obstacles.push({ x: canvas.width + 10, y: groundY - h, w, h });
+    }
+
+    function jump() {
+      if (!state.running || state.over) return;
+      if (player.onGround) {
+        player.vy       = JUMP_FORCE;
+        player.onGround = false;
+      }
+    }
+
+    function overlay() {
+      if (state.running) return;
+      ctx.fillStyle = '#020617bb';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle  = '#e5e7eb';
+      ctx.textAlign  = 'center';
+      ctx.font       = '700 38px Orbitron, sans-serif';
+      ctx.shadowColor = state.over ? '#fb7185' : '#22d3ee';
+      ctx.shadowBlur  = 16;
+      ctx.fillText(state.over ? 'GAME OVER' : 'NEON RUNNER X', canvas.width / 2, canvas.height / 2 - 10);
+      ctx.shadowBlur = 0;
+      ctx.font       = '700 18px Rajdhani, sans-serif';
+      ctx.fillStyle  = '#9ca3af';
+      ctx.fillText(
+        state.over ? `Pontuação: ${state.score} · Clique em Reiniciar` : 'Clique em Iniciar ou pressione Enter',
+        canvas.width / 2, canvas.height / 2 + 26
+      );
+    }
+
+    function update() {
+      if (!state.running || state.over) return;
+      state.score  += 1;
+      state.speed  += 0.0015;
+      // Physics
+      player.vy    += GRAVITY;
+      player.y     += player.vy;
+      if (player.y >= groundY - player.h) {
+        player.y        = groundY - player.h;
+        player.vy       = 0;
+        player.onGround = true;
+      }
+      // Spawn
+      state.spawnTimer -= 1;
+      if (state.spawnTimer <= 0) {
+        spawn();
+        state.spawnTimer = 60 + Math.random() * 65;
+      }
+      // Move obstacles
+      state.obstacles.forEach(o => { o.x -= state.speed; });
+      state.obstacles = state.obstacles.filter(o => o.x + o.w > -5);
+      // Collision
+      const p = { x: player.x, y: player.y, w: player.w, h: player.h };
+      for (const o of state.obstacles) {
+        if (hit(p, o)) {
+          state.over    = true;
+          state.running = false;
+          state.best    = Math.max(state.best, state.score);
+          localStorage.setItem('neonRunnerBest', String(state.best));
+          break;
+        }
+      }
+      // HUD
+      scoreEl.textContent = state.score;
+      bestEl.textContent  = state.best;
+      speedEl.textContent = (state.speed / BASE_SPEED).toFixed(1) + 'x';
+    }
+
+    function renderFrame() {
+      drawBackground();
+      drawPlayer();
+      drawObstacles();
+      overlay();
+    }
+
+    function loop() {
+      update();
+      renderFrame();
+      requestAnimationFrame(loop);
+    }
+
+    function startGame() {
+      if (state.over) return;   // must resetGame first
+      state.running = true;
+    }
+
+    function resetGame() {
+      state.running   = false;
+      state.over      = false;
+      state.score     = 0;
+      state.speed     = BASE_SPEED;
+      state.obstacles = [];
+      state.spawnTimer = 30;
+      player.y        = groundY - player.h;
+      player.vy       = 0;
+      player.onGround = true;
+      scoreEl.textContent = '0';
+      speedEl.textContent = '1.0x';
+    }
+
+    startBtn.addEventListener('click',   startGame);
+    restartBtn.addEventListener('click', resetGame);
+    jumpTouch.addEventListener('click',  jump);
+    startTouch.addEventListener('click', startGame);
+
+    window.addEventListener('keydown', e => {
+      const k = e.key.toLowerCase();
+      if (k === ' ' || k === 'arrowup' || k === 'w') { e.preventDefault(); jump(); }
+      if (k === 'enter') startGame();
+      if (k === 'r')     resetGame();
+    });
+
+    bestEl.textContent = state.best;
+    resetGame();
+    loop();
+  </script>
+</body>
+</html>
