@@ -28,7 +28,6 @@
       --text-light: #f1f5f9;
       --text-muted: #94a3b8;
       --border-soft: rgba(255, 255, 255, 0.08);
-      --border-focus: #3b82f6;
       --radius-sm: 10px;
       --radius-md: 16px;
       --radius-lg: 24px;
@@ -62,12 +61,12 @@
 
     .container {
       width: 100%;
-      max-width: 980px;
+      max-width: 1040px;
       margin: 0 auto;
       padding: 0 1.25rem;
     }
 
-    /* Cartão Principal de Apresentação */
+    /* Cartão Principal */
     .hero-box {
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -277,7 +276,7 @@
       background: rgba(255, 255, 255, 0.04);
       color: var(--text-muted);
       font-family: 'Outfit', sans-serif;
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
@@ -300,7 +299,7 @@
 
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.25rem;
     }
 
@@ -340,13 +339,13 @@
     }
 
     .item-header h3 {
-      font-size: 1.2rem;
+      font-size: 1.22rem;
     }
 
     .item-desc {
       color: var(--text-muted);
-      font-size: 0.98rem;
-      line-height: 1.5;
+      font-size: 0.96rem;
+      line-height: 1.55;
       margin-bottom: 1.5rem;
     }
 
@@ -394,7 +393,7 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: var(--radius-lg);
       width: 100%;
-      max-width: 950px;
+      max-width: 980px;
       height: 88vh;
       display: flex;
       flex-direction: column;
@@ -567,6 +566,13 @@
       .big-btn { width: 100%; }
       .contact-row { flex-direction: column; gap: 0.8rem; }
       .game-grid { grid-template-columns: repeat(3, 80px); grid-template-rows: repeat(3, 80px); }
+      .modal-backdrop { padding: 0.25rem; }
+      .modal-box { height: 96vh; border-radius: var(--radius-md); }
+      .modal-top { padding: 0.75rem 0.85rem; }
+      .modal-top-title { font-size: 0.95rem; }
+      .btn-tab-link, .btn-close-modal { padding: 0.4rem 0.65rem; font-size: 0.8rem; }
+      .filter-bar { gap: 0.4rem; justify-content: flex-start; overflow-x: auto; padding-bottom: 0.5rem; -webkit-overflow-scrolling: touch; }
+      .filter-tab { font-size: 0.82rem; padding: 0.5rem 0.85rem; white-space: nowrap; }
     }
   </style>
 </head>
@@ -648,36 +654,52 @@
       </div>
     </section>
 
-    <!-- EXEMPLOS PRÁTICOS -->
+    <!-- TODOS OS PROJETOS UNIFICADOS -->
     <section id="exemplos" class="section-box">
       <div class="section-intro">
-        <h2>Exemplos de Projetos Prontos</h2>
-        <p>Escolha um modelo abaixo e clique no botão para testar como ele funciona na tela.</p>
+        <h2>Todos os Modelos de Projetos</h2>
+        <p>Escolha qualquer modelo abaixo e clique no botão para testar interativamente.</p>
       </div>
 
       <!-- Abas de Filtro -->
       <div class="filter-bar">
         <button class="filter-tab active" onclick="filterCategory('all', this)">
-          <i data-lucide="layout-grid" style="width: 17px; height: 17px;"></i> Todos os Modelos
+          <i data-lucide="layout-grid" style="width: 17px; height: 17px;"></i> Todos (16)
         </button>
         <button class="filter-tab" onclick="filterCategory('comercio', this)">
-          <i data-lucide="store" style="width: 17px; height: 17px;"></i> Lojas e Vendas
+          <i data-lucide="store" style="width: 17px; height: 17px;"></i> Lojas & Vendas (6)
         </button>
         <button class="filter-tab" onclick="filterCategory('servicos', this)">
-          <i data-lucide="user-check" style="width: 17px; height: 17px;"></i> Serviços e Saúde
+          <i data-lucide="briefcase" style="width: 17px; height: 17px;"></i> Serviços & Empresas (5)
         </button>
         <button class="filter-tab" onclick="filterCategory('institucional', this)">
-          <i data-lucide="building" style="width: 17px; height: 17px;"></i> Sites Completos
+          <i data-lucide="building" style="width: 17px; height: 17px;"></i> Portais Completos (2)
         </button>
         <button class="filter-tab" onclick="filterCategory('jogos', this)">
-          <i data-lucide="gamepad-2" style="width: 17px; height: 17px;"></i> Jogos
+          <i data-lucide="gamepad-2" style="width: 17px; height: 17px;"></i> Jogos (3)
         </button>
       </div>
 
       <!-- Grade dos Projetos -->
       <div class="project-grid" id="project-list">
 
-        <!-- 1. Site Dra. Fernanda Roberta (Fonoaudiologia) -->
+        <!-- 1. Metalúrgica Alfa (Soluções Industriais) -->
+        <div class="project-item" data-cat="servicos">
+          <div>
+            <div class="item-header">
+              <div class="item-icon" style="background: rgba(234, 88, 12, 0.15); color: #f97316;">
+                <i data-lucide="cog" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Metalúrgica Alfa</h3>
+            </div>
+            <p class="item-desc">Apresentação industrial completa: catálogo de usinagem, caldeiraria, corte a laser e formulário rápido de cotação de peças.</p>
+          </div>
+          <button class="btn-test-card" onclick="openPreview('Metalúrgica Alfa | Soluções Industriais', './projetos/metalurgica/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
+        </div>
+
+        <!-- 2. Site Dra. Fernanda Roberta (Fonoaudiologia) -->
         <div class="project-item" data-cat="servicos">
           <div>
             <div class="item-header">
@@ -693,7 +715,7 @@
           </button>
         </div>
 
-        <!-- 2. Loja de Roupas & Boutique (Maison Nilo) -->
+        <!-- 3. Loja de Roupas & Boutique (Maison Nilo) -->
         <div class="project-item" data-cat="comercio">
           <div>
             <div class="item-header">
@@ -709,7 +731,7 @@
           </button>
         </div>
 
-        <!-- 3. Portal de Advocacia (Junqueira & Associados) -->
+        <!-- 4. Portal de Advocacia (Junqueira & Associados) -->
         <div class="project-item" data-cat="servicos">
           <div>
             <div class="item-header">
@@ -725,7 +747,7 @@
           </button>
         </div>
 
-        <!-- 4. Padaria & Cafeteria Artesanal (Forno D'Ouro) -->
+        <!-- 5. Padaria & Cafeteria Artesanal (Forno D'Ouro) -->
         <div class="project-item" data-cat="comercio">
           <div>
             <div class="item-header">
@@ -741,7 +763,7 @@
           </button>
         </div>
 
-        <!-- 5. Frente de Caixa & PDV (Mercadinho São Mateus) -->
+        <!-- 6. Frente de Caixa & PDV (Mercadinho São Mateus) -->
         <div class="project-item" data-cat="comercio">
           <div>
             <div class="item-header">
@@ -757,7 +779,23 @@
           </button>
         </div>
 
-        <!-- 6. Catálogo Burger Express -->
+        <!-- 7. Bazar Centro (Vitrine Comercial) -->
+        <div class="project-item" data-cat="comercio">
+          <div>
+            <div class="item-header">
+              <div class="item-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">
+                <i data-lucide="store" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Bazar Centro Comercial</h3>
+            </div>
+            <p class="item-desc">Página de loja moderna para destacar novidades da semana, catálogo de produtos em oferta e atendimento rápido.</p>
+          </div>
+          <button class="btn-test-card" onclick="openPreview('Bazar Centro | Vitrine de Loja', './projetos/page-loja/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
+        </div>
+
+        <!-- 8. Catálogo Burger Express -->
         <div class="project-item" data-cat="comercio">
           <div>
             <div class="item-header">
@@ -773,7 +811,7 @@
           </button>
         </div>
 
-        <!-- 7. Barbearia e Salão -->
+        <!-- 9. Barbearia e Salão -->
         <div class="project-item" data-cat="servicos">
           <div>
             <div class="item-header">
@@ -789,52 +827,116 @@
           </button>
         </div>
 
-        <!-- 8. Site da Igreja IASD -->
+        <!-- 10. Nexo Finance (Gestor Financeiro) -->
+        <div class="project-item" data-cat="servicos">
+          <div>
+            <div class="item-header">
+              <div class="item-icon" style="background: rgba(22, 163, 74, 0.15); color: #4ade80;">
+                <i data-lucide="wallet" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Nexo Finance Web</h3>
+            </div>
+            <p class="item-desc">Aplicativo prático para controle de receitas, despesas diárias e planejamento financeiro pessoal.</p>
+          </div>
+          <button class="btn-test-card" onclick="openPreview('Nexo Finance | App Financeiro', './projetos/app-financas-pessoais/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
+        </div>
+
+        <!-- 11. Consultório Médico & Clínicas -->
         <div class="project-item" data-cat="institucional">
           <div>
             <div class="item-header">
-              <div class="item-icon">
-                <i data-lucide="landmark" style="width: 24px; height: 24px;"></i>
+              <div class="item-icon" style="background: rgba(14, 165, 233, 0.15); color: #38bdf8;">
+                <i data-lucide="stethoscope" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Site Oficial da Igreja</h3>
+              <h3>Consultório Médico & Saúde</h3>
             </div>
-            <p class="item-desc">Portal completo com história de 60 anos, transmissão de rádio, bíblia e horários de cultos.</p>
+            <p class="item-desc">Página para clínicas e médicos apresentarem especialidades, corpo clínico e canais de agendamento.</p>
           </div>
-          <a href="https://github.com/felipejunqueira/iasd-sao-mateus" target="_blank" class="btn-test-card">
-            <i data-lucide="external-link" style="width: 18px; height: 18px;"></i> Ver Projeto Oficial
-          </a>
+          <button class="btn-test-card" onclick="openPreview('Consultório Médico & Saúde', './projetos/profissional-saude/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
         </div>
 
-        <!-- 9. Cartão Fidelidade -->
+        <!-- 12. Cartão Fidelidade -->
         <div class="project-item" data-cat="comercio">
           <div>
             <div class="item-header">
               <div class="item-icon">
                 <i data-lucide="award" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Cartão Fidelidade</h3>
+              <h3>Cartão Fidelidade Digital</h3>
             </div>
             <p class="item-desc">Substitui o papelzinho por um cartão no celular do cliente para juntar selos e ganhar prêmios.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Cartão Fidelidade', './projetos/sistema-fidelidade/')">
+          <button class="btn-test-card" onclick="openPreview('Cartão Fidelidade Digital', './projetos/sistema-fidelidade/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
 
-        <!-- 10. Jogo da Velha -->
+        <!-- 13. Site da Igreja IASD -->
+        <div class="project-item" data-cat="institucional">
+          <div>
+            <div class="item-header">
+              <div class="item-icon">
+                <i data-lucide="landmark" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Site Oficial da Igreja IASD</h3>
+            </div>
+            <p class="item-desc">Portal completo com história de 60 anos, transmissão de rádio web, bíblia integrada e horários de cultos.</p>
+          </div>
+          <a href="https://github.com/felipejunqueira/iasd-sao-mateus" target="_blank" class="btn-test-card">
+            <i data-lucide="external-link" style="width: 18px; height: 18px;"></i> Ver Projeto Oficial
+          </a>
+        </div>
+
+        <!-- 14. Jogo da Velha Moderno -->
         <div class="project-item" data-cat="jogos">
           <div>
             <div class="item-header">
               <div class="item-icon">
                 <i data-lucide="gamepad-2" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Jogo da Velha</h3>
+              <h3>Jogo da Velha Moderno</h3>
             </div>
-            <p class="item-desc">Jogo interativo e divertido para jogar contra o computador direto na tela.</p>
+            <p class="item-desc">Interface moderna com inteligência artificial, efeitos visuais e sons para partidas rápidas.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Jogo da Velha', './projetos/jogo-moderno/')">
+          <button class="btn-test-card" onclick="openPreview('Jogo da Velha Moderno', './projetos/jogo-moderno/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Jogar Agora
           </button>
+        </div>
+
+        <!-- 15. Jogo da Velha Clássico -->
+        <div class="project-item" data-cat="jogos">
+          <div>
+            <div class="item-header">
+              <div class="item-icon" style="background: rgba(100, 116, 139, 0.15); color: #cbd5e1;">
+                <i data-lucide="grid" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Jogo da Velha Clássico</h3>
+            </div>
+            <p class="item-desc">Versão minimalista e retrô com regras tradicionais para testar a lógica no navegador.</p>
+          </div>
+          <button class="btn-test-card" onclick="openPreview('Jogo da Velha Clássico', './projetos/jogo-classico/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Jogar Agora
+          </button>
+        </div>
+
+        <!-- 16. Tic-Tac-Toe Multi-Linguagens -->
+        <div class="project-item" data-cat="jogos">
+          <div>
+            <div class="item-header">
+              <div class="item-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+                <i data-lucide="cpu" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Tic-Tac-Toe Multi-Linguagem</h3>
+            </div>
+            <p class="item-desc">Estudo de lógica e engenharia de software implementando o jogo em C, Python, Java e Lua.</p>
+          </div>
+          <a href="https://github.com/felipejunqueira/tic-tac-toe" target="_blank" class="btn-test-card">
+            <i data-lucide="external-link" style="width: 18px; height: 18px;"></i> Ver Repositório
+          </a>
         </div>
 
       </div>
