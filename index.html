@@ -3,36 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Felipe Junqueira - Criação de Sites, Landing Pages, Aplicativos e Sistemas para Comércio Local. Estudante de Ciência da Computação na UFABC.">
-  <title>Felipe Junqueira | Cartão de Visitas Digital & Portfólio</title>
+  <meta name="description" content="Felipe Junqueira - Sites e aplicativos simples e fáceis para o seu comércio.">
+  <title>Felipe Junqueira | Sites & Aplicativos Simples</title>
 
   <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     :root {
-      --bg-dark: #090d16;
-      --bg-card: #111827;
-      --bg-card-hover: #172238;
+      --bg-main: #0c111d;
+      --bg-card: #161f30;
+      --bg-card-hover: #1c283f;
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
-      --accent-cyan: #0284c7;
-      --accent-green: #059669;
-      --accent-purple: #7c3aed;
-      --text-main: #f8fafc;
+      --primary-light: #93c5fd;
+      --green-wa: #16a34a;
+      --green-wa-hover: #15803d;
+      --text-white: #ffffff;
+      --text-light: #f1f5f9;
       --text-muted: #94a3b8;
-      --border-card: rgba(255, 255, 255, 0.08);
-      --border-card-hover: rgba(37, 99, 235, 0.4);
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --border-focus: #3b82f6;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
       --radius-pill: 9999px;
-      --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
 
     * {
@@ -44,454 +44,340 @@
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-main);
+      background-color: var(--bg-main);
+      color: var(--text-light);
       line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
+      font-size: 17px;
     }
 
-    h1, h2, h3, h4, .font-heading {
+    /* Títulos Grandes e Claros */
+    h1, h2, h3, h4 {
       font-family: 'Outfit', sans-serif;
       font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    /* Fundo dinâmico sutil e elegante */
-    .bg-ambient {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: -1;
-      background:
-        radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.1), transparent 45%),
-        radial-gradient(circle at 85% 25%, rgba(124, 58, 237, 0.08), transparent 45%),
-        radial-gradient(circle at 50% 80%, rgba(5, 150, 105, 0.06), transparent 45%),
-        #090d16;
+      color: var(--text-white);
+      line-height: 1.25;
     }
 
     .container {
       width: 100%;
-      max-width: 1120px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 0 1.25rem;
     }
 
-    /* Header e Cartão de Visitas Principal */
-    .hero-card {
-      background: linear-gradient(180deg, rgba(17, 24, 39, 0.9) 0%, rgba(15, 23, 42, 0.98) 100%);
-      border: 1px solid var(--border-card);
+    /* Cartão Principal de Apresentação (Aberto, limpo e acolhedor) */
+    .hero-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
       border-radius: var(--radius-lg);
-      padding: 2.75rem 1.75rem;
+      padding: 3rem 2rem;
       margin-top: 2rem;
       margin-bottom: 2.5rem;
       text-align: center;
-      position: relative;
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
     }
 
-    .avatar-wrapper {
+    .avatar-box {
       position: relative;
-      width: 130px;
-      height: 130px;
+      width: 140px;
+      height: 140px;
       margin: 0 auto 1.5rem;
     }
 
-    .avatar-ring {
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--accent-cyan), var(--accent-purple));
-    }
-
     .avatar-img {
-      position: relative;
       width: 100%;
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--bg-dark);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      border: 4px solid var(--primary);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
       display: block;
     }
 
-    .badge-verified {
+    .verified-icon {
       position: absolute;
-      bottom: 4px;
-      right: 4px;
+      bottom: 6px;
+      right: 6px;
       background: var(--primary);
       color: #ffffff;
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid var(--bg-dark);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      border: 3px solid var(--bg-card);
     }
 
-    .hero-name {
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      color: #ffffff;
-      margin-bottom: 0.35rem;
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      margin-bottom: 0.5rem;
     }
 
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--primary-light);
+      font-weight: 600;
       margin-bottom: 1.25rem;
     }
 
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-card);
-      padding: 0.4rem 0.9rem;
-      border-radius: var(--radius-pill);
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-
-    .badge-pill.highlight {
-      background: rgba(37, 99, 235, 0.15);
-      border-color: rgba(37, 99, 235, 0.35);
-      color: #93c5fd;
-    }
-
-    .hero-pitch {
-      font-size: 1.15rem;
+    .hero-text {
+      font-size: 1.2rem;
       color: #cbd5e1;
-      max-width: 680px;
-      margin: 0 auto 1.85rem;
-      line-height: 1.65;
+      max-width: 640px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
     }
 
-    .hero-pitch strong {
-      color: #ffffff;
-    }
-
-    /* Botões de Ação Imediata */
-    .cta-buttons {
+    /* Botões Grandes e Fáceis de Clicar */
+    .btn-group {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.85rem;
+      gap: 1rem;
       margin-bottom: 1.5rem;
     }
 
-    .btn-action {
+    .big-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
-      padding: 0.9rem 1.75rem;
+      gap: 0.65rem;
+      padding: 1rem 2rem;
       border-radius: var(--radius-md);
       font-family: 'Outfit', sans-serif;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       font-weight: 700;
       text-decoration: none;
-      transition: all 0.25s ease;
       cursor: pointer;
       border: none;
+      transition: all 0.2s ease;
     }
 
-    .btn-whatsapp {
-      background: #16a34a;
+    .btn-green {
+      background-color: var(--green-wa);
       color: #ffffff;
-      box-shadow: 0 4px 18px rgba(22, 163, 74, 0.35);
+      box-shadow: 0 4px 16px rgba(22, 163, 74, 0.4);
     }
 
-    .btn-whatsapp:hover {
-      background: #15803d;
+    .btn-green:hover {
+      background-color: var(--green-wa-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 22px rgba(22, 163, 74, 0.5);
     }
 
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--text-main);
-      border: 1px solid var(--border-card);
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    .btn-secondary:hover {
+    .btn-outline:hover {
       background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: #ffffff;
       transform: translateY(-2px);
     }
 
-    .quick-contacts {
+    .contact-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
       gap: 1.5rem;
-      margin-top: 1rem;
-      font-size: 0.92rem;
+      font-size: 1rem;
       color: var(--text-muted);
+      margin-top: 1rem;
     }
 
-    .quick-contacts a {
+    .contact-row a {
       color: var(--text-muted);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.4rem;
       transition: color 0.2s;
     }
 
-    .quick-contacts a:hover {
-      color: #60a5fa;
+    .contact-row a:hover {
+      color: var(--primary-light);
     }
 
-    /* Seção O Que Eu Faço */
-    .services-section {
+    /* Seção "O que eu faço" - Super Simples */
+    .section-box {
       margin-bottom: 3.5rem;
     }
 
-    .section-header {
+    .section-intro {
       text-align: center;
       margin-bottom: 2rem;
     }
 
-    .section-title {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      color: #ffffff;
+    .section-intro h2 {
+      font-size: clamp(1.7rem, 4vw, 2.3rem);
       margin-bottom: 0.4rem;
     }
 
-    .section-subtitle {
+    .section-intro p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .cards-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .info-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(37, 99, 235, 0.15);
+      color: #60a5fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .info-card h3 {
+      font-size: 1.25rem;
+    }
+
+    .info-card p {
       color: var(--text-muted);
       font-size: 1rem;
-      max-width: 580px;
-      margin: 0 auto;
+      line-height: 1.55;
     }
 
-    .services-grid {
+    /* Catálogo de Projetos (Fácil de navegar) */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .filter-tab {
+      padding: 0.75rem 1.4rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .filter-tab:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .filter-tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    }
+
+    .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.25rem;
     }
 
-    .service-card {
+    .project-item {
       background: var(--bg-card);
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border-soft);
       border-radius: var(--radius-md);
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      transition: all 0.25s ease;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
     }
 
-    .service-card:hover {
-      border-color: var(--border-card-hover);
+    .project-item:hover {
+      border-color: rgba(59, 130, 246, 0.5);
       transform: translateY(-3px);
     }
 
-    .service-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+    .item-header {
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .service-title {
-      font-size: 1.15rem;
-      color: #ffffff;
-    }
-
-    .service-desc {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    /* Seção de Projetos e Catálogo */
-    .catalog-section {
-      margin-bottom: 4rem;
-    }
-
-    /* Filtros táteis e fáceis */
-    .filter-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .filter-btn {
-      padding: 0.65rem 1.15rem;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--border-card);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-muted);
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      transition: all 0.2s ease;
-    }
-
-    .filter-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
-    }
-
-    .filter-btn.active {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #ffffff;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
-    }
-
-    /* Grid de Projetos */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: 1.4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.25s ease;
-      position: relative;
-    }
-
-    .project-card:hover {
-      border-color: var(--border-card-hover);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 25px -8px rgba(0, 0, 0, 0.5);
-    }
-
-    .card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
+      gap: 1rem;
       margin-bottom: 1rem;
     }
 
-    .card-icon {
+    .item-icon {
       width: 48px;
       height: 48px;
       border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #93c5fd;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
 
-    .card-badge {
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 0.25rem 0.65rem;
-      border-radius: var(--radius-pill);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+    .item-header h3 {
+      font-size: 1.2rem;
     }
 
-    .badge-ecommerce { background: rgba(37, 99, 235, 0.15); color: #60a5fa; border: 1px solid rgba(37, 99, 235, 0.3); }
-    .badge-service { background: rgba(124, 58, 237, 0.15); color: #c084fc; border: 1px solid rgba(124, 58, 237, 0.3); }
-    .badge-portal { background: rgba(5, 150, 105, 0.15); color: #34d399; border: 1px solid rgba(5, 150, 105, 0.3); }
-    .badge-game { background: rgba(217, 119, 6, 0.15); color: #fbbf24; border: 1px solid rgba(217, 119, 6, 0.3); }
-
-    .card-body {
-      margin-bottom: 1.25rem;
-    }
-
-    .card-title {
-      font-size: 1.22rem;
-      color: #ffffff;
-      margin-bottom: 0.4rem;
-    }
-
-    .card-desc {
-      font-size: 0.92rem;
+    .item-desc {
       color: var(--text-muted);
+      font-size: 0.98rem;
       line-height: 1.5;
+      margin-bottom: 1.5rem;
     }
 
-    .card-actions {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: auto;
-    }
-
-    .btn-test {
-      flex: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      padding: 0.7rem 1rem;
+    .btn-test-card {
+      width: 100%;
+      padding: 0.85rem 1rem;
       border-radius: var(--radius-sm);
-      background: rgba(37, 99, 235, 0.15);
-      border: 1px solid rgba(37, 99, 235, 0.3);
-      color: #93c5fd;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 600;
-      font-size: 0.92rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .btn-test:hover {
       background: var(--primary);
-      border-color: var(--primary);
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
-    }
-
-    .btn-icon-link {
-      width: 42px;
-      height: 42px;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-card);
-      color: var(--text-muted);
+      gap: 0.5rem;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: background 0.2s;
     }
 
-    .btn-icon-link:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: #ffffff;
+    .btn-test-card:hover {
+      background: var(--primary-hover);
     }
 
-    /* Modal de Demonstração Interativa */
-    .modal-overlay {
+    /* Modal de Demonstração (Simples, com botão gigante de fechar) */
+    .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.88);
       z-index: 9999;
       display: none;
       align-items: center;
@@ -499,911 +385,653 @@
       padding: 1rem;
     }
 
-    .modal-overlay.active {
+    .modal-backdrop.open {
       display: flex;
     }
 
-    .modal-window {
+    .modal-box {
       background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: var(--radius-lg);
       width: 100%;
-      max-width: 960px;
+      max-width: 900px;
       height: 85vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
-      animation: modalFadeIn 0.2s ease-out;
     }
 
-    @keyframes modalFadeIn {
-      from { opacity: 0; transform: scale(0.96); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .modal-header {
-      padding: 0.9rem 1.25rem;
+    .modal-top {
+      padding: 1rem 1.25rem;
       background: #1e293b;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .modal-title-group {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .modal-title {
-      font-size: 1.05rem;
+    .modal-top-title {
+      font-size: 1.15rem;
+      font-weight: 700;
       color: #ffffff;
-    }
-
-    .modal-controls {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
 
-    .btn-modal-action {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #cbd5e1;
-      padding: 0.45rem 0.85rem;
+    .btn-close-modal {
+      background: #ef4444;
+      color: #ffffff;
+      border: none;
+      padding: 0.5rem 1.1rem;
       border-radius: var(--radius-sm);
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.95rem;
+      font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      text-decoration: none;
+      gap: 0.35rem;
     }
 
-    .btn-modal-action:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: #ffffff;
+    .btn-close-modal:hover {
+      background: #dc2626;
     }
 
-    .btn-modal-close {
-      background: rgba(239, 68, 68, 0.2);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #fca5a5;
-    }
-
-    .btn-modal-close:hover {
-      background: #ef4444;
-      color: #ffffff;
-    }
-
-    .modal-body {
-      flex: 1;
-      background: #0b0f19;
-      position: relative;
-    }
-
-    .modal-iframe {
+    .modal-frame {
       width: 100%;
       height: 100%;
       border: none;
+      background: #ffffff;
     }
 
-    /* Seção Jogo da Velha Embutido */
-    .game-section {
+    /* Jogo da Velha (Grande, intuitivo) */
+    .game-box {
       background: var(--bg-card);
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border-soft);
       border-radius: var(--radius-lg);
       padding: 2.5rem 1.5rem;
-      margin-bottom: 4rem;
       text-align: center;
+      margin-bottom: 3.5rem;
     }
 
-    .game-board {
+    .game-grid {
       display: grid;
-      grid-template-columns: repeat(3, 85px);
-      grid-template-rows: repeat(3, 85px);
-      gap: 10px;
+      grid-template-columns: repeat(3, 90px);
+      grid-template-rows: repeat(3, 90px);
+      gap: 12px;
       margin: 1.5rem auto;
       width: fit-content;
     }
 
-    .game-cell {
-      background: #0f172a;
-      border: 2px solid rgba(255, 255, 255, 0.08);
+    .game-tile {
+      background: #090d16;
+      border: 2px solid rgba(255, 255, 255, 0.1);
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Outfit', sans-serif;
-      font-size: 2.2rem;
+      font-size: 2.6rem;
       font-weight: 800;
       cursor: pointer;
       user-select: none;
-      transition: all 0.15s ease;
     }
 
-    .game-cell:hover:not(.taken) {
-      background: rgba(37, 99, 235, 0.15);
+    .game-tile:hover {
       border-color: var(--primary);
     }
 
-    .game-cell.cell-x {
-      color: #60a5fa;
-      text-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
-    }
+    .game-tile.x-tile { color: #60a5fa; }
+    .game-tile.o-tile { color: #f87171; }
 
-    .game-cell.cell-o {
-      color: #f43f5e;
-      text-shadow: 0 0 12px rgba(244, 63, 94, 0.5);
-    }
-
-    .game-status-text {
-      font-size: 1.1rem;
+    .game-message {
+      font-size: 1.15rem;
       font-weight: 600;
-      color: #93c5fd;
-      min-height: 1.8rem;
+      color: var(--primary-light);
+      min-height: 2rem;
       margin-bottom: 1rem;
     }
 
-    /* Footer Final de Contato */
-    .footer-cta {
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(11, 15, 25, 0.98) 100%);
-      border-top: 1px solid var(--border-card);
+    /* Rodapé */
+    .site-footer {
+      background: #090d16;
+      border-top: 1px solid var(--border-soft);
       padding: 3.5rem 1.25rem 2.5rem;
       text-align: center;
       margin-top: auto;
     }
 
-    .footer-cta-card {
-      max-width: 650px;
+    .footer-content {
+      max-width: 600px;
       margin: 0 auto;
     }
 
-    .footer-cta-title {
-      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-      color: #ffffff;
+    .footer-title {
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
       margin-bottom: 0.6rem;
     }
 
-    .footer-cta-text {
+    .footer-sub {
       color: var(--text-muted);
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       margin-bottom: 1.75rem;
     }
 
-    /* Botão flutuante WhatsApp */
-    .floating-wa {
+    /* Botão Flutuante de WhatsApp */
+    .float-wa {
       position: fixed;
       bottom: 1.5rem;
       right: 1.5rem;
-      width: 58px;
-      height: 58px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      background: #16a34a;
+      background: var(--green-wa);
       color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 24px rgba(22, 163, 74, 0.45);
+      box-shadow: 0 6px 20px rgba(22, 163, 74, 0.5);
       z-index: 100;
       text-decoration: none;
-      transition: all 0.25s ease;
+      transition: transform 0.2s;
     }
 
-    .floating-wa:hover {
-      transform: scale(1.08) translateY(-3px);
-      box-shadow: 0 12px 30px rgba(22, 163, 74, 0.6);
+    .float-wa:hover {
+      transform: scale(1.08);
     }
 
     @media (max-width: 640px) {
-      .hero-card { padding: 2rem 1.25rem; }
-      .cta-buttons { flex-direction: column; width: 100%; }
-      .btn-action { width: 100%; }
-      .quick-contacts { flex-direction: column; gap: 0.8rem; }
-      .game-board { grid-template-columns: repeat(3, 75px); grid-template-rows: repeat(3, 75px); }
+      body { font-size: 16px; }
+      .hero-box { padding: 2rem 1.25rem; }
+      .btn-group { flex-direction: column; }
+      .big-btn { width: 100%; }
+      .contact-row { flex-direction: column; gap: 0.8rem; }
+      .game-grid { grid-template-columns: repeat(3, 80px); grid-template-rows: repeat(3, 80px); }
     }
   </style>
 </head>
 <body>
 
-  <div class="bg-ambient"></div>
-
   <main class="container">
 
-    <!-- CARTÃO DE VISITAS PRINCIPAL COM FOTO REAL -->
-    <header class="hero-card">
-      <div class="avatar-wrapper">
-        <div class="avatar-ring"></div>
-        <img src="assets/images/felipe.png" alt="Felipe Junqueira" class="avatar-img" />
-        <div class="badge-verified" title="Desenvolvedor Verificado">
-          <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+    <!-- CARTÃO DE VISITAS PRINCIPAL -->
+    <header class="hero-box">
+      <div class="avatar-box">
+        <img src="assets/images/felipe.png" alt="Foto de Felipe Junqueira" class="avatar-img" />
+        <div class="verified-icon" title="Verificado">
+          <i data-lucide="check" style="width: 18px; height: 18px;"></i>
         </div>
       </div>
 
-      <h1 class="hero-name">Felipe Junqueira</h1>
+      <h1 class="hero-title">Felipe Junqueira</h1>
+      <p class="hero-subtitle">Ciência da Computação (UFABC) • Criação de Sites e Aplicativos</p>
 
-      <div class="hero-badges">
-        <span class="badge-pill highlight">
-          <i data-lucide="graduation-cap" style="width: 15px; height: 15px;"></i>
-          UFABC • Ciência da Computação
-        </span>
-        <span class="badge-pill">
-          <i data-lucide="code-2" style="width: 15px; height: 15px;"></i>
-          Desenvolvedor Web & Full Stack
-        </span>
-        <span class="badge-pill">
-          <i data-lucide="map-pin" style="width: 15px; height: 15px;"></i>
-          São Paulo - SP
-        </span>
-      </div>
-
-      <p class="hero-pitch">
-        Desenvolvimento de <strong>sites modernos, catálogos de pedidos no WhatsApp</strong> e 
-        <strong>sistemas comerciais</strong> para empresas e prestadores de serviços atenderem melhor e venderem mais com tecnologia simples e acessível.
+      <p class="hero-text">
+        Eu desenvolvo <strong>sites modernos</strong>, <strong>catálogos para receber pedidos no WhatsApp</strong> e <strong>sistemas fáceis</strong> para ajudar o seu comércio ou serviço a vender mais na internet.
       </p>
 
-      <!-- Botões de Ação Imediata -->
-      <div class="cta-buttons">
-        <a href="https://wa.me/5511983909578?text=Olá%20Felipe!%20Vi%20seu%20cartão%20de%20visitas%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%20para%20o%20meu%20negócio" target="_blank" class="btn-action btn-whatsapp">
-          <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
-          Conversar no WhatsApp
+      <div class="btn-group">
+        <a href="https://wa.me/5511983909578?text=Olá%20Felipe!%20Vi%20seu%20site%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%20para%20meu%20negócio" target="_blank" class="big-btn btn-green">
+          <i data-lucide="message-circle" style="width: 22px; height: 22px;"></i>
+          Falar Comigo no WhatsApp
         </a>
-        <a href="#catalogo" class="btn-action btn-secondary">
-          <i data-lucide="layers" style="width: 20px; height: 20px;"></i>
-          Ver Projetos & Demonstrações
+        <a href="#exemplos" class="big-btn btn-outline">
+          <i data-lucide="eye" style="width: 22px; height: 22px;"></i>
+          Ver Exemplos de Projetos
         </a>
       </div>
 
-      <div class="quick-contacts">
+      <div class="contact-row">
         <a href="https://wa.me/5511983909578" target="_blank">
-          <i data-lucide="phone" style="width: 15px; height: 15px;"></i> (11) 98390-9578
+          <i data-lucide="phone" style="width: 16px; height: 16px;"></i> Telefone: (11) 98390-9578
         </a>
         <a href="https://www.linkedin.com/in/felipe-j-135531262" target="_blank">
-          <i data-lucide="linkedin" style="width: 15px; height: 15px;"></i> LinkedIn
+          <i data-lucide="linkedin" style="width: 16px; height: 16px;"></i> Meu LinkedIn
         </a>
         <a href="https://github.com/felipejunqueira" target="_blank">
-          <i data-lucide="github" style="width: 15px; height: 15px;"></i> GitHub
+          <i data-lucide="github" style="width: 16px; height: 16px;"></i> Meu GitHub
         </a>
       </div>
     </header>
 
-    <!-- O QUE POSSO DESENVOLVER PARA VOCÊ -->
-    <section class="services-section">
-      <div class="section-header">
-        <h2 class="section-title">Soluções para o Seu Negócio</h2>
-        <p class="section-subtitle">Sistemas e páginas pensadas para quem precisa de resultados práticos, rápidos e fáceis de operar.</p>
+    <!-- O QUE POSSO FAZER (3 PONTOS CLAROS E DIRETOS) -->
+    <section class="section-box">
+      <div class="section-intro">
+        <h2>Como Posso Te Ajudar?</h2>
+        <p>Soluções simples, sem palavras difíceis e fáceis de usar no celular.</p>
       </div>
 
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon" style="background: rgba(37, 99, 235, 0.15); color: #60a5fa;">
-            <i data-lucide="globe"></i>
+      <div class="cards-row">
+        <div class="info-card">
+          <div class="info-icon">
+            <i data-lucide="globe" style="width: 26px; height: 26px;"></i>
           </div>
-          <h3 class="service-title">Sites & Landing Pages</h3>
-          <p class="service-desc">Páginas modernas, rápidas e que abrem perfeitamente no celular para passar credibilidade e atrair novos clientes.</p>
+          <h3>Sites e Páginas na Internet</h3>
+          <p>Seu negócio aparece de forma bonita e profissional para qualquer pessoa que pesquisar no celular ou no computador.</p>
         </div>
 
-        <div class="service-card">
-          <div class="service-icon" style="background: rgba(5, 150, 105, 0.15); color: #34d399;">
-            <i data-lucide="shopping-cart"></i>
+        <div class="info-card">
+          <div class="info-icon" style="background: rgba(22, 163, 74, 0.15); color: #4ade80;">
+            <i data-lucide="shopping-bag" style="width: 26px; height: 26px;"></i>
           </div>
-          <h3 class="service-title">Catálogos & Pedidos no WhatsApp</h3>
-          <p class="service-desc">Cardápios e vitrines onde o cliente escolhe os itens e o pedido chega pronto no seu WhatsApp, sem comissões de aplicativos.</p>
+          <h3>Pedidos no WhatsApp</h3>
+          <p>O cliente escolhe os produtos, clica em comprar e a lista do pedido já chega pronta no seu WhatsApp, sem taxas de aplicativos.</p>
         </div>
 
-        <div class="service-card">
-          <div class="service-icon" style="background: rgba(124, 58, 237, 0.15); color: #c084fc;">
-            <i data-lucide="scissors"></i>
+        <div class="info-card">
+          <div class="info-icon" style="background: rgba(147, 51, 234, 0.15); color: #c084fc;">
+            <i data-lucide="calendar" style="width: 26px; height: 26px;"></i>
           </div>
-          <h3 class="service-title">Link na Bio & Agendamento</h3>
-          <p class="service-desc">Página central para barbearias, salões, clínicas e consultórios facilitarem o agendamento de horários.</p>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon" style="background: rgba(217, 119, 6, 0.15); color: #fbbf24;">
-            <i data-lucide="award"></i>
-          </div>
-          <h3 class="service-title">Fidelidade & Frente de Caixa</h3>
-          <p class="service-desc">Cartão de fidelidade digital para incentivar o cliente a retornar e sistemas ágeis de registro de compras.</p>
+          <h3>Agendamentos e Atendimento</h3>
+          <p>Ideal para barbearias, salões de beleza e consultórios para os clientes marcarem horários rapidamente.</p>
         </div>
       </div>
     </section>
 
-    <!-- CATÁLOGO DE PROJETOS UNIFICADOS -->
-    <section id="catalogo" class="catalog-section">
-      <div class="section-header">
-        <h2 class="section-title">Projetos e Demonstrações Prontas</h2>
-        <p class="section-subtitle">Clique em <strong>Testar Agora</strong> para experimentar qualquer projeto interativamente na sua tela.</p>
+    <!-- EXEMPLOS PRÁTICOS (SIMPLES DE ESCOLHER E TESTAR) -->
+    <section id="exemplos" class="section-box">
+      <div class="section-intro">
+        <h2>Exemplos de Projetos Prontos</h2>
+        <p>Escolha um modelo abaixo e clique no botão para testar como ele funciona na tela.</p>
       </div>
 
-      <!-- Filtros com Botões Táteis -->
-      <div class="filter-tabs">
-        <button class="filter-btn active" onclick="filterProjects('all', this)">
-          <i data-lucide="layers" style="width: 16px; height: 16px;"></i> Todos (15)
+      <!-- Abas de Filtro Simples -->
+      <div class="filter-bar">
+        <button class="filter-tab active" onclick="filterCategory('all', this)">
+          <i data-lucide="layout-grid" style="width: 17px; height: 17px;"></i> Todos os Modelos
         </button>
-        <button class="filter-btn" onclick="filterProjects('comercio', this)">
-          <i data-lucide="store" style="width: 16px; height: 16px;"></i> Comércio & Lojas
+        <button class="filter-tab" onclick="filterCategory('comercio', this)">
+          <i data-lucide="store" style="width: 17px; height: 17px;"></i> Lojas e Vendas
         </button>
-        <button class="filter-btn" onclick="filterProjects('servicos', this)">
-          <i data-lucide="briefcase" style="width: 16px; height: 16px;"></i> Serviços & Saúde
+        <button class="filter-tab" onclick="filterCategory('servicos', this)">
+          <i data-lucide="user-check" style="width: 17px; height: 17px;"></i> Serviços e Saúde
         </button>
-        <button class="filter-btn" onclick="filterProjects('institucional', this)">
-          <i data-lucide="building-2" style="width: 16px; height: 16px;"></i> Sites & Portais
+        <button class="filter-tab" onclick="filterCategory('institucional', this)">
+          <i data-lucide="building" style="width: 17px; height: 17px;"></i> Sites Completos
         </button>
-        <button class="filter-btn" onclick="filterProjects('jogos', this)">
-          <i data-lucide="gamepad-2" style="width: 16px; height: 16px;"></i> Jogos & Lógica
+        <button class="filter-tab" onclick="filterCategory('jogos', this)">
+          <i data-lucide="gamepad-2" style="width: 17px; height: 17px;"></i> Jogos
         </button>
       </div>
 
-      <!-- Grid de Projetos -->
-      <div class="projects-grid" id="projects-grid">
+      <!-- Grade dos Projetos -->
+      <div class="project-grid" id="project-list">
 
-        <!-- 1. IASD São Mateus -->
-        <div class="project-card" data-category="institucional">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(5, 150, 105, 0.15); color: #34d399;">
-              <i data-lucide="landmark"></i>
+        <!-- 1. Catálogo Lanchonete -->
+        <div class="project-item" data-cat="comercio">
+          <div>
+            <div class="item-header">
+              <div class="item-icon">
+                <i data-lucide="utensils" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Cardápio de Lanches</h3>
             </div>
-            <span class="card-badge badge-portal">Site Oficial</span>
+            <p class="item-desc">O cliente escolhe os lanches e bebidas e manda o pedido prontinho direto para o seu WhatsApp.</p>
           </div>
-          <div class="card-body">
-            <h3 class="card-title">IASD São Mateus</h3>
-            <p class="card-desc">Portal institucional bilíngue com 60 anos de história, rádio web integrada, bíblia interativa e agenda de cultos.</p>
-          </div>
-          <div class="card-actions">
-            <a href="https://github.com/felipejunqueira/iasd-sao-mateus" target="_blank" class="btn-test">
-              <i data-lucide="external-link" style="width: 16px; height: 16px;"></i> Ver Repositório
-            </a>
-            <a href="https://github.com/felipejunqueira/iasd-sao-mateus" target="_blank" class="btn-icon-link" title="GitHub">
-              <i data-lucide="github" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
+          <button class="btn-test-card" onclick="openPreview('Cardápio de Lanches', './projetos/catalogo-pedidos/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
         </div>
 
-        <!-- 2. Catálogo de Pedidos WhatsApp -->
-        <div class="project-card" data-category="comercio">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(37, 99, 235, 0.15); color: #60a5fa;">
-              <i data-lucide="shopping-cart"></i>
+        <!-- 2. Loja de Roupas -->
+        <div class="project-item" data-cat="comercio">
+          <div>
+            <div class="item-header">
+              <div class="item-icon">
+                <i data-lucide="tag" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Vitrine de Roupas</h3>
             </div>
-            <span class="card-badge badge-ecommerce">WhatsApp</span>
+            <p class="item-desc">Vitrine online com fotos das peças, cores e tamanhos para lojas de moda e roupas.</p>
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Catálogo Burger Express</h3>
-            <p class="card-desc">Cardápio digital para lanchonetes e comércio: o cliente monta a sacola e o pedido chega formatado direto no WhatsApp.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Catálogo de Pedidos', './projetos/catalogo-pedidos/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
-            </button>
-            <a href="./projetos/catalogo-pedidos/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
+          <button class="btn-test-card" onclick="openPreview('Vitrine de Roupas', './projetos/loja-roupas/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
         </div>
 
-        <!-- 3. Vitrine Loja de Roupas -->
-        <div class="project-card" data-category="comercio">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">
-              <i data-lucide="tag"></i>
+        <!-- 3. Barbearia e Salão -->
+        <div class="project-item" data-cat="servicos">
+          <div>
+            <div class="item-header">
+              <div class="item-icon">
+                <i data-lucide="scissors" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Barbearia & Salão</h3>
             </div>
-            <span class="card-badge badge-ecommerce">Moda & Vendas</span>
+            <p class="item-desc">Página para colocar no Instagram com fotos dos cortes, valores de serviços e agendamento fácil.</p>
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Vitrine Loja de Roupas</h3>
-            <p class="card-desc">Catálogo virtual de moda com seleção de tamanhos, cores e visual moderno para clientes do Instagram.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Loja de Roupas', './projetos/loja-roupas/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
-            </button>
-            <a href="./projetos/loja-roupas/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
+          <button class="btn-test-card" onclick="openPreview('Barbearia e Salão', './projetos/link-bio-barbearia/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
         </div>
 
-        <!-- 4. Link da Bio para Barbearia & Salão -->
-        <div class="project-card" data-category="servicos">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(217, 119, 6, 0.15); color: #fbbf24;">
-              <i data-lucide="scissors"></i>
+        <!-- 4. Fonoaudiologia e Saúde -->
+        <div class="project-item" data-cat="servicos">
+          <div>
+            <div class="item-header">
+              <div class="item-icon">
+                <i data-lucide="heart" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Clínica & Saúde</h3>
             </div>
-            <span class="card-badge badge-service">Agendamento</span>
+            <p class="item-desc">Site profissional para consultórios, médicos, dentistas e terapeutas com agendamento de consultas.</p>
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Link Bio Barbearia & Salão</h3>
-            <p class="card-desc">Página central para colocar no Instagram: tabela de serviços, fotos dos cortes, localização e agendamento rápido.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Link Bio Barbearia', './projetos/link-bio-barbearia/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
-            </button>
-            <a href="./projetos/link-bio-barbearia/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
+          <a href="https://github.com/felipejunqueira/SiteFernandaFono" target="_blank" class="btn-test-card">
+            <i data-lucide="external-link" style="width: 18px; height: 18px;"></i> Ver Projeto
+          </a>
         </div>
 
-        <!-- 5. Site da Fonoaudióloga Fernanda Roberta -->
-        <div class="project-card" data-category="servicos">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(124, 58, 237, 0.15); color: #c084fc;">
-              <i data-lucide="activity"></i>
+        <!-- 5. Site da Igreja IASD -->
+        <div class="project-item" data-cat="institucional">
+          <div>
+            <div class="item-header">
+              <div class="item-icon">
+                <i data-lucide="landmark" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Site Oficial da Igreja</h3>
             </div>
-            <span class="card-badge badge-service">Saúde & Clínica</span>
+            <p class="item-desc">Portal completo com história de 60 anos, transmissão de rádio, bíblia e horários de cultos.</p>
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Fernanda Fonoaudiologia</h3>
-            <p class="card-desc">Site profissional para consultório de fonoaudiologia com agendamento, orientações aos pacientes e especialidades.</p>
-          </div>
-          <div class="card-actions">
-            <a href="https://github.com/felipejunqueira/SiteFernandaFono" target="_blank" class="btn-test">
-              <i data-lucide="external-link" style="width: 16px; height: 16px;"></i> Ver Repositório
-            </a>
-            <a href="https://github.com/felipejunqueira/SiteFernandaFono" target="_blank" class="btn-icon-link" title="GitHub">
-              <i data-lucide="github" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
+          <a href="https://github.com/felipejunqueira/iasd-sao-mateus" target="_blank" class="btn-test-card">
+            <i data-lucide="external-link" style="width: 18px; height: 18px;"></i> Ver Projeto
+          </a>
         </div>
 
-        <!-- 6. Cartão Fidelidade Digital -->
-        <div class="project-card" data-category="comercio">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(5, 150, 105, 0.15); color: #34d399;">
-              <i data-lucide="award"></i>
+        <!-- 6. Cartão Fidelidade -->
+        <div class="project-item" data-cat="comercio">
+          <div>
+            <div class="item-header">
+              <div class="item-icon">
+                <i data-lucide="award" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Cartão Fidelidade</h3>
             </div>
-            <span class="card-badge badge-ecommerce">Fidelização</span>
+            <p class="item-desc">Substitui o papelzinho por um cartão no celular do cliente para juntar selos e ganhar prêmios.</p>
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Cartão Fidelidade Digital</h3>
-            <p class="card-desc">Substitui o papel carimbado por um cartão digital moderno no celular do cliente para acumular selos e recompensas.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Sistema de Fidelidade', './projetos/sistema-fidelidade/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
-            </button>
-            <a href="./projetos/sistema-fidelidade/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
+          <button class="btn-test-card" onclick="openPreview('Cartão Fidelidade', './projetos/sistema-fidelidade/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
         </div>
 
-        <!-- 7. PDV / Frente de Caixa Simples -->
-        <div class="project-card" data-category="comercio">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(14, 165, 233, 0.15); color: #38bdf8;">
-              <i data-lucide="calculator"></i>
+        <!-- 7. Caixa de Mercadinho -->
+        <div class="project-item" data-cat="comercio">
+          <div>
+            <div class="item-header">
+              <div class="item-icon">
+                <i data-lucide="calculator" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Caixa de Mercadinho</h3>
             </div>
-            <span class="card-badge badge-ecommerce">PDV & Caixa</span>
+            <p class="item-desc">Sistema simples para registrar produtos no caixa, somar os totais e emitir o comprovante.</p>
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Frente de Caixa Mercadinho</h3>
-            <p class="card-desc">Sistema visual e rápido para registrar compras, somar itens e emitir resumo de venda sem complicações nem travamentos.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Frente de Caixa', './projetos/pdv-mercado/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
-            </button>
-            <a href="./projetos/pdv-mercado/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
+          <button class="btn-test-card" onclick="openPreview('Caixa de Mercadinho', './projetos/pdv-mercado/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
         </div>
 
-        <!-- 8. Padaria & Cafeteria -->
-        <div class="project-card" data-category="comercio">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(217, 119, 6, 0.15); color: #fbbf24;">
-              <i data-lucide="coffee"></i>
+        <!-- 8. Padaria e Café -->
+        <div class="project-item" data-cat="comercio">
+          <div>
+            <div class="item-header">
+              <div class="item-icon">
+                <i data-lucide="coffee" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Padaria & Confeitaria</h3>
             </div>
-            <span class="card-badge badge-ecommerce">Cardápio</span>
+            <p class="item-desc">Cardápio ilustrado para padarias exibirem pães, bolos e cafés com pedidos rápidos.</p>
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Padaria & Confeitaria</h3>
-            <p class="card-desc">Apresentação gastronômica com cardápio de cafés, pães quentinhos e bolos com fotos claras e pedidos fáceis.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Padaria & Cafeteria', './projetos/padaria/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
-            </button>
-            <a href="./projetos/padaria/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
+          <button class="btn-test-card" onclick="openPreview('Padaria e Confeitaria', './projetos/padaria/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
         </div>
 
-        <!-- 9. Portal Advocacia -->
-        <div class="project-card" data-category="servicos">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(148, 163, 184, 0.15); color: #cbd5e1;">
-              <i data-lucide="scale"></i>
+        <!-- 9. Portal de Advocacia -->
+        <div class="project-item" data-cat="servicos">
+          <div>
+            <div class="item-header">
+              <div class="item-icon">
+                <i data-lucide="scale" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Portal de Advocacia</h3>
             </div>
-            <span class="card-badge badge-service">Jurídico</span>
+            <p class="item-desc">Site sério e respeitável para advogados e escritórios receberem novos clientes.</p>
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Portal de Advocacia</h3>
-            <p class="card-desc">Landing page corporativa e elegante para advogados e escritórios transmitirem autoridade e receberem clientes.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Portal Advocacia', './projetos/advocacia/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
-            </button>
-            <a href="./projetos/advocacia/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
+          <button class="btn-test-card" onclick="openPreview('Portal de Advocacia', './projetos/advocacia/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
         </div>
 
-        <!-- 10. Portal Clínicas & Saúde -->
-        <div class="project-card" data-category="servicos">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(2, 132, 199, 0.15); color: #38bdf8;">
-              <i data-lucide="stethoscope"></i>
+        <!-- 10. Jogo da Velha -->
+        <div class="project-item" data-cat="jogos">
+          <div>
+            <div class="item-header">
+              <div class="item-icon">
+                <i data-lucide="gamepad-2" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Jogo da Velha</h3>
             </div>
-            <span class="card-badge badge-service">Consultórios</span>
+            <p class="item-desc">Jogo interativo e divertido para jogar contra o computador direto na tela.</p>
           </div>
-          <div class="card-body">
-            <h3 class="card-title">Consultório Médico & Saúde</h3>
-            <p class="card-desc">Página institucional para médicos, psicólogos e terapeutas apresentarem especialidades e facilitarem consultas.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Profissional da Saúde', './projetos/profissional-saude/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
-            </button>
-            <a href="./projetos/profissional-saude/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 11. Catálogo Metalúrgica & Indústria -->
-        <div class="project-card" data-category="institucional">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(100, 116, 139, 0.2); color: #94a3b8;">
-              <i data-lucide="cog"></i>
-            </div>
-            <span class="card-badge badge-portal">Indústria</span>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Catálogo Metalúrgica</h3>
-            <p class="card-desc">Apresentação corporativa para empresas do setor industrial, usinagem e metalurgia com solicitação de cotações.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Metalúrgica', './projetos/metalurgica/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
-            </button>
-            <a href="./projetos/metalurgica/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 12. Página de Loja Comercial -->
-        <div class="project-card" data-category="comercio">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(124, 58, 237, 0.15); color: #c084fc;">
-              <i data-lucide="store"></i>
-            </div>
-            <span class="card-badge badge-ecommerce">Vitrine</span>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Página de Loja Comercial</h3>
-            <p class="card-desc">Landing page comercial destacando ofertas, novidades da semana e canais de atendimento da sua loja.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Página de Loja', './projetos/page-loja/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
-            </button>
-            <a href="./projetos/page-loja/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 13. Gestor de Finanças Pessoais -->
-        <div class="project-card" data-category="servicos">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(5, 150, 105, 0.15); color: #34d399;">
-              <i data-lucide="wallet"></i>
-            </div>
-            <span class="card-badge badge-service">Finanças</span>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Gestor Financeiro Web</h3>
-            <p class="card-desc">Aplicativo prático para controle de receitas, despesas diárias e saldo mensal com interface limpa e intuitiva.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Finanças Pessoais', './projetos/app-financas-pessoais/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Testar Agora
-            </button>
-            <a href="./projetos/app-financas-pessoais/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 14. Jogo da Velha Moderno -->
-        <div class="project-card" data-category="jogos">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(37, 99, 235, 0.15); color: #60a5fa;">
-              <i data-lucide="gamepad-2"></i>
-            </div>
-            <span class="card-badge badge-game">Jogo Web</span>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Jogo da Velha Moderno</h3>
-            <p class="card-desc">Jogo clássico repaginado com efeitos visuais, inteligência artificial e sons para uma experiência rápida.</p>
-          </div>
-          <div class="card-actions">
-            <button class="btn-test" onclick="openDemo('Jogo da Velha Moderno', './projetos/jogo-moderno/')">
-              <i data-lucide="play" style="width: 16px; height: 16px;"></i> Jogar Agora
-            </button>
-            <a href="./projetos/jogo-moderno/" target="_blank" class="btn-icon-link" title="Abrir em Nova Aba">
-              <i data-lucide="external-link" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 15. Tic-Tac-Toe Multi-Linguagens -->
-        <div class="project-card" data-category="jogos">
-          <div class="card-top">
-            <div class="card-icon" style="background: rgba(217, 119, 6, 0.15); color: #fbbf24;">
-              <i data-lucide="cpu"></i>
-            </div>
-            <span class="card-badge badge-game">Multi-Linguagem</span>
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">Tic-Tac-Toe Multi-Engine</h3>
-            <p class="card-desc">Estudo comparativo implementando a mesma lógica de jogo em C, Python, Java e Lua compartilhando regras.</p>
-          </div>
-          <div class="card-actions">
-            <a href="https://github.com/felipejunqueira/tic-tac-toe" target="_blank" class="btn-test">
-              <i data-lucide="external-link" style="width: 16px; height: 16px;"></i> Ver Repositório
-            </a>
-            <a href="https://github.com/felipejunqueira/tic-tac-toe" target="_blank" class="btn-icon-link" title="GitHub">
-              <i data-lucide="github" style="width: 18px; height: 18px;"></i>
-            </a>
-          </div>
+          <button class="btn-test-card" onclick="openPreview('Jogo da Velha', './projetos/jogo-moderno/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Jogar Agora
+          </button>
         </div>
 
       </div>
     </section>
 
-    <!-- MINIJOGO INTERATIVO EMBUTIDO NA PÁGINA -->
-    <section class="game-section">
-      <h2 class="section-title" style="margin-bottom: 0.3rem;">Desafio Rápido: Jogue Contra a IA</h2>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
-        Teste a lógica do computador agora mesmo. Você joga com <strong>X</strong> (Azul) e a IA joga com <strong>O</strong> (Vermelho).
+    <!-- BRINCADEIRA RÁPIDA: JOGO DA VELHA NA PÁGINA -->
+    <section class="game-box">
+      <h2 style="font-size: 1.8rem; margin-bottom: 0.3rem;">Quer Jogar uma Partida Rápida?</h2>
+      <p style="color: var(--text-muted); font-size: 1.05rem;">
+        Você joga com o <strong>X</strong> azul. O computador joga com a bolinha <strong>O</strong> vermelha. Clique num quadrado para começar!
       </p>
 
-      <div class="game-status-text" id="ai-game-status">Sua vez. Clique em qualquer quadrado.</div>
+      <div class="game-message" id="turn-message">Sua vez! Clique em qualquer quadrado livre.</div>
 
-      <div class="game-board" id="ai-board">
-        <div class="game-cell" onclick="makeMove(0)"></div>
-        <div class="game-cell" onclick="makeMove(1)"></div>
-        <div class="game-cell" onclick="makeMove(2)"></div>
-        <div class="game-cell" onclick="makeMove(3)"></div>
-        <div class="game-cell" onclick="makeMove(4)"></div>
-        <div class="game-cell" onclick="makeMove(5)"></div>
-        <div class="game-cell" onclick="makeMove(6)"></div>
-        <div class="game-cell" onclick="makeMove(7)"></div>
-        <div class="game-cell" onclick="makeMove(8)"></div>
+      <div class="game-grid" id="board-grid">
+        <div class="game-tile" onclick="playTurn(0)"></div>
+        <div class="game-tile" onclick="playTurn(1)"></div>
+        <div class="game-tile" onclick="playTurn(2)"></div>
+        <div class="game-tile" onclick="playTurn(3)"></div>
+        <div class="game-tile" onclick="playTurn(4)"></div>
+        <div class="game-tile" onclick="playTurn(5)"></div>
+        <div class="game-tile" onclick="playTurn(6)"></div>
+        <div class="game-tile" onclick="playTurn(7)"></div>
+        <div class="game-tile" onclick="playTurn(8)"></div>
       </div>
 
-      <button class="btn-action btn-secondary" onclick="resetGame()" style="padding: 0.5rem 1.2rem; font-size: 0.95rem;">
-        <i data-lucide="rotate-ccw" style="width: 16px; height: 16px;"></i> Reiniciar Partida
+      <button class="big-btn btn-outline" onclick="resetBoard()" style="padding: 0.6rem 1.4rem; font-size: 1rem;">
+        <i data-lucide="rotate-ccw" style="width: 18px; height: 18px;"></i> Jogar de Novo
       </button>
     </section>
 
   </main>
 
-  <!-- MODAL DE DEMONSTRAÇÃO INTERATIVA (LIVE PREVIEW) -->
-  <div class="modal-overlay" id="demo-modal">
-    <div class="modal-window">
-      <div class="modal-header">
-        <div class="modal-title-group">
-          <i data-lucide="layers" style="color: #60a5fa; width: 18px; height: 18px;"></i>
-          <span class="modal-title" id="modal-project-title">Demonstração Interativa</span>
+  <!-- JANELA DE DEMONSTRAÇÃO (MODAL CLARA E LIMPA) -->
+  <div class="modal-backdrop" id="demo-modal">
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-title" id="modal-heading">
+          <i data-lucide="eye" style="color: var(--primary-light);"></i>
+          <span>Exemplo de Projeto</span>
         </div>
-        <div class="modal-controls">
-          <a href="#" target="_blank" id="modal-external-link" class="btn-modal-action" title="Abrir em Nova Aba">
-            <i data-lucide="external-link" style="width: 14px; height: 14px;"></i> Nova Aba
-          </a>
-          <button class="btn-modal-action btn-modal-close" onclick="closeDemo()">
-            <i data-lucide="x" style="width: 16px; height: 16px;"></i> Fechar
-          </button>
-        </div>
+        <button class="btn-close-modal" onclick="closePreview()">
+          <i data-lucide="x" style="width: 18px; height: 18px;"></i> Fechar Janela
+        </button>
       </div>
-      <div class="modal-body">
-        <iframe src="" class="modal-iframe" id="modal-frame"></iframe>
-      </div>
+      <iframe src="" class="modal-frame" id="demo-iframe"></iframe>
     </div>
   </div>
 
-  <!-- RODAPÉ & CHAMADA FINAL -->
-  <footer class="footer-cta">
-    <div class="footer-cta-card">
-      <h2 class="footer-cta-title">Vamos Criar o Seu Projeto?</h2>
-      <p class="footer-cta-text">
-        Entre em contato diretamente pelo WhatsApp para conversarmos sobre a solução ideal para o seu comércio ou serviço.
+  <!-- RODAPÉ DE CONTATO -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <h2 class="footer-title">Quer um Site ou Sistema Desse?</h2>
+      <p class="footer-sub">
+        Fale comigo no WhatsApp. A gente conversa de forma rápida, sem compromisso e sem termos técnicos difíceis.
       </p>
 
-      <a href="https://wa.me/5511983909578?text=Olá%20Felipe!%20Vi%20seus%20projetos%20no%20portfólio%20e%20gostaria%20de%20um%20orçamento%20para%20meu%20negócio" target="_blank" class="btn-action btn-whatsapp" style="font-size: 1.15rem; padding: 1rem 2rem;">
-        <i data-lucide="message-square" style="width: 24px; height: 24px;"></i>
-        Chamar no WhatsApp: (11) 98390-9578
+      <a href="https://wa.me/5511983909578?text=Olá%20Felipe!%20Gostei%20dos%20seus%20projetos%20e%20gostaria%20de%20um%20orçamento%20para%20meu%20negócio" target="_blank" class="big-btn btn-green" style="font-size: 1.2rem; padding: 1.1rem 2.2rem;">
+        <i data-lucide="message-circle" style="width: 24px; height: 24px;"></i>
+        Conversar no WhatsApp: (11) 98390-9578
       </a>
 
-      <p style="margin-top: 2rem; font-size: 0.85rem; color: #64748b;">
-        Felipe Junqueira Leite • São Paulo, SP • Foco em simplicidade, velocidade e conversão
+      <p style="margin-top: 2rem; font-size: 0.9rem; color: #64748b;">
+        Felipe Junqueira Leite • São Paulo - SP • Simples, rápido e feito para qualquer pessoa usar
       </p>
     </div>
   </footer>
 
   <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
-  <a href="https://wa.me/5511983909578?text=Olá%20Felipe!%20Vi%20seu%20portfólio%20e%20quero%20conversar%20sobre%20um%20projeto" target="_blank" class="floating-wa" title="Falar no WhatsApp" aria-label="WhatsApp">
-    <i data-lucide="message-square" style="width: 28px; height: 28px;"></i>
+  <a href="https://wa.me/5511983909578?text=Olá%20Felipe!%20Vi%20seu%20site%20e%20quero%20conversar%20sobre%20um%20projeto" target="_blank" class="float-wa" title="Falar no WhatsApp" aria-label="WhatsApp">
+    <i data-lucide="message-circle" style="width: 32px; height: 32px;"></i>
   </a>
 
-  <!-- SCRIPTS -->
+  <!-- SCRIPTS LIMPOS E SIMPLES -->
   <script>
-    // Inicializa ícones Lucide
+    // Inicia ícones
     lucide.createIcons();
 
-    // Filtro de Projetos Simples
-    function filterProjects(category, btn) {
-      const buttons = document.querySelectorAll('.filter-btn');
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    // Filtro de Categorias
+    function filterCategory(cat, button) {
+      document.querySelectorAll('.filter-tab').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
 
-      const cards = document.querySelectorAll('#projects-grid .project-card');
-      cards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-category') === category) {
-          card.style.display = 'flex';
+      const items = document.querySelectorAll('#project-list .project-item');
+      items.forEach(item => {
+        if (cat === 'all' || item.getAttribute('data-cat') === cat) {
+          item.style.display = 'flex';
         } else {
-          card.style.display = 'none';
+          item.style.display = 'none';
         }
       });
     }
 
-    // Modal de Demonstração
-    function openDemo(title, url) {
-      document.getElementById('modal-project-title').textContent = 'Demonstração: ' + title;
-      document.getElementById('modal-external-link').href = url;
-      document.getElementById('modal-frame').src = url;
-      document.getElementById('demo-modal').classList.add('active');
+    // Modal de Teste
+    function openPreview(name, url) {
+      document.getElementById('modal-heading').querySelector('span').textContent = 'Testando: ' + name;
+      document.getElementById('demo-iframe').src = url;
+      document.getElementById('demo-modal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
-    function closeDemo() {
-      document.getElementById('demo-modal').classList.remove('active');
-      document.getElementById('modal-frame').src = '';
+    function closePreview() {
+      document.getElementById('demo-modal').classList.remove('open');
+      document.getElementById('demo-iframe').src = '';
       document.body.style.overflow = 'auto';
     }
 
-    // Fecha modal clicando fora
+    // Fechar ao clicar fora
     document.getElementById('demo-modal').addEventListener('click', function(e) {
-      if (e.target === this) closeDemo();
+      if (e.target === this) closePreview();
     });
 
-    // Tecla ESC fecha modal
+    // Fechar no ESC
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeDemo();
+      if (e.key === 'Escape') closePreview();
     });
 
-    // Jogo da Velha contra IA Simples
-    let board = ['', '', '', '', '', '', '', '', ''];
-    let gameActive = true;
+    // Jogo da Velha
+    let gridState = ['', '', '', '', '', '', '', '', ''];
+    let isGameRunning = true;
 
-    function makeMove(index) {
-      if (!gameActive || board[index] !== '') return;
+    function playTurn(pos) {
+      if (!isGameRunning || gridState[pos] !== '') return;
 
-      board[index] = 'X';
-      renderBoard();
+      gridState[pos] = 'X';
+      updateBoard();
 
-      if (checkWin('X')) {
-        document.getElementById('ai-game-status').innerHTML = '<span style="color:#10b981;">Você venceu a partida!</span>';
-        gameActive = false;
+      if (verifyWinner('X')) {
+        document.getElementById('turn-message').innerHTML = '<span style="color:#4ade80;">Muito bem! Você venceu a partida!</span>';
+        isGameRunning = false;
         return;
       }
 
-      if (board.every(cell => cell !== '')) {
-        document.getElementById('ai-game-status').innerHTML = '<span style="color:#94a3b8;">Empate técnico.</span>';
-        gameActive = false;
+      if (gridState.every(cell => cell !== '')) {
+        document.getElementById('turn-message').innerHTML = '<span style="color:#94a3b8;">Empatou! Ninguém perdeu.</span>';
+        isGameRunning = false;
         return;
       }
 
-      document.getElementById('ai-game-status').textContent = 'Aguarde o movimento da IA...';
-      setTimeout(aiMove, 300);
+      document.getElementById('turn-message').textContent = 'O computador está jogando...';
+      setTimeout(computerTurn, 300);
     }
 
-    function aiMove() {
-      if (!gameActive) return;
+    function computerTurn() {
+      if (!isGameRunning) return;
 
-      // 1. Tentar vencer
-      let bestMove = findWinningMove('O');
-      // 2. Bloquear vitória do jogador
-      if (bestMove === null) bestMove = findWinningMove('X');
-      // 3. Pegar o centro
-      if (bestMove === null && board[4] === '') bestMove = 4;
-      // 4. Pegar qualquer espaço livre
-      if (bestMove === null) {
-        const available = board.map((val, idx) => val === '' ? idx : null).filter(val => val !== null);
-        if (available.length > 0) {
-          bestMove = available[Math.floor(Math.random() * available.length)];
+      let move = findWinningCell('O');
+      if (move === null) move = findWinningCell('X');
+      if (move === null && gridState[4] === '') move = 4;
+      if (move === null) {
+        const freeSpots = gridState.map((val, idx) => val === '' ? idx : null).filter(val => val !== null);
+        if (freeSpots.length > 0) {
+          move = freeSpots[Math.floor(Math.random() * freeSpots.length)];
         }
       }
 
-      if (bestMove !== null) {
-        board[bestMove] = 'O';
-        renderBoard();
+      if (move !== null) {
+        gridState[move] = 'O';
+        updateBoard();
 
-        if (checkWin('O')) {
-          document.getElementById('ai-game-status').innerHTML = '<span style="color:#f43f5e;">A IA venceu. Tente novamente!</span>';
-          gameActive = false;
+        if (verifyWinner('O')) {
+          document.getElementById('turn-message').innerHTML = '<span style="color:#f87171;">O computador venceu desta vez!</span>';
+          isGameRunning = false;
           return;
         }
 
-        if (board.every(cell => cell !== '')) {
-          document.getElementById('ai-game-status').innerHTML = '<span style="color:#94a3b8;">Empate técnico.</span>';
-          gameActive = false;
+        if (gridState.every(cell => cell !== '')) {
+          document.getElementById('turn-message').innerHTML = '<span style="color:#94a3b8;">Empatou! Ninguém perdeu.</span>';
+          isGameRunning = false;
           return;
         }
 
-        document.getElementById('ai-game-status').textContent = 'Sua vez. Escolha um quadrado.';
+        document.getElementById('turn-message').textContent = 'Sua vez! Clique em outro quadrado.';
       }
     }
 
-    function findWinningMove(player) {
-      const winCombos = [
+    function findWinningCell(mark) {
+      const lines = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8],
         [0, 3, 6], [1, 4, 7], [2, 5, 8],
         [0, 4, 8], [2, 4, 6]
       ];
-
-      for (let combo of winCombos) {
-        const [a, b, c] = combo;
-        const line = [board[a], board[b], board[c]];
-        const countPlayer = line.filter(v => v === player).length;
-        const countEmpty = line.filter(v => v === '').length;
-
-        if (countPlayer === 2 && countEmpty === 1) {
-          if (board[a] === '') return a;
-          if (board[b] === '') return b;
-          if (board[c] === '') return c;
+      for (let line of lines) {
+        const [a, b, c] = line;
+        const current = [gridState[a], gridState[b], gridState[c]];
+        if (current.filter(v => v === mark).length === 2 && current.filter(v => v === '').length === 1) {
+          if (gridState[a] === '') return a;
+          if (gridState[b] === '') return b;
+          if (gridState[c] === '') return c;
         }
       }
       return null;
     }
 
-    function checkWin(player) {
-      const winCombos = [
+    function verifyWinner(mark) {
+      const lines = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8],
         [0, 3, 6], [1, 4, 7], [2, 5, 8],
         [0, 4, 8], [2, 4, 6]
       ];
-      return winCombos.some(combo => combo.every(idx => board[idx] === player));
+      return lines.some(line => line.every(pos => gridState[pos] === mark));
     }
 
-    function renderBoard() {
-      const cells = document.querySelectorAll('#ai-board .game-cell');
-      cells.forEach((cell, idx) => {
-        cell.textContent = board[idx];
-        cell.className = 'game-cell';
-        if (board[idx] === 'X') cell.classList.add('cell-x', 'taken');
-        if (board[idx] === 'O') cell.classList.add('cell-o', 'taken');
+    function updateBoard() {
+      const tiles = document.querySelectorAll('#board-grid .game-tile');
+      tiles.forEach((tile, index) => {
+        tile.textContent = gridState[index];
+        tile.className = 'game-tile';
+        if (gridState[index] === 'X') tile.classList.add('x-tile');
+        if (gridState[index] === 'O') tile.classList.add('o-tile');
       });
     }
 
-    function resetGame() {
-      board = ['', '', '', '', '', '', '', '', ''];
-      gameActive = true;
-      document.getElementById('ai-game-status').textContent = 'Sua vez. Clique em qualquer quadrado.';
-      renderBoard();
+    function resetBoard() {
+      gridState = ['', '', '', '', '', '', '', '', ''];
+      isGameRunning = true;
+      document.getElementById('turn-message').textContent = 'Sua vez! Clique em qualquer quadrado livre.';
+      updateBoard();
     }
   </script>
 </body>
