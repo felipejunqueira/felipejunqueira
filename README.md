@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/images/felipe.png" width="130" height="130" style="border-radius: 50%; object-fit: cover; border: 3px solid #3b82f6; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" alt="Felipe Junqueira" />
+  <img src="assets/images/felipe.jpg" width="130" height="130" style="border-radius: 50%; object-fit: cover; object-position: center 20%; border: 3px solid #3b82f6; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" alt="Felipe Junqueira" />
   
   # Felipe Junqueira Leite
   
