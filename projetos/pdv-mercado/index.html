@@ -1,147 +1,578 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mercado Pulse PDV | Sistema de Gestão</title>
-  <meta name="description" content="Mercado Pulse PDV — sistema de caixa e gestão para mercados. Reduza filas, aumente margem e controle o estoque em tempo real." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDV Caixa Express | Sistema de Frente de Caixa</title>
+  <meta name="description" content="PDV Caixa Express — Sistema ágil de ponto de venda para supermercados, mercearias e comércios locais.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
-    :root{--ink:#0b1324;--muted:#334155;--line:#7dd3fc;--card:#fff;--brand:#0369a1;--brand2:#0ea5e9}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:'Space Grotesk',sans-serif;color:var(--ink);background:linear-gradient(160deg,#cffafe,#dbeafe);min-height:100vh}
-    .wrap{width:min(1120px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
-    .hero{background:#ffffffdd;border:1px solid #ffffffa6;border-radius:20px;overflow:hidden;box-shadow:0 17px 42px #0c4a6e33}
-    .hero-img{height:200px;background:url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=1600&q=80') center/cover}
-    @media(min-width:640px){.hero-img{height:280px}}
-    .hero-body{padding:1.2rem}
-    @media(min-width:640px){.hero-body{padding:1.4rem 1.8rem}}
-    h1{margin:0 0 .5rem;font:700 clamp(2rem,5vw,3rem) 'Space Grotesk',sans-serif;line-height:1.15}
-    .lead{color:var(--muted);max-width:76ch;line-height:1.65}
-    .meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
-    .badge{border:1px solid #38bdf8;background:#ecfeff;padding:.4rem .75rem;border-radius:999px;font-size:.82rem;font-weight:700}
-    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem}
-    .tab-btn{border:1px solid var(--line);background:#fff;padding:.5rem .9rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
-    .tab-btn:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
-    .tab-btn.active{background:var(--brand);color:#ecfeff;border-color:var(--brand)}
-    .panel{display:none;padding:1rem 0}
-    .panel.active{display:block;animation:fadeUp .28s ease}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    .grid{display:grid;grid-template-columns:1fr;gap:.8rem}
-    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;transition:.2s ease}
-    .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px #0c4a6e18}
-    .card h3{margin:0 0 .4rem;font-size:1rem;color:var(--brand)}
-    .card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
-    .stat{font-size:1.6rem;font-weight:700;color:var(--brand);display:block;margin-bottom:.3rem}
-    .gallery{display:grid;grid-template-columns:1fr;gap:.7rem}
-    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
-    .gallery img{width:100%;height:180px;object-fit:cover;border-radius:14px;border:1px solid var(--line);transition:.2s ease}
-    .gallery img:hover{transform:scale(1.03)}
-    .cta{background:linear-gradient(130deg,var(--brand),var(--brand2));color:#ecfeff;padding:1.2rem 1.4rem;border-radius:16px;margin-top:1.2rem}
-    .cta a{display:inline-block;margin-top:.5rem;background:#ecfeff;color:#0c4a6e;text-decoration:none;padding:.65rem 1.2rem;border-radius:999px;font-weight:800;font-size:.9rem;transition:.2s ease}
-    .cta a:hover{transform:translateY(-2px);box-shadow:0 6px 18px #0c4a6e44}
-    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#ffffffb0;border-radius:0 0 20px 20px}
-    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
-    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
-    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
-    .cert{background:var(--brand);color:#ecfeff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
-    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+    :root {
+      --bg: #0f172a;
+      --panel: #1e293b;
+      --panel-light: #334155;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --green: #16a34a;
+      --green-hover: #15803d;
+      --amber: #d97706;
+      --text: #f8fafc;
+      --text-dim: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Bar */
+    .pos-top {
+      background: #020617;
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .pos-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+    }
+    .pos-status {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 10px #22c55e;
+      display: inline-block;
+    }
+
+    /* Layout Principal */
+    .pos-container {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 1.25rem;
+      padding: 1.25rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Painel Esquerdo: Produtos e Busca */
+    .left-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .search-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .search-input {
+      flex: 1;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 1.05rem;
+    }
+    .search-input:focus { outline: none; border-color: var(--primary); }
+
+    .quick-grid {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .quick-grid h3 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.75rem;
+    }
+    .quick-btn {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 0.9rem 0.6rem;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.15s;
+    }
+    .quick-btn:hover {
+      background: rgba(37, 99, 235, 0.15);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .quick-btn:active {
+      transform: scale(0.96);
+    }
+    .quick-btn-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Painel Direito: Cupom e Fechamento */
+    .right-panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .receipt-header {
+      background: #020617;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .receipt-title {
+      font-family: 'Chivo Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-dim);
+    }
+    .receipt-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.25rem;
+      font-family: 'Chivo Mono', monospace;
+      font-size: 0.92rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      min-height: 250px;
+    }
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+      padding-bottom: 0.4rem;
+    }
+    .item-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .btn-qty {
+      background: #334155;
+      color: #fff;
+      border: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Display de Total Digital */
+    .total-display-box {
+      background: #020617;
+      border-top: 1px solid var(--border);
+      padding: 1.25rem;
+      text-align: right;
+    }
+    .total-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 0.2rem;
+    }
+    .total-value {
+      font-family: 'Chivo Mono', monospace;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #4ade80;
+    }
+
+    /* Pagamento & Finalização */
+    .checkout-actions {
+      padding: 1.25rem;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+    .btn-pay {
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 0.65rem 0.4rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-pay.active, .btn-pay:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+    .btn-finish-sale {
+      background: var(--green);
+      color: #ffffff;
+      border: none;
+      padding: 1.1rem;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 1.15rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: background 0.2s;
+    }
+    .btn-finish-sale:hover { background: var(--green-hover); }
+
+    /* Modal Comprovante */
+    .receipt-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .receipt-modal.open { display: flex; }
+    .receipt-paper {
+      background: #ffffff;
+      color: #000000;
+      width: 100%;
+      max-width: 380px;
+      padding: 2rem 1.5rem;
+      border-radius: 6px;
+      font-family: 'Chivo Mono', monospace;
+      font-size: 0.88rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .btn-new-sale {
+      width: 100%;
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      padding: 0.9rem;
+      margin-top: 1.5rem;
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 860px) {
+      .pos-container { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="hero-img"></div>
-      <div class="hero-body">
-        <h1>Mercado Pulse PDV</h1>
-        <p class="lead">Landing de produto para sistema de caixa e gestão de mercado. Estrutura comercial com foco em dores reais: fila, ruptura de estoque, divergência de caixa e falta de visão de margem.</p>
-        <div class="meta">
-          <span class="badge">🖥️ Frente de Caixa</span>
-          <span class="badge">📦 Estoque em Tempo Real</span>
-          <span class="badge">📊 Relatórios Inteligentes</span>
-        </div>
 
-        <nav class="tabs" aria-label="Seções">
-          <button class="tab-btn active" data-tab="visao">Visão Geral</button>
-          <button class="tab-btn" data-tab="modulos">Módulos</button>
-          <button class="tab-btn" data-tab="galeria">Interface</button>
-          <button class="tab-btn" data-tab="resultados">Resultados</button>
-          <button class="tab-btn" data-tab="faq">FAQ</button>
-        </nav>
+  <header class="pos-top">
+    <div class="pos-brand">
+      <i data-lucide="calculator" style="color: #60a5fa; width: 22px; height: 22px;"></i>
+      <span>MERCADINHO SÃO MATEUS • CAIXA 01</span>
+    </div>
+    <div class="pos-status">
+      <div><span class="status-dot"></span> Caixa Livre / Aberto</div>
+      <div id="clock-display">14:00:00</div>
+    </div>
+  </header>
 
-        <section class="panel active" id="visao">
-          <div class="grid">
-            <article class="card"><h3>⚡ Produtividade</h3><p>Fluxo de caixa otimizado com atalhos para operação de alta demanda.</p></article>
-            <article class="card"><h3>📊 Gestão</h3><p>Indicadores de venda e margem para tomada de decisão diária.</p></article>
-            <article class="card"><h3>📈 Escalabilidade</h3><p>Base pronta para multi-caixa e multi-loja.</p></article>
-          </div>
-        </section>
+  <main class="pos-container">
 
-        <section class="panel" id="modulos">
-          <div class="grid">
-            <article class="card"><h3>🖥️ PDV</h3><p>Venda com leitor, balança, impressão e fechamento por operador.</p></article>
-            <article class="card"><h3>📦 Estoque</h3><p>Entrada de nota, inventário, alertas de ruptura e curva ABC.</p></article>
-            <article class="card"><h3>💰 Financeiro</h3><p>Fluxo de caixa, contas e conciliação para reduzir perdas.</p></article>
-          </div>
-        </section>
+    <!-- Painel Esquerdo -->
+    <section class="left-panel">
+      <div class="search-box">
+        <i data-lucide="barcode" style="color: var(--text-dim); width: 24px; height: 24px;"></i>
+        <input type="text" class="search-input" id="barcode-input" placeholder="Digite o nome do produto ou clique nos botões rápidos..." onkeyup="handleSearch(event)">
+      </div>
 
-        <section class="panel" id="galeria">
-          <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80" alt="Checkout mercado" />
-            <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?auto=format&fit=crop&w=900&q=80" alt="Prateleiras de mercado" />
-            <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=900&q=80" alt="Equipe em operação" />
-          </div>
-        </section>
-
-        <section class="panel" id="resultados">
-          <div class="grid">
-            <article class="card"><span class="stat">−32%</span><h3>em Filas</h3><p>Mercados parceiros reduziram tempo médio de atendimento no caixa.</p></article>
-            <article class="card"><span class="stat">+18%</span><h3>de Margem</h3><p>Mais controle de compra e menos ruptura geraram ganho de margem.</p></article>
-            <article class="card"><span class="stat">−40%</span><h3>em Perdas</h3><p>Auditoria de estoque e rastreabilidade diminuíram perdas operacionais.</p></article>
-          </div>
-        </section>
-
-        <section class="panel" id="faq">
-          <div class="grid">
-            <article class="card"><h3>🎓 Treinamento</h3><p>Implantação guiada em 7 dias com suporte dedicado.</p></article>
-            <article class="card"><h3>🔌 Integrações</h3><p>Balança, impressora, leitor e TEF homologados.</p></article>
-            <article class="card"><h3>💬 Suporte</h3><p>Atendimento por WhatsApp e painel em horário comercial.</p></article>
-          </div>
-        </section>
-
-        <div class="cta">
-          <strong>Quer transformar seu mercado em operação de alta performance? 🚀</strong><br />
-          <a href="#">Agendar demonstração</a>
+      <div class="quick-grid">
+        <h3>Atalhos Rápidos de Venda</h3>
+        <div class="buttons-grid" id="quick-buttons">
+          <!-- Botões serão gerados via JS -->
         </div>
       </div>
     </section>
 
-    <footer class="footer">
-      <p class="footer-name">Felipe Junqueira Leite</p>
-      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
-      <div class="footer-badges">
-        <span class="cert">HTML5</span>
-        <span class="cert">CSS3</span>
-        <span class="cert">JavaScript</span>
-        <span class="cert">Mobile‑First</span>
-        <span class="cert">SEO</span>
-        <span class="cert">UX/UI</span>
+    <!-- Painel Direito: Cupom Fiscal Virtual -->
+    <section class="right-panel">
+      <div class="receipt-header">
+        <div class="receipt-title">CUPOM DE VENDA #0492</div>
+        <button onclick="clearCart()" style="background:transparent; border:none; color:#ef4444; font-size:0.85rem; font-weight:700; cursor:pointer;">
+          CANCELAR VENDA
+        </button>
       </div>
-      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
-    </footer>
+
+      <div class="receipt-items" id="receipt-list">
+        <div style="text-align: center; color: var(--text-dim); margin: auto;">
+          Nenhum item registrado ainda.<br>Passe o leitor ou clique nos botões.
+        </div>
+      </div>
+
+      <div class="total-display-box">
+        <div class="total-label">Total de Itens Registrados</div>
+        <div class="total-value" id="items-count-display">0 ITENS</div>
+      </div>
+
+      <div class="checkout-actions">
+        <div class="payment-methods">
+          <button class="btn-pay active" onclick="setPayment('DINHEIRO', this)">DINHEIRO</button>
+          <button class="btn-pay" onclick="setPayment('PIX', this)">PIX</button>
+          <button class="btn-pay" onclick="setPayment('DÉBITO', this)">DÉBITO</button>
+          <button class="btn-pay" onclick="setPayment('CRÉDITO', this)">CRÉDITO</button>
+        </div>
+
+        <button class="btn-finish-sale" onclick="finishSale()">
+          <i data-lucide="check-circle-2" style="width: 22px; height: 22px;"></i>
+          CONFIRMAR & FINALIZAR VENDA
+        </button>
+      </div>
+    </section>
+
   </main>
+
+  <!-- Modal Comprovante Fiscal -->
+  <div class="receipt-modal" id="modal-receipt">
+    <div class="receipt-paper">
+      <div style="text-align: center; border-bottom: 1px dashed #000; padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
+        <strong>MERCADINHO SÃO MATEUS</strong><br>
+        CNPJ: 12.345.678/0001-90<br>
+        São Paulo - SP<br>
+        --------------------------------<br>
+        EXTRATO DE VENDA AO CONSUMIDOR
+      </div>
+
+      <div id="printed-items-list" style="margin-bottom: 0.75rem;"></div>
+
+      <div style="border-top: 1px dashed #000; padding-top: 0.5rem; text-align: right;">
+        <strong id="printed-total">TOTAL: 0 ITENS</strong><br>
+        <span id="printed-payment" style="font-size: 0.8rem;">FORMA: DINHEIRO</span>
+      </div>
+
+      <div style="text-align: center; margin-top: 1rem; font-size: 0.75rem;">
+        Obrigado pela preferência!<br>Volte sempre!
+      </div>
+
+      <button class="btn-new-sale" onclick="closeReceiptModal()">
+        INICIAR NOVA VENDA (ESC)
+      </button>
+    </div>
+  </div>
+
   <script>
-    const tabs=[...document.querySelectorAll('.tab-btn')];
-    const panels=[...document.querySelectorAll('.panel')];
-    tabs.forEach(btn=>btn.addEventListener('click',()=>{
-      tabs.forEach(b=>b.classList.remove('active'));
-      panels.forEach(p=>p.classList.remove('active'));
+    lucide.createIcons();
+
+    // Relógio
+    setInterval(() => {
+      const now = new Date();
+      document.getElementById('clock-display').textContent = now.toLocaleTimeString('pt-BR');
+    }, 1000);
+
+    // Lista de Produtos Rápidos
+    const catalog = [
+      { name: 'Pão Francês 1kg', icon: 'croissant' },
+      { name: 'Leite Integral 1L', icon: 'milk' },
+      { name: 'Café Tradicional', icon: 'coffee' },
+      { name: 'Arroz Tipo 1 (5kg)', icon: 'package' },
+      { name: 'Feijão Carioca 1kg', icon: 'package' },
+      { name: 'Açúcar Refinado 1kg', icon: 'package' },
+      { name: 'Óleo de Soja 900ml', icon: 'droplet' },
+      { name: 'Refrigerante 2L', icon: 'cup-soda' },
+      { name: 'Dúzia de Ovos', icon: 'egg' },
+      { name: 'Detergente Líquido', icon: 'sparkles' },
+      { name: 'Sabão em Pó 1kg', icon: 'sparkles' },
+      { name: 'Biscoito Recheado', icon: 'cookie' }
+    ];
+
+    const quickBox = document.getElementById('quick-buttons');
+    catalog.forEach(p => {
+      const btn = document.createElement('button');
+      btn.className = 'quick-btn';
+      btn.innerHTML = `<i data-lucide="${p.icon}" style="width:24px; height:24px; color:#60a5fa;"></i><span class="quick-btn-name">${p.name}</span>`;
+      btn.onclick = () => addProduct(p.name);
+      quickBox.appendChild(btn);
+    });
+    lucide.createIcons();
+
+    // Carrinho
+    let cart = [];
+    let selectedPayment = 'DINHEIRO';
+
+    // Som de Bipe (Web Audio API)
+    function playBeep() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.08);
+      } catch (e) {}
+    }
+
+    function addProduct(name) {
+      playBeep();
+      const existing = cart.find(i => i.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, qty: 1 });
+      }
+      renderCart();
+    }
+
+    function changeQty(name, delta) {
+      const item = cart.find(i => i.name === name);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.name !== name);
+      }
+      renderCart();
+    }
+
+    function clearCart() {
+      if (cart.length === 0) return;
+      if (confirm('Deseja realmente cancelar a venda atual?')) {
+        cart = [];
+        renderCart();
+      }
+    }
+
+    function renderCart() {
+      const list = document.getElementById('receipt-list');
+      const countDisplay = document.getElementById('items-count-display');
+
+      const totalItems = cart.reduce((acc, i) => acc + i.qty, 0);
+      countDisplay.textContent = totalItems + (totalItems === 1 ? ' ITEM' : ' ITENS');
+
+      if (cart.length === 0) {
+        list.innerHTML = `<div style="text-align: center; color: var(--text-dim); margin: auto;">Nenhum item registrado ainda.<br>Passe o leitor ou clique nos botões.</div>`;
+        return;
+      }
+
+      list.innerHTML = cart.map((item, idx) => `
+        <div class="receipt-row">
+          <div class="item-left">
+            <span>#${String(idx + 1).padStart(2, '0')}</span>
+            <span>${item.name}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <button class="btn-qty" onclick="changeQty('${item.name}', -1)">-</button>
+            <span>x${item.qty}</span>
+            <button class="btn-qty" onclick="changeQty('${item.name}', 1)">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setPayment(method, btn) {
+      selectedPayment = method;
+      document.querySelectorAll('.btn-pay').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    }));
+    }
+
+    function handleSearch(e) {
+      if (e.key === 'Enter') {
+        const val = e.target.value.trim();
+        if (val) {
+          addProduct(val);
+          e.target.value = '';
+        }
+      }
+    }
+
+    function finishSale() {
+      if (cart.length === 0) {
+        alert('Nenhum produto foi registrado no caixa ainda!');
+        return;
+      }
+
+      const totalItems = cart.reduce((acc, i) => acc + i.qty, 0);
+      document.getElementById('printed-total').textContent = `TOTAL DE ITENS: ${totalItems}`;
+      document.getElementById('printed-payment').textContent = `FORMA DE PAGAMENTO: ${selectedPayment}`;
+
+      document.getElementById('printed-items-list').innerHTML = cart.map(i => `
+        <div style="display:flex; justify-content:space-between; margin-bottom: 0.2rem;">
+          <span>${i.name}</span>
+          <span>x${i.qty}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('modal-receipt').classList.add('open');
+    }
+
+    function closeReceiptModal() {
+      document.getElementById('modal-receipt').classList.remove('open');
+      cart = [];
+      renderCart();
+    }
   </script>
 </body>
 </html>

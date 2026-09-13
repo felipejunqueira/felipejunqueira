@@ -1,146 +1,588 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pereira &amp; Lemos | Advocacia Estratégica</title>
-  <meta name="description" content="Pereira & Lemos — escritório jurídico com foco em direito empresarial, civil e trabalhista. Atendimento presencial e remoto." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Junqueira & Associados | Advocacia & Consultoria Jurídica</title>
+  <meta name="description" content="Junqueira & Associados — Atuação jurídica de excelência em Direito Empresarial, Civil, Trabalhista e Imobiliário. Atendimento ágil e consultoria personalizada.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
-    :root{--ink:#111827;--muted:#374151;--line:#bfdbfe;--card:#fff;--brand:#1d4ed8;--brand2:#1e40af}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Manrope,sans-serif;color:var(--ink);background:linear-gradient(150deg,#dbeafe,#f8fafc);min-height:100vh}
-    .wrap{width:min(1120px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
-    .hero{background:#ffffffdb;border:1px solid #ffffffa6;border-radius:20px;overflow:hidden;box-shadow:0 18px 42px #0f172a2e}
-    .hero-img{height:200px;background:url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1600&q=80') center/cover}
-    @media(min-width:640px){.hero-img{height:280px}}
-    .hero-body{padding:1.2rem}
-    @media(min-width:640px){.hero-body{padding:1.4rem 1.8rem}}
-    h1{margin:0 0 .5rem;font:700 clamp(1.9rem,5vw,3rem) 'Libre Baskerville',serif;line-height:1.15}
-    .lead{color:var(--muted);max-width:76ch;line-height:1.65}
-    .meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
-    .badge{border:1px solid #93c5fd;background:#eff6ff;padding:.4rem .75rem;border-radius:999px;font-size:.82rem;font-weight:700}
-    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem}
-    .tab-btn{border:1px solid var(--line);background:#fff;padding:.5rem .9rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
-    .tab-btn:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
-    .tab-btn.active{background:var(--brand);color:#eff6ff;border-color:var(--brand)}
-    .panel{display:none;padding:1rem 0}
-    .panel.active{display:block;animation:fadeUp .28s ease}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    .grid{display:grid;grid-template-columns:1fr;gap:.8rem}
-    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;transition:.2s ease}
-    .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px #0f172a14}
-    .card h3{margin:0 0 .4rem;font-size:1rem;color:var(--brand)}
-    .card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
-    .gallery{display:grid;grid-template-columns:1fr;gap:.7rem}
-    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
-    .gallery img{width:100%;height:180px;object-fit:cover;border-radius:14px;border:1px solid var(--line);transition:.2s ease}
-    .gallery img:hover{transform:scale(1.03)}
-    .cta{background:linear-gradient(130deg,var(--brand),var(--brand2));color:#eff6ff;padding:1.2rem 1.4rem;border-radius:16px;margin-top:1.2rem}
-    .cta a{display:inline-block;margin-top:.5rem;background:#eff6ff;color:#1e3a8a;text-decoration:none;padding:.65rem 1.2rem;border-radius:999px;font-weight:800;font-size:.9rem;transition:.2s ease}
-    .cta a:hover{transform:translateY(-2px);box-shadow:0 6px 18px #0f172a33}
-    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#ffffffb0;border-radius:0 0 20px 20px}
-    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
-    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
-    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
-    .cert{background:var(--brand);color:#eff6ff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
-    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+    :root {
+      --bg-dark: #070d18;
+      --bg-card: #0e1726;
+      --gold: #c5a880;
+      --gold-light: #e6ca9f;
+      --text-white: #ffffff;
+      --text-slate: #cbd5e1;
+      --text-muted: #8896ab;
+      --border: rgba(197, 168, 128, 0.2);
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-slate);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .cinzel {
+      font-family: 'Cinzel', serif;
+      color: var(--text-white);
+      letter-spacing: 0.02em;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: #040810;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.6rem 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .top-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .top-bar-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(7, 13, 24, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+    }
+    .logo-main {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-white);
+      letter-spacing: 0.04em;
+    }
+    .logo-sub {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-slate);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .btn-consult-nav {
+      background: linear-gradient(135deg, var(--gold) 0%, #9a784d 100%);
+      color: #070d18;
+      border: none;
+      padding: 0.65rem 1.3rem;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: opacity 0.2s;
+    }
+    .btn-consult-nav:hover { opacity: 0.9; }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 5rem 1.5rem 4rem;
+      background: radial-gradient(circle at 75% 25%, rgba(197, 168, 128, 0.12), transparent 45%),
+                  linear-gradient(180deg, #070d18 0%, #0a1120 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .badge-oab {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(197, 168, 128, 0.12);
+      border: 1px solid var(--border);
+      color: var(--gold-light);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      margin-bottom: 1.25rem;
+      line-height: 1.15;
+    }
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-slate);
+      margin-bottom: 2rem;
+      line-height: 1.65;
+    }
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .metric-number {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .metric-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Formulário Hero Card */
+    .form-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+    .form-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+    .form-box p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-slate);
+      margin-bottom: 0.35rem;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: #070d18;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+      padding: 0.75rem 0.9rem;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .btn-submit-legal {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold) 0%, #9a784d 100%);
+      color: #070d18;
+      border: none;
+      padding: 0.95rem;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      transition: opacity 0.2s;
+    }
+    .btn-submit-legal:hover { opacity: 0.9; }
+
+    /* Áreas de Atuação */
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem;
+    }
+    .section-heading {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-heading h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .section-heading p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .area-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 2rem 1.75rem;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .area-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+    .area-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: rgba(197, 168, 128, 0.12);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .area-title {
+      font-size: 1.35rem;
+      margin-bottom: 0.6rem;
+    }
+    .area-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+    .area-link {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* FAQ */
+    .faq-section {
+      background: #050a14;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 4.5rem 1.5rem;
+    }
+    .faq-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+    .faq-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 1.25rem 1.5rem;
+      text-align: left;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .faq-answer {
+      padding: 0 1.5rem 1.25rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      display: none;
+    }
+    .faq-item.active .faq-answer { display: block; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+    /* Footer */
+    .legal-footer {
+      background: #040810;
+      padding: 3.5rem 1.5rem 2rem;
+      text-align: center;
+    }
+    .legal-footer p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="hero-img"></div>
-      <div class="hero-body">
-        <h1>Pereira &amp; Lemos</h1>
-        <p class="lead">Site institucional jurídico com narrativa estratégica, foco em autoridade e captação qualificada. O projeto apresenta áreas de atuação, método de trabalho e canais claros de primeiro contato.</p>
-        <div class="meta">
-          <span class="badge">⚖️ Direito Empresarial</span>
-          <span class="badge">📋 Contencioso Civil</span>
-          <span class="badge">🛡️ Consultoria Preventiva</span>
-        </div>
 
-        <nav class="tabs" aria-label="Seções">
-          <button class="tab-btn active" data-tab="visao">Visão Geral</button>
-          <button class="tab-btn" data-tab="areas">Áreas</button>
-          <button class="tab-btn" data-tab="galeria">Equipe</button>
-          <button class="tab-btn" data-tab="cases">Casos</button>
-          <button class="tab-btn" data-tab="faq">FAQ</button>
-        </nav>
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-item">
+        <i data-lucide="map-pin" style="width: 15px; height: 15px; color: var(--gold);"></i>
+        <span>Av. Paulista, 1200 - Bela Vista, São Paulo - SP</span>
+      </div>
+      <div class="top-bar-item">
+        <i data-lucide="phone" style="width: 15px; height: 15px; color: var(--gold);"></i>
+        <span>Plantão Jurídico: (11) 98390-9578</span>
+      </div>
+    </div>
+  </div>
 
-        <section class="panel active" id="visao">
-          <div class="grid">
-            <article class="card"><h3>🏛️ Autoridade</h3><p>Arquitetura de conteúdo voltada à credibilidade, com linguagem técnica acessível para decisores.</p></article>
-            <article class="card"><h3>🎯 Conversão</h3><p>Canal de pré-atendimento estruturado para filtrar demandas e ganhar produtividade.</p></article>
-            <article class="card"><h3>📡 Presença</h3><p>Base pronta para marketing de conteúdo jurídico e posicionamento regional.</p></article>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="logo-main">JUNQUEIRA</span>
+        <span class="logo-sub">& ASSOCIADOS ADVOCACIA</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#atuacao">Áreas de Atuação</a></li>
+        <li><a href="#sobre">Diferenciais</a></li>
+        <li><a href="#faq">Dúvidas Frequentes</a></li>
+      </ul>
+
+      <a href="https://wa.me/5511983909578?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta%20jurídica%20com%20a%20Junqueira%20&%20Associados" target="_blank" class="btn-consult-nav">
+        <i data-lucide="message-square" style="width: 16px; height: 16px;"></i>
+        Consulta Imediata
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="badge-oab">
+          <i data-lucide="shield-check" style="width: 16px; height: 16px;"></i>
+          Inscrição OAB/SP Regular • Atendimento Especializado
+        </span>
+        <h1 class="hero-title">Defesa Estratégica & Segurança Jurídica</h1>
+        <p class="hero-desc">
+          Atuamos na solução de litígios complexos e na consultoria preventiva para empresas e pessoas físicas, com rigor ético, agilidade e absoluto sigilo.
+        </p>
+
+        <div class="hero-metrics">
+          <div>
+            <div class="metric-number">15+</div>
+            <div class="metric-label">Anos de Prática Jurídica</div>
           </div>
-        </section>
-
-        <section class="panel" id="areas">
-          <div class="grid">
-            <article class="card"><h3>🏢 Empresarial</h3><p>Contratos, societário, governança e mitigação de risco operacional.</p></article>
-            <article class="card"><h3>📜 Civil</h3><p>Demandas indenizatórias, obrigacionais e conflitos contratuais complexos.</p></article>
-            <article class="card"><h3>👷 Trabalhista</h3><p>Defesa patronal, compliance trabalhista e estratégias de prevenção.</p></article>
+          <div>
+            <div class="metric-number">+1.400</div>
+            <div class="metric-label">Processos Concluídos</div>
           </div>
-        </section>
-
-        <section class="panel" id="galeria">
-          <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1453945619913-79ec89a82c51?auto=format&fit=crop&w=900&q=80" alt="Reunião jurídica" />
-            <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?auto=format&fit=crop&w=900&q=80" alt="Advogados em trabalho" />
-            <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=900&q=80" alt="Análise de processo" />
+          <div>
+            <div class="metric-number">98%</div>
+            <div class="metric-label">Acordos Favoráveis</div>
           </div>
-        </section>
-
-        <section class="panel" id="cases">
-          <div class="grid">
-            <article class="card"><h3>📉 Caso 1</h3><p>Redução de passivo trabalhista com revisão contratual e plano de ação em 90 dias.</p></article>
-            <article class="card"><h3>💰 Caso 2</h3><p>Recuperação de crédito empresarial por via extrajudicial e judicial coordenada.</p></article>
-            <article class="card"><h3>🔒 Caso 3</h3><p>Blindagem societária para expansão de operação com menor exposição jurídica.</p></article>
-          </div>
-        </section>
-
-        <section class="panel" id="faq">
-          <div class="grid">
-            <article class="card"><h3>📞 Primeiro Contato</h3><p>Avaliação inicial em até 24h com direcionamento técnico.</p></article>
-            <article class="card"><h3>💳 Honorários</h3><p>Modelos flexíveis conforme escopo: mensal, projeto ou success fee.</p></article>
-            <article class="card"><h3>🌐 Atendimento</h3><p>Presencial e remoto para empresas de todo o Brasil.</p></article>
-          </div>
-        </section>
-
-        <div class="cta">
-          <strong>Precisa de estratégia jurídica para crescer com segurança? ⚖️</strong><br />
-          <a href="#">Falar com o escritório</a>
         </div>
       </div>
-    </section>
 
-    <footer class="footer">
-      <p class="footer-name">Felipe Junqueira Leite</p>
-      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
-      <div class="footer-badges">
-        <span class="cert">HTML5</span>
-        <span class="cert">CSS3</span>
-        <span class="cert">JavaScript</span>
-        <span class="cert">Mobile‑First</span>
-        <span class="cert">SEO</span>
-        <span class="cert">UX/UI</span>
+      <!-- Formulário de Contato Direto -->
+      <div class="form-box">
+        <h3>Solicitar Análise de Caso</h3>
+        <p>Preencha os dados para iniciar o contato com nossa equipe jurídica.</p>
+
+        <form onsubmit="handleLegalSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Seu Nome Completo</label>
+            <input type="text" id="legal-name" class="form-input" placeholder="Ex: Carlos Eduardo" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Área de Interesse</label>
+            <select id="legal-area" class="form-select" required>
+              <option value="Direito Trabalhista">Direito Trabalhista & Previdenciário</option>
+              <option value="Direito Civil">Direito Civil & Contratos</option>
+              <option value="Direito Imobiliário">Direito Imobiliário & Propriedade</option>
+              <option value="Direito Empresarial">Direito Empresarial & Tributário</option>
+              <option value="Direito de Família">Direito de Família & Sucessões</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Breve resumo da situação</label>
+            <textarea id="legal-details" class="form-textarea" rows="3" placeholder="Descreva brevemente sua dúvida ou processo..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit-legal">
+            <i data-lucide="send" style="width: 17px; height: 17px;"></i>
+            Encaminhar para o Advogado
+          </button>
+        </form>
       </div>
-      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
-    </footer>
-  </main>
+    </div>
+  </section>
+
+  <!-- Áreas de Atuação -->
+  <section class="section-wrap" id="atuacao">
+    <div class="section-heading">
+      <h2>Áreas de Prática</h2>
+      <p>Consultoria consultiva e contenciosa especializada para cada necessidade jurídica.</p>
+    </div>
+
+    <div class="areas-grid">
+      <div class="area-card">
+        <div class="area-icon">
+          <i data-lucide="briefcase" style="width: 26px; height: 26px;"></i>
+        </div>
+        <h3 class="area-title">Direito Trabalhista</h3>
+        <p class="area-desc">Defesa patronal e assessoria ao trabalhador em rescisões complexas, assédio, horas extras e acordos sindicais.</p>
+        <a href="#contato" class="area-link">Consultar Especialista <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+      </div>
+
+      <div class="area-card">
+        <div class="area-icon">
+          <i data-lucide="scale" style="width: 26px; height: 26px;"></i>
+        </div>
+        <h3 class="area-title">Direito Civil & Contratos</h3>
+        <p class="area-desc">Elaboração de minutas contratuais robustas, cobrança de inadimplentes, indenizações e responsabilidade civil.</p>
+        <a href="#contato" class="area-link">Consultar Especialista <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+      </div>
+
+      <div class="area-card">
+        <div class="area-icon">
+          <i data-lucide="home" style="width: 26px; height: 26px;"></i>
+        </div>
+        <h3 class="area-title">Direito Imobiliário</h3>
+        <p class="area-desc">Assessoria em compra e venda de imóveis, usucapião, inventários, locações comerciais e regularização de escrituras.</p>
+        <a href="#contato" class="area-link">Consultar Especialista <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+      </div>
+
+      <div class="area-card">
+        <div class="area-icon">
+          <i data-lucide="landmark" style="width: 26px; height: 26px;"></i>
+        </div>
+        <h3 class="area-title">Direito Empresarial</h3>
+        <p class="area-desc">Planejamento societário, fusões, proteção patrimonial e defesa em autuações fiscais e tributárias.</p>
+        <a href="#contato" class="area-link">Consultar Especialista <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="faq-wrap">
+      <div class="section-heading">
+        <h2>Dúvidas Frequentes</h2>
+        <p>Respostas claras para as principais perguntas de nossos clientes.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-btn" type="button">
+          <span>Como funciona a primeira consulta de avaliação?</span>
+          <i data-lucide="chevron-down" class="faq-icon" style="width: 18px; height: 18px;"></i>
+        </button>
+        <div class="faq-answer">
+          Nossa equipe realiza uma triagem inicial para entender o caso, examinar os documentos preliminares e orientar sobre a viabilidade jurídica antes de qualquer contratação.
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-btn" type="button">
+          <span>O atendimento pode ser feito 100% online?</span>
+          <i data-lucide="chevron-down" class="faq-icon" style="width: 18px; height: 18px;"></i>
+        </button>
+        <div class="faq-answer">
+          Sim. Atendemos clientes de todo o país através de videoconferências seguras, assinatura digital de procurações e acompanhamento processual digital.
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-btn" type="button">
+          <span>Como sou informado sobre o andamento do meu processo?</span>
+          <i data-lucide="chevron-down" class="faq-icon" style="width: 18px; height: 18px;"></i>
+        </button>
+        <div class="faq-answer">
+          Você recebe relatórios periódicos em linguagem acessível e atualizações diretamente por WhatsApp e e-mail a cada nova movimentação relevante.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="legal-footer">
+    <div style="font-family: 'Cinzel', serif; font-size: 1.4rem; color: #ffffff; margin-bottom: 0.4rem;">
+      JUNQUEIRA & ASSOCIADOS
+    </div>
+    <p>Sociedade de Advogados • Registro OAB/SP nº 45.890</p>
+    <p style="margin-top: 1rem; font-size: 0.8rem; color: #64748b;">
+      © 2026 Junqueira & Associados. Todos os direitos reservados.
+    </p>
+  </footer>
+
   <script>
-    const tabs=[...document.querySelectorAll('.tab-btn')];
-    const panels=[...document.querySelectorAll('.panel')];
-    tabs.forEach(btn=>btn.addEventListener('click',()=>{
-      tabs.forEach(b=>b.classList.remove('active'));
-      panels.forEach(p=>p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    }));
+    lucide.createIcons();
+
+    function toggleFaq(item) {
+      item.classList.toggle('active');
+    }
+
+    function handleLegalSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('legal-name').value;
+      const area = document.getElementById('legal-area').value;
+      const details = document.getElementById('legal-details').value;
+
+      const msg = `Olá! Gostaria de uma avaliação jurídica com a Junqueira & Associados:%0A%0A• Nome: ${encodeURIComponent(name)}%0A• Área: ${encodeURIComponent(area)}%0A• Situação: ${encodeURIComponent(details)}`;
+      window.open(`https://wa.me/5511983909578?text=${msg}`, '_blank');
+    }
   </script>
 </body>
 </html>

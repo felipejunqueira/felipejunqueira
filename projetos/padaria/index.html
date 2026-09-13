@@ -1,146 +1,598 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Forno da Vila | Padaria Artesanal</title>
-  <meta name="description" content="Forno da Vila — padaria artesanal com delivery, encomendas e assinatura de café da manhã. Peça pelo WhatsApp!" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Bree+Serif&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forno D'Ouro | Panificação Artesanal & Cafeteria</title>
+  <meta name="description" content="Forno D'Ouro — Pães de fermentação natural de 48h, confeitaria fina, cafés especiais e encomendas com entrega rápida.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
-    :root{--ink:#292524;--muted:#57534e;--line:#fcd34d;--card:#fff;--brand:#b45309;--brand2:#d97706}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Manrope,sans-serif;color:var(--ink);background:linear-gradient(155deg,#fef9c3,#fff7ed);min-height:100vh}
-    .wrap{width:min(1120px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
-    .hero{background:#ffffffe0;border:1px solid #ffffffa8;border-radius:20px;overflow:hidden;box-shadow:0 16px 40px #78350f2a}
-    .hero-img{height:200px;background:url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80') center/cover}
-    @media(min-width:640px){.hero-img{height:280px}}
-    .hero-body{padding:1.2rem}
-    @media(min-width:640px){.hero-body{padding:1.4rem 1.8rem}}
-    h1{margin:0 0 .5rem;font:700 clamp(2rem,5vw,3rem) 'Bree Serif',serif;line-height:1.15}
-    .lead{color:var(--muted);max-width:76ch;line-height:1.65}
-    .meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
-    .badge{border:1px solid #f59e0b;background:#fffbeb;padding:.4rem .75rem;border-radius:999px;font-size:.82rem;font-weight:700}
-    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem}
-    .tab-btn{border:1px solid var(--line);background:#fff;padding:.5rem .9rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
-    .tab-btn:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
-    .tab-btn.active{background:var(--brand);color:#fffbeb;border-color:var(--brand)}
-    .panel{display:none;padding:1rem 0}
-    .panel.active{display:block;animation:fadeUp .28s ease}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    .grid{display:grid;grid-template-columns:1fr;gap:.8rem}
-    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;transition:.2s ease}
-    .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px #78350f18}
-    .card h3{margin:0 0 .4rem;font-size:1rem;color:var(--brand)}
-    .card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
-    .gallery{display:grid;grid-template-columns:1fr;gap:.7rem}
-    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
-    .gallery img{width:100%;height:180px;object-fit:cover;border-radius:14px;border:1px solid var(--line);transition:.2s ease}
-    .gallery img:hover{transform:scale(1.03)}
-    .cta{background:linear-gradient(130deg,var(--brand),var(--brand2));color:#fffbeb;padding:1.2rem 1.4rem;border-radius:16px;margin-top:1.2rem}
-    .cta a{display:inline-block;margin-top:.5rem;background:#fffbeb;color:#78350f;text-decoration:none;padding:.65rem 1.2rem;border-radius:999px;font-weight:800;font-size:.9rem;transition:.2s ease}
-    .cta a:hover{transform:translateY(-2px);box-shadow:0 6px 18px #78350f44}
-    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#ffffffb0;border-radius:0 0 20px 20px}
-    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
-    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
-    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
-    .cert{background:var(--brand);color:#fffbeb;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
-    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+    :root {
+      --bg: #fcf9f2;
+      --surface: #ffffff;
+      --amber: #b45309;
+      --amber-dark: #78350f;
+      --amber-light: #fef3c7;
+      --espresso: #27170c;
+      --text-muted: #6b7280;
+      --border: #e5e0d3;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--espresso);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+    }
+
+    /* Top Strip */
+    .fresh-strip {
+      background: var(--espresso);
+      color: #fef3c7;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    /* Header */
+    .bakery-nav {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .bakery-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--espresso);
+    }
+    .logo-text h1 {
+      font-size: 1.75rem;
+      line-height: 1;
+    }
+    .logo-text span {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--amber);
+      font-weight: 700;
+    }
+    .btn-cart-nav {
+      background: var(--amber);
+      color: #ffffff;
+      border: none;
+      padding: 0.65rem 1.2rem;
+      border-radius: 9999px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s;
+    }
+    .btn-cart-nav:hover { background: var(--amber-dark); }
+    .cart-pill {
+      background: #ffffff;
+      color: var(--amber-dark);
+      font-size: 0.75rem;
+      font-weight: 800;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Hero */
+    .hero-section {
+      max-width: 1200px;
+      margin: 1.5rem auto 3rem;
+      padding: 0 1.5rem;
+    }
+    .hero-card {
+      border-radius: 20px;
+      overflow: hidden;
+      min-height: 480px;
+      background: linear-gradient(to right, rgba(39, 23, 12, 0.92) 0%, rgba(39, 23, 12, 0.5) 60%, transparent 100%),
+                  url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80') center/cover;
+      display: flex;
+      align-items: center;
+      padding: 3.5rem;
+      color: #ffffff;
+    }
+    .hero-text-wrap {
+      max-width: 550px;
+    }
+    .hero-seal {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(254, 243, 199, 0.15);
+      border: 1px solid rgba(254, 243, 199, 0.3);
+      color: #fde68a;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+    .hero-card h2 {
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+      color: #ffffff;
+    }
+    .hero-card p {
+      font-size: 1.1rem;
+      color: #f3ede2;
+      margin-bottom: 2rem;
+    }
+    .btn-hero {
+      background: #f59e0b;
+      color: #27170c;
+      text-decoration: none;
+      font-weight: 800;
+      padding: 0.9rem 1.8rem;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn-hero:hover {
+      background: #d97706;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* Menu & Tabs */
+    .menu-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+    .menu-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .menu-header h2 {
+      font-size: 2.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .menu-header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+    .menu-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .tab-btn {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--espresso);
+      padding: 0.6rem 1.3rem;
+      border-radius: 9999px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { border-color: var(--amber); }
+    .tab-btn.active {
+      background: var(--amber);
+      color: #ffffff;
+      border-color: var(--amber);
+      box-shadow: 0 4px 12px rgba(180, 83, 9, 0.3);
+    }
+
+    /* Items Grid */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.75rem;
+    }
+    .item-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .item-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(39, 23, 12, 0.08);
+    }
+    .item-thumb {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .item-content {
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .item-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+    .item-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+    .btn-add-item {
+      width: 100%;
+      background: var(--amber-light);
+      color: var(--amber-dark);
+      border: 1px solid #fde68a;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+    .btn-add-item:hover {
+      background: var(--amber);
+      color: #ffffff;
+      border-color: var(--amber);
+    }
+
+    /* Modal Carrinho Drawer */
+    .cart-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      display: none;
+      justify-content: flex-end;
+    }
+    .cart-drawer-backdrop.open { display: flex; }
+    .cart-drawer {
+      background: #ffffff;
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+    }
+    .cart-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    .cart-list {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .cart-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f4f4f5;
+      padding-bottom: 0.6rem;
+    }
+    .cart-item-name { font-weight: 600; font-size: 0.95rem; }
+    .btn-del-item {
+      background: transparent;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .btn-whatsapp-order {
+      width: 100%;
+      background: #16a34a;
+      color: #ffffff;
+      border: none;
+      padding: 1rem;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      transition: background 0.2s;
+    }
+    .btn-whatsapp-order:hover { background: #15803d; }
+
+    /* Footer */
+    .bakery-footer {
+      background: var(--espresso);
+      color: #fef3c7;
+      text-align: center;
+      padding: 3.5rem 1.5rem 2rem;
+    }
+    .bakery-footer h3 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .bakery-footer p {
+      color: #d1c7b7;
+      font-size: 0.95rem;
+    }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="hero-img"></div>
-      <div class="hero-body">
-        <h1>Forno da Vila</h1>
-        <p class="lead">Página comercial para padaria artesanal com foco em pedidos recorrentes, encomendas para eventos e assinatura de café da manhã. O site apresenta produtos em destaque, prova social e chamada direta para pedido.</p>
-        <div class="meta">
-          <span class="badge">🛵 Delivery</span>
-          <span class="badge">🎂 Encomendas</span>
-          <span class="badge">☕ Assinatura Semanal</span>
+
+  <div class="fresh-strip">
+    <i data-lucide="flame" style="width: 16px; height: 16px; color: #f59e0b;"></i>
+    <span>Fornada fresca saindo a cada 30 minutos • Pedidos pelo WhatsApp com entrega local</span>
+  </div>
+
+  <header class="bakery-nav">
+    <div class="nav-inner">
+      <a href="#" class="bakery-logo">
+        <i data-lucide="croissant" style="width: 32px; height: 32px; color: var(--amber);"></i>
+        <div class="logo-text">
+          <h1>Forno D'Ouro</h1>
+          <span>PANIFICAÇÃO ARTESANAL & CAFÉ</span>
         </div>
+      </a>
 
-        <nav class="tabs" aria-label="Seções">
-          <button class="tab-btn active" data-tab="visao">Visão Geral</button>
-          <button class="tab-btn" data-tab="menu">Menu</button>
-          <button class="tab-btn" data-tab="galeria">Galeria</button>
-          <button class="tab-btn" data-tab="clientes">Clientes</button>
-          <button class="tab-btn" data-tab="faq">FAQ</button>
-        </nav>
+      <button class="btn-cart-nav" onclick="toggleCart()">
+        <i data-lucide="shopping-basket" style="width: 18px; height: 18px;"></i>
+        <span>Sua Cesta</span>
+        <span class="cart-pill" id="cart-counter">0</span>
+      </button>
+    </div>
+  </header>
 
-        <section class="panel active" id="visao">
-          <div class="grid">
-            <article class="card"><h3>😍 Experiência</h3><p>Narrativa visual de produto fresco para gerar desejo imediato no usuário.</p></article>
-            <article class="card"><h3>⚙️ Operação</h3><p>Fluxo rápido de atendimento para reduzir filas e aumentar pedidos por mensagem.</p></article>
-            <article class="card"><h3>💰 Receita</h3><p>Seções dedicadas a combos e kits para elevar ticket médio.</p></article>
-          </div>
-        </section>
+  <section class="hero-section">
+    <div class="hero-card">
+      <div class="hero-text-wrap">
+        <span class="hero-seal">
+          <i data-lucide="award" style="width: 14px; height: 14px;"></i>
+          Fermentação Natural de 48 Horas
+        </span>
+        <h2>O Pão de Verdade, Feito Sem Pressa</h2>
+        <p>Farinhas selecionadas, casca crocante dourada e miolo macio e aerado. Saboreie o verdadeiro pão artesanal feito com afeto todos os dias.</p>
+        <a href="#cardapio" class="btn-hero">
+          <i data-lucide="coffee" style="width: 18px; height: 18px;"></i>
+          Ver Nosso Cardápio
+        </a>
+      </div>
+    </div>
+  </section>
 
-        <section class="panel" id="menu">
-          <div class="grid">
-            <article class="card"><h3>🍞 Pães da Casa</h3><p>Fermentação natural, integral, australiano e multigrãos.</p></article>
-            <article class="card"><h3>🎂 Confeitaria</h3><p>Bolos artesanais, tortas sazonais e sobremesas de vitrine.</p></article>
-            <article class="card"><h3>🥐 Salgados</h3><p>Esfihas, folhados e combos de café para retirada ou entrega.</p></article>
-          </div>
-        </section>
+  <main class="menu-wrap" id="cardapio">
+    <div class="menu-header">
+      <h2>Nosso Cardápio Artesanal</h2>
+      <p>Escolha os itens que deseja encomendar e envie direto para o nosso balcão.</p>
+    </div>
 
-        <section class="panel" id="galeria">
-          <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&w=900&q=80" alt="Pães artesanais" />
-            <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=900&q=80" alt="Bolo caseiro" />
-            <img src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?auto=format&fit=crop&w=900&q=80" alt="Cesta de café" />
-          </div>
-        </section>
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="filterBakery('all', this)">Todos os Sabores</button>
+      <button class="tab-btn" onclick="filterBakery('paes', this)">Pães de Fermentação</button>
+      <button class="tab-btn" onclick="filterBakery('doces', this)">Confeitaria & Bolos</button>
+      <button class="tab-btn" onclick="filterBakery('cafes', this)">Cafés Especiais</button>
+    </div>
 
-        <section class="panel" id="clientes">
-          <div class="grid">
-            <article class="card"><p>⭐⭐⭐⭐⭐ "A página aumentou muito os pedidos no horário de pico."</p><strong>— Lucas, proprietário</strong></article>
-            <article class="card"><p>⭐⭐⭐⭐⭐ "Agora eu escolho tudo no celular e só retiro na loja."</p><strong>— Ana, cliente</strong></article>
-            <article class="card"><p>⭐⭐⭐⭐⭐ "As fotos venderam por si só. Tudo muito apetitoso!"</p><strong>— Marina, cliente</strong></article>
-          </div>
-        </section>
+    <div class="items-grid" id="bakery-items">
 
-        <section class="panel" id="faq">
-          <div class="grid">
-            <article class="card"><h3>🛵 Entrega</h3><p>Entregamos em até 7km com janelas de 30 minutos.</p></article>
-            <article class="card"><h3>📅 Encomendas</h3><p>Pedidos para evento com mínimo de 48h de antecedência.</p></article>
-            <article class="card"><h3>💳 Pagamento</h3><p>Pix, cartão e dinheiro na entrega.</p></article>
-          </div>
-        </section>
-
-        <div class="cta">
-          <strong>Quer sua padaria vendendo o dia todo, inclusive fora do balcão? 🥖</strong><br />
-          <a href="#">Pedir consultoria</a>
+      <div class="item-card" data-cat="paes">
+        <img src="https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=800&q=80" alt="Pão Sourdough Rústico" class="item-thumb">
+        <div class="item-content">
+          <h3 class="item-title">Sourdough Rústico Tradicional</h3>
+          <p class="item-desc">Massa de fermentação lenta com levain selvagem de 48h, crosta caramelizada e miolo incrivelmente aromático.</p>
+          <button class="btn-add-item" onclick="addItemToBasket('Sourdough Rústico Tradicional')">
+            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
+          </button>
         </div>
       </div>
-    </section>
 
-    <footer class="footer">
-      <p class="footer-name">Felipe Junqueira Leite</p>
-      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
-      <div class="footer-badges">
-        <span class="cert">HTML5</span>
-        <span class="cert">CSS3</span>
-        <span class="cert">JavaScript</span>
-        <span class="cert">Mobile‑First</span>
-        <span class="cert">SEO</span>
-        <span class="cert">UX/UI</span>
+      <div class="item-card" data-cat="paes">
+        <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=800&q=80" alt="Pão de Queijo Canastra" class="item-thumb">
+        <div class="item-content">
+          <h3 class="item-title">Pão de Queijo da Canastra</h3>
+          <p class="item-desc">Feito artesanalmente com polvilho caipira e queijo curado da Serra da Canastra. Casquinha dourada e puxa-puxa.</p>
+          <button class="btn-add-item" onclick="addItemToBasket('Porção de Pão de Queijo da Canastra')">
+            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
+          </button>
+        </div>
       </div>
-      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
-    </footer>
+
+      <div class="item-card" data-cat="doces">
+        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80" alt="Croissant Francês de Amêndoas" class="item-thumb">
+        <div class="item-content">
+          <h3 class="item-title">Croissant Francês com Amêndoas</h3>
+          <p class="item-desc">Folhado tradicional com manteiga francesa, recheio de creme de amêndoas suave e lascas crocantes tostadas.</p>
+          <button class="btn-add-item" onclick="addItemToBasket('Croissant Francês com Amêndoas')">
+            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
+          </button>
+        </div>
+      </div>
+
+      <div class="item-card" data-cat="doces">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" alt="Bolo Caseiro de Cenoura" class="item-thumb">
+        <div class="item-content">
+          <h3 class="item-title">Bolo de Cenoura com Calda Quente</h3>
+          <p class="item-desc">Receita tradicional fofíssima coberta com generosa cascata de brigadeiro artesanal meio amargo 50% cacau.</p>
+          <button class="btn-add-item" onclick="addItemToBasket('Bolo de Cenoura com Calda de Chocolate')">
+            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
+          </button>
+        </div>
+      </div>
+
+      <div class="item-card" data-cat="cafes">
+        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" alt="Cappuccino Italiano Cremoso" class="item-thumb">
+        <div class="item-content">
+          <h3 class="item-title">Cappuccino Cremoso Especial</h3>
+          <p class="item-desc">Grãos 100% arábica do Sul de Minas, leite vaporizado aveludado e finalização com cacau belga polvilhado.</p>
+          <button class="btn-add-item" onclick="addItemToBasket('Cappuccino Cremoso Especial')">
+            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
+          </button>
+        </div>
+      </div>
+
+      <div class="item-card" data-cat="paes">
+        <img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=800&q=80" alt="Focaccia de Alecrim e Tomate Confit" class="item-thumb">
+        <div class="item-content">
+          <h3 class="item-title">Focaccia Alecrim & Tomate Confit</h3>
+          <p class="item-desc">Massa aerada e dourada regada com azeite extravirgem de oliva, flor de sal, alecrim fresco e tomatinhos assados.</p>
+          <button class="btn-add-item" onclick="addItemToBasket('Focaccia Alecrim & Tomate Confit')">
+            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
+          </button>
+        </div>
+      </div>
+
+    </div>
   </main>
+
+  <!-- Drawer Cesta -->
+  <div class="cart-drawer-backdrop" id="cart-drawer" onclick="handleDrawerClick(event)">
+    <div class="cart-drawer">
+      <div class="cart-head">
+        <h3 class="serif" style="font-size: 1.6rem;">Sua Cesta de Pães</h3>
+        <button onclick="toggleCart()" style="background:transparent; border:none; cursor:pointer; color:var(--text-muted);">
+          <i data-lucide="x" style="width: 22px; height: 22px;"></i>
+        </button>
+      </div>
+
+      <div class="cart-list" id="cart-list-body">
+        <p style="color: var(--text-muted); text-align:center; margin: auto;">Sua cesta está vazia.</p>
+      </div>
+
+      <button class="btn-whatsapp-order" onclick="sendWhatsAppOrder()">
+        <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
+        Enviar Encomenda no WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <footer class="bakery-footer">
+    <h3>Forno D'Ouro</h3>
+    <p>Rua das Amendoeiras, 340 • Vila Mariana, São Paulo - SP</p>
+    <p style="margin-top: 0.5rem;">Aberto de Terça a Domingo das 06:30 às 20:00</p>
+    <div style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.6;">
+      © 2026 Forno D'Ouro • Tradição e sabor artesanal
+    </div>
+  </footer>
+
   <script>
-    const tabs=[...document.querySelectorAll('.tab-btn')];
-    const panels=[...document.querySelectorAll('.panel')];
-    tabs.forEach(btn=>btn.addEventListener('click',()=>{
-      tabs.forEach(b=>b.classList.remove('active'));
-      panels.forEach(p=>p.classList.remove('active'));
+    lucide.createIcons();
+
+    function filterBakery(cat, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    }));
+      const cards = document.querySelectorAll('#bakery-items .item-card');
+      cards.forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    let basket = [];
+
+    function toggleCart() {
+      document.getElementById('cart-drawer').classList.toggle('open');
+    }
+
+    function handleDrawerClick(e) {
+      if (e.target.id === 'cart-drawer') toggleCart();
+    }
+
+    function addItemToBasket(name) {
+      basket.push(name);
+      renderBasket();
+      toggleCart();
+    }
+
+    function removeBasketItem(idx) {
+      basket.splice(idx, 1);
+      renderBasket();
+    }
+
+    function renderBasket() {
+      document.getElementById('cart-counter').textContent = basket.length;
+      const list = document.getElementById('cart-list-body');
+      if (basket.length === 0) {
+        list.innerHTML = '<p style="color: var(--text-muted); text-align:center; margin: auto;">Sua cesta está vazia.</p>';
+        return;
+      }
+      list.innerHTML = basket.map((item, i) => `
+        <div class="cart-item-row">
+          <span class="cart-item-name">${item}</span>
+          <button class="btn-del-item" onclick="removeBasketItem(${i})">Remover</button>
+        </div>
+      `).join('');
+    }
+
+    function sendWhatsAppOrder() {
+      if (basket.length === 0) {
+        alert('Por favor, adicione itens à sua cesta antes de enviar!');
+        return;
+      }
+      const itens = basket.map(i => `• ${i}`).join('%0A');
+      const msg = `Olá Forno D'Ouro! Gostaria de fazer uma encomenda:%0A%0A${itens}%0A%0APoderiam confirmar se está disponível para entrega?`;
+      window.open(`https://wa.me/5511983909578?text=${msg}`, '_blank');
+    }
   </script>
 </body>
 </html>

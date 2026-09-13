@@ -55,7 +55,7 @@ Todos os projetos abaixo possuem versões funcionais e acessíveis diretamente p
 | Projeto | Descrição | Demonstração |
 | :--- | :--- | :---: |
 | **Link Bio Barbearia & Salão** | Central de agendamento online, tabela de serviços e localização | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/link-bio-barbearia/) |
-| **Fernanda Fonoaudiologia** | Plataforma profissional para clínica de fonoaudiologia com agendamento | [Ver Repositório](https://github.com/felipejunqueira/SiteFernandaFono) |
+| **Fernanda Fonoaudiologia** | Plataforma profissional para clínica de fonoaudiologia com agendamento | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/fernanda-fono/) |
 | **Padaria & Cafeteria** | Cardápio digital interativo para confeitarias e panificação | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/padaria/) |
 | **Portal Advocacia** | Apresentação institucional sóbria para escritórios jurídicos | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/advocacia/) |
 | **Portal Saúde & Consultórios** | Página para profissionais de saúde com facilidade de contato | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/profissional-saude/) |

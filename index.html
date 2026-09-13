@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Felipe Junqueira - Sites e aplicativos simples e fáceis para o seu comércio.">
-  <title>Felipe Junqueira | Sites & Aplicativos Simples</title>
+  <title>Felipe Junqueira | Sites & Aplicativos Comerciais</title>
 
   <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,7 +53,6 @@
       font-size: 17px;
     }
 
-    /* Títulos Grandes e Claros */
     h1, h2, h3, h4 {
       font-family: 'Outfit', sans-serif;
       font-weight: 700;
@@ -68,7 +67,7 @@
       padding: 0 1.25rem;
     }
 
-    /* Cartão Principal de Apresentação (Aberto, limpo e acolhedor) */
+    /* Cartão Principal de Apresentação */
     .hero-box {
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -91,7 +90,8 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      object-fit: cover; object-position: center 20%;
+      object-fit: cover;
+      object-position: center 20%;
       border: 4px solid var(--primary);
       box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
       display: block;
@@ -132,7 +132,7 @@
       line-height: 1.6;
     }
 
-    /* Botões Grandes e Fáceis de Clicar */
+    /* Botões Grandes */
     .btn-group {
       display: flex;
       flex-wrap: wrap;
@@ -203,7 +203,7 @@
       color: var(--primary-light);
     }
 
-    /* Seção "O que eu faço" - Super Simples */
+    /* Seção "O que eu faço" */
     .section-box {
       margin-bottom: 3.5rem;
     }
@@ -261,7 +261,7 @@
       line-height: 1.55;
     }
 
-    /* Catálogo de Projetos (Fácil de navegar) */
+    /* Catálogo de Projetos */
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
@@ -373,7 +373,7 @@
       background: var(--primary-hover);
     }
 
-    /* Modal de Demonstração (Simples, com botão gigante de fechar) */
+    /* Modal de Demonstração */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -394,15 +394,15 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: var(--radius-lg);
       width: 100%;
-      max-width: 900px;
-      height: 85vh;
+      max-width: 950px;
+      height: 88vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
     }
 
     .modal-top {
-      padding: 1rem 1.25rem;
+      padding: 0.9rem 1.25rem;
       background: #1e293b;
       display: flex;
       align-items: center;
@@ -418,13 +418,34 @@
       gap: 0.5rem;
     }
 
+    .modal-controls-group {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .btn-tab-link {
+      background: rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
     .btn-close-modal {
       background: #ef4444;
       color: #ffffff;
       border: none;
-      padding: 0.5rem 1.1rem;
+      padding: 0.45rem 1rem;
       border-radius: var(--radius-sm);
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
@@ -443,7 +464,7 @@
       background: #ffffff;
     }
 
-    /* Jogo da Velha (Grande, intuitivo) */
+    /* Jogo da Velha */
     .game-box {
       background: var(--bg-card);
       border: 1px solid var(--border-soft);
@@ -516,7 +537,7 @@
       margin-bottom: 1.75rem;
     }
 
-    /* Botão Flutuante de WhatsApp */
+    /* Botão Flutuante */
     .float-wa {
       position: fixed;
       bottom: 1.5rem;
@@ -593,7 +614,7 @@
       </div>
     </header>
 
-    <!-- O QUE POSSO FAZER (3 PONTOS CLAROS E DIRETOS) -->
+    <!-- O QUE POSSO FAZER -->
     <section class="section-box">
       <div class="section-intro">
         <h2>Como Posso Te Ajudar?</h2>
@@ -627,14 +648,14 @@
       </div>
     </section>
 
-    <!-- EXEMPLOS PRÁTICOS (SIMPLES DE ESCOLHER E TESTAR) -->
+    <!-- EXEMPLOS PRÁTICOS -->
     <section id="exemplos" class="section-box">
       <div class="section-intro">
         <h2>Exemplos de Projetos Prontos</h2>
         <p>Escolha um modelo abaixo e clique no botão para testar como ele funciona na tela.</p>
       </div>
 
-      <!-- Abas de Filtro Simples -->
+      <!-- Abas de Filtro -->
       <div class="filter-bar">
         <button class="filter-tab active" onclick="filterCategory('all', this)">
           <i data-lucide="layout-grid" style="width: 17px; height: 17px;"></i> Todos os Modelos
@@ -656,39 +677,103 @@
       <!-- Grade dos Projetos -->
       <div class="project-grid" id="project-list">
 
-        <!-- 1. Catálogo Lanchonete -->
+        <!-- 1. Site Dra. Fernanda Roberta (Fonoaudiologia) -->
+        <div class="project-item" data-cat="servicos">
+          <div>
+            <div class="item-header">
+              <div class="item-icon" style="background: rgba(124, 58, 237, 0.15); color: #c084fc;">
+                <i data-lucide="activity" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Dra. Fernanda Fonoaudiologia</h3>
+            </div>
+            <p class="item-desc">Site completo para clínica de fonoaudiologia com fotos do consultório, tratamentos e agendamento de consultas.</p>
+          </div>
+          <button class="btn-test-card" onclick="openPreview('Dra. Fernanda Roberta | Fonoaudiologia', './projetos/fernanda-fono/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
+        </div>
+
+        <!-- 2. Loja de Roupas & Boutique (Maison Nilo) -->
+        <div class="project-item" data-cat="comercio">
+          <div>
+            <div class="item-header">
+              <div class="item-icon" style="background: rgba(154, 52, 18, 0.15); color: #fb923c;">
+                <i data-lucide="tag" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Maison Nilo Boutique</h3>
+            </div>
+            <p class="item-desc">Vitrine de alta moda com lookbook, seleção de tamanhos, sacola interativa e envio do pedido no WhatsApp.</p>
+          </div>
+          <button class="btn-test-card" onclick="openPreview('Maison Nilo | Boutique de Moda', './projetos/loja-roupas/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
+        </div>
+
+        <!-- 3. Portal de Advocacia (Junqueira & Associados) -->
+        <div class="project-item" data-cat="servicos">
+          <div>
+            <div class="item-header">
+              <div class="item-icon" style="background: rgba(197, 168, 128, 0.15); color: #e6ca9f;">
+                <i data-lucide="scale" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Junqueira & Associados Advocacia</h3>
+            </div>
+            <p class="item-desc">Portal jurídico de alto padrão com áreas de atuação, perguntas frequentes e formulário de consulta imediata.</p>
+          </div>
+          <button class="btn-test-card" onclick="openPreview('Junqueira & Associados Advocacia', './projetos/advocacia/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
+        </div>
+
+        <!-- 4. Padaria & Cafeteria Artesanal (Forno D'Ouro) -->
+        <div class="project-item" data-cat="comercio">
+          <div>
+            <div class="item-header">
+              <div class="item-icon" style="background: rgba(180, 83, 9, 0.15); color: #f59e0b;">
+                <i data-lucide="coffee" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>Padaria Artesanal Forno D'Ouro</h3>
+            </div>
+            <p class="item-desc">Cardápio ilustrado de pães de fermentação natural, bolos e cafés com montagem de cesta e pedidos para entrega.</p>
+          </div>
+          <button class="btn-test-card" onclick="openPreview('Forno D\'Ouro | Panificação & Café', './projetos/padaria/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
+        </div>
+
+        <!-- 5. Frente de Caixa & PDV (Mercadinho São Mateus) -->
+        <div class="project-item" data-cat="comercio">
+          <div>
+            <div class="item-header">
+              <div class="item-icon" style="background: rgba(37, 99, 235, 0.15); color: #60a5fa;">
+                <i data-lucide="calculator" style="width: 24px; height: 24px;"></i>
+              </div>
+              <h3>PDV Frente de Caixa Mercadinho</h3>
+            </div>
+            <p class="item-desc">Sistema realista de caixa de supermercado: registro de compras com bipe sonoro, formas de pagamento e emissão de cupom.</p>
+          </div>
+          <button class="btn-test-card" onclick="openPreview('PDV Caixa Express | Sistema de Caixa', './projetos/pdv-mercado/')">
+            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
+          </button>
+        </div>
+
+        <!-- 6. Catálogo Burger Express -->
         <div class="project-item" data-cat="comercio">
           <div>
             <div class="item-header">
               <div class="item-icon">
                 <i data-lucide="utensils" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Cardápio de Lanches</h3>
+              <h3>Cardápio Burger Express</h3>
             </div>
-            <p class="item-desc">O cliente escolhe os lanches e bebidas e manda o pedido prontinho direto para o seu WhatsApp.</p>
+            <p class="item-desc">O cliente escolhe os lanches e bebidas e manda o pedido prontinho direto para o WhatsApp da lanchonete.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Cardápio de Lanches', './projetos/catalogo-pedidos/')">
+          <button class="btn-test-card" onclick="openPreview('Cardápio Burger Express', './projetos/catalogo-pedidos/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
 
-        <!-- 2. Loja de Roupas -->
-        <div class="project-item" data-cat="comercio">
-          <div>
-            <div class="item-header">
-              <div class="item-icon">
-                <i data-lucide="tag" style="width: 24px; height: 24px;"></i>
-              </div>
-              <h3>Vitrine de Roupas</h3>
-            </div>
-            <p class="item-desc">Vitrine online com fotos das peças, cores e tamanhos para lojas de moda e roupas.</p>
-          </div>
-          <button class="btn-test-card" onclick="openPreview('Vitrine de Roupas', './projetos/loja-roupas/')">
-            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
-          </button>
-        </div>
-
-        <!-- 3. Barbearia e Salão -->
+        <!-- 7. Barbearia e Salão -->
         <div class="project-item" data-cat="servicos">
           <div>
             <div class="item-header">
@@ -704,23 +789,7 @@
           </button>
         </div>
 
-        <!-- 4. Fonoaudiologia e Saúde -->
-        <div class="project-item" data-cat="servicos">
-          <div>
-            <div class="item-header">
-              <div class="item-icon">
-                <i data-lucide="heart" style="width: 24px; height: 24px;"></i>
-              </div>
-              <h3>Clínica & Saúde</h3>
-            </div>
-            <p class="item-desc">Site profissional para consultórios, médicos, dentistas e terapeutas com agendamento de consultas.</p>
-          </div>
-          <a href="https://github.com/felipejunqueira/SiteFernandaFono" target="_blank" class="btn-test-card">
-            <i data-lucide="external-link" style="width: 18px; height: 18px;"></i> Ver Projeto
-          </a>
-        </div>
-
-        <!-- 5. Site da Igreja IASD -->
+        <!-- 8. Site da Igreja IASD -->
         <div class="project-item" data-cat="institucional">
           <div>
             <div class="item-header">
@@ -732,11 +801,11 @@
             <p class="item-desc">Portal completo com história de 60 anos, transmissão de rádio, bíblia e horários de cultos.</p>
           </div>
           <a href="https://github.com/felipejunqueira/iasd-sao-mateus" target="_blank" class="btn-test-card">
-            <i data-lucide="external-link" style="width: 18px; height: 18px;"></i> Ver Projeto
+            <i data-lucide="external-link" style="width: 18px; height: 18px;"></i> Ver Projeto Oficial
           </a>
         </div>
 
-        <!-- 6. Cartão Fidelidade -->
+        <!-- 9. Cartão Fidelidade -->
         <div class="project-item" data-cat="comercio">
           <div>
             <div class="item-header">
@@ -748,54 +817,6 @@
             <p class="item-desc">Substitui o papelzinho por um cartão no celular do cliente para juntar selos e ganhar prêmios.</p>
           </div>
           <button class="btn-test-card" onclick="openPreview('Cartão Fidelidade', './projetos/sistema-fidelidade/')">
-            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
-          </button>
-        </div>
-
-        <!-- 7. Caixa de Mercadinho -->
-        <div class="project-item" data-cat="comercio">
-          <div>
-            <div class="item-header">
-              <div class="item-icon">
-                <i data-lucide="calculator" style="width: 24px; height: 24px;"></i>
-              </div>
-              <h3>Caixa de Mercadinho</h3>
-            </div>
-            <p class="item-desc">Sistema simples para registrar produtos no caixa, somar os totais e emitir o comprovante.</p>
-          </div>
-          <button class="btn-test-card" onclick="openPreview('Caixa de Mercadinho', './projetos/pdv-mercado/')">
-            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
-          </button>
-        </div>
-
-        <!-- 8. Padaria e Café -->
-        <div class="project-item" data-cat="comercio">
-          <div>
-            <div class="item-header">
-              <div class="item-icon">
-                <i data-lucide="coffee" style="width: 24px; height: 24px;"></i>
-              </div>
-              <h3>Padaria & Confeitaria</h3>
-            </div>
-            <p class="item-desc">Cardápio ilustrado para padarias exibirem pães, bolos e cafés com pedidos rápidos.</p>
-          </div>
-          <button class="btn-test-card" onclick="openPreview('Padaria e Confeitaria', './projetos/padaria/')">
-            <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
-          </button>
-        </div>
-
-        <!-- 9. Portal de Advocacia -->
-        <div class="project-item" data-cat="servicos">
-          <div>
-            <div class="item-header">
-              <div class="item-icon">
-                <i data-lucide="scale" style="width: 24px; height: 24px;"></i>
-              </div>
-              <h3>Portal de Advocacia</h3>
-            </div>
-            <p class="item-desc">Site sério e respeitável para advogados e escritórios receberem novos clientes.</p>
-          </div>
-          <button class="btn-test-card" onclick="openPreview('Portal de Advocacia', './projetos/advocacia/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
@@ -855,9 +876,14 @@
           <i data-lucide="eye" style="color: var(--primary-light);"></i>
           <span>Exemplo de Projeto</span>
         </div>
-        <button class="btn-close-modal" onclick="closePreview()">
-          <i data-lucide="x" style="width: 18px; height: 18px;"></i> Fechar Janela
-        </button>
+        <div class="modal-controls-group">
+          <a href="#" target="_blank" id="modal-newtab-btn" class="btn-tab-link">
+            <i data-lucide="external-link" style="width: 15px; height: 15px;"></i> Abrir em Nova Aba
+          </a>
+          <button class="btn-close-modal" onclick="closePreview()">
+            <i data-lucide="x" style="width: 18px; height: 18px;"></i> Fechar Janela
+          </button>
+        </div>
       </div>
       <iframe src="" class="modal-frame" id="demo-iframe"></iframe>
     </div>
@@ -887,12 +913,10 @@
     <i data-lucide="message-circle" style="width: 32px; height: 32px;"></i>
   </a>
 
-  <!-- SCRIPTS LIMPOS E SIMPLES -->
+  <!-- SCRIPTS -->
   <script>
-    // Inicia ícones
     lucide.createIcons();
 
-    // Filtro de Categorias
     function filterCategory(cat, button) {
       document.querySelectorAll('.filter-tab').forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
@@ -907,10 +931,10 @@
       });
     }
 
-    // Modal de Teste
     function openPreview(name, url) {
       document.getElementById('modal-heading').querySelector('span').textContent = 'Testando: ' + name;
       document.getElementById('demo-iframe').src = url;
+      document.getElementById('modal-newtab-btn').href = url;
       document.getElementById('demo-modal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -921,12 +945,10 @@
       document.body.style.overflow = 'auto';
     }
 
-    // Fechar ao clicar fora
     document.getElementById('demo-modal').addEventListener('click', function(e) {
       if (e.target === this) closePreview();
     });
 
-    // Fechar no ESC
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closePreview();
     });
