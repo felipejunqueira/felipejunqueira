@@ -1,80 +1,87 @@
-# Olá! Eu sou o Felipe Junqueira 👋
+<div align="center">
+  <img src="assets/images/felipe.png" width="130" height="130" style="border-radius: 50%; object-fit: cover; border: 3px solid #3b82f6; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" alt="Felipe Junqueira" />
+  
+  # Felipe Junqueira Leite
+  
+  **Desenvolvedor de Software & Soluções Comerciais Web**  
+  *Graduando em Ciência da Computação pela Universidade Federal do ABC (UFABC)*  
+  *Técnico em Desenvolvimento de Sistemas pela ETEC*  
+  São Paulo, Brasil
 
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=700&size=24&pause=1000&color=3B82F6&center=true&vCenter=true&width=650&lines=Desenvolvedor+de+Software+%26+Solu%C3%A7%C3%B5es+Web;Estudante+de+Ci%C3%AAncia+da+Computa%C3%A7%C3%A3o+na+UFABC;Criador+de+Sites%2C+Landing+Pages+e+Sistemas+Comerciais" alt="Typing SVG" />
-</p>
+  <br />
 
-<p align="center">
-  <a href="https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Vi%20seu%20GitHub%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto"><img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp" /></a>
-  <a href="https://www.linkedin.com/in/felipe-j-135531262"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-  <a href="https://felipejunqueira.github.io/felipejunqueira/"><img src="https://img.shields.io/badge/🌐_Portfólio_Online-Testar_Demos-3B82F6?style=for-the-badge" alt="Portfólio Online" /></a>
-</p>
-
----
-
-## 🙋‍♂️ Quem Sou Eu?
-
-Sou **estudante de Ciência da Computação na Universidade Federal do ABC (UFABC)** e formado como **Técnico em Desenvolvimento de Sistemas pela ETEC**. 
-
-Apaixonado por tecnologia prática e acessível, meu foco é **transformar ideias em soluções digitais que funcionam de verdade** — desde sites elegantes e rápidos até sistemas completos para comércios, lojas e profissionais autônomos.
+  <a href="https://wa.me/5511983909578?text=Olá%20Felipe!%20Vi%20seu%20perfil%20no%20GitHub%20e%20gostaria%20de%20um%20orçamento%20para%20o%20meu%20negócio"><img src="https://img.shields.io/badge/WhatsApp-(11)%2098390--9578-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp" /></a>
+  <a href="https://www.linkedin.com/in/felipe-j-135531262"><img src="https://img.shields.io/badge/LinkedIn-felipe--j--135531262-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+  <a href="https://felipejunqueira.github.io/felipejunqueira/"><img src="https://img.shields.io/badge/Portfólio_Online-Acessar_Demonstrações-3B82F6?style=for-the-badge" alt="Portfólio Online" /></a>
+</div>
 
 ---
 
-## 💼 O Que Posso Fazer Pelo Seu Negócio?
+## Sobre Mim
 
-Precisa modernizar o seu comércio ou criar presença na internet? Desenvolvo:
+Sou desenvolvedor focado na criação de soluções digitais práticas, rápidas e acessíveis para empresas, comércios locais e prestadores de serviços. 
 
-* 🚀 **Sites & Landing Pages Rápidas:** Páginas modernas, atraentes e que abrem rápido em qualquer celular.
-* 📲 **Catálogos com Pedidos via WhatsApp:** Seus clientes escolhem os produtos e mandam o pedido direto no seu WhatsApp, sem taxas de marketplaces.
-* 💈 **Links na Bio com Agendamento:** Facilidade para clientes marcarem horários na sua barbearia, clínica ou salão com um toque.
-* 🎁 **Cartões Fidelidade Digitais:** Fidelize seus clientes de maneira simples e interativa.
-* 🖥️ **Sistemas de Frente de Caixa (PDV):** Controle rápido e visual de vendas para mercadinhos e pequenas lojas.
-* 🕹️ **Jogos & Aplicações Interativas:** Experiências visuais e jogos web envolventes.
+Minha formação une o rigor lógico da **Ciência da Computação (UFABC)** com a experiência prática de entrega rápida e eficiente em ambientes web, transformando necessidades de atendimento e vendas em sistemas que funcionam em qualquer dispositivo.
 
 ---
 
-## 🚀 Catálogo de Projetos & Demonstrações Interativas
+## Soluções Comerciais para o Seu Negócio
 
-> 💡 **Todos os projetos abaixo possuem demonstrações interativas que você pode testar agora mesmo!**
+Desenvolvo ferramentas sob medida para profissionalizar a presença digital de comércios e prestadores de serviços:
 
-### 🛒 Comércio, Lojas & Vendas
-| Projeto | Descrição | Demonstração / Código |
+* **Sites Institucionais e Landing Pages:** Estruturas modernas, rápidas e adaptadas para celulares, desenvolvidas para transmitir autoridade e converter visitantes em contatos.
+* **Catálogos de Pedidos com WhatsApp:** Plataformas ágeis onde o cliente monta o pedido e o envia pronto diretamente para o atendimento no WhatsApp, sem intermediários ou cobrança de comissões por pedido.
+* **Link na Bio e Agendamento Digital:** Páginas otimizadas para barbearias, salões, clínicas e consultórios facilitarem o agendamento de clientes com poucos cliques.
+* **Cartão Fidelidade Digital:** Sistema de selos digitais para retenção e fidelização de clientes diretamente pelo smartphone.
+* **Sistemas de Frente de Caixa (PDV):** Interfaces limpas e ágeis para registro de vendas e organização do fluxo comercial de pequenas lojas e mercearias.
+* **Aplicações Interativas e Jogos:** Experiências web modernas com lógica interativa e gamificação.
+
+---
+
+## Portfólio de Projetos Unificados
+
+Todos os projetos abaixo possuem versões funcionais e acessíveis diretamente pelo navegador:
+
+### Comércio, Lojas e Vendas
+| Projeto | Descrição | Demonstração |
 | :--- | :--- | :---: |
-| **Catálogo de Pedidos** | Carrinho de compras simples para envio de pedidos direto no WhatsApp do lojista | [👉 Ver Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/catalogo-pedidos/) |
-| **Vitrine Loja de Roupas** | Catálogo digital para lojas de roupas com categorias e visual moderno | [👉 Ver Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/loja-roupas/) |
-| **Página de Loja (Vitrine)** | Landing page comercial para produtos e promoções em destaque | [👉 Ver Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/page-loja/) |
-| **Sistema de Fidelidade** | Cartão fidelidade digital para clientes acumularem selos e recompensas | [👉 Ver Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/sistema-fidelidade/) |
-| **PDV / Frente de Caixa** | Sistema visual e rápido de registro de vendas para mercadinhos e mercearias | [👉 Ver Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/pdv-mercado/) |
+| **Catálogo de Pedidos** | Carrinho de compras simples para envio de pedidos formatados no WhatsApp | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/catalogo-pedidos/) |
+| **Vitrine Loja de Roupas** | Catálogo digital para moda com seleção de tamanhos e visual limpo | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/loja-roupas/) |
+| **Página de Loja Comercial** | Landing page para exposição de produtos, ofertas e informações de contato | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/page-loja/) |
+| **Cartão Fidelidade Digital** | Programa de selos e recompensas digitais para retenção de clientes | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/sistema-fidelidade/) |
+| **PDV / Frente de Caixa** | Registro ágil e visual de compras e cálculo de vendas para mercadinhos | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/pdv-mercado/) |
 
-### ✂️ Serviços & Profissionais Autônomos
-| Projeto | Descrição | Demonstração / Código |
+### Serviços, Saúde e Corporativo
+| Projeto | Descrição | Demonstração |
 | :--- | :--- | :---: |
-| **Link Bio Barbearia & Salão** | Página central de links com agendamento direto, fotos e localização | [👉 Ver Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/link-bio-barbearia/) |
-| **Site Fonoaudiologia** | Plataforma profissional para a fonoaudióloga Fernanda Roberta com agendamento | [👉 Repositório](https://github.com/felipejunqueira/SiteFernandaFono) |
-| **Padaria & Cafeteria** | Cardápio online ilustrado com produtos frescos e pedidos fáceis | [👉 Ver Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/padaria/) |
-| **Portal Advocacia** | Landing page jurídica moderna de alta credibilidade para advogados | [👉 Ver Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/advocacia/) |
-| **Portal Saúde & Clínicas** | Apresentação institucional e agendamento para clínicas e consultórios | [👉 Ver Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/profissional-saude/) |
-| **Catálogo Metalúrgica** | Apresentação institucional de peças e serviços industriais | [👉 Ver Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/metalurgica/) |
-| **Gestor de Finanças Pessoais** | Aplicativo web para controle de despesas diárias e saldo mensal | [👉 Ver Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/app-financas-pessoais/) |
+| **Link Bio Barbearia & Salão** | Central de agendamento online, tabela de serviços e localização | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/link-bio-barbearia/) |
+| **Fernanda Fonoaudiologia** | Plataforma profissional para clínica de fonoaudiologia com agendamento | [Ver Repositório](https://github.com/felipejunqueira/SiteFernandaFono) |
+| **Padaria & Cafeteria** | Cardápio digital interativo para confeitarias e panificação | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/padaria/) |
+| **Portal Advocacia** | Apresentação institucional sóbria para escritórios jurídicos | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/advocacia/) |
+| **Portal Saúde & Consultórios** | Página para profissionais de saúde com facilidade de contato | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/profissional-saude/) |
+| **Catálogo Metalúrgica** | Apresentação institucional e técnica para o setor industrial | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/metalurgica/) |
+| **Controle Financeiro Web** | Aplicativo de gestão de despesas diárias e saldo financeiro | [Acessar Demonstração](https://felipejunqueira.github.io/felipejunqueira/projetos/app-financas-pessoais/) |
 
-### 🏛️ Portais Institucionais & Grandes Projetos
-* **[IASD São Mateus (Website Oficial)](https://github.com/felipejunqueira/iasd-sao-mateus)** — Portal completo, responsivo e bilíngue, documentando 60 anos de história comunitária, rádio web integrada, bíblia interativa, agenda de cultos e departamentos.
+### Portais Institucionais e Comunitários
+* **[IASD São Mateus (Website Oficial)](https://github.com/felipejunqueira/iasd-sao-mateus):** Portal institucional bilíngue, documentando 60 anos de história comunitária, com rádio web integrada, bíblia interativa e programação completa de cultos e departamentos.
 
-### 🎮 Jogos & Lógica Interativa
-* **[Jogo da Velha Moderno](https://felipejunqueira.github.io/felipejunqueira/projetos/jogo-moderno/)** — Interface moderna e animada para partidas rápidas.
-* **[Jogo da Velha Clássico](https://felipejunqueira.github.io/felipejunqueira/projetos/jogo-classico/)** — Versão clássica e minimalista.
-* **[Tic-Tac-Toe Multi-Linguagens](https://github.com/felipejunqueira/tic-tac-toe)** — Projeto de estudo comparativo de sintaxe implementando o jogo em C, Python, Java e Lua.
-
----
-
-## 📱 Vamos Conversar e Tirar a Sua Ideia do Papel?
-
-Está pensando em criar um site, catálogo ou aplicativo para o seu comércio? Mande uma mensagem para conversarmos sem compromisso!
-
-* 🟢 **WhatsApp:** [(11) 98390-9578](https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Vi%20seu%20GitHub%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto)
-* 💼 **LinkedIn:** [linkedin.com/in/felipe-j-135531262](https://www.linkedin.com/in/felipe-j-135531262)
-* 🐙 **GitHub:** [github.com/felipejunqueira](https://github.com/felipejunqueira)
-* 🌐 **Portfólio Interativo Completo:** [Acessar Cartão de Visitas Digital](https://felipejunqueira.github.io/felipejunqueira/)
+### Jogos e Lógica Web
+* **[Jogo da Velha Moderno](https://felipejunqueira.github.io/felipejunqueira/projetos/jogo-moderno/):** Interface moderna com inteligência artificial para partidas rápidas.
+* **[Jogo da Velha Clássico](https://felipejunqueira.github.io/felipejunqueira/projetos/jogo-classico/):** Implementação clássica com foco em simplicidade.
+* **[Tic-Tac-Toe Multi-Linguagens](https://github.com/felipejunqueira/tic-tac-toe):** Estudo de engenharia de software comparando implementações em C, Python, Java e Lua.
 
 ---
-<p align="center">Feito com dedicação por <b>Felipe Junqueira</b> • São Paulo, Brasil 🇧🇷</p>
+
+## Contato e Atendimento
+
+Para conversar sobre o desenvolvimento de um site, catálogo ou sistema para o seu comércio:
+
+* **WhatsApp:** [(11) 98390-9578](https://wa.me/5511983909578?text=Olá%20Felipe!%20Vi%20seu%20perfil%20no%20GitHub%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto)
+* **LinkedIn:** [linkedin.com/in/felipe-j-135531262](https://www.linkedin.com/in/felipe-j-135531262)
+* **GitHub:** [github.com/felipejunqueira](https://github.com/felipejunqueira)
+* **Portfólio Interativo Completo:** [felipejunqueira.github.io/felipejunqueira](https://felipejunqueira.github.io/felipejunqueira/)
+
+---
+<div align="center">
+  <sub>Felipe Junqueira Leite • São Paulo, Brasil</sub>
+</div>

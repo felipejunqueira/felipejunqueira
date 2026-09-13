@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Felipe Junqueira - Criação de Sites, Landing Pages, Aplicativos e Sistemas para Comércio Local. Estudante de Ciência da Computação na UFABC.">
-  <title>Felipe Junqueira | Cartão de Visitas Digital & Portfólio de Soluções</title>
+  <title>Felipe Junqueira | Cartão de Visitas Digital & Portfólio</title>
 
   <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -18,22 +18,21 @@
     :root {
       --bg-dark: #090d16;
       --bg-card: #111827;
-      --bg-card-hover: #172033;
-      --primary: #3b82f6;
-      --primary-hover: #2563eb;
-      --accent-cyan: #06b6d4;
-      --accent-green: #10b981;
-      --accent-purple: #8b5cf6;
-      --accent-amber: #f59e0b;
+      --bg-card-hover: #172238;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --accent-cyan: #0284c7;
+      --accent-green: #059669;
+      --accent-purple: #7c3aed;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --border-card: rgba(255, 255, 255, 0.08);
-      --border-card-hover: rgba(59, 130, 246, 0.4);
+      --border-card-hover: rgba(37, 99, 235, 0.4);
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
       --radius-pill: 9999px;
-      --shadow-glow: 0 0 25px rgba(59, 130, 246, 0.2);
+      --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
 
     * {
@@ -60,7 +59,7 @@
       letter-spacing: -0.02em;
     }
 
-    /* Fundo dinâmico e sutil */
+    /* Fundo dinâmico sutil e elegante */
     .bg-ambient {
       position: fixed;
       top: 0;
@@ -70,9 +69,9 @@
       pointer-events: none;
       z-index: -1;
       background:
-        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.12), transparent 40%),
-        radial-gradient(circle at 85% 25%, rgba(139, 92, 246, 0.1), transparent 45%),
-        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.08), transparent 40%),
+        radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.1), transparent 45%),
+        radial-gradient(circle at 85% 25%, rgba(124, 58, 237, 0.08), transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(5, 150, 105, 0.06), transparent 45%),
         #090d16;
     }
 
@@ -85,23 +84,23 @@
 
     /* Header e Cartão de Visitas Principal */
     .hero-card {
-      background: linear-gradient(180deg, rgba(17, 24, 39, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      background: linear-gradient(180deg, rgba(17, 24, 39, 0.9) 0%, rgba(15, 23, 42, 0.98) 100%);
       border: 1px solid var(--border-card);
       border-radius: var(--radius-lg);
-      padding: 2.5rem 1.75rem;
+      padding: 2.75rem 1.75rem;
       margin-top: 2rem;
       margin-bottom: 2.5rem;
       text-align: center;
       position: relative;
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      box-shadow: var(--shadow-soft);
       backdrop-filter: blur(12px);
     }
 
     .avatar-wrapper {
       position: relative;
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 1.25rem;
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 1.5rem;
     }
 
     .avatar-ring {
@@ -109,44 +108,33 @@
       inset: -4px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--primary), var(--accent-cyan), var(--accent-purple));
-      animation: spinRing 6s linear infinite;
     }
 
-    @keyframes spinRing {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .avatar {
+    .avatar-img {
       position: relative;
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: #0f172a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Outfit', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 800;
-      color: #ffffff;
+      object-fit: cover;
       border: 3px solid var(--bg-dark);
-      text-shadow: 0 2px 10px rgba(59, 130, 246, 0.5);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      display: block;
     }
 
     .badge-verified {
       position: absolute;
-      bottom: 2px;
+      bottom: 4px;
       right: 4px;
       background: var(--primary);
       color: #ffffff;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       border: 2px solid var(--bg-dark);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     }
 
     .hero-name {
@@ -166,27 +154,27 @@
     .badge-pill {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.4rem;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border-card);
-      padding: 0.35rem 0.85rem;
+      padding: 0.4rem 0.9rem;
       border-radius: var(--radius-pill);
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 500;
       color: var(--text-muted);
     }
 
     .badge-pill.highlight {
-      background: rgba(59, 130, 246, 0.12);
-      border-color: rgba(59, 130, 246, 0.3);
+      background: rgba(37, 99, 235, 0.15);
+      border-color: rgba(37, 99, 235, 0.35);
       color: #93c5fd;
     }
 
     .hero-pitch {
-      font-size: 1.12rem;
+      font-size: 1.15rem;
       color: #cbd5e1;
       max-width: 680px;
-      margin: 0 auto 1.75rem;
+      margin: 0 auto 1.85rem;
       line-height: 1.65;
     }
 
@@ -200,7 +188,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 0.85rem;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
 
     .btn-action {
@@ -208,30 +196,31 @@
       align-items: center;
       justify-content: center;
       gap: 0.6rem;
-      padding: 0.85rem 1.6rem;
+      padding: 0.9rem 1.75rem;
       border-radius: var(--radius-md);
       font-family: 'Outfit', sans-serif;
       font-size: 1.05rem;
       font-weight: 700;
       text-decoration: none;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.25s ease;
       cursor: pointer;
       border: none;
     }
 
     .btn-whatsapp {
-      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      background: #16a34a;
       color: #ffffff;
-      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+      box-shadow: 0 4px 18px rgba(22, 163, 74, 0.35);
     }
 
     .btn-whatsapp:hover {
+      background: #15803d;
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+      box-shadow: 0 6px 22px rgba(22, 163, 74, 0.5);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.06);
       color: var(--text-main);
       border: 1px solid var(--border-card);
     }
@@ -244,11 +233,12 @@
 
     .quick-contacts {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: 1.25rem;
-      margin-top: 1.25rem;
-      font-size: 0.9rem;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.92rem;
       color: var(--text-muted);
     }
 
@@ -257,12 +247,12 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
       transition: color 0.2s;
     }
 
     .quick-contacts a:hover {
-      color: var(--primary);
+      color: #60a5fa;
     }
 
     /* Seção O Que Eu Faço */
@@ -298,7 +288,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border-card);
       border-radius: var(--radius-md);
-      padding: 1.4rem;
+      padding: 1.5rem;
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
@@ -308,17 +298,16 @@
     .service-card:hover {
       border-color: var(--border-card-hover);
       transform: translateY(-3px);
-      box-shadow: var(--shadow-glow);
     }
 
     .service-icon {
-      width: 46px;
-      height: 46px;
+      width: 44px;
+      height: 44px;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      flex-shrink: 0;
     }
 
     .service-title {
@@ -337,7 +326,7 @@
       margin-bottom: 4rem;
     }
 
-    /* Filtros ultra táteis e fáceis */
+    /* Filtros táteis e fáceis */
     .filter-tabs {
       display: flex;
       flex-wrap: wrap;
@@ -347,7 +336,7 @@
     }
 
     .filter-btn {
-      padding: 0.6rem 1.1rem;
+      padding: 0.65rem 1.15rem;
       border-radius: var(--radius-pill);
       border: 1px solid var(--border-card);
       background: rgba(255, 255, 255, 0.04);
@@ -358,7 +347,7 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.45rem;
       transition: all 0.2s ease;
     }
 
@@ -371,7 +360,7 @@
       background: var(--primary);
       border-color: var(--primary);
       color: #ffffff;
-      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
     }
 
     /* Grid de Projetos */
@@ -407,13 +396,12 @@
     }
 
     .card-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 14px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
       flex-shrink: 0;
     }
 
@@ -426,17 +414,17 @@
       letter-spacing: 0.04em;
     }
 
-    .badge-ecommerce { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
-    .badge-service { background: rgba(139, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.3); }
-    .badge-portal { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .badge-game { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-ecommerce { background: rgba(37, 99, 235, 0.15); color: #60a5fa; border: 1px solid rgba(37, 99, 235, 0.3); }
+    .badge-service { background: rgba(124, 58, 237, 0.15); color: #c084fc; border: 1px solid rgba(124, 58, 237, 0.3); }
+    .badge-portal { background: rgba(5, 150, 105, 0.15); color: #34d399; border: 1px solid rgba(5, 150, 105, 0.3); }
+    .badge-game { background: rgba(217, 119, 6, 0.15); color: #fbbf24; border: 1px solid rgba(217, 119, 6, 0.3); }
 
     .card-body {
       margin-bottom: 1.25rem;
     }
 
     .card-title {
-      font-size: 1.25rem;
+      font-size: 1.22rem;
       color: #ffffff;
       margin-bottom: 0.4rem;
     }
@@ -458,11 +446,11 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.4rem;
-      padding: 0.65rem 0.9rem;
+      gap: 0.45rem;
+      padding: 0.7rem 1rem;
       border-radius: var(--radius-sm);
-      background: rgba(59, 130, 246, 0.15);
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(37, 99, 235, 0.3);
       color: #93c5fd;
       font-family: 'Outfit', sans-serif;
       font-weight: 600;
@@ -476,12 +464,12 @@
       background: var(--primary);
       border-color: var(--primary);
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
     }
 
     .btn-icon-link {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -520,7 +508,7 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: var(--radius-lg);
       width: 100%;
-      max-width: 950px;
+      max-width: 960px;
       height: 85vh;
       display: flex;
       flex-direction: column;
@@ -550,7 +538,7 @@
     }
 
     .modal-title {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: #ffffff;
     }
 
@@ -564,14 +552,14 @@
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: #cbd5e1;
-      padding: 0.4rem 0.8rem;
+      padding: 0.45rem 0.85rem;
       border-radius: var(--radius-sm);
       font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.4rem;
       text-decoration: none;
     }
 
@@ -638,13 +626,13 @@
     }
 
     .game-cell:hover:not(.taken) {
-      background: rgba(59, 130, 246, 0.15);
+      background: rgba(37, 99, 235, 0.15);
       border-color: var(--primary);
     }
 
     .game-cell.cell-x {
-      color: var(--primary);
-      text-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+      color: #60a5fa;
+      text-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
     }
 
     .game-cell.cell-o {
@@ -662,7 +650,7 @@
 
     /* Footer Final de Contato */
     .footer-cta {
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(11, 15, 25, 0.95) 100%);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.6) 0%, rgba(11, 15, 25, 0.98) 100%);
       border-top: 1px solid var(--border-card);
       padding: 3.5rem 1.25rem 2.5rem;
       text-align: center;
@@ -694,26 +682,27 @@
       width: 58px;
       height: 58px;
       border-radius: 50%;
-      background: #25d366;
+      background: #16a34a;
       color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+      box-shadow: 0 8px 24px rgba(22, 163, 74, 0.45);
       z-index: 100;
       text-decoration: none;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.25s ease;
     }
 
     .floating-wa:hover {
       transform: scale(1.08) translateY(-3px);
-      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+      box-shadow: 0 12px 30px rgba(22, 163, 74, 0.6);
     }
 
     @media (max-width: 640px) {
-      .hero-card { padding: 1.75rem 1.25rem; }
+      .hero-card { padding: 2rem 1.25rem; }
       .cta-buttons { flex-direction: column; width: 100%; }
       .btn-action { width: 100%; }
+      .quick-contacts { flex-direction: column; gap: 0.8rem; }
       .game-board { grid-template-columns: repeat(3, 75px); grid-template-rows: repeat(3, 75px); }
     }
   </style>
@@ -724,11 +713,11 @@
 
   <main class="container">
 
-    <!-- CARTÃO DE VISITAS PRINCIPAL -->
+    <!-- CARTÃO DE VISITAS PRINCIPAL COM FOTO REAL -->
     <header class="hero-card">
       <div class="avatar-wrapper">
         <div class="avatar-ring"></div>
-        <div class="avatar">FJ</div>
+        <img src="assets/images/felipe.png" alt="Felipe Junqueira" class="avatar-img" />
         <div class="badge-verified" title="Desenvolvedor Verificado">
           <i data-lucide="check" style="width: 16px; height: 16px;"></i>
         </div>
@@ -752,19 +741,19 @@
       </div>
 
       <p class="hero-pitch">
-        Olá! Eu desenvolvo <strong>sites modernos, catálogos de pedidos no WhatsApp</strong> e 
-        <strong>sistemas práticos</strong> para o seu comércio ou serviço atrair mais clientes e vender todos os dias com tecnologia simples e acessível.
+        Desenvolvimento de <strong>sites modernos, catálogos de pedidos no WhatsApp</strong> e 
+        <strong>sistemas comerciais</strong> para empresas e prestadores de serviços atenderem melhor e venderem mais com tecnologia simples e acessível.
       </p>
 
       <!-- Botões de Ação Imediata -->
       <div class="cta-buttons">
-        <a href="https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Vi%20seu%20cart%C3%A3o%20de%20visitas%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%20para%20o%20meu%20neg%C3%B3cio" target="_blank" class="btn-action btn-whatsapp">
-          <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
+        <a href="https://wa.me/5511983909578?text=Olá%20Felipe!%20Vi%20seu%20cartão%20de%20visitas%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%20para%20o%20meu%20negócio" target="_blank" class="btn-action btn-whatsapp">
+          <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
           Conversar no WhatsApp
         </a>
         <a href="#catalogo" class="btn-action btn-secondary">
-          <i data-lucide="sparkles" style="width: 20px; height: 20px;"></i>
-          Ver Projetos & Testar Demos
+          <i data-lucide="layers" style="width: 20px; height: 20px;"></i>
+          Ver Projetos & Demonstrações
         </a>
       </div>
 
@@ -784,41 +773,41 @@
     <!-- O QUE POSSO DESENVOLVER PARA VOCÊ -->
     <section class="services-section">
       <div class="section-header">
-        <h2 class="section-title">Como Posso Ajudar o Seu Negócio?</h2>
-        <p class="section-subtitle">Soluções digitais pensadas para quem precisa de resultados rápidos e fáceis de operar.</p>
+        <h2 class="section-title">Soluções para o Seu Negócio</h2>
+        <p class="section-subtitle">Sistemas e páginas pensadas para quem precisa de resultados práticos, rápidos e fáceis de operar.</p>
       </div>
 
       <div class="services-grid">
         <div class="service-card">
-          <div class="service-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
+          <div class="service-icon" style="background: rgba(37, 99, 235, 0.15); color: #60a5fa;">
             <i data-lucide="globe"></i>
           </div>
           <h3 class="service-title">Sites & Landing Pages</h3>
-          <p class="service-desc">Páginas elegantes, rápidas e que abrem perfeitamente no celular para passar credibilidade e atrair novos clientes.</p>
+          <p class="service-desc">Páginas modernas, rápidas e que abrem perfeitamente no celular para passar credibilidade e atrair novos clientes.</p>
         </div>
 
         <div class="service-card">
-          <div class="service-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+          <div class="service-icon" style="background: rgba(5, 150, 105, 0.15); color: #34d399;">
             <i data-lucide="shopping-cart"></i>
           </div>
-          <h3 class="service-title">Catálogos & Pedidos no Zap</h3>
-          <p class="service-desc">Cardápios e vitrines onde o cliente escolhe os itens e o pedido chega mastigado no seu WhatsApp, sem pagar comissões.</p>
+          <h3 class="service-title">Catálogos & Pedidos no WhatsApp</h3>
+          <p class="service-desc">Cardápios e vitrines onde o cliente escolhe os itens e o pedido chega pronto no seu WhatsApp, sem comissões de aplicativos.</p>
         </div>
 
         <div class="service-card">
-          <div class="service-icon" style="background: rgba(139, 92, 246, 0.15); color: #c084fc;">
+          <div class="service-icon" style="background: rgba(124, 58, 237, 0.15); color: #c084fc;">
             <i data-lucide="scissors"></i>
           </div>
           <h3 class="service-title">Link na Bio & Agendamento</h3>
-          <p class="service-desc">Central única para barbearias, salões e profissionais de saúde com horários e atendimento simplificado.</p>
+          <p class="service-desc">Página central para barbearias, salões, clínicas e consultórios facilitarem o agendamento de horários.</p>
         </div>
 
         <div class="service-card">
-          <div class="service-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
-            <i data-lucide="gift"></i>
+          <div class="service-icon" style="background: rgba(217, 119, 6, 0.15); color: #fbbf24;">
+            <i data-lucide="award"></i>
           </div>
           <h3 class="service-title">Fidelidade & Frente de Caixa</h3>
-          <p class="service-desc">Cartão de fidelidade digital para incentivar o cliente a voltar e sistemas ágeis de registro de vendas.</p>
+          <p class="service-desc">Cartão de fidelidade digital para incentivar o cliente a retornar e sistemas ágeis de registro de compras.</p>
         </div>
       </div>
     </section>
@@ -826,8 +815,8 @@
     <!-- CATÁLOGO DE PROJETOS UNIFICADOS -->
     <section id="catalogo" class="catalog-section">
       <div class="section-header">
-        <h2 class="section-title">Projetos & Modelos Prontos</h2>
-        <p class="section-subtitle">Clique em <strong>"Testar Agora"</strong> para experimentar qualquer modelo interativamente!</p>
+        <h2 class="section-title">Projetos e Demonstrações Prontas</h2>
+        <p class="section-subtitle">Clique em <strong>Testar Agora</strong> para experimentar qualquer projeto interativamente na sua tela.</p>
       </div>
 
       <!-- Filtros com Botões Táteis -->
@@ -836,13 +825,13 @@
           <i data-lucide="layers" style="width: 16px; height: 16px;"></i> Todos (15)
         </button>
         <button class="filter-btn" onclick="filterProjects('comercio', this)">
-          <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Comércio & Lojas
+          <i data-lucide="store" style="width: 16px; height: 16px;"></i> Comércio & Lojas
         </button>
         <button class="filter-btn" onclick="filterProjects('servicos', this)">
           <i data-lucide="briefcase" style="width: 16px; height: 16px;"></i> Serviços & Saúde
         </button>
         <button class="filter-btn" onclick="filterProjects('institucional', this)">
-          <i data-lucide="building" style="width: 16px; height: 16px;"></i> Sites & Portais
+          <i data-lucide="building-2" style="width: 16px; height: 16px;"></i> Sites & Portais
         </button>
         <button class="filter-btn" onclick="filterProjects('jogos', this)">
           <i data-lucide="gamepad-2" style="width: 16px; height: 16px;"></i> Jogos & Lógica
@@ -855,14 +844,14 @@
         <!-- 1. IASD São Mateus -->
         <div class="project-card" data-category="institucional">
           <div class="card-top">
-            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
-              <i data-lucide="church"></i>
+            <div class="card-icon" style="background: rgba(5, 150, 105, 0.15); color: #34d399;">
+              <i data-lucide="landmark"></i>
             </div>
             <span class="card-badge badge-portal">Site Oficial</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">IASD São Mateus</h3>
-            <p class="card-desc">Portal completo e bilíngue com 60 anos de história, transmissão de rádio web, bíblia interativa e programação de cultos.</p>
+            <p class="card-desc">Portal institucional bilíngue com 60 anos de história, rádio web integrada, bíblia interativa e agenda de cultos.</p>
           </div>
           <div class="card-actions">
             <a href="https://github.com/felipejunqueira/iasd-sao-mateus" target="_blank" class="btn-test">
@@ -877,14 +866,14 @@
         <!-- 2. Catálogo de Pedidos WhatsApp -->
         <div class="project-card" data-category="comercio">
           <div class="card-top">
-            <div class="card-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
+            <div class="card-icon" style="background: rgba(37, 99, 235, 0.15); color: #60a5fa;">
               <i data-lucide="shopping-cart"></i>
             </div>
             <span class="card-badge badge-ecommerce">WhatsApp</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">Catálogo Burger Express</h3>
-            <p class="card-desc">Cardápio digital para lanchonetes e lojas: o cliente monta a sacola e o pedido chega formatado direto no WhatsApp.</p>
+            <p class="card-desc">Cardápio digital para lanchonetes e comércio: o cliente monta a sacola e o pedido chega formatado direto no WhatsApp.</p>
           </div>
           <div class="card-actions">
             <button class="btn-test" onclick="openDemo('Catálogo de Pedidos', './projetos/catalogo-pedidos/')">
@@ -900,13 +889,13 @@
         <div class="project-card" data-category="comercio">
           <div class="card-top">
             <div class="card-icon" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">
-              <i data-lucide="shirt"></i>
+              <i data-lucide="tag"></i>
             </div>
             <span class="card-badge badge-ecommerce">Moda & Vendas</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">Vitrine Loja de Roupas</h3>
-            <p class="card-desc">Catálogo virtual de moda com seleção de tamanhos, cores e visual moderno para encantar clientes no Instagram.</p>
+            <p class="card-desc">Catálogo virtual de moda com seleção de tamanhos, cores e visual moderno para clientes do Instagram.</p>
           </div>
           <div class="card-actions">
             <button class="btn-test" onclick="openDemo('Loja de Roupas', './projetos/loja-roupas/')">
@@ -921,14 +910,14 @@
         <!-- 4. Link da Bio para Barbearia & Salão -->
         <div class="project-card" data-category="servicos">
           <div class="card-top">
-            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+            <div class="card-icon" style="background: rgba(217, 119, 6, 0.15); color: #fbbf24;">
               <i data-lucide="scissors"></i>
             </div>
             <span class="card-badge badge-service">Agendamento</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">Link Bio Barbearia & Salão</h3>
-            <p class="card-desc">Página perfeita para colocar na bio do Instagram: serviços, fotos dos cortes, localização no mapa e agendamento.</p>
+            <p class="card-desc">Página central para colocar no Instagram: tabela de serviços, fotos dos cortes, localização e agendamento rápido.</p>
           </div>
           <div class="card-actions">
             <button class="btn-test" onclick="openDemo('Link Bio Barbearia', './projetos/link-bio-barbearia/')">
@@ -943,14 +932,14 @@
         <!-- 5. Site da Fonoaudióloga Fernanda Roberta -->
         <div class="project-card" data-category="servicos">
           <div class="card-top">
-            <div class="card-icon" style="background: rgba(139, 92, 246, 0.15); color: #c084fc;">
-              <i data-lucide="heart-pulse"></i>
+            <div class="card-icon" style="background: rgba(124, 58, 237, 0.15); color: #c084fc;">
+              <i data-lucide="activity"></i>
             </div>
             <span class="card-badge badge-service">Saúde & Clínica</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">Fernanda Fonoaudiologia</h3>
-            <p class="card-desc">Site profissional para consultório de fonoaudiologia, focado em agendamento, orientações aos pacientes e tratamentos.</p>
+            <p class="card-desc">Site profissional para consultório de fonoaudiologia com agendamento, orientações aos pacientes e especialidades.</p>
           </div>
           <div class="card-actions">
             <a href="https://github.com/felipejunqueira/SiteFernandaFono" target="_blank" class="btn-test">
@@ -965,14 +954,14 @@
         <!-- 6. Cartão Fidelidade Digital -->
         <div class="project-card" data-category="comercio">
           <div class="card-top">
-            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+            <div class="card-icon" style="background: rgba(5, 150, 105, 0.15); color: #34d399;">
               <i data-lucide="award"></i>
             </div>
             <span class="card-badge badge-ecommerce">Fidelização</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">Cartão Fidelidade Digital</h3>
-            <p class="card-desc">Substitui o papelzinho carimbado por um cartão digital moderno no celular do cliente para acumular selos e recompensas.</p>
+            <p class="card-desc">Substitui o papel carimbado por um cartão digital moderno no celular do cliente para acumular selos e recompensas.</p>
           </div>
           <div class="card-actions">
             <button class="btn-test" onclick="openDemo('Sistema de Fidelidade', './projetos/sistema-fidelidade/')">
@@ -1009,14 +998,14 @@
         <!-- 8. Padaria & Cafeteria -->
         <div class="project-card" data-category="comercio">
           <div class="card-top">
-            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+            <div class="card-icon" style="background: rgba(217, 119, 6, 0.15); color: #fbbf24;">
               <i data-lucide="coffee"></i>
             </div>
             <span class="card-badge badge-ecommerce">Cardápio</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">Padaria & Confeitaria</h3>
-            <p class="card-desc">Apresentação gastronômica com cardápio de cafés, pães quentinhos e bolos com fotos apetitosas e pedidos práticos.</p>
+            <p class="card-desc">Apresentação gastronômica com cardápio de cafés, pães quentinhos e bolos com fotos claras e pedidos fáceis.</p>
           </div>
           <div class="card-actions">
             <button class="btn-test" onclick="openDemo('Padaria & Cafeteria', './projetos/padaria/')">
@@ -1038,7 +1027,7 @@
           </div>
           <div class="card-body">
             <h3 class="card-title">Portal de Advocacia</h3>
-            <p class="card-desc">Landing page corporativa e elegante para advogados e escritórios transmitirem autoridade e receberem contatos de clientes.</p>
+            <p class="card-desc">Landing page corporativa e elegante para advogados e escritórios transmitirem autoridade e receberem clientes.</p>
           </div>
           <div class="card-actions">
             <button class="btn-test" onclick="openDemo('Portal Advocacia', './projetos/advocacia/')">
@@ -1053,14 +1042,14 @@
         <!-- 10. Portal Clínicas & Saúde -->
         <div class="project-card" data-category="servicos">
           <div class="card-top">
-            <div class="card-icon" style="background: rgba(6, 182, 212, 0.15); color: #22d3ee;">
+            <div class="card-icon" style="background: rgba(2, 132, 199, 0.15); color: #38bdf8;">
               <i data-lucide="stethoscope"></i>
             </div>
             <span class="card-badge badge-service">Consultórios</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">Consultório Médico & Saúde</h3>
-            <p class="card-desc">Página institucional para médicos, dentistas, psicólogos e terapeutas apresentarem especialidades e facilitarem consultas.</p>
+            <p class="card-desc">Página institucional para médicos, psicólogos e terapeutas apresentarem especialidades e facilitarem consultas.</p>
           </div>
           <div class="card-actions">
             <button class="btn-test" onclick="openDemo('Profissional da Saúde', './projetos/profissional-saude/')">
@@ -1082,7 +1071,7 @@
           </div>
           <div class="card-body">
             <h3 class="card-title">Catálogo Metalúrgica</h3>
-            <p class="card-desc">Apresentação corporativa para empresas do setor industrial, usinagem e metalurgia com solicitação rápida de cotações.</p>
+            <p class="card-desc">Apresentação corporativa para empresas do setor industrial, usinagem e metalurgia com solicitação de cotações.</p>
           </div>
           <div class="card-actions">
             <button class="btn-test" onclick="openDemo('Metalúrgica', './projetos/metalurgica/')">
@@ -1094,17 +1083,17 @@
           </div>
         </div>
 
-        <!-- 12. Página de Loja (Vitrine Comercial) -->
+        <!-- 12. Página de Loja Comercial -->
         <div class="project-card" data-category="comercio">
           <div class="card-top">
-            <div class="card-icon" style="background: rgba(168, 85, 247, 0.15); color: #d8b4fe;">
+            <div class="card-icon" style="background: rgba(124, 58, 237, 0.15); color: #c084fc;">
               <i data-lucide="store"></i>
             </div>
             <span class="card-badge badge-ecommerce">Vitrine</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">Página de Loja Comercial</h3>
-            <p class="card-desc">Landing page comercial destacando ofertas, novidades da semana e informações de atendimento da sua loja.</p>
+            <p class="card-desc">Landing page comercial destacando ofertas, novidades da semana e canais de atendimento da sua loja.</p>
           </div>
           <div class="card-actions">
             <button class="btn-test" onclick="openDemo('Página de Loja', './projetos/page-loja/')">
@@ -1119,7 +1108,7 @@
         <!-- 13. Gestor de Finanças Pessoais -->
         <div class="project-card" data-category="servicos">
           <div class="card-top">
-            <div class="card-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+            <div class="card-icon" style="background: rgba(5, 150, 105, 0.15); color: #34d399;">
               <i data-lucide="wallet"></i>
             </div>
             <span class="card-badge badge-service">Finanças</span>
@@ -1138,17 +1127,17 @@
           </div>
         </div>
 
-        <!-- 14. Jogo da Velha Moderno (Box) -->
+        <!-- 14. Jogo da Velha Moderno -->
         <div class="project-card" data-category="jogos">
           <div class="card-top">
-            <div class="card-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
+            <div class="card-icon" style="background: rgba(37, 99, 235, 0.15); color: #60a5fa;">
               <i data-lucide="gamepad-2"></i>
             </div>
             <span class="card-badge badge-game">Jogo Web</span>
           </div>
           <div class="card-body">
             <h3 class="card-title">Jogo da Velha Moderno</h3>
-            <p class="card-desc">Jogo clássico repaginado com efeitos visuais, inteligência artificial e sons para uma experiência divertida.</p>
+            <p class="card-desc">Jogo clássico repaginado com efeitos visuais, inteligência artificial e sons para uma experiência rápida.</p>
           </div>
           <div class="card-actions">
             <button class="btn-test" onclick="openDemo('Jogo da Velha Moderno', './projetos/jogo-moderno/')">
@@ -1163,7 +1152,7 @@
         <!-- 15. Tic-Tac-Toe Multi-Linguagens -->
         <div class="project-card" data-category="jogos">
           <div class="card-top">
-            <div class="card-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+            <div class="card-icon" style="background: rgba(217, 119, 6, 0.15); color: #fbbf24;">
               <i data-lucide="cpu"></i>
             </div>
             <span class="card-badge badge-game">Multi-Linguagem</span>
@@ -1187,12 +1176,12 @@
 
     <!-- MINIJOGO INTERATIVO EMBUTIDO NA PÁGINA -->
     <section class="game-section">
-      <h2 class="section-title" style="margin-bottom: 0.3rem;">Desafio Rápido: Jogue Contra Minha IA</h2>
+      <h2 class="section-title" style="margin-bottom: 0.3rem;">Desafio Rápido: Jogue Contra a IA</h2>
       <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.25rem;">
-        Teste a lógica do computador agora mesmo! Você joga com <strong>X</strong> (Azul) e a IA joga com <strong>O</strong> (Vermelho).
+        Teste a lógica do computador agora mesmo. Você joga com <strong>X</strong> (Azul) e a IA joga com <strong>O</strong> (Vermelho).
       </p>
 
-      <div class="game-status-text" id="ai-game-status">Sua vez! Clique em qualquer quadrado.</div>
+      <div class="game-status-text" id="ai-game-status">Sua vez. Clique em qualquer quadrado.</div>
 
       <div class="game-board" id="ai-board">
         <div class="game-cell" onclick="makeMove(0)"></div>
@@ -1218,7 +1207,7 @@
     <div class="modal-window">
       <div class="modal-header">
         <div class="modal-title-group">
-          <i data-lucide="sparkles" style="color: var(--primary); width: 18px; height: 18px;"></i>
+          <i data-lucide="layers" style="color: #60a5fa; width: 18px; height: 18px;"></i>
           <span class="modal-title" id="modal-project-title">Demonstração Interativa</span>
         </div>
         <div class="modal-controls">
@@ -1239,25 +1228,25 @@
   <!-- RODAPÉ & CHAMADA FINAL -->
   <footer class="footer-cta">
     <div class="footer-cta-card">
-      <h2 class="footer-cta-title">Gostou de Algum Modelo?</h2>
+      <h2 class="footer-cta-title">Vamos Criar o Seu Projeto?</h2>
       <p class="footer-cta-text">
-        Vamos criar o site ou aplicativo perfeito para o seu comércio! Me chame no WhatsApp para conversarmos e tirar suas dúvidas sem compromisso.
+        Entre em contato diretamente pelo WhatsApp para conversarmos sobre a solução ideal para o seu comércio ou serviço.
       </p>
 
-      <a href="https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Vi%20seus%20projetos%20no%20portf%C3%B3lio%20e%20gostaria%20de%20um%20or%C3%A7amento%20para%20meu%20neg%C3%B3cio" target="_blank" class="btn-action btn-whatsapp" style="font-size: 1.15rem; padding: 1rem 2rem;">
-        <i data-lucide="message-circle" style="width: 24px; height: 24px;"></i>
+      <a href="https://wa.me/5511983909578?text=Olá%20Felipe!%20Vi%20seus%20projetos%20no%20portfólio%20e%20gostaria%20de%20um%20orçamento%20para%20meu%20negócio" target="_blank" class="btn-action btn-whatsapp" style="font-size: 1.15rem; padding: 1rem 2rem;">
+        <i data-lucide="message-square" style="width: 24px; height: 24px;"></i>
         Chamar no WhatsApp: (11) 98390-9578
       </a>
 
       <p style="margin-top: 2rem; font-size: 0.85rem; color: #64748b;">
-        © 2026 Felipe Junqueira Leite • São Paulo, SP • Feito com foco em simplicidade e alta performance
+        Felipe Junqueira Leite • São Paulo, SP • Foco em simplicidade, velocidade e conversão
       </p>
     </div>
   </footer>
 
   <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
-  <a href="https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar%20sobre%20um%20projeto" target="_blank" class="floating-wa" title="Falar no WhatsApp" aria-label="WhatsApp">
-    <i data-lucide="message-circle" style="width: 30px; height: 30px;"></i>
+  <a href="https://wa.me/5511983909578?text=Olá%20Felipe!%20Vi%20seu%20portfólio%20e%20quero%20conversar%20sobre%20um%20projeto" target="_blank" class="floating-wa" title="Falar no WhatsApp" aria-label="WhatsApp">
+    <i data-lucide="message-square" style="width: 28px; height: 28px;"></i>
   </a>
 
   <!-- SCRIPTS -->
@@ -1283,7 +1272,7 @@
 
     // Modal de Demonstração
     function openDemo(title, url) {
-      document.getElementById('modal-project-title').textContent = 'Testando: ' + title;
+      document.getElementById('modal-project-title').textContent = 'Demonstração: ' + title;
       document.getElementById('modal-external-link').href = url;
       document.getElementById('modal-frame').src = url;
       document.getElementById('demo-modal').classList.add('active');
@@ -1317,18 +1306,18 @@
       renderBoard();
 
       if (checkWin('X')) {
-        document.getElementById('ai-game-status').innerHTML = '🎉 <span style="color:#10b981;">Parabéns! Você venceu!</span>';
+        document.getElementById('ai-game-status').innerHTML = '<span style="color:#10b981;">Você venceu a partida!</span>';
         gameActive = false;
         return;
       }
 
       if (board.every(cell => cell !== '')) {
-        document.getElementById('ai-game-status').innerHTML = '🤝 <span style="color:#94a3b8;">Empate técnico!</span>';
+        document.getElementById('ai-game-status').innerHTML = '<span style="color:#94a3b8;">Empate técnico.</span>';
         gameActive = false;
         return;
       }
 
-      document.getElementById('ai-game-status').textContent = 'IA pensando...';
+      document.getElementById('ai-game-status').textContent = 'Aguarde o movimento da IA...';
       setTimeout(aiMove, 300);
     }
 
@@ -1354,18 +1343,18 @@
         renderBoard();
 
         if (checkWin('O')) {
-          document.getElementById('ai-game-status').innerHTML = '🤖 <span style="color:#f43f5e;">A IA venceu! Tente novamente!</span>';
+          document.getElementById('ai-game-status').innerHTML = '<span style="color:#f43f5e;">A IA venceu. Tente novamente!</span>';
           gameActive = false;
           return;
         }
 
         if (board.every(cell => cell !== '')) {
-          document.getElementById('ai-game-status').innerHTML = '🤝 <span style="color:#94a3b8;">Empate técnico!</span>';
+          document.getElementById('ai-game-status').innerHTML = '<span style="color:#94a3b8;">Empate técnico.</span>';
           gameActive = false;
           return;
         }
 
-        document.getElementById('ai-game-status').textContent = 'Sua vez! Escolha um quadrado.';
+        document.getElementById('ai-game-status').textContent = 'Sua vez. Escolha um quadrado.';
       }
     }
 
@@ -1413,7 +1402,7 @@
     function resetGame() {
       board = ['', '', '', '', '', '', '', '', ''];
       gameActive = true;
-      document.getElementById('ai-game-status').textContent = 'Sua vez! Clique em qualquer quadrado.';
+      document.getElementById('ai-game-status').textContent = 'Sua vez. Clique em qualquer quadrado.';
       renderBoard();
     }
   </script>
