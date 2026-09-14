@@ -16,18 +16,18 @@
 
   <style>
     :root {
-      --bg-main: #0c111d;
-      --bg-card: #161f30;
-      --bg-card-hover: #1c283f;
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
-      --primary-light: #93c5fd;
+      --primary-light: #3b82f6;
       --green-wa: #16a34a;
       --green-wa-hover: #15803d;
-      --text-white: #ffffff;
-      --text-light: #f1f5f9;
-      --text-muted: #94a3b8;
-      --border-soft: rgba(255, 255, 255, 0.08);
+      --text-white: #0f172a;
+      --text-light: #334155;
+      --text-muted: #64748b;
+      --border-soft: rgba(0, 0, 0, 0.08);
       --radius-sm: 10px;
       --radius-md: 16px;
       --radius-lg: 24px;
@@ -125,7 +125,7 @@
 
     .hero-text {
       font-size: 1.2rem;
-      color: #cbd5e1;
+      color: var(--text-light);
       max-width: 640px;
       margin: 0 auto 2rem;
       line-height: 1.6;
@@ -168,13 +168,13 @@
     }
 
     .btn-outline {
-      background: rgba(255, 255, 255, 0.05);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #ffffff;
+      color: var(--text-white);
+      border: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.06);
       border-color: #ffffff;
       transform: translateY(-2px);
     }
@@ -273,7 +273,7 @@
       padding: 0.75rem 1.4rem;
       border-radius: var(--radius-pill);
       border: 1px solid var(--border-soft);
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(0, 0, 0, 0.02);
       color: var(--text-muted);
       font-family: 'Outfit', sans-serif;
       font-size: 0.98rem;
@@ -287,7 +287,7 @@
 
     .filter-tab:hover {
       color: #ffffff;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.04);
     }
 
     .filter-tab.active {
@@ -330,7 +330,7 @@
       width: 48px;
       height: 48px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(0, 0, 0, 0.04);
       color: #93c5fd;
       display: flex;
       align-items: center;
@@ -354,7 +354,7 @@
       padding: 0.85rem 1rem;
       border-radius: var(--radius-sm);
       background: var(--primary);
-      color: #ffffff;
+      color: var(--text-white);
       border: none;
       font-family: 'Outfit', sans-serif;
       font-size: 1.05rem;
@@ -390,7 +390,7 @@
 
     .modal-box {
       background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: var(--radius-lg);
       width: 100%;
       max-width: 980px;
@@ -424,9 +424,9 @@
     }
 
     .btn-tab-link {
-      background: rgba(255, 255, 255, 0.08);
-      color: #cbd5e1;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--text-light);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       padding: 0.45rem 0.85rem;
       border-radius: var(--radius-sm);
       font-size: 0.88rem;
@@ -440,7 +440,7 @@
 
     .btn-close-modal {
       background: #ef4444;
-      color: #ffffff;
+      color: var(--text-white);
       border: none;
       padding: 0.45rem 1rem;
       border-radius: var(--radius-sm);
@@ -483,8 +483,8 @@
     }
 
     .game-tile {
-      background: #090d16;
-      border: 2px solid rgba(255, 255, 255, 0.1);
+      background: #f1f5f9;
+      border: 2px solid rgba(0, 0, 0, 0.06);
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
@@ -513,7 +513,7 @@
 
     /* Rodapé */
     .site-footer {
-      background: #090d16;
+      background: #f1f5f9;
       border-top: 1px solid var(--border-soft);
       padding: 3.5rem 1.25rem 2.5rem;
       text-align: center;
@@ -620,40 +620,6 @@
       </div>
     </header>
 
-    <!-- O QUE POSSO FAZER -->
-    <section class="section-box">
-      <div class="section-intro">
-        <h2>Como Posso Te Ajudar?</h2>
-        <p>Soluções simples, sem palavras difíceis e fáceis de usar no celular.</p>
-      </div>
-
-      <div class="cards-row">
-        <div class="info-card">
-          <div class="info-icon">
-            <i data-lucide="globe" style="width: 26px; height: 26px;"></i>
-          </div>
-          <h3>Sites e Páginas na Internet</h3>
-          <p>Seu negócio aparece de forma bonita e profissional para qualquer pessoa que pesquisar no celular ou no computador.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="info-icon" style="background: rgba(22, 163, 74, 0.15); color: #4ade80;">
-            <i data-lucide="shopping-bag" style="width: 26px; height: 26px;"></i>
-          </div>
-          <h3>Pedidos no WhatsApp</h3>
-          <p>O cliente escolhe os produtos, clica em comprar e a lista do pedido já chega pronta no seu WhatsApp, sem taxas de aplicativos.</p>
-        </div>
-
-        <div class="info-card">
-          <div class="info-icon" style="background: rgba(147, 51, 234, 0.15); color: #c084fc;">
-            <i data-lucide="calendar" style="width: 26px; height: 26px;"></i>
-          </div>
-          <h3>Agendamentos e Atendimento</h3>
-          <p>Ideal para barbearias, salões de beleza e consultórios para os clientes marcarem horários rapidamente.</p>
-        </div>
-      </div>
-    </section>
-
     <!-- TODOS OS PROJETOS UNIFICADOS -->
     <section id="exemplos" class="section-box">
       <div class="section-intro">
@@ -690,11 +656,11 @@
               <div class="item-icon" style="background: rgba(234, 88, 12, 0.15); color: #f97316;">
                 <i data-lucide="cog" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Metalúrgica Alfa</h3>
+              <h3>Site de Metalúrgica</h3>
             </div>
             <p class="item-desc">Apresentação industrial completa: catálogo de usinagem, caldeiraria, corte a laser e formulário rápido de cotação de peças.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Metalúrgica Alfa | Soluções Industriais', './projetos/metalurgica/')">
+          <button class="btn-test-card" onclick="openPreview('Site de Metalúrgica', './projetos/metalurgica/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
@@ -706,11 +672,11 @@
               <div class="item-icon" style="background: rgba(124, 58, 237, 0.15); color: #c084fc;">
                 <i data-lucide="activity" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Dra. Fernanda Fonoaudiologia</h3>
+              <h3>Site de Fonoaudiologia</h3>
             </div>
             <p class="item-desc">Site completo para clínica de fonoaudiologia com fotos do consultório, tratamentos e agendamento de consultas.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Dra. Fernanda Roberta | Fonoaudiologia', './projetos/fernanda-fono/')">
+          <button class="btn-test-card" onclick="openPreview('Site de Fonoaudiologia', './projetos/fernanda-fono/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
@@ -722,11 +688,11 @@
               <div class="item-icon" style="background: rgba(154, 52, 18, 0.15); color: #fb923c;">
                 <i data-lucide="tag" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Maison Nilo Boutique</h3>
+              <h3>Loja de Roupa</h3>
             </div>
             <p class="item-desc">Vitrine de alta moda com lookbook, seleção de tamanhos, sacola interativa e envio do pedido no WhatsApp.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Maison Nilo | Boutique de Moda', './projetos/loja-roupas/')">
+          <button class="btn-test-card" onclick="openPreview('Loja de Roupa', './projetos/loja-roupas/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
@@ -738,11 +704,11 @@
               <div class="item-icon" style="background: rgba(197, 168, 128, 0.15); color: #e6ca9f;">
                 <i data-lucide="scale" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Junqueira & Associados Advocacia</h3>
+              <h3>Site de Advocacia</h3>
             </div>
             <p class="item-desc">Portal jurídico de alto padrão com áreas de atuação, perguntas frequentes e formulário de consulta imediata.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Junqueira & Associados Advocacia', './projetos/advocacia/')">
+          <button class="btn-test-card" onclick="openPreview('Site de Advocacia', './projetos/advocacia/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
@@ -754,7 +720,7 @@
               <div class="item-icon" style="background: rgba(180, 83, 9, 0.15); color: #f59e0b;">
                 <i data-lucide="coffee" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Padaria Artesanal Forno D'Ouro</h3>
+              <h3>Site de Padaria</h3>
             </div>
             <p class="item-desc">Cardápio ilustrado de pães de fermentação natural, bolos e cafés com montagem de cesta e pedidos para entrega.</p>
           </div>
@@ -770,11 +736,11 @@
               <div class="item-icon" style="background: rgba(37, 99, 235, 0.15); color: #60a5fa;">
                 <i data-lucide="calculator" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>PDV Frente de Caixa Mercadinho</h3>
+              <h3>Sistema de PDV para Mercado</h3>
             </div>
             <p class="item-desc">Sistema realista de caixa de supermercado: registro de compras com bipe sonoro, formas de pagamento e emissão de cupom.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('PDV Caixa Express | Sistema de Caixa', './projetos/pdv-mercado/')">
+          <button class="btn-test-card" onclick="openPreview('Sistema de PDV para Mercado', './projetos/pdv-mercado/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
@@ -786,11 +752,11 @@
               <div class="item-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">
                 <i data-lucide="store" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Bazar Centro Comercial</h3>
+              <h3>Vitrine de Loja</h3>
             </div>
             <p class="item-desc">Página de loja moderna para destacar novidades da semana, catálogo de produtos em oferta e atendimento rápido.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Bazar Centro | Vitrine de Loja', './projetos/page-loja/')">
+          <button class="btn-test-card" onclick="openPreview('Vitrine de Loja', './projetos/page-loja/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
@@ -802,7 +768,7 @@
               <div class="item-icon">
                 <i data-lucide="utensils" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Cardápio Burger Express</h3>
+              <h3>Catálogo de Pedidos</h3>
             </div>
             <p class="item-desc">O cliente escolhe os lanches e bebidas e manda o pedido prontinho direto para o WhatsApp da lanchonete.</p>
           </div>
@@ -818,7 +784,7 @@
               <div class="item-icon">
                 <i data-lucide="scissors" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Barbearia & Salão</h3>
+              <h3>Site de Barbearia</h3>
             </div>
             <p class="item-desc">Página para colocar no Instagram com fotos dos cortes, valores de serviços e agendamento fácil.</p>
           </div>
@@ -834,11 +800,11 @@
               <div class="item-icon" style="background: rgba(22, 163, 74, 0.15); color: #4ade80;">
                 <i data-lucide="wallet" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Nexo Finance Web</h3>
+              <h3>App de Finanças Pessoais</h3>
             </div>
             <p class="item-desc">Aplicativo prático para controle de receitas, despesas diárias e planejamento financeiro pessoal.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Nexo Finance | App Financeiro', './projetos/app-financas-pessoais/')">
+          <button class="btn-test-card" onclick="openPreview('App de Finanças Pessoais', './projetos/app-financas-pessoais/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
@@ -850,11 +816,11 @@
               <div class="item-icon" style="background: rgba(14, 165, 233, 0.15); color: #38bdf8;">
                 <i data-lucide="stethoscope" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Consultório Médico & Saúde</h3>
+              <h3>Site Médico e de Clínicas</h3>
             </div>
             <p class="item-desc">Página para clínicas e médicos apresentarem especialidades, corpo clínico e canais de agendamento.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Consultório Médico & Saúde', './projetos/profissional-saude/')">
+          <button class="btn-test-card" onclick="openPreview('Site Médico e de Clínicas', './projetos/profissional-saude/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
@@ -866,11 +832,11 @@
               <div class="item-icon">
                 <i data-lucide="award" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Cartão Fidelidade Digital</h3>
+              <h3>Sistema de Fidelidade</h3>
             </div>
             <p class="item-desc">Substitui o papelzinho por um cartão no celular do cliente para juntar selos e ganhar prêmios.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Cartão Fidelidade Digital', './projetos/sistema-fidelidade/')">
+          <button class="btn-test-card" onclick="openPreview('Sistema de Fidelidade', './projetos/sistema-fidelidade/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Testar Este Modelo
           </button>
         </div>
@@ -882,7 +848,7 @@
               <div class="item-icon">
                 <i data-lucide="landmark" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Site Oficial da Igreja IASD</h3>
+              <h3>Site de Igreja</h3>
             </div>
             <p class="item-desc">Portal completo com história de 60 anos, transmissão de rádio web, bíblia integrada e horários de cultos.</p>
           </div>
@@ -891,34 +857,34 @@
           </a>
         </div>
 
-        <!-- 14. Jogo da Velha Moderno -->
+        <!-- 14. Jogo da Velha (Modo Moderno) -->
         <div class="project-item" data-cat="jogos">
           <div>
             <div class="item-header">
               <div class="item-icon">
                 <i data-lucide="gamepad-2" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Jogo da Velha Moderno</h3>
+              <h3>Jogo da Velha (Modo Moderno)</h3>
             </div>
             <p class="item-desc">Interface moderna com inteligência artificial, efeitos visuais e sons para partidas rápidas.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Jogo da Velha Moderno', './projetos/jogo-moderno/')">
+          <button class="btn-test-card" onclick="openPreview('Jogo da Velha (Modo Moderno)', './projetos/jogo-moderno/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Jogar Agora
           </button>
         </div>
 
-        <!-- 15. Jogo da Velha Clássico -->
+        <!-- 15. Jogo da Velha (Modo Retrô) -->
         <div class="project-item" data-cat="jogos">
           <div>
             <div class="item-header">
-              <div class="item-icon" style="background: rgba(100, 116, 139, 0.15); color: #cbd5e1;">
+              <div class="item-icon" style="background: rgba(100, 116, 139, 0.15); color: var(--text-light);">
                 <i data-lucide="grid" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Jogo da Velha Clássico</h3>
+              <h3>Jogo da Velha (Modo Retrô)</h3>
             </div>
             <p class="item-desc">Versão minimalista e retrô com regras tradicionais para testar a lógica no navegador.</p>
           </div>
-          <button class="btn-test-card" onclick="openPreview('Jogo da Velha Clássico', './projetos/jogo-classico/')">
+          <button class="btn-test-card" onclick="openPreview('Jogo da Velha (Modo Retrô)', './projetos/jogo-classico/')">
             <i data-lucide="play" style="width: 18px; height: 18px;"></i> Jogar Agora
           </button>
         </div>
@@ -930,7 +896,7 @@
               <div class="item-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
                 <i data-lucide="cpu" style="width: 24px; height: 24px;"></i>
               </div>
-              <h3>Tic-Tac-Toe Multi-Linguagem</h3>
+              <h3>Portfólio de Códigos (Tic-Tac-Toe)</h3>
             </div>
             <p class="item-desc">Estudo de lógica e engenharia de software implementando o jogo em C, Python, Java e Lua.</p>
           </div>
@@ -942,6 +908,41 @@
       </div>
     </section>
 
+    <!-- O QUE POSSO FAZER -->
+    <section class="section-box">
+      <div class="section-intro">
+        <h2>Como Posso Te Ajudar?</h2>
+        <p>Soluções simples, sem palavras difíceis e fáceis de usar no celular.</p>
+      </div>
+
+      <div class="cards-row">
+        <div class="info-card">
+          <div class="info-icon">
+            <i data-lucide="globe" style="width: 26px; height: 26px;"></i>
+          </div>
+          <h3>Sites e Páginas na Internet</h3>
+          <p>Seu negócio aparece de forma bonita e profissional para qualquer pessoa que pesquisar no celular ou no computador.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon" style="background: rgba(22, 163, 74, 0.15); color: #4ade80;">
+            <i data-lucide="shopping-bag" style="width: 26px; height: 26px;"></i>
+          </div>
+          <h3>Pedidos no WhatsApp</h3>
+          <p>O cliente escolhe os produtos, clica em comprar e a lista do pedido já chega pronta no seu WhatsApp, sem taxas de aplicativos.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon" style="background: rgba(147, 51, 234, 0.15); color: #c084fc;">
+            <i data-lucide="calendar" style="width: 26px; height: 26px;"></i>
+          </div>
+          <h3>Agendamentos e Atendimento</h3>
+          <p>Ideal para barbearias, salões de beleza e consultórios para os clientes marcarem horários rapidamente.</p>
+        </div>
+      </div>
+    </section>
+
+    
     <!-- BRINCADEIRA RÁPIDA: JOGO DA VELHA NA PÁGINA -->
     <section class="game-box">
       <h2 style="font-size: 1.8rem; margin-bottom: 0.3rem;">Quer Jogar uma Partida Rápida?</h2>
