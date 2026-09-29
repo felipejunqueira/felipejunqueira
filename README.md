@@ -1,6 +1,6 @@
 # Hi, I'm Felipe Junqueira 👋
 
-Computer Science student at the Federal University of ABC (UFABC) with a strong foundation in Systems Development (ETEC). Passionate about algorithms, computational theory, quantum computing, and software engineering.
+Computer Science student at the Federal University of ABC (UFABC) with a strong foundation in Systems Development. Passionate about algorithms, computational theory, quantum computing, and software engineering.
 
 ---
 
@@ -9,7 +9,7 @@ Computer Science student at the Federal University of ABC (UFABC) with a strong 
 - 🎓 **Education:** 
   - B.S. in Computer Science — Universidade Federal do ABC (UFABC)
   - B.S. in Science and Technology — Universidade Federal do ABC (UFABC)
-  - Technical Degree in Systems Analysis and Development — ETEC de Sapopemba
+  - Technical Degree in Systems Analysis and Development
 - 🔬 **Research:** Undergraduate Researcher in **Quantum Computing & Quantum Algorithms** (Qiskit, QFT, Shor, Grover, Phase Estimation).
 - 🏆 **Teaching & Mentorship:** Instructor and co-organizer for competitive programming workshops (preparatory for Brazilian Olympiad in Informatics - OBI).
 - 💡 **Interests:** Algorithms & Data Structures, Discrete Mathematics, Quantum Information, Systems Programming, Web Technologies.
