@@ -1,0 +1,814 @@
+filepath = '/home/felipe/mycodes/felipejunqueira/index.html'
+
+html = '''<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Felipe Junqueira Leite — Criação de sites modernos, lojas digitais e sistemas simples para o seu negócio.">
+  <title>Nexum Dev | Sites & Sistemas por Felipe Junqueira</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg:        #0f1629;
+      --bg-card:   #1a2540;
+      --bg-card2:  #1f2d4a;
+      --primary:   #3b82f6;
+      --primary-h: #2563eb;
+      --accent:    #38bdf8;
+      --green:     #22c55e;
+      --green-h:   #16a34a;
+      --text-1:    #f0f6ff;
+      --text-2:    #94a3b8;
+      --text-3:    #64748b;
+      --border:    rgba(255,255,255,0.07);
+      --glow:      rgba(59,130,246,0.25);
+      --r-sm: 10px; --r-md: 18px; --r-lg: 28px; --r-pill: 9999px;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-2);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: 16px;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(59,130,246,0.15), transparent),
+        radial-gradient(ellipse 50% 30% at 80% 70%, rgba(56,189,248,0.07), transparent);
+    }
+
+    h1,h2,h3,h4 { font-family:'Outfit',sans-serif; font-weight:700; color:var(--text-1); line-height:1.2; }
+
+    .container { width:100%; max-width:1060px; margin:0 auto; padding:0 1.25rem; }
+
+    /* ───── NAV BAR ───── */
+    .top-bar {
+      position: sticky; top:0; z-index:200;
+      background: rgba(15,22,41,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.25rem;
+    }
+    .top-bar-inner { max-width:1060px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    .brand-mark { display:flex; align-items:center; gap:0.6rem; text-decoration:none; }
+    .brand-dot { width:10px; height:10px; border-radius:50%; background:var(--primary); box-shadow:0 0 8px var(--primary); }
+    .brand-name { font-family:'Outfit',sans-serif; font-weight:800; font-size:1.15rem; color:var(--text-1); letter-spacing:-0.02em; }
+    .brand-name span { color:var(--accent); }
+    .top-wa-btn {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background: var(--green); color:#fff; border:none;
+      padding:0.55rem 1.2rem; border-radius:var(--r-pill);
+      font-family:'Outfit',sans-serif; font-weight:700; font-size:0.9rem;
+      text-decoration:none; transition: background 0.2s, transform 0.15s;
+    }
+    .top-wa-btn:hover { background:var(--green-h); transform:translateY(-1px); }
+
+    /* ───── HERO ───── */
+    .hero {
+      text-align:center;
+      padding: 5rem 1.25rem 4rem;
+    }
+    .logo-wrap {
+      position:relative;
+      width:130px; height:130px;
+      margin:0 auto 2rem;
+    }
+    .logo-ring {
+      position:absolute; inset:-8px;
+      border-radius:50%;
+      background: conic-gradient(from 0deg, var(--primary), var(--accent), var(--primary));
+      animation: spin 6s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .logo-inner {
+      position:relative;
+      width:100%; height:100%;
+      border-radius:50%;
+      background:var(--bg-card);
+      border:4px solid var(--bg);
+      overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .logo-inner img {
+      width:100%; height:100%;
+      object-fit:cover;
+      border-radius:50%;
+    }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:0.45rem;
+      background:rgba(59,130,246,0.12); border:1px solid rgba(59,130,246,0.25);
+      color:var(--accent); font-size:0.82rem; font-weight:600;
+      padding:0.35rem 0.9rem; border-radius:var(--r-pill);
+      margin-bottom:1.25rem;
+      font-family:'Outfit',sans-serif;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      font-weight:800; letter-spacing:-0.03em;
+      color:var(--text-1);
+      margin-bottom:0.3rem;
+    }
+    .hero-by {
+      font-size:1rem; color:var(--text-2); margin-bottom:1.2rem;
+    }
+    .hero-by a { color:var(--accent); text-decoration:none; font-weight:600; transition:color 0.2s; }
+    .hero-by a:hover { color:var(--primary); }
+    .hero-desc {
+      font-size:1.15rem; color:var(--text-2);
+      max-width:580px; margin:0 auto 2.5rem;
+      line-height:1.7;
+    }
+    .hero-desc strong { color:var(--text-1); }
+
+    /* ───── BOTÕES ───── */
+    .btn-row { display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin-bottom:2rem; }
+    .btn-primary {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color:#fff; border:none; border-radius:var(--r-md);
+      padding:1rem 2rem; font-family:'Outfit',sans-serif;
+      font-size:1.1rem; font-weight:700; text-decoration:none;
+      cursor:pointer; transition:opacity 0.2s, transform 0.15s;
+      box-shadow: 0 6px 24px rgba(59,130,246,0.4);
+    }
+    .btn-primary:hover { opacity:0.9; transform:translateY(-2px); }
+    .btn-secondary {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+      color:var(--text-1); border-radius:var(--r-md);
+      padding:1rem 2rem; font-family:'Outfit',sans-serif;
+      font-size:1.1rem; font-weight:700; text-decoration:none;
+      cursor:pointer; transition:background 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover { background:rgba(255,255,255,0.1); transform:translateY(-2px); }
+    .btn-green-big {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      background: var(--green); color:#fff; border:none;
+      border-radius:var(--r-md); padding:1rem 2rem;
+      font-family:'Outfit',sans-serif; font-size:1.1rem; font-weight:700;
+      text-decoration:none; cursor:pointer;
+      box-shadow: 0 6px 24px rgba(34,197,94,0.35);
+      transition:background 0.2s, transform 0.15s;
+    }
+    .btn-green-big:hover { background:var(--green-h); transform:translateY(-2px); }
+
+    /* ───── LINKS SOCIAIS ───── */
+    .social-links { display:flex; flex-wrap:wrap; justify-content:center; gap:1.25rem; margin-top:0.5rem; }
+    .social-links a {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      color:var(--text-3); font-size:0.95rem; text-decoration:none;
+      transition:color 0.2s;
+    }
+    .social-links a:hover { color:var(--accent); }
+
+    /* ───── DIVIDER ───── */
+    .divider { border:none; border-top:1px solid var(--border); margin:0; }
+
+    /* ───── SEÇÃO COMUM ───── */
+    .section { padding:4rem 0; }
+    .section-head { text-align:center; margin-bottom:2.5rem; }
+    .section-tag {
+      display:inline-block; font-family:'Outfit',sans-serif; font-size:0.75rem;
+      font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+      color:var(--accent); margin-bottom:0.6rem;
+    }
+    .section-head h2 { font-size:clamp(1.8rem,4vw,2.4rem); margin-bottom:0.5rem; }
+    .section-head p { color:var(--text-2); font-size:1.05rem; max-width:500px; margin:0 auto; }
+
+    /* ───── CARDS DE SERVIÇO ───── */
+    .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.25rem; }
+    .svc-card {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--r-md); padding:1.75rem;
+      display:flex; flex-direction:column; gap:1rem;
+      transition:border-color 0.25s, transform 0.2s;
+    }
+    .svc-card:hover { border-color:rgba(59,130,246,0.4); transform:translateY(-3px); }
+    .svc-icon {
+      width:52px; height:52px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .svc-card h3 { font-size:1.15rem; }
+    .svc-card p { color:var(--text-2); font-size:0.95rem; }
+
+    /* ───── FILTRO ───── */
+    .filter-bar { display:flex; flex-wrap:wrap; justify-content:center; gap:0.55rem; margin-bottom:2rem; }
+    .ftab {
+      padding:0.6rem 1.3rem; border-radius:var(--r-pill);
+      border:1px solid var(--border); background:rgba(255,255,255,0.04);
+      color:var(--text-3); font-family:'Outfit',sans-serif;
+      font-size:0.9rem; font-weight:600; cursor:pointer;
+      display:inline-flex; align-items:center; gap:0.45rem;
+      transition:all 0.2s; white-space:nowrap;
+    }
+    .ftab:hover { color:var(--text-1); background:rgba(255,255,255,0.07); }
+    .ftab.active { background:var(--primary); border-color:var(--primary); color:#fff; box-shadow:0 4px 14px var(--glow); }
+
+    /* ───── GRADE PROJETOS ───── */
+    .project-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.25rem; }
+    .pcard {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--r-md); padding:1.5rem;
+      display:flex; flex-direction:column; justify-content:space-between;
+      transition:border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+    }
+    .pcard:hover {
+      border-color:rgba(59,130,246,0.4); transform:translateY(-4px);
+      box-shadow:0 12px 32px rgba(0,0,0,0.3);
+    }
+    .pcard-head { display:flex; align-items:center; gap:0.9rem; margin-bottom:0.9rem; }
+    .pcard-icon { width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .pcard-head h3 { font-size:1.1rem; }
+    .pcard-desc { color:var(--text-2); font-size:0.92rem; line-height:1.55; margin-bottom:1.25rem; }
+    .pcard-btn {
+      width:100%; padding:0.8rem; border-radius:var(--r-sm);
+      background:var(--primary); color:#fff; border:none;
+      font-family:'Outfit',sans-serif; font-size:1rem; font-weight:700;
+      cursor:pointer; display:inline-flex; align-items:center;
+      justify-content:center; gap:0.5rem; text-decoration:none;
+      transition:background 0.2s;
+    }
+    .pcard-btn:hover { background:var(--primary-h); }
+
+    /* ───── MODAL ───── */
+    .modal-backdrop {
+      position:fixed; inset:0; background:rgba(0,0,0,0.88);
+      z-index:9999; display:none; align-items:center; justify-content:center; padding:1rem;
+    }
+    .modal-backdrop.open { display:flex; }
+    .modal-box {
+      background:#1a2540; border:1px solid rgba(255,255,255,0.12);
+      border-radius:var(--r-lg); width:100%; max-width:980px;
+      height:88vh; display:flex; flex-direction:column; overflow:hidden;
+    }
+    .modal-top {
+      padding:0.9rem 1.2rem; background:#111827;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .modal-title { font-size:1.05rem; font-weight:700; color:var(--text-1); display:flex; align-items:center; gap:0.5rem; }
+    .modal-btns { display:flex; gap:0.5rem; }
+    .btn-new-tab {
+      background:rgba(255,255,255,0.08); color:var(--text-2); border:1px solid rgba(255,255,255,0.1);
+      padding:0.4rem 0.8rem; border-radius:8px; font-size:0.82rem; font-weight:600;
+      cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:0.3rem;
+    }
+    .btn-close { background:#ef4444; color:#fff; border:none; padding:0.4rem 0.9rem; border-radius:8px; font-size:0.82rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.3rem; }
+    .btn-close:hover { background:#dc2626; }
+    .modal-frame { width:100%; height:100%; border:none; background:#fff; }
+
+    /* ───── JOGO ───── */
+    .game-section {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--r-lg); padding:3rem 1.5rem;
+      text-align:center; margin-bottom:4rem;
+    }
+    .game-grid {
+      display:grid; grid-template-columns:repeat(3,88px); grid-template-rows:repeat(3,88px);
+      gap:10px; margin:1.5rem auto; width:fit-content;
+    }
+    .gtile {
+      background:var(--bg); border:2px solid rgba(255,255,255,0.08);
+      border-radius:14px; display:flex; align-items:center; justify-content:center;
+      font-family:'Outfit',sans-serif; font-size:2.5rem; font-weight:800;
+      cursor:pointer; user-select:none; transition:border-color 0.15s;
+    }
+    .gtile:hover { border-color:var(--primary); }
+    .gtile.xtile { color:var(--accent); }
+    .gtile.otile { color:#f87171; }
+    .game-msg { font-size:1.05rem; font-weight:600; color:var(--accent); min-height:1.8rem; margin-bottom:1rem; }
+
+    /* ───── RODAPÉ ───── */
+    .site-footer {
+      background:#0a1020; border-top:1px solid var(--border);
+      padding:4rem 1.25rem 3rem; text-align:center; margin-top:auto;
+    }
+    .footer-inner { max-width:580px; margin:0 auto; }
+    .site-footer h2 { font-size:clamp(1.6rem,4vw,2.2rem); margin-bottom:0.6rem; }
+    .site-footer p { color:var(--text-2); margin-bottom:1.75rem; font-size:1rem; }
+    .footer-credit { margin-top:2.5rem; font-size:0.82rem; color:var(--text-3); }
+    .footer-credit a { color:var(--accent); text-decoration:none; font-weight:600; }
+    .footer-credit a:hover { color:var(--primary); }
+
+    /* ───── FLOAT WA ───── */
+    .float-wa {
+      position:fixed; bottom:1.5rem; right:1.5rem;
+      width:58px; height:58px; border-radius:50%;
+      background:var(--green); color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 6px 20px rgba(34,197,94,0.45);
+      z-index:100; text-decoration:none; transition:transform 0.2s;
+    }
+    .float-wa:hover { transform:scale(1.1); }
+
+    /* ───── MOBILE ───── */
+    @media (max-width:640px) {
+      .hero { padding:3.5rem 1rem 3rem; }
+      .btn-row { flex-direction:column; }
+      .btn-primary, .btn-secondary, .btn-green-big { width:100%; justify-content:center; }
+      .social-links { flex-direction:column; align-items:center; gap:0.7rem; }
+      .game-grid { grid-template-columns:repeat(3,78px); grid-template-rows:repeat(3,78px); }
+      .modal-backdrop { padding:0; }
+      .modal-box { height:97vh; border-radius:0; }
+      .filter-bar { justify-content:flex-start; overflow-x:auto; padding-bottom:0.4rem; -webkit-overflow-scrolling:touch; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="top-bar">
+    <div class="top-bar-inner">
+      <a href="#" class="brand-mark">
+        <div class="brand-dot"></div>
+        <span class="brand-name">Nexum<span>Dev</span></span>
+      </a>
+      <a href="https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Vi%20seu%20site%20e%20quero%20um%20or%C3%A7amento" target="_blank" class="top-wa-btn">
+        <i data-lucide="message-circle" style="width:16px;height:16px;"></i>
+        WhatsApp
+      </a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="logo-wrap">
+        <div class="logo-ring"></div>
+        <div class="logo-inner">
+          <img src="assets/images/logo.jpg?v=1" alt="Logo Nexum Dev">
+        </div>
+      </div>
+
+      <div class="hero-badge">
+        <i data-lucide="zap" style="width:13px;height:13px;"></i>
+        Desenvolvimento Web & Sistemas
+      </div>
+
+      <h1>Nexum Dev</h1>
+      <p class="hero-by">por <a href="https://github.com/felipejunqueira" target="_blank">Felipe Junqueira Leite</a> &nbsp;·&nbsp; Ciência da Computação, UFABC</p>
+
+      <p class="hero-desc">
+        Crio <strong>sites modernos</strong>, <strong>lojas digitais com pedidos pelo WhatsApp</strong> e <strong>sistemas fáceis de usar</strong> para ajudar o seu negócio a vender mais na internet.
+      </p>
+
+      <div class="btn-row">
+        <a href="https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Vi%20seu%20site%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto" target="_blank" class="btn-green-big">
+          <i data-lucide="message-circle" style="width:20px;height:20px;"></i>
+          Falar no WhatsApp
+        </a>
+        <a href="#exemplos" class="btn-secondary">
+          <i data-lucide="eye" style="width:20px;height:20px;"></i>
+          Ver Projetos
+        </a>
+      </div>
+
+      <div class="social-links">
+        <a href="https://wa.me/5511983909578" target="_blank"><i data-lucide="phone" style="width:15px;height:15px;"></i> (11) 98390-9578</a>
+        <a href="https://github.com/felipejunqueira" target="_blank"><i data-lucide="github" style="width:15px;height:15px;"></i> GitHub</a>
+        <a href="https://www.linkedin.com/in/felipe-j-135531262" target="_blank"><i data-lucide="linkedin" style="width:15px;height:15px;"></i> LinkedIn</a>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- PROJETOS -->
+    <section id="exemplos" class="section">
+      <div class="section-head">
+        <span class="section-tag">Portfólio</span>
+        <h2>Modelos de Projetos</h2>
+        <p>Clique em qualquer projeto para testar ao vivo — funciona no celular e no computador.</p>
+      </div>
+
+      <div class="filter-bar">
+        <button class="ftab active" onclick="filterCat(\'all\',this)"><i data-lucide="layout-grid" style="width:15px;height:15px;"></i> Todos (16)</button>
+        <button class="ftab" onclick="filterCat(\'comercio\',this)"><i data-lucide="store" style="width:15px;height:15px;"></i> Lojas &amp; Vendas</button>
+        <button class="ftab" onclick="filterCat(\'servicos\',this)"><i data-lucide="briefcase" style="width:15px;height:15px;"></i> Serviços</button>
+        <button class="ftab" onclick="filterCat(\'institucional\',this)"><i data-lucide="building" style="width:15px;height:15px;"></i> Portais</button>
+        <button class="ftab" onclick="filterCat(\'jogos\',this)"><i data-lucide="gamepad-2" style="width:15px;height:15px;"></i> Jogos</button>
+      </div>
+
+      <div class="project-grid" id="project-list">
+
+        <div class="pcard" data-cat="servicos">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(234,88,12,0.15);color:#f97316;"><i data-lucide="cog" style="width:22px;height:22px;"></i></div>
+              <h3>Site de Metalúrgica</h3>
+            </div>
+            <p class="pcard-desc">Catálogo industrial: usinagem, caldeiraria, corte a laser e formulário de cotação de peças.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Site de Metalúrgica\',\'./projetos/metalurgica/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="servicos">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(124,58,237,0.15);color:#c084fc;"><i data-lucide="activity" style="width:22px;height:22px;"></i></div>
+              <h3>Site de Fonoaudiologia</h3>
+            </div>
+            <p class="pcard-desc">Site clínico com especialidades, fotos do consultório e agendamento de consultas.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Site de Fonoaudiologia\',\'./projetos/fernanda-fono/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="comercio">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(154,52,18,0.15);color:#fb923c;"><i data-lucide="tag" style="width:22px;height:22px;"></i></div>
+              <h3>Loja de Roupa</h3>
+            </div>
+            <p class="pcard-desc">Vitrine de moda com lookbook, seleção de tamanhos, sacola interativa e pedido pelo WhatsApp.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Loja de Roupa\',\'./projetos/loja-roupas/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="servicos">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(197,168,128,0.15);color:#e6ca9f;"><i data-lucide="scale" style="width:22px;height:22px;"></i></div>
+              <h3>Site de Advocacia</h3>
+            </div>
+            <p class="pcard-desc">Portal jurídico de alto padrão com áreas de atuação, FAQ e formulário de consulta.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Site de Advocacia\',\'./projetos/advocacia/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="comercio">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(180,83,9,0.15);color:#f59e0b;"><i data-lucide="coffee" style="width:22px;height:22px;"></i></div>
+              <h3>Site de Padaria</h3>
+            </div>
+            <p class="pcard-desc">Cardápio ilustrado de pães artesanais, bolos e cafés com montagem de cesta para entrega.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Site de Padaria\',\'./projetos/padaria/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="comercio">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(37,99,235,0.15);color:#60a5fa;"><i data-lucide="calculator" style="width:22px;height:22px;"></i></div>
+              <h3>Sistema de PDV para Mercado</h3>
+            </div>
+            <p class="pcard-desc">Caixa de supermercado: registro com bipe sonoro, formas de pagamento e emissão de cupom.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Sistema PDV\',\'./projetos/pdv-mercado/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="comercio">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(168,85,247,0.15);color:#c084fc;"><i data-lucide="store" style="width:22px;height:22px;"></i></div>
+              <h3>Vitrine de Loja</h3>
+            </div>
+            <p class="pcard-desc">Página moderna para destacar novidades, catálogo em oferta e atendimento rápido.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Vitrine de Loja\',\'./projetos/page-loja/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="comercio">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(234,88,12,0.15);color:#fb923c;"><i data-lucide="utensils" style="width:22px;height:22px;"></i></div>
+              <h3>Catálogo de Pedidos</h3>
+            </div>
+            <p class="pcard-desc">Cardápio digital para lanchonetes e restaurantes: produtos, combos e pedidos pelo WhatsApp.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Catálogo de Pedidos\',\'./projetos/burger/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="servicos">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(16,185,129,0.15);color:#34d399;"><i data-lucide="scissors" style="width:22px;height:22px;"></i></div>
+              <h3>Site de Barbearia</h3>
+            </div>
+            <p class="pcard-desc">Site para salão com serviços, preços, agendamento online e galeria de trabalhos.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Site de Barbearia\',\'./projetos/barbearia/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="servicos">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(99,102,241,0.15);color:#818cf8;"><i data-lucide="trending-up" style="width:22px;height:22px;"></i></div>
+              <h3>App de Finanças Pessoais</h3>
+            </div>
+            <p class="pcard-desc">Dashboard para controlar receitas, despesas e visualizar gráficos financeiros no celular.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'App de Finanças\',\'./projetos/financas/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="servicos">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(20,184,166,0.15);color:#2dd4bf;"><i data-lucide="stethoscope" style="width:22px;height:22px;"></i></div>
+              <h3>Site Médico e de Clínicas</h3>
+            </div>
+            <p class="pcard-desc">Portal médico com especialidades, convênios aceitos e agendamento de consultas online.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Site Médico\',\'./projetos/consultorio/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="comercio">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(245,158,11,0.15);color:#fbbf24;"><i data-lucide="award" style="width:22px;height:22px;"></i></div>
+              <h3>Sistema de Fidelidade</h3>
+            </div>
+            <p class="pcard-desc">Cartão digital de fidelidade: cliente acumula pontos e resgata prêmios facilmente.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Sistema de Fidelidade\',\'./projetos/fidelidade/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="institucional">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(16,185,129,0.15);color:#34d399;"><i data-lucide="landmark" style="width:22px;height:22px;"></i></div>
+              <h3>Site de Igreja</h3>
+            </div>
+            <p class="pcard-desc">Portal completo com 60 anos de história, rádio web, bíblia integrada e horários de cultos.</p>
+          </div>
+          <a href="https://felipejunqueira.github.io/iasd-sao-mateus/" target="_blank" class="pcard-btn">
+            <i data-lucide="external-link" style="width:16px;height:16px;"></i> Acessar o Site
+          </a>
+        </div>
+
+        <div class="pcard" data-cat="institucional">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(99,102,241,0.15);color:#818cf8;"><i data-lucide="school" style="width:22px;height:22px;"></i></div>
+              <h3>Portal Institucional</h3>
+            </div>
+            <p class="pcard-desc">Site completo para escola, associação ou ONG: eventos, notícias, galeria e formulário de contato.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Portal Institucional\',\'./projetos/institucional/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Testar ao Vivo
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="jogos">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(59,130,246,0.15);color:#60a5fa;"><i data-lucide="gamepad-2" style="width:22px;height:22px;"></i></div>
+              <h3>Jogo da Velha (Moderno)</h3>
+            </div>
+            <p class="pcard-desc">Interface moderna com inteligência artificial, efeitos visuais e sons para partidas rápidas.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Jogo da Velha Moderno\',\'./projetos/jogo-moderno/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Jogar Agora
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="jogos">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(100,116,139,0.15);color:#94a3b8;"><i data-lucide="grid" style="width:22px;height:22px;"></i></div>
+              <h3>Jogo da Velha (Retrô)</h3>
+            </div>
+            <p class="pcard-desc">Versão minimalista e clássica para dois jogadores testar a lógica no navegador.</p>
+          </div>
+          <button class="pcard-btn" onclick="openPreview(\'Jogo da Velha Clássico\',\'./projetos/jogo-classico/\')">
+            <i data-lucide="play" style="width:16px;height:16px;"></i> Jogar Agora
+          </button>
+        </div>
+
+        <div class="pcard" data-cat="jogos">
+          <div>
+            <div class="pcard-head">
+              <div class="pcard-icon" style="background:rgba(245,158,11,0.15);color:#fbbf24;"><i data-lucide="cpu" style="width:22px;height:22px;"></i></div>
+              <h3>Portfólio de Códigos</h3>
+            </div>
+            <p class="pcard-desc">Implementação do Tic-Tac-Toe em C, Python, Java e Lua — estudo de lógica e engenharia.</p>
+          </div>
+          <a href="https://github.com/felipejunqueira/tic-tac-toe" target="_blank" class="pcard-btn">
+            <i data-lucide="external-link" style="width:16px;height:16px;"></i> Ver Repositório
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- COMO AJUDO -->
+    <section class="section">
+      <div class="section-head">
+        <span class="section-tag">Serviços</span>
+        <h2>Como Posso Te Ajudar?</h2>
+        <p>Soluções simples, sem termos técnicos e fáceis de usar no celular.</p>
+      </div>
+      <div class="services-grid">
+        <div class="svc-card">
+          <div class="svc-icon" style="background:rgba(59,130,246,0.15);color:#60a5fa;"><i data-lucide="globe" style="width:26px;height:26px;"></i></div>
+          <h3>Sites na Internet</h3>
+          <p>Seu negócio aparece bonito e profissional para qualquer pessoa que pesquisar no celular ou computador.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon" style="background:rgba(34,197,94,0.15);color:#4ade80;"><i data-lucide="shopping-bag" style="width:26px;height:26px;"></i></div>
+          <h3>Pedidos pelo WhatsApp</h3>
+          <p>O cliente escolhe os produtos, clica em comprar e a lista chega pronta no seu WhatsApp, sem taxas de app.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon" style="background:rgba(147,51,234,0.15);color:#c084fc;"><i data-lucide="calendar" style="width:26px;height:26px;"></i></div>
+          <h3>Agendamentos</h3>
+          <p>Ideal para barbearias, salões e consultórios. Os clientes marcam horários rapidamente, sem complicação.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- JOGO -->
+    <section class="game-section">
+      <h2 style="font-size:1.75rem;margin-bottom:0.4rem;">Quer Jogar uma Partida Rápida? 🎮</h2>
+      <p style="font-size:1rem;color:var(--text-2);">Você joga com o <strong style="color:var(--accent);">X</strong>. O computador joga com o <strong style="color:#f87171;">O</strong>. Clique num quadrado!</p>
+
+      <div class="game-msg" id="game-msg">Sua vez! Clique em qualquer quadrado livre.</div>
+
+      <div class="game-grid" id="board">
+        <div class="gtile" onclick="playTurn(0)"></div>
+        <div class="gtile" onclick="playTurn(1)"></div>
+        <div class="gtile" onclick="playTurn(2)"></div>
+        <div class="gtile" onclick="playTurn(3)"></div>
+        <div class="gtile" onclick="playTurn(4)"></div>
+        <div class="gtile" onclick="playTurn(5)"></div>
+        <div class="gtile" onclick="playTurn(6)"></div>
+        <div class="gtile" onclick="playTurn(7)"></div>
+        <div class="gtile" onclick="playTurn(8)"></div>
+      </div>
+
+      <button class="btn-secondary" onclick="resetBoard()" style="padding:0.6rem 1.4rem;font-size:0.95rem;margin-top:0.5rem;">
+        <i data-lucide="rotate-ccw" style="width:16px;height:16px;"></i> Jogar Novamente
+      </button>
+    </section>
+
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-backdrop" id="demo-modal">
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-title">
+          <i data-lucide="eye" style="width:16px;height:16px;color:var(--accent);"></i>
+          <span id="modal-heading">Exemplo de Projeto</span>
+        </div>
+        <div class="modal-btns">
+          <a href="#" target="_blank" id="modal-newtab" class="btn-new-tab">
+            <i data-lucide="external-link" style="width:13px;height:13px;"></i> Nova Aba
+          </a>
+          <button class="btn-close" onclick="closePreview()">
+            <i data-lucide="x" style="width:15px;height:15px;"></i> Fechar
+          </button>
+        </div>
+      </div>
+      <iframe src="" class="modal-frame" id="demo-iframe"></iframe>
+    </div>
+  </div>
+
+  <!-- RODAPÉ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <h2>Quer um Site Assim para o Seu Negócio?</h2>
+      <p>Fale comigo no WhatsApp. Conversa rápida, sem compromisso e sem palavras técnicas difíceis.</p>
+      <a href="https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Gostei%20dos%20seus%20projetos%20e%20gostaria%20de%20um%20or%C3%A7amento" target="_blank" class="btn-green-big" style="font-size:1.15rem;padding:1.1rem 2.2rem;">
+        <i data-lucide="message-circle" style="width:22px;height:22px;"></i>
+        Conversar no WhatsApp: (11) 98390-9578
+      </a>
+      <p class="footer-credit">
+        Nexum Dev &bull; São Paulo - SP &bull; Criado por <a href="https://github.com/felipejunqueira" target="_blank">Felipe Junqueira Leite</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- FLOAT WA -->
+  <a href="https://wa.me/5511983909578?text=Ol%C3%A1%20Felipe!%20Vi%20seu%20site" target="_blank" class="float-wa" title="WhatsApp" aria-label="WhatsApp">
+    <i data-lucide="message-circle" style="width:30px;height:30px;"></i>
+  </a>
+
+  <script>
+    lucide.createIcons();
+
+    function filterCat(cat, btn) {
+      document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#project-list .pcard').forEach(c => {
+        c.style.display = (cat === 'all' || c.getAttribute('data-cat') === cat) ? 'flex' : 'none';
+      });
+    }
+
+    function openPreview(name, url) {
+      document.getElementById('modal-heading').textContent = 'Testando: ' + name;
+      document.getElementById('demo-iframe').src = url;
+      document.getElementById('modal-newtab').href = url;
+      document.getElementById('demo-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePreview() {
+      document.getElementById('demo-modal').classList.remove('open');
+      document.getElementById('demo-iframe').src = '';
+      document.body.style.overflow = 'auto';
+    }
+
+    document.getElementById('demo-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closePreview(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closePreview(); });
+
+    // Jogo da Velha
+    let gs = ['','','','','','','','',''], running = true;
+
+    function playTurn(p) {
+      if (!running || gs[p]) return;
+      gs[p] = 'X'; drawBoard();
+      if (checkWin('X')) { setMsg('<span style="color:#4ade80;">🎉 Você venceu!</span>'); running = false; return; }
+      if (gs.every(v=>v)) { setMsg('<span style="color:#94a3b8;">Empate! Ninguém perdeu.</span>'); running = false; return; }
+      setMsg('O computador está jogando...');
+      setTimeout(compTurn, 300);
+    }
+
+    function compTurn() {
+      if (!running) return;
+      let m = findMove('O'); if (m===null) m = findMove('X');
+      if (m===null && !gs[4]) m = 4;
+      if (m===null) { const f=gs.map((v,i)=>v===''?i:null).filter(v=>v!==null); if(f.length) m=f[Math.floor(Math.random()*f.length)]; }
+      if (m!==null) { gs[m]='O'; drawBoard(); }
+      if (checkWin('O')) { setMsg('<span style="color:#f87171;">O computador ganhou desta vez!</span>'); running = false; return; }
+      if (gs.every(v=>v)) { setMsg('<span style="color:#94a3b8;">Empate! Ninguém perdeu.</span>'); running = false; return; }
+      setMsg('Sua vez! Clique em outro quadrado.');
+    }
+
+    function findMove(mark) {
+      const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+      for (const [a,b,c] of lines) {
+        const cur=[gs[a],gs[b],gs[c]];
+        if (cur.filter(v=>v===mark).length===2 && cur.includes('')) {
+          if (!gs[a]) return a; if (!gs[b]) return b; return c;
+        }
+      }
+      return null;
+    }
+
+    function checkWin(m) {
+      return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].some(l=>l.every(p=>gs[p]===m));
+    }
+
+    function drawBoard() {
+      document.querySelectorAll('#board .gtile').forEach((t,i) => {
+        t.textContent = gs[i]; t.className = 'gtile';
+        if (gs[i]==='X') t.classList.add('xtile');
+        if (gs[i]==='O') t.classList.add('otile');
+      });
+    }
+
+    function resetBoard() {
+      gs = ['','','','','','','','','']; running = true;
+      setMsg('Sua vez! Clique em qualquer quadrado livre.'); drawBoard();
+    }
+
+    function setMsg(html) { document.getElementById('game-msg').innerHTML = html; }
+  </script>
+</body>
+</html>'''
+
+with open(filepath, 'w', encoding='utf-8') as f:
+    f.write(html)
+
+print("Done! File written.")
