@@ -26,6 +26,7 @@ Computer Science student at the Federal University of ABC (UFABC) with a strong 
 
 ### 📫 Connect with Me
 
+- **Website / Business Card:** [felipejunqueira.github.io/felipejunqueira](https://felipejunqueira.github.io/felipejunqueira/)
 - **LinkedIn:** [linkedin.com/in/felipe-j-135531262](https://www.linkedin.com/in/felipe-j-135531262)
 - **GitHub:** [github.com/felipejunqueira](https://github.com/felipejunqueira)
 - **Email:** felipejleite18@gmail.com
