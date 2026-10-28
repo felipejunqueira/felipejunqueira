@@ -24,6 +24,17 @@ Computer Science student at the Federal University of ABC (UFABC) with a strong 
 
 ---
 
+### 📂 Featured Projects & Repositories
+
+- ⚛️ **[Quantum-Algorithms](https://github.com/felipejunqueira/Quantum-Algorithms)** — Undergraduate research in Quantum Computing and Qiskit (BHT, Shor, Grover, Bell states).
+- 🌐 **[iasd-sao-mateus](https://github.com/felipejunqueira/iasd-sao-mateus)** — Accessible, modern web platform following Unix philosophy and responsive design.
+- 📐 **[algorithms-playbook](https://github.com/felipejunqueira/algorithms-playbook)** — Data structures and competitive programming algorithm implementations.
+- 🐧 **[Linux-and-FreeBSD](https://github.com/felipejunqueira/Linux-and-FreeBSD)** — In-depth architectural studies and POSIX comparisons between Linux and FreeBSD kernels.
+- ⚡ **[WebServer-C-Lua-Pallene](https://github.com/felipejunqueira/WebServer-C-Lua-Pallene)** — High-performance HTTP server exploring low-level C, Lua, and Pallene integration.
+- 🔌 **[ProjetoRedes](https://github.com/felipejunqueira/ProjetoRedes)** / **[unix-sock](https://github.com/felipejunqueira/unix-sock)** — POSIX socket networking implementations in C.
+
+---
+
 ### 📫 Connect with Me
 
 - **Website / Business Card:** [felipejunqueira.github.io/felipejunqueira](https://felipejunqueira.github.io/felipejunqueira/)
