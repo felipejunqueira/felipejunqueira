@@ -1,308 +1,910 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Barber Shop Elite - Links</title>
+    <title>Barber Shop Elite | Experiência & Estilo Masculino</title>
+    <meta name="description" content="Barbearia premium com cortes clássicos e modernos, barba terapia com toalha quente, chopp cortesia e atendimento com agendamento online rápido.">
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-    
-    <style>
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes shimmer {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        .animate-fade-in-down { animation: fadeInDown 0.6s ease-out; }
-        .animate-fade-in-up { animation: fadeInUp 0.6s ease-out 0.2s both; }
-        .animate-shimmer { animation: shimmer 3s ease-in-out infinite; }
-        .link-button-transition {
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .gradient-gold {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
-        }
-        .modal-backdrop {
-            animation: fadeIn 0.3s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Montserrat', 'sans-serif'] },
-                    colors: { 
-                        brand: { 
-                            gold: '#D4AF37', 
-                            dark: '#0A0A0A', 
-                            card: '#171717' 
-                        } 
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['Cinzel', 'serif']
+                    },
+                    colors: {
+                        brand: {
+                            gold: '#D4AF37',
+                            'gold-light': '#F3E5AB',
+                            'gold-dark': '#A07D1C',
+                            dark: '#0B0D12',
+                            surface: '#131620',
+                            card: '#1A1E2B',
+                            border: '#292E40'
+                        }
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 0 25px -5px rgba(212, 175, 55, 0.3)',
+                        'gold-glow-lg': '0 0 40px 0 rgba(212, 175, 55, 0.4)'
                     }
                 }
             }
         }
     </script>
-</head>
-<body class="bg-brand-dark text-white min-h-screen flex flex-col items-center py-8 px-4 md:py-12 md:px-5 selection:bg-brand-gold selection:text-black overflow-x-hidden">
     
-    <div class="w-full max-w-sm space-y-10 text-center flex-1">
-        
-        <div class="space-y-5 animate-fade-in-down">
-            <div class="relative w-28 h-28 md:w-32 md:h-32 mx-auto group">
-                <div class="absolute inset-0 bg-brand-gold/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=400&q=80" alt="Barber Shop Elite" class="rounded-full w-full h-full object-cover border-4 border-brand-gold/40 shadow-2xl shadow-brand-gold/20 relative z-10 transition-transform duration-500 group-hover:scale-105">
+    <style>
+        /* Smooth custom styling */
+        body {
+            background-color: #0B0D12;
+            color: #E2E8F0;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(19, 22, 32, 0.9) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Gold gradient text */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF1C5 0%, #D4AF37 50%, #AA820A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-gradient {
+            border-image: linear-gradient(to right, rgba(212, 175, 55, 0.6), rgba(212, 175, 55, 0.1)) 1;
+        }
+
+        /* Subtle luxury card */
+        .luxury-card {
+            background: linear-gradient(145deg, rgba(26, 30, 43, 0.9) 0%, rgba(19, 22, 32, 0.85) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.16);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .luxury-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.6), 0 0 20px -3px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0D12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A3042;
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        /* Toast notification */
+        #toastContainer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: calc(100vw - 40px);
+        }
+        .toast {
+            pointer-events: auto;
+            transform: translateX(120%);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+            opacity: 0;
+        }
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* Pulse animation for live tag */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+        }
+        .live-dot {
+            animation: pulse-ring 2s infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-brand-gold selection:text-black flex flex-col items-center justify-between p-4 sm:p-6 md:p-8">
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" aria-live="polite"></div>
+
+    <!-- Main Container (Mobile-first responsive container) -->
+    <main class="w-full max-w-lg mx-auto flex-1 flex flex-col items-center">
+
+        <!-- Top Announcement Bar -->
+        <div class="w-full mb-6 py-2 px-4 rounded-full bg-brand-surface/90 border border-brand-gold/20 flex items-center justify-between text-xs backdrop-blur-md shadow-sm">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 live-dot"></span>
+                <span class="text-zinc-300 font-medium">Aberto Hoje até 20:30</span>
             </div>
-            <div>
-                <h1 class="text-xl md:text-2xl font-extrabold tracking-widest uppercase">Barber Shop <span class="text-brand-gold">Elite</span></h1>
-                <p class="text-gray-400 text-xs md:text-sm mt-2 font-medium">Cortes clássicos, barba e estilo.</p>
+            <div class="flex items-center gap-1.5 text-brand-gold font-semibold">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                <span>Chopp Artesanal Incluso</span>
             </div>
         </div>
 
-        <div class="space-y-3 w-full animate-fade-in-up">
-            
-            <a href="https://wa.me/5511983909578?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio!" target="_blank" class="flex items-center justify-center gap-3 w-full bg-brand-card hover:bg-zinc-800 border border-zinc-800/50 hover:border-brand-gold/50 text-white font-semibold py-4 px-6 rounded-2xl link-button-transition hover:shadow-lg hover:shadow-green-500/20 active:scale-95 group gradient-gold">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 group-hover:scale-125 transition-transform"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                Agendar Horário
-            </a>
-
-            <a href="https://www.google.com/maps/search/?api=1&query=Avenida+Paulista,+São+Paulo" target="_blank" class="flex items-center justify-center gap-3 w-full bg-brand-card hover:bg-zinc-800 border border-zinc-800/50 hover:border-brand-gold/50 text-white font-semibold py-4 px-6 rounded-2xl link-button-transition hover:shadow-lg hover:shadow-brand-gold/20 active:scale-95 group gradient-gold">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold group-hover:scale-125 transition-transform"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                Como Chegar
-            </a>
-
-            <a href="https://instagram.com" target="_blank" class="flex items-center justify-center gap-3 w-full bg-brand-card hover:bg-zinc-800 border border-zinc-800/50 hover:border-brand-gold/50 text-white font-semibold py-4 px-6 rounded-2xl link-button-transition hover:shadow-lg hover:shadow-pink-500/20 active:scale-95 group gradient-gold">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-400 group-hover:scale-125 transition-transform"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-                Nosso Instagram
-            </a>
-
-            <button onclick="openModal()" class="flex items-center justify-center gap-3 w-full bg-brand-card hover:bg-zinc-800 border border-zinc-800/50 hover:border-brand-gold/50 text-white font-semibold py-4 px-6 rounded-2xl link-button-transition hover:shadow-lg hover:shadow-blue-500/20 active:scale-95 group gradient-gold">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400 group-hover:scale-125 transition-transform"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" x2="8.12" y1="4" y2="15.88"/><line x1="14.47" x2="14.48" y1="14.48" y2="14.47"/><line x1="8.12" x2="20" y1="8.12" y2="20"/></svg>
-                Serviços e Preços
-            </button>
-            
-        </div>
-    </div>
-
-    <footer class="mt-16 text-center w-full">
-        <div class="h-px w-20 bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent mx-auto mb-6"></div>
-        <p class="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold hover:text-brand-gold/60 transition-colors cursor-default">Desenvolvido por Felipe Junqueira Leite</p>
-    </footer>
-
-    <!-- Modal de Serviços -->
-    <div id="servicesModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 modal-backdrop">
-        <div class="bg-gradient-to-br from-brand-card to-zinc-900 border border-zinc-800 rounded-3xl max-w-sm w-full p-6 md:p-8 shadow-2xl shadow-brand-gold/10 relative">
-            
-            <!-- Botão de fechar -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-white transition-colors p-2 rounded-full hover:bg-zinc-800">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
-            </button>
-
-            <div class="space-y-6">
-                <div class="space-y-2 text-center">
-                    <h2 class="text-2xl font-extrabold text-brand-gold">Serviços & Preços</h2>
-                    <p class="text-sm text-gray-400">Confira nossos serviços premium</p>
+        <!-- Profile / Hero Header -->
+        <header class="text-center w-full mb-8">
+            <!-- Avatar with luxury glowing frame -->
+            <div class="relative w-28 h-28 sm:w-32 sm:h-32 mx-auto mb-4 group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold via-amber-400 to-brand-gold-dark rounded-full blur-md opacity-70 group-hover:opacity-100 transition duration-700"></div>
+                <div class="relative w-full h-full rounded-full overflow-hidden border-2 border-brand-gold/80 p-0.5 bg-brand-dark">
+                    <img 
+                        src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80" 
+                        alt="Barber Shop Elite" 
+                        class="w-full h-full object-cover rounded-full transition-transform duration-500 group-hover:scale-110"
+                        loading="eager"
+                    />
                 </div>
-
-                <div class="space-y-3 max-h-96 overflow-y-auto pr-2 select-none">
-                    <!-- Serviço 1 -->
-                    <div id="srv-corte-classico" onclick="toggleServico('corte-classico', 'Corte Clássico', 45.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
-                        <div class="pr-2">
-                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Corte Clássico</p>
-                            <p class="text-xs text-gray-400">Tesoura/máquina</p>
-                        </div>
-                        <div class="flex items-center gap-2 shrink-0">
-                            <span class="text-brand-gold font-bold">R$ 45,00</span>
-                            <svg id="chk-corte-classico" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                    </div>
-
-                    <!-- Serviço 2 -->
-                    <div id="srv-corte-barba" onclick="toggleServico('corte-barba', 'Corte + Barba', 65.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
-                        <div class="pr-2">
-                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Corte + Barba</p>
-                            <p class="text-xs text-gray-400">Combo premium</p>
-                        </div>
-                        <div class="flex items-center gap-2 shrink-0">
-                            <span class="text-brand-gold font-bold">R$ 65,00</span>
-                            <svg id="chk-corte-barba" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                    </div>
-
-                    <!-- Serviço 3 -->
-                    <div id="srv-barba-design" onclick="toggleServico('barba-design', 'Barba Design', 35.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
-                        <div class="pr-2">
-                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Barba Design</p>
-                            <p class="text-xs text-gray-400">Design premium</p>
-                        </div>
-                        <div class="flex items-center gap-2 shrink-0">
-                            <span class="text-brand-gold font-bold">R$ 35,00</span>
-                            <svg id="chk-barba-design" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                    </div>
-
-                    <!-- Serviço 4 -->
-                    <div id="srv-pigmentacao-barba" onclick="toggleServico('pigmentacao-barba', 'Pigmentação Barba', 40.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
-                        <div class="pr-2">
-                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Pigmentação Barba</p>
-                            <p class="text-xs text-gray-400">Cobertura de fios brancos</p>
-                        </div>
-                        <div class="flex items-center gap-2 shrink-0">
-                            <span class="text-brand-gold font-bold">R$ 40,00</span>
-                            <svg id="chk-pigmentacao-barba" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                    </div>
-
-                    <!-- Serviço 5 -->
-                    <div id="srv-tratamento-capilar" onclick="toggleServico('tratamento-capilar', 'Tratamento Capilar', 50.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
-                        <div class="pr-2">
-                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Tratamento Capilar</p>
-                            <p class="text-xs text-gray-400">Hidratação premium</p>
-                        </div>
-                        <div class="flex items-center gap-2 shrink-0">
-                            <span class="text-brand-gold font-bold">R$ 50,00</span>
-                            <svg id="chk-tratamento-capilar" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                    </div>
-
-                    <!-- Serviço 6 -->
-                    <div id="srv-limpeza-pele" onclick="toggleServico('limpeza-pele', 'Limpeza de Pele', 30.00)" class="flex justify-between items-center p-4 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all cursor-pointer border border-zinc-700/50 hover:border-brand-gold/30 group">
-                        <div class="pr-2">
-                            <p class="font-semibold text-white group-hover:text-brand-gold transition-colors">Limpeza de Pele</p>
-                            <p class="text-xs text-gray-400">Facial gentlemen</p>
-                        </div>
-                        <div class="flex items-center gap-2 shrink-0">
-                            <span class="text-brand-gold font-bold">R$ 30,00</span>
-                            <svg id="chk-limpeza-pele" class="w-5 h-5 text-brand-gold hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                    </div>
+                <!-- Verified Badge -->
+                <div class="absolute bottom-1 right-1 bg-brand-gold text-brand-dark p-1 rounded-full shadow-lg border-2 border-brand-dark" title="Barbearia Certificada">
+                    <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
                 </div>
+            </div>
 
-                <div class="pt-4 border-t border-zinc-800">
-                    <p class="text-xs text-zinc-500 text-center mb-4">💳 Aceitamos cartão e PIX</p>
-                    <button id="btnAgendarModal" onclick="enviarAgendamento()" class="block text-center w-full bg-brand-gold hover:bg-brand-gold/90 text-black font-bold py-3 px-4 rounded-xl transition-all hover:shadow-lg hover:shadow-brand-gold/30 link-button-transition">
-                        Agendar Agora
+            <!-- Title & Subtitle -->
+            <h1 class="font-serif text-2xl sm:text-3xl font-bold tracking-wider uppercase mb-1">
+                Barber Shop <span class="gold-gradient-text">Elite</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-zinc-400 font-medium max-w-xs mx-auto">
+                Cortes de alta precisão, barba terapia tradicional e ambiente exclusivo para cavalheiros.
+            </p>
+
+            <!-- Social Proof Rating -->
+            <div class="flex items-center justify-center gap-2 mt-3 text-xs text-zinc-300">
+                <div class="flex text-brand-gold">
+                    <i data-lucide="star" class="w-4 h-4 fill-brand-gold"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-brand-gold"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-brand-gold"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-brand-gold"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-brand-gold"></i>
+                </div>
+                <span class="font-bold text-white">4.9</span>
+                <span class="text-zinc-500">•</span>
+                <span class="text-zinc-400 font-medium">+350 clientes satisfeitos</span>
+            </div>
+
+            <!-- Perks / Highlights Chips -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mt-4">
+                <span class="text-[11px] bg-brand-surface/70 border border-zinc-800 text-zinc-300 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    <i data-lucide="beer" class="w-3.5 h-3.5 text-brand-gold"></i> Chopp Cortesia
+                </span>
+                <span class="text-[11px] bg-brand-surface/70 border border-zinc-800 text-zinc-300 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    <i data-lucide="scissors" class="w-3.5 h-3.5 text-brand-gold"></i> Toalha Quente
+                </span>
+                <span class="text-[11px] bg-brand-surface/70 border border-zinc-800 text-zinc-300 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    <i data-lucide="car" class="w-3.5 h-3.5 text-brand-gold"></i> Estacionamento
+                </span>
+            </div>
+        </header>
+
+        <!-- Fast Booking Feature Banner (Featured Card) -->
+        <section class="w-full mb-6">
+            <div class="relative overflow-hidden rounded-2xl p-5 bg-gradient-to-br from-amber-950/40 via-brand-card to-brand-surface border border-brand-gold/40 shadow-xl shadow-brand-gold/5">
+                <div class="absolute -right-10 -bottom-10 w-36 h-36 bg-brand-gold/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="flex items-start justify-between gap-3">
+                    <div>
+                        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-brand-gold/15 text-brand-gold text-[10px] font-bold uppercase tracking-wider mb-2">
+                            <i data-lucide="zap" class="w-3 h-3"></i> Agendamento Rápido
+                        </div>
+                        <h2 class="text-lg font-bold text-white font-serif">Escolha seu Estilo sem Fila</h2>
+                        <p class="text-xs text-zinc-400 mt-1">Selecione seu serviço e horário abaixo para confirmar via WhatsApp em 30 segundos.</p>
+                    </div>
+                    <button onclick="scrollToScheduler()" class="shrink-0 bg-brand-gold hover:bg-brand-gold-light text-brand-dark font-bold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-md hover:scale-105 active:scale-95 flex items-center gap-1.5" aria-label="Ir para agendamento">
+                        <span>Agendar</span>
+                        <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
                     </button>
                 </div>
             </div>
+        </section>
+
+        <!-- Quick Links Hub -->
+        <nav class="w-full space-y-3 mb-8" aria-label="Links rápidos">
+            
+            <!-- WhatsApp Direto -->
+            <a href="https://wa.me/5511983909578?text=Ol%C3%A1%2C%20gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20o%20Barber%20Shop%20Elite!" target="_blank" rel="noopener noreferrer" class="luxury-card flex items-center justify-between p-4 rounded-2xl group text-left">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                        <i data-lucide="message-square" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="block text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">Fale Conosco no WhatsApp</span>
+                        <span class="block text-xs text-zinc-400">Atendimento imediato e dúvidas</span>
+                    </div>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+            </a>
+
+            <!-- Localização / Como Chegar -->
+            <button onclick="openLocationModal()" class="w-full luxury-card flex items-center justify-between p-4 rounded-2xl group text-left">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:scale-110 group-hover:bg-brand-gold group-hover:text-black transition-all">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="block text-sm font-bold text-white group-hover:text-brand-gold transition-colors">Onde Estamos & Como Chegar</span>
+                        <span class="block text-xs text-zinc-400">Av. Paulista, 1200 • Estacionamento valet</span>
+                    </div>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+            </button>
+
+            <!-- Instagram com seguidores -->
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="luxury-card flex items-center justify-between p-4 rounded-2xl group text-left">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 group-hover:scale-110 group-hover:bg-gradient-to-tr group-hover:from-amber-500 group-hover:via-pink-500 group-hover:to-purple-600 group-hover:text-white transition-all">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="block text-sm font-bold text-white group-hover:text-pink-400 transition-colors">Galeria no Instagram</span>
+                        <span class="block text-xs text-zinc-400">@barbershopelite • Fotos e tendências</span>
+                    </div>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+            </a>
+
+            <!-- Horários de Funcionamento -->
+            <button onclick="openHoursModal()" class="w-full luxury-card flex items-center justify-between p-4 rounded-2xl group text-left">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                        <i data-lucide="clock" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span class="block text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Horários de Atendimento</span>
+                        <span class="block text-xs text-zinc-400">Terça a Sábado das 09:00 às 20:30</span>
+                    </div>
+                </div>
+                <i data-lucide="chevron-right" class="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+            </button>
+        </nav>
+
+        <!-- Galeria / Lookbook (Aspect Ratio Elegante) -->
+        <section class="w-full mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="font-serif text-sm font-bold tracking-wider uppercase text-zinc-300 flex items-center gap-2">
+                    <i data-lucide="camera" class="w-4 h-4 text-brand-gold"></i> Nosso Trabalho
+                </h2>
+                <span class="text-[11px] text-brand-gold font-medium">Fotos Reais</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2.5">
+                <!-- Foto 1 -->
+                <div class="group relative rounded-xl overflow-hidden aspect-[4/5] bg-zinc-800 border border-zinc-800">
+                    <img 
+                        src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=500&q=80" 
+                        alt="Corte Degradê Fade" 
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                        <span class="text-[10px] font-bold text-white">Skin Fade</span>
+                    </div>
+                </div>
+
+                <!-- Foto 2 -->
+                <div class="group relative rounded-xl overflow-hidden aspect-[4/5] bg-zinc-800 border border-zinc-800">
+                    <img 
+                        src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=500&q=80" 
+                        alt="Design de Barba e Toalha" 
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                        <span class="text-[10px] font-bold text-white">Barba Terapia</span>
+                    </div>
+                </div>
+
+                <!-- Foto 3 -->
+                <div class="group relative rounded-xl overflow-hidden aspect-[4/5] bg-zinc-800 border border-zinc-800">
+                    <img 
+                        src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=500&q=80" 
+                        alt="Corte Clássico na Tesoura" 
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                        <span class="text-[10px] font-bold text-white">Pompadour Clássico</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DE AGENDAMENTO RÁPIDO & INTERATIVO -->
+        <section id="agendamentoSection" class="w-full luxury-card p-5 sm:p-6 rounded-3xl border border-brand-gold/30 mb-8 scroll-mt-6">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-zinc-800/80 mb-5">
+                <div>
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-brand-gold">Passo a Passo</span>
+                    <h2 class="text-xl font-bold font-serif text-white">Agendamento Rápido</h2>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-brand-gold/15 flex items-center justify-center text-brand-gold border border-brand-gold/30">
+                    <i data-lucide="calendar" class="w-5 h-5"></i>
+                </div>
+            </div>
+
+            <!-- Etapa 1: Escolha dos Serviços -->
+            <div class="mb-6">
+                <label class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2 flex items-center justify-between">
+                    <span>1. Escolha o(s) Serviço(s)</span>
+                    <span class="text-[11px] text-zinc-500 font-normal">Toque para selecionar</span>
+                </label>
+                
+                <div class="space-y-2.5" id="servicesList">
+                    
+                    <!-- Serviço 1: Corte Clássico -->
+                    <div onclick="toggleService('corte', 'Corte de Cabelo (Fade/Tesoura)', 45, 40)" id="srv-corte" class="service-item flex items-center justify-between p-3.5 rounded-xl bg-brand-dark/70 border border-zinc-800 hover:border-brand-gold/50 cursor-pointer transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="service-checkbox w-5 h-5 rounded-md border border-zinc-600 flex items-center justify-center text-black transition-colors">
+                                <i data-lucide="check" class="w-3.5 h-3.5 opacity-0 check-icon stroke-[3]"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-white">Corte Tradicional / Fade</p>
+                                <p class="text-[11px] text-zinc-400">Lavagem inclusa + finalização • 40 min</p>
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold text-brand-gold">R$ 45,00</span>
+                    </div>
+
+                    <!-- Serviço 2: Barba Terapia -->
+                    <div onclick="toggleService('barba', 'Barba Terapia com Toalha Quente', 35, 30)" id="srv-barba" class="service-item flex items-center justify-between p-3.5 rounded-xl bg-brand-dark/70 border border-zinc-800 hover:border-brand-gold/50 cursor-pointer transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="service-checkbox w-5 h-5 rounded-md border border-zinc-600 flex items-center justify-center text-black transition-colors">
+                                <i data-lucide="check" class="w-3.5 h-3.5 opacity-0 check-icon stroke-[3]"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-white">Barba Terapia Completa</p>
+                                <p class="text-[11px] text-zinc-400">Toalha quente + óleos nobres • 30 min</p>
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold text-brand-gold">R$ 35,00</span>
+                    </div>
+
+                    <!-- Serviço 3: Combo Cabelo + Barba (Destaque) -->
+                    <div onclick="toggleService('combo', 'Combo VIP: Cabelo + Barba + Chopp', 70, 60)" id="srv-combo" class="service-item relative flex items-center justify-between p-3.5 rounded-xl bg-brand-dark/70 border border-brand-gold/40 hover:border-brand-gold cursor-pointer transition-all">
+                        <span class="absolute -top-2 right-4 bg-gradient-to-r from-amber-500 to-brand-gold text-[9px] font-black uppercase tracking-wider text-black px-2 py-0.5 rounded-full shadow-sm">
+                            Mais Escolhido 🔥
+                        </span>
+                        <div class="flex items-center gap-3">
+                            <div class="service-checkbox w-5 h-5 rounded-md border border-zinc-600 flex items-center justify-center text-black transition-colors">
+                                <i data-lucide="check" class="w-3.5 h-3.5 opacity-0 check-icon stroke-[3]"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-white">Combo VIP: Cabelo + Barba</p>
+                                <p class="text-[11px] text-zinc-400">Experiência completa + Chopp duplo • 60 min</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-zinc-500 line-through block">R$ 80</span>
+                            <span class="text-sm font-bold text-brand-gold">R$ 70,00</span>
+                        </div>
+                    </div>
+
+                    <!-- Serviço 4: Pigmentação de Barba -->
+                    <div onclick="toggleService('pigmentacao', 'Pigmentação & Camuflagem de Barba', 40, 25)" id="srv-pigmentacao" class="service-item flex items-center justify-between p-3.5 rounded-xl bg-brand-dark/70 border border-zinc-800 hover:border-brand-gold/50 cursor-pointer transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="service-checkbox w-5 h-5 rounded-md border border-zinc-600 flex items-center justify-center text-black transition-colors">
+                                <i data-lucide="check" class="w-3.5 h-3.5 opacity-0 check-icon stroke-[3]"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-white">Pigmentação de Barba</p>
+                                <p class="text-[11px] text-zinc-400">Correção de falhas e fios brancos • 25 min</p>
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold text-brand-gold">R$ 40,00</span>
+                    </div>
+
+                    <!-- Serviço 5: Limpeza de Pele Gentlemen -->
+                    <div onclick="toggleService('facial', 'Limpeza Facial & Hidratação Express', 30, 20)" id="srv-facial" class="service-item flex items-center justify-between p-3.5 rounded-xl bg-brand-dark/70 border border-zinc-800 hover:border-brand-gold/50 cursor-pointer transition-all">
+                        <div class="flex items-center gap-3">
+                            <div class="service-checkbox w-5 h-5 rounded-md border border-zinc-600 flex items-center justify-center text-black transition-colors">
+                                <i data-lucide="check" class="w-3.5 h-3.5 opacity-0 check-icon stroke-[3]"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-white">Limpeza Facial Gentlemen</p>
+                                <p class="text-[11px] text-zinc-400">Esfoliação e máscara negra • 20 min</p>
+                            </div>
+                        </div>
+                        <span class="text-sm font-bold text-brand-gold">R$ 30,00</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Etapa 2: Escolha do Profissional -->
+            <div class="mb-6">
+                <label class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-2">
+                    2. Escolha o Profissional
+                </label>
+                <div class="grid grid-cols-3 gap-2">
+                    <button type="button" onclick="selectBarber('Qualquer Barbeiro Disponível', this)" class="barber-btn active p-2.5 rounded-xl border border-brand-gold bg-brand-gold/10 text-white text-xs font-medium text-center transition-all">
+                        <i data-lucide="users" class="w-4 h-4 mx-auto mb-1 text-brand-gold"></i>
+                        <span>Primeiro Livre</span>
+                    </button>
+                    <button type="button" onclick="selectBarber('Mestre Junqueira', this)" class="barber-btn p-2.5 rounded-xl border border-zinc-800 bg-brand-dark/70 text-zinc-400 text-xs font-medium text-center hover:border-zinc-700 transition-all">
+                        <i data-lucide="award" class="w-4 h-4 mx-auto mb-1 text-brand-gold"></i>
+                        <span>Junqueira</span>
+                    </button>
+                    <button type="button" onclick="selectBarber('Lucas Fade', this)" class="barber-btn p-2.5 rounded-xl border border-zinc-800 bg-brand-dark/70 text-zinc-400 text-xs font-medium text-center hover:border-zinc-700 transition-all">
+                        <i data-lucide="scissors" class="w-4 h-4 mx-auto mb-1 text-brand-gold"></i>
+                        <span>Lucas Fade</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Etapa 3: Data e Horários Dinâmicos -->
+            <div class="mb-6">
+                <div class="flex items-center justify-between mb-2">
+                    <label class="text-xs font-bold uppercase tracking-wider text-zinc-300">
+                        3. Escolha a Data & Horário
+                    </label>
+                    <span class="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+                        <i data-lucide="check-circle" class="w-3 h-3"></i> Horários disponíveis
+                    </span>
+                </div>
+
+                <!-- Dias (Tabs) -->
+                <div class="flex gap-2 overflow-x-auto pb-2 mb-3 no-scrollbar" id="dateTabs">
+                    <button type="button" onclick="selectDate('Hoje', this)" class="date-btn active shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-gold text-brand-dark transition-all">
+                        Hoje (Sáb)
+                    </button>
+                    <button type="button" onclick="selectDate('Segunda-feira', this)" class="date-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-semibold bg-brand-dark/80 text-zinc-300 border border-zinc-800 hover:border-zinc-700 transition-all">
+                        Segunda (03/11)
+                    </button>
+                    <button type="button" onclick="selectDate('Terça-feira', this)" class="date-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-semibold bg-brand-dark/80 text-zinc-300 border border-zinc-800 hover:border-zinc-700 transition-all">
+                        Terça (04/11)
+                    </button>
+                    <button type="button" onclick="selectDate('Quarta-feira', this)" class="date-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-semibold bg-brand-dark/80 text-zinc-300 border border-zinc-800 hover:border-zinc-700 transition-all">
+                        Quarta (05/11)
+                    </button>
+                </div>
+
+                <!-- Horários Grid -->
+                <div class="space-y-2">
+                    <span class="text-[10px] text-zinc-500 uppercase tracking-wider block font-semibold">Turno da Tarde / Noite</span>
+                    <div class="grid grid-cols-4 gap-2" id="timeSlotsGrid">
+                        <button type="button" onclick="selectTime('14:30', this)" class="time-btn p-2 rounded-lg bg-brand-dark/80 border border-zinc-800 text-xs font-semibold text-zinc-300 hover:border-brand-gold/50 transition-all">14:30</button>
+                        <button type="button" onclick="selectTime('15:45', this)" class="time-btn p-2 rounded-lg bg-brand-dark/80 border border-zinc-800 text-xs font-semibold text-zinc-300 hover:border-brand-gold/50 transition-all">15:45</button>
+                        <button type="button" onclick="selectTime('17:00', this)" class="time-btn active p-2 rounded-lg bg-brand-gold/20 border border-brand-gold text-xs font-bold text-brand-gold transition-all">17:00</button>
+                        <button type="button" onclick="selectTime('18:15', this)" class="time-btn p-2 rounded-lg bg-brand-dark/80 border border-zinc-800 text-xs font-semibold text-zinc-300 hover:border-brand-gold/50 transition-all">18:15</button>
+                        <button type="button" onclick="selectTime('19:00', this)" class="time-btn p-2 rounded-lg bg-brand-dark/80 border border-zinc-800 text-xs font-semibold text-zinc-300 hover:border-brand-gold/50 transition-all">19:00</button>
+                        <button type="button" onclick="selectTime('19:45', this)" class="time-btn p-2 rounded-lg bg-brand-dark/80 border border-zinc-800 text-xs font-semibold text-zinc-300 hover:border-brand-gold/50 transition-all">19:45</button>
+                        <button type="button" onclick="selectTime('20:15', this)" class="time-btn p-2 rounded-lg bg-brand-dark/80 border border-zinc-800 text-xs font-semibold text-zinc-300 hover:border-brand-gold/50 transition-all">20:15</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 4: Identificação Rápida (Nome) -->
+            <div class="mb-6">
+                <label for="clientNameInput" class="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-1.5">
+                    4. Seu Nome (para identificação)
+                </label>
+                <div class="relative">
+                    <i data-lucide="user" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500"></i>
+                    <input 
+                        type="text" 
+                        id="clientNameInput" 
+                        placeholder="Ex: Carlos Silva" 
+                        class="w-full bg-brand-dark/80 border border-zinc-800 rounded-xl py-2.5 pl-10 pr-4 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-brand-gold transition-colors"
+                        maxlength="40"
+                    />
+                </div>
+            </div>
+
+            <!-- Resumo Dinâmico da Reserva -->
+            <div class="p-4 rounded-2xl bg-zinc-950/90 border border-zinc-800 mb-5">
+                <div class="flex items-center justify-between text-xs text-zinc-400 mb-2">
+                    <span>Resumo do Agendamento:</span>
+                    <span id="summaryTime" class="font-bold text-white flex items-center gap-1">
+                        <i data-lucide="clock" class="w-3.5 h-3.5 text-brand-gold"></i> ~0 min
+                    </span>
+                </div>
+
+                <div class="text-sm font-semibold text-zinc-200 mb-1" id="summaryServices">
+                    Nenhum serviço selecionado
+                </div>
+
+                <div class="text-xs text-zinc-400 flex items-center gap-2 mb-3" id="summaryDetails">
+                    <span>Profissional: <b class="text-zinc-200" id="summaryBarber">Primeiro Livre</b></span>
+                    <span>•</span>
+                    <span>Horário: <b class="text-brand-gold" id="summaryDateTime">Hoje às 17:00</b></span>
+                </div>
+
+                <div class="pt-3 border-t border-zinc-800/80 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase text-zinc-500 block font-bold">Investimento Total</span>
+                        <span class="text-xl font-bold font-serif text-brand-gold" id="summaryTotal">R$ 0,00</span>
+                    </div>
+                    <span class="text-[11px] text-zinc-400 bg-zinc-900 px-2.5 py-1 rounded-md border border-zinc-800">
+                        PIX, Cartão ou Dinheiro no local
+                    </span>
+                </div>
+            </div>
+
+            <!-- Botão de Confirmação WhatsApp -->
+            <button 
+                type="button" 
+                onclick="confirmBooking()" 
+                id="btnConfirmBooking" 
+                class="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-sm py-4 px-6 rounded-2xl shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 transition-all flex items-center justify-center gap-2.5 active:scale-95 group"
+            >
+                <i data-lucide="message-circle" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                <span id="btnConfirmText">Agendar pelo WhatsApp</span>
+            </button>
+            <p class="text-center text-[10px] text-zinc-500 mt-2">Você será redirecionado para confirmar a data direto com o atendente.</p>
+        </section>
+
+        <!-- Depoimentos & Avaliações -->
+        <section class="w-full mb-8">
+            <h2 class="font-serif text-sm font-bold tracking-wider uppercase text-zinc-400 mb-3 flex items-center gap-2">
+                <i data-lucide="heart" class="w-4 h-4 text-brand-gold"></i> Experiência dos Clientes
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="p-3.5 rounded-2xl bg-brand-surface/60 border border-zinc-800/80">
+                    <div class="flex items-center gap-1 text-brand-gold mb-1">
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-gold"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-gold"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-gold"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-gold"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-gold"></i>
+                    </div>
+                    <p class="text-xs text-zinc-300 italic">"Ambiente de primeira, chopp gelado e o corte com o Junqueira ficou impecável. Não troco mais de barbearia."</p>
+                    <span class="block text-[11px] font-bold text-brand-gold mt-2">— Rodrigo M., Advogado</span>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-brand-surface/60 border border-zinc-800/80">
+                    <div class="flex items-center gap-1 text-brand-gold mb-1">
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-gold"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-gold"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-gold"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-gold"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-gold"></i>
+                    </div>
+                    <p class="text-xs text-zinc-300 italic">"Barba terapia surreal com toalha quente e massagem. Vale cada centavo pela paz e pelo estilo."</p>
+                    <span class="block text-[11px] font-bold text-brand-gold mt-2">— Gabriel S., Empreendedor</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-lg mx-auto mt-6 pb-4 text-center">
+        <div class="h-px w-28 bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent mx-auto mb-4"></div>
+        <p class="text-xs text-zinc-400 font-serif">Barber Shop Elite • Tradição & Excelência</p>
+        <p class="text-[10px] text-zinc-600 mt-1 uppercase tracking-widest font-semibold">Desenvolvido por Felipe Junqueira Leite</p>
+    </footer>
+
+    <!-- MODAL LOCALIZAÇÃO -->
+    <div id="locationModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" onclick="closeOnBackdrop(event, 'locationModal')">
+        <div class="luxury-card bg-brand-surface max-w-sm w-full p-6 rounded-3xl border border-brand-gold/30 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeModal('locationModal')" class="absolute top-4 right-4 text-zinc-400 hover:text-white p-1 rounded-full hover:bg-zinc-800" aria-label="Fechar modal">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 rounded-2xl bg-brand-gold/15 text-brand-gold flex items-center justify-center mx-auto mb-3 border border-brand-gold/30">
+                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-serif text-lg font-bold text-white">Nossa Localização</h3>
+                <p class="text-xs text-zinc-400 mt-1">Fácil acesso no coração da cidade</p>
+            </div>
+
+            <div class="space-y-3 text-xs text-zinc-300 mb-6 bg-brand-dark/70 p-4 rounded-2xl border border-zinc-800">
+                <p class="font-semibold text-white flex items-center gap-2">
+                    <i data-lucide="navigation" class="w-4 h-4 text-brand-gold"></i>
+                    Avenida Paulista, 1200 - Bela Vista
+                </p>
+                <p class="text-zinc-400 pl-6">São Paulo - SP • A 200m do Metrô Trianon-Masp</p>
+                <div class="pt-2 border-t border-zinc-800 text-zinc-400 flex items-center gap-2">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+                    <span>Estacionamento com manobrista cortesia para clientes.</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+                <a href="https://maps.google.com/?q=Avenida+Paulista+1200+Sao+Paulo" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs hover:bg-brand-gold-light transition-all">
+                    <i data-lucide="map" class="w-4 h-4"></i>
+                    <span>Abrir Google Maps</span>
+                </a>
+                <a href="https://waze.com/ul?q=Avenida+Paulista+1200" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-1.5 py-3 px-4 rounded-xl bg-zinc-800 text-white font-bold text-xs hover:bg-zinc-700 transition-all">
+                    <i data-lucide="navigation-2" class="w-4 h-4"></i>
+                    <span>Abrir no Waze</span>
+                </a>
+            </div>
         </div>
     </div>
 
-    <script>
-        const numeroWhatsApp = '5511983909578';
-        let servicosSelecionados = [];
+    <!-- MODAL HORÁRIOS -->
+    <div id="hoursModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" onclick="closeOnBackdrop(event, 'hoursModal')">
+        <div class="luxury-card bg-brand-surface max-w-sm w-full p-6 rounded-3xl border border-brand-gold/30 shadow-2xl relative animate-in fade-in zoom-in duration-200">
+            <button onclick="closeModal('hoursModal')" class="absolute top-4 right-4 text-zinc-400 hover:text-white p-1 rounded-full hover:bg-zinc-800" aria-label="Fechar modal">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
 
-        function openModal() {
-            const modal = document.getElementById('servicesModal');
+            <div class="text-center mb-5">
+                <div class="w-12 h-12 rounded-2xl bg-blue-500/15 text-blue-400 flex items-center justify-center mx-auto mb-3 border border-blue-500/30">
+                    <i data-lucide="clock" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-serif text-lg font-bold text-white">Horários de Atendimento</h3>
+                <p class="text-xs text-zinc-400 mt-1">Planeje sua visita com conforto</p>
+            </div>
+
+            <div class="space-y-2 text-xs mb-6">
+                <div class="flex justify-between items-center p-3 rounded-xl bg-brand-dark/60 border border-zinc-800">
+                    <span class="text-zinc-300 font-semibold">Segunda-feira</span>
+                    <span class="text-zinc-500 font-medium">Fechado para manutenção</span>
+                </div>
+                <div class="flex justify-between items-center p-3 rounded-xl bg-brand-dark/60 border border-zinc-800">
+                    <span class="text-zinc-300 font-semibold">Terça a Sexta</span>
+                    <span class="text-emerald-400 font-bold">09:00 — 20:30</span>
+                </div>
+                <div class="flex justify-between items-center p-3 rounded-xl bg-brand-dark/60 border border-zinc-800">
+                    <span class="text-zinc-300 font-semibold">Sábado</span>
+                    <span class="text-emerald-400 font-bold">08:30 — 20:00</span>
+                </div>
+                <div class="flex justify-between items-center p-3 rounded-xl bg-brand-dark/60 border border-zinc-800">
+                    <span class="text-zinc-300 font-semibold">Domingos & Feriados</span>
+                    <span class="text-zinc-400">Atendimento sob consulta</span>
+                </div>
+            </div>
+
+            <button onclick="closeModal('hoursModal'); scrollToScheduler();" class="w-full py-3 px-4 rounded-xl bg-brand-gold text-brand-dark font-bold text-xs hover:bg-brand-gold-light transition-all flex items-center justify-center gap-2">
+                <i data-lucide="calendar" class="w-4 h-4"></i>
+                <span>Agendar para esta semana</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // State
+        const whatsappNumber = '5511983909578';
+        let selectedServices = [];
+        let selectedBarber = 'Qualquer Barbeiro Disponível';
+        let selectedDate = 'Hoje';
+        let selectedTime = '17:00';
+
+        // Pre-select Combo on load for great UX
+        window.addEventListener('DOMContentLoaded', () => {
+            toggleService('combo', 'Combo VIP: Cabelo + Barba + Chopp', 70, 60);
+        });
+
+        // Toast System (Replaces browser alert)
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            const iconMap = {
+                success: '<i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>',
+                warning: '<i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400 shrink-0"></i>',
+                info: '<i data-lucide="info" class="w-4 h-4 text-brand-gold shrink-0"></i>'
+            };
+
+            const borderColors = {
+                success: 'border-emerald-500/40 bg-zinc-900/95',
+                warning: 'border-amber-500/40 bg-zinc-900/95',
+                info: 'border-brand-gold/40 bg-zinc-900/95'
+            };
+
+            toast.className = `toast flex items-center gap-2.5 p-3.5 rounded-xl border ${borderColors[type] || borderColors.info} text-xs text-white shadow-2xl backdrop-blur-md`;
+            toast.innerHTML = `
+                ${iconMap[type] || iconMap.info}
+                <span class="font-medium">${message}</span>
+            `;
+
+            container.appendChild(toast);
+            lucide.createIcons();
+
+            // Trigger animation
+            requestAnimationFrame(() => {
+                toast.classList.add('show');
+            });
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 400);
+            }, 3500);
+        }
+
+        // Toggle Service selection
+        function toggleService(id, name, price, minutes) {
+            const existingIndex = selectedServices.findIndex(s => s.id === id);
+            const card = document.getElementById(`srv-${id}`);
+            const checkIcon = card.querySelector('.check-icon');
+            const checkboxBox = card.querySelector('.service-checkbox');
+
+            if (existingIndex > -1) {
+                // Remove
+                selectedServices.splice(existingIndex, 1);
+                card.classList.remove('border-brand-gold', 'bg-brand-gold/10');
+                card.classList.add('border-zinc-800', 'bg-brand-dark/70');
+                checkboxBox.classList.remove('bg-brand-gold', 'border-brand-gold');
+                checkboxBox.classList.add('border-zinc-600');
+                checkIcon.classList.add('opacity-0');
+            } else {
+                // Add
+                selectedServices.push({ id, name, price, minutes });
+                card.classList.remove('border-zinc-800', 'bg-brand-dark/70');
+                card.classList.add('border-brand-gold', 'bg-brand-gold/10');
+                checkboxBox.classList.remove('border-zinc-600');
+                checkboxBox.classList.add('bg-brand-gold', 'border-brand-gold');
+                checkIcon.classList.remove('opacity-0');
+            }
+
+            updateSummary();
+        }
+
+        // Update live summary
+        function updateSummary() {
+            const summaryServicesEl = document.getElementById('summaryServices');
+            const summaryTimeEl = document.getElementById('summaryTime');
+            const summaryTotalEl = document.getElementById('summaryTotal');
+            const btnConfirmText = document.getElementById('btnConfirmText');
+
+            if (selectedServices.length === 0) {
+                summaryServicesEl.textContent = 'Nenhum serviço selecionado';
+                summaryTimeEl.innerHTML = `<i data-lucide="clock" class="w-3.5 h-3.5 text-zinc-500"></i> ~0 min`;
+                summaryTotalEl.textContent = 'R$ 0,00';
+                btnConfirmText.textContent = 'Selecione um serviço para agendar';
+                lucide.createIcons();
+                return;
+            }
+
+            const total = selectedServices.reduce((acc, s) => acc + s.price, 0);
+            const totalMinutes = selectedServices.reduce((acc, s) => acc + s.minutes, 0);
+            const formattedTotal = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            if (selectedServices.length === 1) {
+                summaryServicesEl.textContent = selectedServices[0].name;
+            } else {
+                summaryServicesEl.textContent = `${selectedServices.length} serviços selecionados (${selectedServices.map(s => s.name.split(' ')[0]).join(', ')})`;
+            }
+
+            summaryTimeEl.innerHTML = `<i data-lucide="clock" class="w-3.5 h-3.5 text-brand-gold"></i> ~${totalMinutes} min`;
+            summaryTotalEl.textContent = formattedTotal;
+            btnConfirmText.textContent = `Confirmar Agendamento (${formattedTotal})`;
+            lucide.createIcons();
+        }
+
+        // Select Barber
+        function selectBarber(barberName, btn) {
+            document.querySelectorAll('.barber-btn').forEach(b => {
+                b.classList.remove('active', 'border-brand-gold', 'bg-brand-gold/10', 'text-white');
+                b.classList.add('border-zinc-800', 'bg-brand-dark/70', 'text-zinc-400');
+            });
+            btn.classList.add('active', 'border-brand-gold', 'bg-brand-gold/10', 'text-white');
+            btn.classList.remove('border-zinc-800', 'bg-brand-dark/70', 'text-zinc-400');
+            selectedBarber = barberName;
+            document.getElementById('summaryBarber').textContent = barberName;
+        }
+
+        // Select Date
+        function selectDate(dateLabel, btn) {
+            document.querySelectorAll('.date-btn').forEach(b => {
+                b.classList.remove('active', 'bg-brand-gold', 'text-brand-dark');
+                b.classList.add('bg-brand-dark/80', 'text-zinc-300', 'border', 'border-zinc-800');
+            });
+            btn.classList.add('active', 'bg-brand-gold', 'text-brand-dark');
+            btn.classList.remove('bg-brand-dark/80', 'text-zinc-300', 'border', 'border-zinc-800');
+            selectedDate = dateLabel;
+            document.getElementById('summaryDateTime').textContent = `${selectedDate} às ${selectedTime}`;
+        }
+
+        // Select Time
+        function selectTime(timeLabel, btn) {
+            document.querySelectorAll('.time-btn').forEach(b => {
+                b.classList.remove('active', 'bg-brand-gold/20', 'border-brand-gold', 'text-brand-gold');
+                b.classList.add('bg-brand-dark/80', 'border-zinc-800', 'text-zinc-300');
+            });
+            btn.classList.add('active', 'bg-brand-gold/20', 'border-brand-gold', 'text-brand-gold');
+            btn.classList.remove('bg-brand-dark/80', 'border-zinc-800', 'text-zinc-300');
+            selectedTime = timeLabel;
+            document.getElementById('summaryDateTime').textContent = `${selectedDate} às ${selectedTime}`;
+        }
+
+        // Smooth scroll to scheduler
+        function scrollToScheduler() {
+            document.getElementById('agendamentoSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Confirm booking action -> WhatsApp
+        function confirmBooking() {
+            if (selectedServices.length === 0) {
+                showToast('Por favor, selecione pelo menos um serviço acima!', 'warning');
+                scrollToScheduler();
+                return;
+            }
+
+            const clientName = document.getElementById('clientNameInput').value.trim();
+            const total = selectedServices.reduce((acc, s) => acc + s.price, 0);
+            const totalFormatted = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            const totalMinutes = selectedServices.reduce((acc, s) => acc + s.minutes, 0);
+
+            let servicesListText = selectedServices.map(s => `• ${s.name} (${s.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })})`).join('\n');
+
+            let message = `Olá! Gostaria de confirmar um agendamento no *Barber Shop Elite*:\n\n`;
+            if (clientName) {
+                message += `👤 *Cliente:* ${clientName}\n`;
+            }
+            message += `💈 *Serviço(s):*\n${servicesListText}\n`;
+            message += `✂️ *Profissional:* ${selectedBarber}\n`;
+            message += `📅 *Data/Horário:* ${selectedDate} às ${selectedTime} (~${totalMinutes} min)\n`;
+            message += `💰 *Valor Total:* ${totalFormatted}\n\n`;
+            message += `Podem me confirmar a disponibilidade deste horário? Obrigado!`;
+
+            showToast('Redirecionando para o WhatsApp...', 'success');
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+            }, 600);
+        }
+
+        // Modals management
+        function openLocationModal() {
+            const modal = document.getElementById('locationModal');
             modal.classList.remove('hidden');
-            modal.style.animation = 'fadeIn 0.3s ease-out';
             document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() {
-            const modal = document.getElementById('servicesModal');
+        function openHoursModal() {
+            const modal = document.getElementById('hoursModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
             modal.classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
 
-        function toggleServico(id, nome, preco) {
-            const index = servicosSelecionados.findIndex(item => item.id === id);
-            const card = document.getElementById(`srv-${id}`);
-            const check = document.getElementById(`chk-${id}`);
-
-            if (index > -1) {
-                // Remove
-                servicosSelecionados.splice(index, 1);
-                card.classList.remove('border-brand-gold', 'bg-brand-gold/10');
-                card.classList.add('border-zinc-700/50', 'bg-zinc-800/50');
-                check.classList.add('hidden');
-            } else {
-                // Adiciona
-                servicosSelecionados.push({ id, nome, preco });
-                card.classList.remove('border-zinc-700/50', 'bg-zinc-800/50');
-                card.classList.add('border-brand-gold', 'bg-brand-gold/10');
-                check.classList.remove('hidden');
-            }
-
-            atualizarBotaoAgendamento();
-        }
-
-        function atualizarBotaoAgendamento() {
-            const btn = document.getElementById('btnAgendarModal');
-            if (servicosSelecionados.length === 0) {
-                btn.textContent = 'Agendar Agora';
-                return;
-            }
-
-            const totalValor = servicosSelecionados.reduce((sum, s) => sum + s.preco, 0);
-            const formatado = totalValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-            if (servicosSelecionados.length === 1) {
-                btn.textContent = `Agendar ${servicosSelecionados[0].nome} (${formatado})`;
-            } else {
-                btn.textContent = `Agendar ${servicosSelecionados.length} Serviços (${formatado})`;
+        function closeOnBackdrop(e, modalId) {
+            if (e.target.id === modalId) {
+                closeModal(modalId);
             }
         }
 
-        function enviarAgendamento() {
-            let mensagem = '';
-            if (servicosSelecionados.length === 0) {
-                mensagem = 'Olá, gostaria de agendar um horário!';
-            } else {
-                let listagem = '';
-                servicosSelecionados.forEach(s => {
-                    listagem += `• ${s.nome} (${s.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })})\n`;
-                });
-                const totalValor = servicosSelecionados.reduce((sum, s) => sum + s.preco, 0);
-                const totalFormatado = totalValor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-                mensagem = `Olá! Gostaria de agendar os seguintes serviços no Barber Shop Elite:\n`;
-                mensagem += `---------------------------------\n`;
-                mensagem += `${listagem}`;
-                mensagem += `---------------------------------\n`;
-                mensagem += `Total: ${totalFormatado}\n\n`;
-                mensagem += `Quais horários vocês têm disponíveis para agendamento?`;
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal('locationModal');
+                closeModal('hoursModal');
             }
-
-            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-            window.open(url, '_blank', 'noopener,noreferrer');
-        }
-
-        // Fechar modal ao clicar fora
-        document.addEventListener('click', function(event) {
-            const modal = document.getElementById('servicesModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Fechar modal com ESC
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Adicionar classe de animação aos elementos ao carregar
-        window.addEventListener('load', function() {
-            document.querySelectorAll('.animate-fade-in-down, .animate-fade-in-up').forEach(el => {
-                el.style.opacity = '1';
-            });
         });
     </script>
-
 </body>
 </html>

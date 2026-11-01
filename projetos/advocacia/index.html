@@ -3,585 +3,1801 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Junqueira & Associados | Advocacia & Consultoria Jurídica</title>
-  <meta name="description" content="Junqueira & Associados — Atuação jurídica de excelência em Direito Empresarial, Civil, Trabalhista e Imobiliário. Atendimento ágil e consultoria personalizada.">
+  <title>Junqueira & Associados | Advocacia de Excelência & Estratégia Jurídica</title>
+  <meta name="description" content="Junqueira & Associados — Sociedade de advogados com mais de 15 anos de atuação estratégica em Direito Empresarial, Cível, Trabalhista e Imobiliário. Av. Paulista, São Paulo.">
 
+  <!-- Google Fonts: Cinzel + Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     :root {
-      --bg-dark: #070d18;
-      --bg-card: #0e1726;
-      --gold: #c5a880;
-      --gold-light: #e6ca9f;
-      --text-white: #ffffff;
+      --bg-dark: #060a12;
+      --bg-surface: #0b1220;
+      --bg-card: #0f192d;
+      --bg-elevated: #15223c;
+      --gold-primary: #c5a880;
+      --gold-light: #e4ceaf;
+      --gold-dark: #8c7350;
+      --gold-glow: rgba(197, 168, 128, 0.15);
+      --text-pure: #ffffff;
       --text-slate: #cbd5e1;
-      --text-muted: #8896ab;
-      --border: rgba(197, 168, 128, 0.2);
-      --radius: 12px;
+      --text-muted: #8493a8;
+      --border-subtle: rgba(197, 168, 128, 0.18);
+      --border-strong: rgba(197, 168, 128, 0.38);
+      --border-light: rgba(255, 255, 255, 0.08);
+      --status-green: #10b981;
+      --status-amber: #f59e0b;
+      --status-red: #ef4444;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-pill: 9999px;
+      --shadow-card: 0 16px 36px rgba(0, 0, 0, 0.45);
+      --shadow-elevated: 0 25px 60px rgba(0, 0, 0, 0.65);
+      --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-dark);
       color: var(--text-slate);
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3, .cinzel {
+    h1, h2, h3, h4, .cinzel {
       font-family: 'Cinzel', serif;
-      color: var(--text-white);
-      letter-spacing: 0.02em;
+      color: var(--text-pure);
+      letter-spacing: 0.03em;
+      font-weight: 700;
     }
 
-    /* Top Bar */
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Top Bar Informativa */
     .top-bar {
-      background: #040810;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 0.6rem 1.5rem;
-      font-size: 0.85rem;
+      background: #03060b;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 0.65rem 1.5rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
+      position: relative;
+      z-index: 60;
     }
     .top-bar-inner {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 1rem;
     }
-    .top-bar-item {
+    .top-bar-group {
       display: flex;
       align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .top-bar-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .badge-status-online {
+      display: inline-flex;
+      align-items: center;
       gap: 0.4rem;
+      color: var(--status-green);
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--status-green);
+      box-shadow: 0 0 8px var(--status-green);
+      animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+      100% { opacity: 0.4; transform: scale(0.9); }
     }
 
-    /* Navbar */
-    .navbar {
-      background: rgba(7, 13, 24, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+    /* Navbar Executiva */
+    .site-nav {
+      background: rgba(6, 10, 18, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
       position: sticky;
       top: 0;
       z-index: 50;
+      transition: var(--transition);
     }
-    .nav-inner {
-      max-width: 1200px;
+    .nav-container {
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 1.1rem 1.5rem;
+      padding: 1.15rem 1.75rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 1.5rem;
     }
-    .nav-logo {
+    .nav-brand {
       display: flex;
       flex-direction: column;
-      text-decoration: none;
     }
-    .logo-main {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--text-white);
-      letter-spacing: 0.04em;
+    .brand-title {
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--text-pure);
+      line-height: 1;
     }
-    .logo-sub {
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
+    .brand-title span {
+      color: var(--gold-primary);
+    }
+    .brand-sub {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--gold-light);
       font-weight: 600;
+      margin-top: 0.35rem;
     }
-    .nav-links {
+
+    .nav-menu {
       display: flex;
-      gap: 2rem;
+      align-items: center;
+      gap: 2.2rem;
       list-style: none;
     }
-    .nav-links a {
+    .nav-menu a {
       color: var(--text-slate);
-      text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 500;
       transition: color 0.2s;
+      position: relative;
+      padding: 0.2rem 0;
     }
-    .nav-links a:hover { color: var(--gold); }
-    .btn-consult-nav {
-      background: linear-gradient(135deg, var(--gold) 0%, #9a784d 100%);
-      color: #070d18;
-      border: none;
-      padding: 0.65rem 1.3rem;
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-decoration: none;
+    .nav-menu a:hover {
+      color: var(--gold-light);
+    }
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--gold-primary);
+      transition: width 0.25s ease;
+    }
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+
+    .btn-nav-urgent {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      transition: opacity 0.2s;
+      gap: 0.55rem;
+      background: linear-gradient(135deg, #c5a880 0%, #9a784d 100%);
+      color: #060a12;
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 18px rgba(197, 168, 128, 0.25);
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
-    .btn-consult-nav:hover { opacity: 0.9; }
+    .btn-nav-urgent:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(197, 168, 128, 0.35);
+      background: linear-gradient(135deg, #dfc298 0%, #b38e5d 100%);
+    }
 
-    /* Hero */
-    .hero {
-      position: relative;
-      padding: 5rem 1.5rem 4rem;
-      background: radial-gradient(circle at 75% 25%, rgba(197, 168, 128, 0.12), transparent 45%),
-                  linear-gradient(180deg, #070d18 0%, #0a1120 100%);
-      border-bottom: 1px solid var(--border);
+    .btn-mobile-nav {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem;
+      color: var(--text-pure);
+      cursor: pointer;
     }
-    .hero-inner {
-      max-width: 1200px;
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      padding: 5rem 1.75rem 4.5rem;
+      background: 
+        radial-gradient(circle at 80% 15%, rgba(197, 168, 128, 0.09), transparent 45%),
+        radial-gradient(circle at 10% 85%, rgba(15, 25, 45, 0.6), transparent 50%),
+        linear-gradient(180deg, #060a12 0%, #0a1120 100%);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .hero-grid {
+      max-width: 1280px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 3rem;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
       align-items: center;
     }
-    .badge-oab {
+
+    .hero-badge-oab {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      background: rgba(197, 168, 128, 0.12);
-      border: 1px solid var(--border);
+      gap: 0.55rem;
+      background: rgba(197, 168, 128, 0.1);
+      border: 1px solid var(--border-strong);
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--radius-pill);
       color: var(--gold-light);
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1.25rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
     }
     .hero-title {
-      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
-      margin-bottom: 1.25rem;
-      line-height: 1.15;
+      font-size: clamp(2.5rem, 4.4vw, 3.8rem);
+      line-height: 1.14;
+      margin-bottom: 1.4rem;
     }
-    .hero-desc {
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold-primary);
+      text-decoration: underline;
+      text-decoration-color: rgba(197, 168, 128, 0.35);
+      text-underline-offset: 6px;
+    }
+    .hero-lead {
       font-size: 1.1rem;
       color: var(--text-slate);
-      margin-bottom: 2rem;
-      line-height: 1.65;
+      line-height: 1.7;
+      margin-bottom: 2.2rem;
+      font-weight: 300;
     }
-    .hero-metrics {
+
+    .hero-metrics-bar {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 1.75rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-light);
     }
-    .metric-number {
+    .metric-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .metric-val {
       font-family: 'Cinzel', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--gold);
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--gold-primary);
+      line-height: 1;
+      margin-bottom: 0.3rem;
     }
-    .metric-label {
-      font-size: 0.85rem;
+    .metric-sub {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* Card do Formulário de Triagem Jurídica */
+    .triage-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 2.4rem 2.2rem;
+      box-shadow: var(--shadow-elevated);
+      position: relative;
+    }
+    .triage-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    }
+    .triage-head {
+      margin-bottom: 1.5rem;
+    }
+    .triage-head h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.3rem;
+    }
+    .triage-head p {
+      font-size: 0.88rem;
       color: var(--text-muted);
     }
 
-    /* Formulário Hero Card */
-    .form-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2.2rem;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    }
-    .form-box h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.4rem;
-    }
-    .form-box p {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
     .form-group {
-      margin-bottom: 1rem;
+      margin-bottom: 1.15rem;
     }
     .form-label {
       display: block;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text-slate);
-      margin-bottom: 0.35rem;
-    }
-    .form-input, .form-select, .form-textarea {
-      width: 100%;
-      background: #070d18;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: var(--radius);
-      padding: 0.75rem 0.9rem;
-      color: #ffffff;
-      font-family: inherit;
-      font-size: 0.95rem;
-    }
-    .form-input:focus, .form-select:focus, .form-textarea:focus {
-      outline: none;
-      border-color: var(--gold);
-    }
-    .btn-submit-legal {
-      width: 100%;
-      background: linear-gradient(135deg, var(--gold) 0%, #9a784d 100%);
-      color: #070d18;
-      border: none;
-      padding: 0.95rem;
-      border-radius: var(--radius);
-      font-family: inherit;
+      font-size: 0.84rem;
       font-weight: 700;
-      font-size: 1rem;
+      color: var(--text-slate);
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.02em;
+    }
+    .form-control {
+      width: 100%;
+      background: #080d18;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-sm);
+      padding: 0.8rem 1rem;
+      color: #ffffff;
+      font-size: 0.92rem;
+      outline: none;
+      transition: var(--transition);
+    }
+    .form-control:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px rgba(197, 168, 128, 0.15);
+      background: #0b1322;
+    }
+    .form-control::placeholder {
+      color: #556275;
+    }
+
+    /* Seletor Interativo de Urgência */
+    .urgency-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-top: 0.35rem;
+    }
+    .urgency-pill {
+      background: #080d18;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .urgency-pill:hover {
+      border-color: var(--gold-primary);
+      color: var(--text-slate);
+    }
+    .urgency-pill.active {
+      background: rgba(197, 168, 128, 0.12);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+      box-shadow: 0 0 12px rgba(197, 168, 128, 0.18);
+    }
+    .urgency-pill.active.urgent-critical {
+      border-color: var(--status-red);
+      background: rgba(239, 68, 68, 0.12);
+      color: #fca5a5;
+    }
+
+    .form-terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      line-height: 1.4;
+    }
+    .form-terms input {
+      margin-top: 0.15rem;
+      accent-color: var(--gold-primary);
+      cursor: pointer;
+    }
+
+    .btn-submit-triage {
+      width: 100%;
+      background: linear-gradient(135deg, #c5a880 0%, #9a784d 100%);
+      color: #060a12;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      font-size: 0.98rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1.25rem;
-      transition: opacity 0.2s;
+      gap: 0.6rem;
+      margin-top: 1.35rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(197, 168, 128, 0.25);
     }
-    .btn-submit-legal:hover { opacity: 0.9; }
+    .btn-submit-triage:hover {
+      background: linear-gradient(135deg, #dfc298 0%, #b38e5d 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(197, 168, 128, 0.35);
+    }
 
-    /* Áreas de Atuação */
-    .section-wrap {
-      max-width: 1200px;
+    /* Áreas de Atuação com Cards Expansíveis */
+    .practices-section {
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 4.5rem 1.5rem;
+      padding: 5.5rem 1.75rem;
     }
-    .section-heading {
+    .section-head {
       text-align: center;
-      margin-bottom: 3rem;
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
     }
-    .section-heading h2 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+    .section-head-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      display: inline-block;
+      margin-bottom: 0.6rem;
     }
-    .section-heading p {
+    .section-head h2 {
+      font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+      margin-bottom: 0.8rem;
+    }
+    .section-head p {
       color: var(--text-muted);
       font-size: 1.05rem;
     }
-    .areas-grid {
+
+    .practices-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
     }
-    .area-card {
+    .practice-card {
       background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 2rem 1.75rem;
-      transition: all 0.25s ease;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 2.2rem 1.85rem;
       display: flex;
       flex-direction: column;
+      transition: var(--transition);
+      position: relative;
     }
-    .area-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-4px);
+    .practice-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-card);
     }
-    .area-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
+    .practice-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
       background: rgba(197, 168, 128, 0.12);
-      color: var(--gold);
+      color: var(--gold-light);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.4rem;
+      border: 1px solid var(--border-subtle);
     }
-    .area-title {
-      font-size: 1.35rem;
-      margin-bottom: 0.6rem;
+    .practice-title {
+      font-size: 1.45rem;
+      margin-bottom: 0.65rem;
+      line-height: 1.25;
     }
-    .area-desc {
+    .practice-desc {
+      font-size: 0.92rem;
       color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.55;
+      line-height: 1.6;
       margin-bottom: 1.25rem;
-      flex: 1;
     }
-    .area-link {
+
+    /* Conteúdo Expansível do Card */
+    .practice-expandable {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.25s ease;
+      opacity: 0;
+    }
+    .practice-card.expanded .practice-expandable {
+      max-height: 380px;
+      opacity: 1;
+      margin-bottom: 1.25rem;
+    }
+    .scope-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      padding: 0.8rem 0;
+      border-top: 1px dashed var(--border-light);
+      border-bottom: 1px dashed var(--border-light);
+      font-size: 0.85rem;
+      color: var(--text-slate);
+    }
+    .scope-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .scope-list i {
+      color: var(--gold-primary);
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+
+    .practice-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: auto;
+      padding-top: 1rem;
+    }
+    .btn-toggle-expand {
+      background: transparent;
+      border: none;
       color: var(--gold-light);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
+      transition: color 0.2s;
+    }
+    .btn-toggle-expand:hover {
+      color: #ffffff;
+    }
+    .btn-select-area {
+      background: rgba(197, 168, 128, 0.12);
+      border: 1px solid var(--border-subtle);
+      color: var(--gold-light);
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: var(--transition);
+    }
+    .btn-select-area:hover {
+      background: var(--gold-primary);
+      color: #060a12;
     }
 
-    /* FAQ */
-    .faq-section {
-      background: #050a14;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 4.5rem 1.5rem;
+    /* Pilares de Autoridade & Diferenciais */
+    .authority-section {
+      background: #080f1e;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 5.5rem 1.75rem;
     }
-    .faq-wrap {
-      max-width: 800px;
+    .authority-container {
+      max-width: 1280px;
       margin: 0 auto;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.75rem;
+    }
+    .pillar-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 2.2rem 1.75rem;
+      transition: var(--transition);
+    }
+    .pillar-box:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-4px);
+    }
+    .pillar-num {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--gold-dark);
+      margin-bottom: 0.75rem;
+    }
+    .pillar-title {
+      font-size: 1.18rem;
+      color: var(--text-pure);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .pillar-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Corpo Jurídico / Sócios */
+    .partners-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5.5rem 1.75rem;
+    }
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+    }
+    .partner-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+    .partner-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-4px);
+    }
+    .partner-photo-wrap {
+      position: relative;
+      background: #09101d;
+    }
+    .partner-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%) contrast(105%);
+    }
+    .partner-body {
+      padding: 2.2rem 1.85rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .partner-oab {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 0.35rem;
+    }
+    .partner-name {
+      font-size: 1.65rem;
+      margin-bottom: 0.5rem;
+    }
+    .partner-role {
+      font-size: 0.88rem;
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .partner-bio {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+    .partner-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .partner-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.74rem;
+      color: var(--text-slate);
+    }
+
+    /* FAQ Interativo */
+    .faq-section {
+      background: #050811;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 5.5rem 1.75rem;
+    }
+    .faq-container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .faq-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
     .faq-item {
       background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius);
-      margin-bottom: 1rem;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
       overflow: hidden;
+      transition: var(--transition);
     }
-    .faq-btn {
+    .faq-item.active {
+      border-color: var(--gold-primary);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+    .faq-question {
       width: 100%;
       background: transparent;
       border: none;
-      padding: 1.25rem 1.5rem;
+      padding: 1.35rem 1.6rem;
       text-align: left;
-      font-family: inherit;
-      font-size: 1.05rem;
-      font-weight: 600;
       color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
     }
-    .faq-answer {
-      padding: 0 1.5rem 1.25rem;
+    .faq-icon-arrow {
+      color: var(--gold-primary);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+    .faq-item.active .faq-icon-arrow {
+      transform: rotate(180deg);
+    }
+    .faq-reply {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.32s ease;
+      background: rgba(0, 0, 0, 0.15);
+    }
+    .faq-item.active .faq-reply {
+      max-height: 300px;
+    }
+    .faq-reply-inner {
+      padding: 0 1.6rem 1.4rem;
       color: var(--text-muted);
       font-size: 0.95rem;
-      line-height: 1.6;
-      display: none;
+      line-height: 1.65;
     }
-    .faq-item.active .faq-answer { display: block; }
-    .faq-item.active .faq-icon { transform: rotate(180deg); }
 
-    /* Footer */
-    .legal-footer {
-      background: #040810;
-      padding: 3.5rem 1.5rem 2rem;
-      text-align: center;
+    /* Modal de Confirmação de Triagem */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 17, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
     }
-    .legal-footer p {
+    .modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .success-modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      max-width: 520px;
+      width: 100%;
+      padding: 2.5rem 2.2rem;
+      text-align: center;
+      box-shadow: var(--shadow-elevated);
+      animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalPop {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .modal-shield-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(197, 168, 128, 0.15);
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.3rem;
+      border: 1px solid var(--border-strong);
+    }
+    .success-modal-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
+    }
+    .success-modal-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
+    }
+    .btn-modal-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 0.95rem;
+      background: linear-gradient(135deg, #c5a880 0%, #9a784d 100%);
+      color: #060a12;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      font-size: 0.96rem;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+    .btn-modal-action:hover {
+      background: linear-gradient(135deg, #dfc298 0%, #b38e5d 100%);
+    }
+
+    /* Botão Flutuante de Plantão WhatsApp */
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 26px;
+      right: 26px;
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #128c7e;
+      color: #ffffff;
+      padding: 0.75rem 1.25rem 0.75rem 0.9rem;
+      border-radius: var(--radius-pill);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .floating-whatsapp:hover {
+      background: #0f7569;
+      transform: translateY(-3px);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6);
+    }
+    .floating-wa-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #128c7e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 120;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+    .toast-box {
+      pointer-events: auto;
+      background: #0c1424;
+      border: 1px solid var(--border-strong);
+      color: #ffffff;
+      padding: 0.85rem 1.35rem;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes toastIn {
+      from { transform: translateY(15px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Footer Executivo */
+    .site-footer {
+      background: #03060a;
+      border-top: 1px solid var(--border-subtle);
+      padding: 4.5rem 1.75rem 2.5rem;
+    }
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .footer-brand h4 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .footer-brand p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+    .footer-col h5 {
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-pure);
+      margin-bottom: 1.2rem;
+      font-family: 'Cinzel', serif;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .footer-col a {
       color: var(--text-muted);
       font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover {
+      color: var(--gold-light);
+    }
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 2rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.82rem;
+      color: #64748b;
     }
 
-    @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+    /* Mobile Drawer */
+    .mobile-nav-drawer {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-dark);
+      z-index: 95;
+      display: flex;
+      flex-direction: column;
+      padding: 5rem 2rem 2rem;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    .mobile-nav-drawer.open {
+      transform: translateY(0);
+    }
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .mobile-nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      color: #ffffff;
+    }
+
+    /* Responsividade */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .practices-grid { grid-template-columns: repeat(2, 1fr); }
+      .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+      .partners-grid { grid-template-columns: 1fr; }
+      .footer-container { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu, .btn-nav-urgent { display: none; }
+      .btn-mobile-nav { display: block; }
+      .hero-metrics-bar { grid-template-columns: 1fr; gap: 1rem; }
+      .practices-grid { grid-template-columns: 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .partner-card { grid-template-columns: 1fr; }
+      .partner-photo-wrap { height: 260px; }
+      .footer-container { grid-template-columns: 1fr; }
+      .floating-whatsapp span { display: none; }
+      .floating-whatsapp { padding: 0.6rem; border-radius: 50%; }
     }
   </style>
 </head>
 <body>
 
-  <div class="top-bar">
+  <!-- Top Bar Executiva -->
+  <aside class="top-bar" aria-label="Informações Institucionais do Escritório">
     <div class="top-bar-inner">
-      <div class="top-bar-item">
-        <i data-lucide="map-pin" style="width: 15px; height: 15px; color: var(--gold);"></i>
-        <span>Av. Paulista, 1200 - Bela Vista, São Paulo - SP</span>
+      <div class="top-bar-group">
+        <div class="top-bar-item">
+          <i data-lucide="map-pin" style="width: 14px; height: 14px; color: var(--gold-primary);" aria-hidden="true"></i>
+          <span>Av. Paulista, 1200 - 14º Andar • Bela Vista, São Paulo - SP</span>
+        </div>
+        <div class="top-bar-item">
+          <i data-lucide="shield" style="width: 14px; height: 14px; color: var(--gold-primary);" aria-hidden="true"></i>
+          <span>Registro OAB/SP 45.890 • Sociedade de Advogados</span>
+        </div>
       </div>
-      <div class="top-bar-item">
-        <i data-lucide="phone" style="width: 15px; height: 15px; color: var(--gold);"></i>
-        <span>Plantão Jurídico: (11) 98390-9578</span>
+
+      <div class="top-bar-group">
+        <div class="badge-status-online">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span>Plantão Jurídico Ativo: (11) 98390-9578</span>
+        </div>
       </div>
     </div>
-  </div>
+  </aside>
 
-  <header class="navbar">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <span class="logo-main">JUNQUEIRA</span>
-        <span class="logo-sub">& ASSOCIADOS ADVOCACIA</span>
+  <!-- Navbar -->
+  <header class="site-nav">
+    <div class="nav-container">
+      <button class="btn-mobile-nav" onclick="toggleMobileNav()" aria-label="Menu de Navegação">
+        <i data-lucide="menu" style="width: 22px; height: 22px;"></i>
+      </button>
+
+      <a href="#" class="nav-brand" aria-label="Junqueira & Associados Advocacia">
+        <span class="brand-title">JUNQUEIRA<span> & </span>ASSOCIADOS</span>
+        <span class="brand-sub">ADVOCACIA & CONSULTORIA ESTRATÉGICA</span>
       </a>
 
-      <ul class="nav-links">
-        <li><a href="#atuacao">Áreas de Atuação</a></li>
-        <li><a href="#sobre">Diferenciais</a></li>
-        <li><a href="#faq">Dúvidas Frequentes</a></li>
-      </ul>
+      <nav aria-label="Navegação do Escritório">
+        <ul class="nav-menu">
+          <li><a href="#atuacao">Áreas de Prática</a></li>
+          <li><a href="#diferenciais">Diferenciais</a></li>
+          <li><a href="#corpo-juridico">Sócios</a></li>
+          <li><a href="#faq">Dúvidas Frequentes</a></li>
+        </ul>
+      </nav>
 
-      <a href="https://wa.me/5511983909578?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta%20jurídica%20com%20a%20Junqueira%20&%20Associados" target="_blank" class="btn-consult-nav">
-        <i data-lucide="message-square" style="width: 16px; height: 16px;"></i>
-        Consulta Imediata
-      </a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="#triagem" class="btn-nav-urgent" aria-label="Iniciar Triagem de Caso">
+          <i data-lucide="lock" style="width: 15px; height: 15px;" aria-hidden="true"></i>
+          <span>Consulta Sigilosa</span>
+        </a>
+      </div>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-inner">
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav">
+    <button style="align-self: flex-end; background: transparent; border: none; color: #fff; cursor: pointer; margin-bottom: 2rem;" onclick="toggleMobileNav()" aria-label="Fechar Menu">
+      <i data-lucide="x" style="width: 26px; height: 26px;"></i>
+    </button>
+    <ul class="mobile-nav-links">
+      <li><a href="#atuacao" onclick="toggleMobileNav()">Áreas de Prática</a></li>
+      <li><a href="#diferenciais" onclick="toggleMobileNav()">Diferenciais</a></li>
+      <li><a href="#corpo-juridico" onclick="toggleMobileNav()">Corpo Jurídico</a></li>
+      <li><a href="#faq" onclick="toggleMobileNav()">Dúvidas Frequentes</a></li>
+      <li><a href="#triagem" onclick="toggleMobileNav()">Triagem de Caso</a></li>
+    </ul>
+    <a href="https://wa.me/5511983909578?text=Olá!%20Gostaria%20de%20uma%20consulta%20jurídica%20com%20a%20Junqueira%20&%20Associados" target="_blank" rel="noopener noreferrer" class="btn-nav-urgent" style="text-align: center; justify-content: center;">
+      <i data-lucide="message-square" style="width: 18px; height: 18px;"></i>
+      <span>Plantão pelo WhatsApp</span>
+    </a>
+  </div>
+
+  <!-- Hero Section & Formulário de Triagem -->
+  <section class="hero-section" aria-label="Apresentação do Escritório">
+    <div class="hero-grid">
+      <!-- Coluna da Esquerda: Autoridade & Métricas -->
       <div>
-        <span class="badge-oab">
-          <i data-lucide="shield-check" style="width: 16px; height: 16px;"></i>
-          Inscrição OAB/SP Regular • Atendimento Especializado
-        </span>
-        <h1 class="hero-title">Defesa Estratégica & Segurança Jurídica</h1>
-        <p class="hero-desc">
-          Atuamos na solução de litígios complexos e na consultoria preventiva para empresas e pessoas físicas, com rigor ético, agilidade e absoluto sigilo.
+        <div class="hero-badge-oab">
+          <i data-lucide="award" style="width: 16px; height: 16px; color: var(--gold-primary);" aria-hidden="true"></i>
+          <span>Excelência Jurídica • Atendimento Presencial & Remoto Nacional</span>
+        </div>
+
+        <h1 class="hero-title">Defesa Estratégica, <em>Rigor Técnico</em> & Segurança Patrimonial</h1>
+
+        <p class="hero-lead">
+          Conduzimos litígios de alta complexidade e consultoria preventiva com discrição, velocidade de resposta e foco absoluto na salvaguarda de interesses empresariais e individuais.
         </p>
 
-        <div class="hero-metrics">
-          <div>
-            <div class="metric-number">15+</div>
-            <div class="metric-label">Anos de Prática Jurídica</div>
+        <div class="hero-metrics-bar">
+          <div class="metric-item">
+            <span class="metric-val">15+</span>
+            <span class="metric-sub">Anos de atuação contínua nos tribunais</span>
           </div>
-          <div>
-            <div class="metric-number">+1.400</div>
-            <div class="metric-label">Processos Concluídos</div>
+          <div class="metric-item">
+            <span class="metric-val">+1.450</span>
+            <span class="metric-sub">Casos e processos patrocinados com êxito</span>
           </div>
-          <div>
-            <div class="metric-number">98%</div>
-            <div class="metric-label">Acordos Favoráveis</div>
+          <div class="metric-item">
+            <span class="metric-val">98.4%</span>
+            <span class="metric-sub">Índice de resoluções e acordos favoráveis</span>
           </div>
         </div>
       </div>
 
-      <!-- Formulário de Contato Direto -->
-      <div class="form-box">
-        <h3>Solicitar Análise de Caso</h3>
-        <p>Preencha os dados para iniciar o contato com nossa equipe jurídica.</p>
+      <!-- Coluna da Direita: Card de Triagem Jurídica Interativa -->
+      <div class="triage-card" id="triagem">
+        <div class="triage-head">
+          <span style="font-size: 0.76rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-primary);">Triagem Inicial Confidencial</span>
+          <h3>Solicitar Análise de Caso</h3>
+          <p>Preencha os dados abaixo para direcionamento imediato ao advogado especialista.</p>
+        </div>
 
-        <form onsubmit="handleLegalSubmit(event)">
+        <form id="triage-form" onsubmit="handleTriageSubmit(event)">
           <div class="form-group">
-            <label class="form-label">Seu Nome Completo</label>
-            <input type="text" id="legal-name" class="form-input" placeholder="Ex: Carlos Eduardo" required>
+            <label class="form-label" for="client-name">Nome Completo do Solicitante</label>
+            <input type="text" id="client-name" class="form-control" placeholder="Ex: Dr. Roberto Alencar" required>
           </div>
+
           <div class="form-group">
-            <label class="form-label">Área de Interesse</label>
-            <select id="legal-area" class="form-select" required>
-              <option value="Direito Trabalhista">Direito Trabalhista & Previdenciário</option>
-              <option value="Direito Civil">Direito Civil & Contratos</option>
-              <option value="Direito Imobiliário">Direito Imobiliário & Propriedade</option>
-              <option value="Direito Empresarial">Direito Empresarial & Tributário</option>
-              <option value="Direito de Família">Direito de Família & Sucessões</option>
+            <label class="form-label" for="client-phone">WhatsApp para Contato Sigiloso</label>
+            <input type="tel" id="client-phone" class="form-control" placeholder="(11) 99999-9999" maxlength="15" oninput="maskPhone(this)" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="client-area">Área do Direito / Natureza da Causa</label>
+            <select id="client-area" class="form-control" required>
+              <option value="Direito Trabalhista Patronal & Executivo">Direito Trabalhista Patronal & Executivo</option>
+              <option value="Direito Cível & Contratos Estratégicos">Direito Cível & Contratos Estratégicos</option>
+              <option value="Direito Empresarial & Societário">Direito Empresarial & Societário</option>
+              <option value="Direito Imobiliário & Regularização">Direito Imobiliário & Regularização Patrimonial</option>
+              <option value="Planejamento Sucessório & Família">Planejamento Sucessório & Holding Familiar</option>
+              <option value="Direito Tributário & Fiscal">Direito Tributário & Defesas Fiscais</option>
             </select>
           </div>
+
           <div class="form-group">
-            <label class="form-label">Breve resumo da situação</label>
-            <textarea id="legal-details" class="form-textarea" rows="3" placeholder="Descreva brevemente sua dúvida ou processo..." required></textarea>
+            <label class="form-label">Nível de Urgência da Demanda</label>
+            <div class="urgency-grid" role="radiogroup" aria-label="Nível de urgência">
+              <button type="button" class="urgency-pill active" onclick="setUrgency(this, 'Preventivo / Planejamento')" role="radio" aria-checked="true">
+                <i data-lucide="calendar" style="width: 15px; height: 15px;"></i>
+                <span>Normal</span>
+                <small style="font-size: 0.68rem; opacity: 0.75;">Planejamento</small>
+              </button>
+
+              <button type="button" class="urgency-pill" onclick="setUrgency(this, 'Prazo em Curso (24 a 48h)')" role="radio" aria-checked="false">
+                <i data-lucide="clock" style="width: 15px; height: 15px;"></i>
+                <span>Prioritário</span>
+                <small style="font-size: 0.68rem; opacity: 0.75;">Prazo em curso</small>
+              </button>
+
+              <button type="button" class="urgency-pill urgent-critical" onclick="setUrgency(this, 'Crítica / Imediata (Audiência ou Liminar)')" role="radio" aria-checked="false">
+                <i data-lucide="alert-octagon" style="width: 15px; height: 15px; color: var(--status-red);"></i>
+                <span style="color: #f87171;">Urgência</span>
+                <small style="font-size: 0.68rem; opacity: 0.85;">Intimação/Hoje</small>
+              </button>
+            </div>
           </div>
-          <button type="submit" class="btn-submit-legal">
-            <i data-lucide="send" style="width: 17px; height: 17px;"></i>
-            Encaminhar para o Advogado
+
+          <div class="form-group">
+            <label class="form-label" for="client-summary">Breve Síntese da Demanda ou Processo</label>
+            <textarea id="client-summary" class="form-control" rows="3" placeholder="Descreva sucintamente os fatos, partes envolvidas ou número do processo (se houver)..." required></textarea>
+          </div>
+
+          <div class="form-terms">
+            <input type="checkbox" id="terms-consent" required checked>
+            <label for="terms-consent">Declaro que as informações são verídicas e autorizo o contato estritamente sob o dever de sigilo profissional OAB e conformidade LGPD.</label>
+          </div>
+
+          <button type="submit" class="btn-submit-triage" id="btn-submit-triage">
+            <i data-lucide="send" style="width: 18px; height: 18px;" aria-hidden="true"></i>
+            <span>Encaminhar para Triagem do Sócio</span>
           </button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- Áreas de Atuação -->
-  <section class="section-wrap" id="atuacao">
-    <div class="section-heading">
-      <h2>Áreas de Prática</h2>
-      <p>Consultoria consultiva e contenciosa especializada para cada necessidade jurídica.</p>
+  <!-- Áreas de Atuação com Cards Expansíveis -->
+  <section class="practices-section" id="atuacao" aria-label="Áreas de Atuação Jurídica">
+    <div class="section-head">
+      <span class="section-head-badge">Especialidades Técnicas</span>
+      <h2>Áreas de Prática Jurídica</h2>
+      <p>Assessoria contenciosa de ponta e consultoria preventiva personalizada para blindagem de direitos e ativos.</p>
     </div>
 
-    <div class="areas-grid">
-      <div class="area-card">
-        <div class="area-icon">
+    <div class="practices-grid">
+      <!-- Card 1: Trabalhista -->
+      <article class="practice-card" id="card-trabalhista">
+        <div class="practice-icon" aria-hidden="true">
           <i data-lucide="briefcase" style="width: 26px; height: 26px;"></i>
         </div>
-        <h3 class="area-title">Direito Trabalhista</h3>
-        <p class="area-desc">Defesa patronal e assessoria ao trabalhador em rescisões complexas, assédio, horas extras e acordos sindicais.</p>
-        <a href="#contato" class="area-link">Consultar Especialista <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
-      </div>
+        <h3 class="practice-title">Direito Trabalhista Patronal & Executivo</h3>
+        <p class="practice-desc">Defesa de empresas e executivos em litígios sindicais, rescisões complexas de C-Level e auditoria de passivos trabalhistas.</p>
 
-      <div class="area-card">
-        <div class="area-icon">
+        <div class="practice-expandable">
+          <ul class="scope-list">
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Contencioso estratégico em Tribunais Regionais e TST</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Elaboração de stock options, PLR e contratos de não-concorrência</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Defesa em autos do Ministério Público do Trabalho (MPT)</span></li>
+          </ul>
+        </div>
+
+        <div class="practice-actions">
+          <button class="btn-toggle-expand" onclick="togglePracticeExpand('card-trabalhista')">
+            <span>Ver escopo completo</span>
+            <i data-lucide="chevron-down" style="width: 15px; height: 15px;"></i>
+          </button>
+          <button class="btn-select-area" onclick="preselectArea('Direito Trabalhista Patronal & Executivo')">
+            <span>Selecionar Área</span>
+            <i data-lucide="arrow-right" style="width: 13px; height: 13px;"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 2: Cível & Contratos -->
+      <article class="practice-card" id="card-civel">
+        <div class="practice-icon" aria-hidden="true">
           <i data-lucide="scale" style="width: 26px; height: 26px;"></i>
         </div>
-        <h3 class="area-title">Direito Civil & Contratos</h3>
-        <p class="area-desc">Elaboração de minutas contratuais robustas, cobrança de inadimplentes, indenizações e responsabilidade civil.</p>
-        <a href="#contato" class="area-link">Consultar Especialista <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
-      </div>
+        <h3 class="practice-title">Direito Cível & Contratos Estratégicos</h3>
+        <p class="practice-desc">Elaboração de minutas de alta blindagem, cobrança de títulos inadimplentes vultosos, responsabilidade civil e indenizações.</p>
 
-      <div class="area-card">
-        <div class="area-icon">
-          <i data-lucide="home" style="width: 26px; height: 26px;"></i>
+        <div class="practice-expandable">
+          <ul class="scope-list">
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Ações indenizatórias por quebra de sigilo e concorrência desleal</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Execução de garantias fiduciárias e títulos judiciais</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Mediação e arbitragem em litígios comerciais complexos</span></li>
+          </ul>
         </div>
-        <h3 class="area-title">Direito Imobiliário</h3>
-        <p class="area-desc">Assessoria em compra e venda de imóveis, usucapião, inventários, locações comerciais e regularização de escrituras.</p>
-        <a href="#contato" class="area-link">Consultar Especialista <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
-      </div>
 
-      <div class="area-card">
-        <div class="area-icon">
+        <div class="practice-actions">
+          <button class="btn-toggle-expand" onclick="togglePracticeExpand('card-civel')">
+            <span>Ver escopo completo</span>
+            <i data-lucide="chevron-down" style="width: 15px; height: 15px;"></i>
+          </button>
+          <button class="btn-select-area" onclick="preselectArea('Direito Cível & Contratos Estratégicos')">
+            <span>Selecionar Área</span>
+            <i data-lucide="arrow-right" style="width: 13px; height: 13px;"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 3: Imobiliário -->
+      <article class="practice-card" id="card-imobiliario">
+        <div class="practice-icon" aria-hidden="true">
+          <i data-lucide="building-2" style="width: 26px; height: 26px;"></i>
+        </div>
+        <h3 class="practice-title">Direito Imobiliário & Patrimonial</h3>
+        <p class="practice-desc">Due diligence na aquisição de imóveis de alto padrão, usucapião, regularização de escrituras e litígios de locação comercial.</p>
+
+        <div class="practice-expandable">
+          <ul class="scope-list">
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Assessoria jurídica completa a incorporadoras e loteamentos</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Ações renovatórias e revisionais de aluguel corporativo</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Desapropriações e defesa em disputas possessórias</span></li>
+          </ul>
+        </div>
+
+        <div class="practice-actions">
+          <button class="btn-toggle-expand" onclick="togglePracticeExpand('card-imobiliario')">
+            <span>Ver escopo completo</span>
+            <i data-lucide="chevron-down" style="width: 15px; height: 15px;"></i>
+          </button>
+          <button class="btn-select-area" onclick="preselectArea('Direito Imobiliário & Regularização')">
+            <span>Selecionar Área</span>
+            <i data-lucide="arrow-right" style="width: 13px; height: 13px;"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 4: Empresarial & Societário -->
+      <article class="practice-card" id="card-empresarial">
+        <div class="practice-icon" aria-hidden="true">
           <i data-lucide="landmark" style="width: 26px; height: 26px;"></i>
         </div>
-        <h3 class="area-title">Direito Empresarial</h3>
-        <p class="area-desc">Planejamento societário, fusões, proteção patrimonial e defesa em autuações fiscais e tributárias.</p>
-        <a href="#contato" class="area-link">Consultar Especialista <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i></a>
+        <h3 class="practice-title">Direito Empresarial & Societário</h3>
+        <p class="practice-desc">Estruturação societária, acordos de sócios, governança corporativa, processos de fusões & aquisições (M&A) e dissoluções.</p>
+
+        <div class="practice-expandable">
+          <ul class="scope-list">
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Prevenção e resolução de disputas entre acionistas</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Auditoria jurídica (Legal Due Diligence) em transações M&A</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Proteção contra desconsideração da personalidade jurídica</span></li>
+          </ul>
+        </div>
+
+        <div class="practice-actions">
+          <button class="btn-toggle-expand" onclick="togglePracticeExpand('card-empresarial')">
+            <span>Ver escopo completo</span>
+            <i data-lucide="chevron-down" style="width: 15px; height: 15px;"></i>
+          </button>
+          <button class="btn-select-area" onclick="preselectArea('Direito Empresarial & Societário')">
+            <span>Selecionar Área</span>
+            <i data-lucide="arrow-right" style="width: 13px; height: 13px;"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 5: Família & Sucessões -->
+      <article class="practice-card" id="card-familia">
+        <div class="practice-icon" aria-hidden="true">
+          <i data-lucide="shield-check" style="width: 26px; height: 26px;"></i>
+        </div>
+        <h3 class="practice-title">Holding Familiar & Sucessões</h3>
+        <p class="practice-desc">Planejamento patrimonial inteligente, blindagem sucessória, inventários judiciais de alta expressividade e partilhas consensuais.</p>
+
+        <div class="practice-expandable">
+          <ul class="scope-list">
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Criação de holdings patrimoniais e doações com reserva de usufruto</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Redução legal de carga tributária de ITCMD em heranças</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Testamentos públicos com cláusulas restritivas protetivas</span></li>
+          </ul>
+        </div>
+
+        <div class="practice-actions">
+          <button class="btn-toggle-expand" onclick="togglePracticeExpand('card-familia')">
+            <span>Ver escopo completo</span>
+            <i data-lucide="chevron-down" style="width: 15px; height: 15px;"></i>
+          </button>
+          <button class="btn-select-area" onclick="preselectArea('Planejamento Sucessório & Família')">
+            <span>Selecionar Área</span>
+            <i data-lucide="arrow-right" style="width: 13px; height: 13px;"></i>
+          </button>
+        </div>
+      </article>
+
+      <!-- Card 6: Tributário -->
+      <article class="practice-card" id="card-tributario">
+        <div class="practice-icon" aria-hidden="true">
+          <i data-lucide="coins" style="width: 26px; height: 26px;"></i>
+        </div>
+        <h3 class="practice-title">Direito Tributário & Defesas Fiscais</h3>
+        <p class="practice-desc">Impugnação de autos de infração da Receita Federal e Estadual, recuperação de créditos e teses tributárias nos tribunais superiores.</p>
+
+        <div class="practice-expandable">
+          <ul class="scope-list">
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Defesas contra execuções fiscais e penhoras patrimoniais</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Recuperação administrativa e judicial de tributos recolhidos a maior</span></li>
+            <li><i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i> <span>Obtenção de certidões negativas de débito (CND)</span></li>
+          </ul>
+        </div>
+
+        <div class="practice-actions">
+          <button class="btn-toggle-expand" onclick="togglePracticeExpand('card-tributario')">
+            <span>Ver escopo completo</span>
+            <i data-lucide="chevron-down" style="width: 15px; height: 15px;"></i>
+          </button>
+          <button class="btn-select-area" onclick="preselectArea('Direito Tributário & Fiscal')">
+            <span>Selecionar Área</span>
+            <i data-lucide="arrow-right" style="width: 13px; height: 13px;"></i>
+          </button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Pilares de Autoridade e Diferenciais -->
+  <section class="authority-section" id="diferenciais" aria-label="Diferenciais do Escritório">
+    <div class="authority-container">
+      <div class="section-head" style="margin-bottom: 3.5rem;">
+        <span class="section-head-badge">Por Que Nos Escolher</span>
+        <h2>Pilares de Excelência Institucional</h2>
+        <p>A união de rigor doutrinário clássico com agilidade tecnológica contemporânea.</p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-box">
+          <div class="pillar-num">01</div>
+          <h3 class="pillar-title">Atuação Combativa nos Tribunais</h3>
+          <p class="pillar-text">Presença assídua e sustentações orais perante o Tribunal de Justiça (TJSP), TRT, Superior Tribunal de Justiça (STJ) e STF.</p>
+        </div>
+
+        <div class="pillar-box">
+          <div class="pillar-num">02</div>
+          <h3 class="pillar-title">Comunicação Clara e Acessível</h3>
+          <p class="pillar-text">Eliminamos o juridiquês arcaico. Nossos clientes recebem relatórios claros e compreensíveis a cada decisão relevante.</p>
+        </div>
+
+        <div class="pillar-box">
+          <div class="pillar-num">03</div>
+          <h3 class="pillar-title">Sigilo Blindado & LGPD</h3>
+          <p class="pillar-text">Canal criptografado de ponta a ponta para troca de documentos sensíveis, com custódia de dados em servidores dedicados seguros.</p>
+        </div>
+
+        <div class="pillar-box">
+          <div class="pillar-num">04</div>
+          <h3 class="pillar-title">Atendimento Direto com Sócios</h3>
+          <p class="pillar-text">Seu caso é analisado e conduzido diretamente pelos sócios seniores, garantindo profundidade analítica em cada estratégia.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="faq-section" id="faq">
-    <div class="faq-wrap">
-      <div class="section-heading">
+  <!-- Corpo Jurídico / Sócios Fundadores -->
+  <section class="partners-section" id="corpo-juridico" aria-label="Sócios e Corpo Jurídico">
+    <div class="section-head">
+      <span class="section-head-badge">Liderança Jurídica</span>
+      <h2>Sócios Titulares</h2>
+      <p>Advogados de formação consolidada pelas mais prestigiadas faculdades de Direito do país.</p>
+    </div>
+
+    <div class="partners-grid">
+      <!-- Sócio 1 -->
+      <article class="partner-card">
+        <div class="partner-photo-wrap">
+          <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=700&q=80" alt="Dr. Felipe Junqueira - Sócio Fundador" class="partner-photo">
+        </div>
+        <div class="partner-body">
+          <span class="partner-oab">OAB/SP 45.890</span>
+          <h3 class="partner-name">Dr. Felipe Junqueira</h3>
+          <span class="partner-role">Sócio Fundador • Direito Empresarial & Trabalhista</span>
+          <p class="partner-bio">Graduado e Especialista pela Faculdade de Direito do Largo de São Francisco (USP). Mais de 16 anos liderando negociações corporativas de alta complexidade e defesas patronais vultosas.</p>
+          <div class="partner-badges">
+            <span class="partner-tag">Largo São Francisco (USP)</span>
+            <span class="partner-tag">Membro IASP</span>
+            <span class="partner-tag">Contencioso Estratégico</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Sócia 2 -->
+      <article class="partner-card">
+        <div class="partner-photo-wrap">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80" alt="Dra. Camila Junqueira - Sócia Coordenadora" class="partner-photo">
+        </div>
+        <div class="partner-body">
+          <span class="partner-oab">OAB/SP 49.120</span>
+          <h3 class="partner-name">Dra. Camila Junqueira</h3>
+          <span class="partner-role">Sócia Coordenadora • Cível & Planejamento Patrimonial</span>
+          <p class="partner-bio">Mestre em Direito Civil pela Pontifícia Universidade Católica (PUC-SP), com extensão em Direito Societário e Holding Familiar pelo Insper. Especialista em blindagem sucessória e contratos.</p>
+          <div class="partner-badges">
+            <span class="partner-tag">Mestre PUC-SP</span>
+            <span class="partner-tag">Insper Direito</span>
+            <span class="partner-tag">Holdings & Sucessões</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FAQ Interativo Acordeão -->
+  <section class="faq-section" id="faq" aria-label="Perguntas Frequentes">
+    <div class="faq-container">
+      <div class="section-head" style="margin-bottom: 3.5rem;">
+        <span class="section-head-badge">Esclarecimentos Rápidos</span>
         <h2>Dúvidas Frequentes</h2>
-        <p>Respostas claras para as principais perguntas de nossos clientes.</p>
+        <p>Entenda como funciona nossa dinâmica de trabalho, prazos e atendimento.</p>
       </div>
 
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-btn" type="button">
-          <span>Como funciona a primeira consulta de avaliação?</span>
-          <i data-lucide="chevron-down" class="faq-icon" style="width: 18px; height: 18px;"></i>
-        </button>
-        <div class="faq-answer">
-          Nossa equipe realiza uma triagem inicial para entender o caso, examinar os documentos preliminares e orientar sobre a viabilidade jurídica antes de qualquer contratação.
+      <div class="faq-accordion">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>Como é realizada a primeira análise de viabilidade do caso?</span>
+            <i data-lucide="chevron-down" class="faq-icon-arrow" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+          </button>
+          <div class="faq-reply">
+            <div class="faq-reply-inner">
+              Após o preenchimento do formulário de triagem ou contato via WhatsApp, realizamos um exame preliminar de documentos e jurisprudência aplicável. Se houver viabilidade jurídica, agendamos uma conferência detalhada (presencial ou por vídeo segura) para apresentar o parecer estratégico e o plano de ação.
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-btn" type="button">
-          <span>O atendimento pode ser feito 100% online?</span>
-          <i data-lucide="chevron-down" class="faq-icon" style="width: 18px; height: 18px;"></i>
-        </button>
-        <div class="faq-answer">
-          Sim. Atendemos clientes de todo o país através de videoconferências seguras, assinatura digital de procurações e acompanhamento processual digital.
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>Atendem clientes e processos fora do Estado de São Paulo?</span>
+            <i data-lucide="chevron-down" class="faq-icon-arrow" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+          </button>
+          <div class="faq-reply">
+            <div class="faq-reply-inner">
+              Sim. Graças à digitalização integral dos tribunais no Brasil (PJe, e-SAJ e Eproc) e ao uso de assinaturas digitais legalmente reconhecidas com certificado ICP-Brasil, atuamos com plenitude em tribunais de qualquer estado da federação e em Brasília (STJ e STF).
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <button class="faq-btn" type="button">
-          <span>Como sou informado sobre o andamento do meu processo?</span>
-          <i data-lucide="chevron-down" class="faq-icon" style="width: 18px; height: 18px;"></i>
-        </button>
-        <div class="faq-answer">
-          Você recebe relatórios periódicos em linguagem acessível e atualizações diretamente por WhatsApp e e-mail a cada nova movimentação relevante.
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>Como meus documentos e informações são protegidos?</span>
+            <i data-lucide="chevron-down" class="faq-icon-arrow" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+          </button>
+          <div class="faq-reply">
+            <div class="faq-reply-inner">
+              Nosso escritório opera sob estrito sigilo ético amparado pelo Estatuto da Advocacia (Lei Federal 8.906/94) e em rigorosa conformidade com a Lei Geral de Proteção de Dados (LGPD). Todos os canais de triagem e troca documental utilizam criptografia de ponta a ponta.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>Como serei mantido informado sobre as movimentações do meu processo?</span>
+            <i data-lucide="chevron-down" class="faq-icon-arrow" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+          </button>
+          <div class="faq-reply">
+            <div class="faq-reply-inner">
+              Disponibilizamos um canal direto de comunicação via WhatsApp exclusivo da controladoria jurídica, além de relatórios mensais sintetizados. Qualquer intimação urgente, decisão liminar ou sentença é comunicada e explicada no mesmo dia de sua publicação.
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="legal-footer">
-    <div style="font-family: 'Cinzel', serif; font-size: 1.4rem; color: #ffffff; margin-bottom: 0.4rem;">
-      JUNQUEIRA & ASSOCIADOS
+  <!-- Modal de Confirmação de Triagem Sigilosa -->
+  <div class="modal-backdrop" id="success-modal" onclick="handleModalClick(event)" aria-modal="true" role="dialog" aria-label="Confirmação de Triagem">
+    <div class="success-modal-card">
+      <div class="modal-shield-icon" aria-hidden="true">
+        <i data-lucide="shield-check" style="width: 36px; height: 36px;"></i>
+      </div>
+      <span style="font-size: 0.78rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-primary);">Protocolo Registrado</span>
+      <h3>Triagem Jurídica Encaminhada</h3>
+      <p id="modal-summary-text">Seus dados foram organizados e estão prontos para envio ao plantão do sócio com prioridade.</p>
+
+      <button class="btn-modal-action" id="btn-modal-whatsapp" onclick="dispatchWhatsApp()">
+        <i data-lucide="message-square" style="width: 18px; height: 18px;"></i>
+        <span>Abrir WhatsApp do Plantão Agora</span>
+      </button>
+
+      <button style="margin-top: 1rem; background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.85rem;" onclick="closeSuccessModal()">
+        Fechar janela
+      </button>
     </div>
-    <p>Sociedade de Advogados • Registro OAB/SP nº 45.890</p>
-    <p style="margin-top: 1rem; font-size: 0.8rem; color: #64748b;">
-      © 2026 Junqueira & Associados. Todos os direitos reservados.
-    </p>
+  </div>
+
+  <!-- Botão Flutuante de WhatsApp -->
+  <a href="https://wa.me/5511983909578?text=Olá!%20Gostaria%20de%20uma%20consulta%20sigilosa%20com%20o%20plantão%20da%20Junqueira%20&%20Associados" target="_blank" rel="noopener noreferrer" class="floating-whatsapp" aria-label="Falar com o Plantão Jurídico via WhatsApp">
+    <div class="floating-wa-icon" aria-hidden="true">
+      <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
+    </div>
+    <span>Plantão Jurídico Online</span>
+  </a>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Rodapé Executivo -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h4>JUNQUEIRA & ASSOCIADOS</h4>
+        <p>Sociedade de Advogados devidamente registrada na Ordem dos Advogados do Brasil, Seção São Paulo, sob o nº 45.890.</p>
+        <p style="font-size: 0.82rem; color: #64748b;">
+          Sede Principal: Av. Paulista, 1200 - Conjunto 141/142 • Edifício Horizon • Bela Vista, São Paulo - SP • CEP 01310-100
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Áreas de Prática</h5>
+        <ul>
+          <li><a href="#atuacao">Direito Trabalhista Patronal</a></li>
+          <li><a href="#atuacao">Direito Cível & Contratos</a></li>
+          <li><a href="#atuacao">Direito Imobiliário & Regularização</a></li>
+          <li><a href="#atuacao">Direito Empresarial & M&A</a></li>
+          <li><a href="#atuacao">Planejamento Sucessório & Holding</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Institucional</h5>
+        <ul>
+          <li><a href="#corpo-juridico">Corpo Jurídico</a></li>
+          <li><a href="#diferenciais">Nossos Diferenciais</a></li>
+          <li><a href="#faq">Perguntas Frequentes</a></li>
+          <li><a href="#triagem">Triagem de Casos Online</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contato & Plantão</h5>
+        <ul>
+          <li><a href="https://wa.me/5511983909578" target="_blank" rel="noopener noreferrer">WhatsApp: (11) 98390-9578</a></li>
+          <li><a href="mailto:contato@junqueiraadvocacia.com.br">contato@junqueiraadvocacia.com.br</a></li>
+          <li><span style="color: #64748b; font-size: 0.85rem;">Segunda a Sexta: 08h às 19h</span></li>
+          <li><span style="color: #64748b; font-size: 0.85rem;">Plantão de Emergências 24h</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 Junqueira & Associados Advocacia. Todos os direitos reservados. CNPJ: 45.890.321/0001-88.</div>
+      <div>Atuação pautada estritamente pelo Código de Ética e Disciplina da OAB.</div>
+    </div>
   </footer>
 
+  <!-- Scripts Interativos -->
   <script>
     lucide.createIcons();
 
-    function toggleFaq(item) {
-      item.classList.toggle('active');
+    // Estado da Triagem
+    let triageUrgency = 'Preventivo / Planejamento';
+    let lastGeneratedWhatsAppUrl = '';
+
+    // Máscara de Telefone Brasileira
+    function maskPhone(input) {
+      let v = input.value.replace(/\D/g, '');
+      if (v.length > 11) v = v.substring(0, 11);
+
+      if (v.length > 10) {
+        // Formato (11) 99999-9999
+        input.value = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+      } else if (v.length > 6) {
+        // Formato (11) 9999-9999
+        input.value = v.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
+      } else if (v.length > 2) {
+        input.value = v.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
+      } else {
+        input.value = v;
+      }
     }
 
-    function handleLegalSubmit(e) {
-      e.preventDefault();
-      const name = document.getElementById('legal-name').value;
-      const area = document.getElementById('legal-area').value;
-      const details = document.getElementById('legal-details').value;
+    // Seletor de Urgência
+    function setUrgency(pillElement, urgencyLabel) {
+      document.querySelectorAll('.urgency-pill').forEach(p => {
+        p.classList.remove('active');
+        p.setAttribute('aria-checked', 'false');
+      });
+      pillElement.classList.add('active');
+      pillElement.setAttribute('aria-checked', 'true');
+      triageUrgency = urgencyLabel;
+    }
 
-      const msg = `Olá! Gostaria de uma avaliação jurídica com a Junqueira & Associados:%0A%0A• Nome: ${encodeURIComponent(name)}%0A• Área: ${encodeURIComponent(area)}%0A• Situação: ${encodeURIComponent(details)}`;
-      window.open(`https://wa.me/5511983909578?text=${msg}`, '_blank');
+    // Pré-selecionar Área a partir dos Cards
+    function preselectArea(areaName) {
+      const select = document.getElementById('client-area');
+      if (select) {
+        select.value = areaName;
+      }
+      const formSection = document.getElementById('triagem');
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth' });
+        select.focus();
+        showToast(`Área "${areaName}" pré-selecionada no formulário de triagem.`);
+      }
+    }
+
+    // Cards Expansíveis de Áreas de Atuação
+    function togglePracticeExpand(cardId) {
+      const card = document.getElementById(cardId);
+      if (!card) return;
+      const isExpanded = card.classList.contains('expanded');
+      
+      // Fecha outros cards se desejado ou apenas alterna
+      card.classList.toggle('expanded');
+      const btn = card.querySelector('.btn-toggle-expand');
+      if (btn) {
+        if (!isExpanded) {
+          btn.innerHTML = `<span>Recolher escopo</span> <i data-lucide="chevron-up" style="width: 15px; height: 15px;"></i>`;
+        } else {
+          btn.innerHTML = `<span>Ver escopo completo</span> <i data-lucide="chevron-down" style="width: 15px; height: 15px;"></i>`;
+        }
+        lucide.createIcons();
+      }
+    }
+
+    // Acordeão do FAQ
+    function toggleFaq(item) {
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('active');
+        const q = i.querySelector('.faq-question');
+        if (q) q.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isActive) {
+        item.classList.add('active');
+        const q = item.querySelector('.faq-question');
+        if (q) q.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // Envio da Triagem Jurídica
+    function handleTriageSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('client-name').value.trim();
+      const phone = document.getElementById('client-phone').value.trim();
+      const area = document.getElementById('client-area').value;
+      const summary = document.getElementById('client-summary').value.trim();
+
+      if (!name || !phone || !summary) {
+        showToast('⚠️ Por favor, preencha todos os campos obrigatórios.');
+        return;
+      }
+
+      // Gera mensagem profissional para o WhatsApp
+      const urgencySymbol = triageUrgency.includes('Crítica') ? '🚨 [URGÊNCIA IMEDIATA]' : '⚖️ [TRIAGEM JURÍDICA]';
+      const formattedMessage = `${urgencySymbol} Olá, Dr. Felipe Junqueira!%0A%0ASolicito análise de viabilidade com base na triagem do site:%0A%0A👤 Nome: ${encodeURIComponent(name)}%0A📞 Contato: ${encodeURIComponent(phone)}%0A📂 Área: ${encodeURIComponent(area)}%0A⏱️ Grau de Urgência: ${encodeURIComponent(triageUrgency)}%0A%0A📝 Resumo da Demanda:%0A"${encodeURIComponent(summary)}"%0A%0A━━━━━━━━━━━━━━━━━━━━%0ASolicito retorno da equipe técnica para orientações sobre prazos e documentos.`;
+
+      lastGeneratedWhatsAppUrl = `https://wa.me/5511983909578?text=${formattedMessage}`;
+
+      // Abre Modal de Sucesso
+      document.getElementById('modal-summary-text').innerHTML = `
+        <strong>${escapeHtml(name)}</strong>, sua solicitação de análise em <strong>${escapeHtml(area)}</strong> foi estruturada com sucesso sob sigilo ético.
+      `;
+      document.getElementById('success-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      showToast('🔒 Protocolo de triagem pronto para envio.');
+    }
+
+    function dispatchWhatsApp() {
+      if (lastGeneratedWhatsAppUrl) {
+        window.open(lastGeneratedWhatsAppUrl, '_blank');
+        closeSuccessModal();
+      }
+    }
+
+    function closeSuccessModal() {
+      document.getElementById('success-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleModalClick(e) {
+      if (e.target.id === 'success-modal') {
+        closeSuccessModal();
+      }
+    }
+
+    // Menu Mobile
+    function toggleMobileNav() {
+      const drawer = document.getElementById('mobile-nav');
+      drawer.classList.toggle('open');
+      document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+    }
+
+    // Toast de Alerta Elegante
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast-box';
+      toast.innerHTML = `
+        <i data-lucide="shield" style="width: 17px; height: 17px; color: var(--gold-primary);"></i>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      setTimeout(() => {
+        toast.style.transition = 'opacity 0.3s, transform 0.3s';
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        setTimeout(() => toast.remove(), 320);
+      }, 3600);
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+      });
     }
   </script>
 </body>

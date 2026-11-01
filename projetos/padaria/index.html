@@ -1,598 +1,1355 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Forno D'Ouro | Panificação Artesanal & Cafeteria</title>
-  <meta name="description" content="Forno D'Ouro — Pães de fermentação natural de 48h, confeitaria fina, cafés especiais e encomendas com entrega rápida.">
+  <meta name="description" content="Forno D'Ouro — Pães artesanais de fermentação natural de 48h, croissants franceses, confeitaria fina e cafés especiais em São Paulo. Peça online via WhatsApp.">
 
+  <!-- Google Fonts: Playfair Display + Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif']
+          },
+          colors: {
+            bakery: {
+              cream: '#FCF9F2',
+              'cream-dark': '#F4ECE0',
+              wheat: '#E8D7B8',
+              amber: '#B86A14',
+              'amber-hover': '#98540B',
+              'amber-light': '#FEF3C7',
+              espresso: '#23150D',
+              'espresso-light': '#3B261A',
+              crust: '#8C4610'
+            }
+          },
+          boxShadow: {
+            'warm-sm': '0 2px 8px -1px rgba(35, 21, 13, 0.06)',
+            'warm-md': '0 10px 25px -4px rgba(35, 21, 13, 0.08)',
+            'warm-lg': '0 20px 35px -5px rgba(35, 21, 13, 0.12)',
+            'oven-glow': '0 0 25px rgba(232, 138, 38, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    :root {
-      --bg: #fcf9f2;
-      --surface: #ffffff;
-      --amber: #b45309;
-      --amber-dark: #78350f;
-      --amber-light: #fef3c7;
-      --espresso: #27170c;
-      --text-muted: #6b7280;
-      --border: #e5e0d3;
-      --radius: 14px;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Warm bakery bespoke styling */
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg);
-      color: var(--espresso);
-      line-height: 1.6;
-      overflow-x: hidden;
+      background-color: #FCF9F2;
+      color: #23150D;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(248, 238, 222, 0.8) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(254, 243, 199, 0.5) 0%, transparent 50%);
     }
 
-    h1, h2, h3, .serif {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 700;
+    /* Oven steam animation */
+    @keyframes hotSteam {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.9; }
+      50% { transform: translateY(-3px) scale(1.04); opacity: 1; }
+    }
+    .badge-fornada {
+      animation: hotSteam 2.2s infinite ease-in-out;
     }
 
-    /* Top Strip */
-    .fresh-strip {
-      background: var(--espresso);
-      color: #fef3c7;
-      text-align: center;
-      padding: 0.6rem 1rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    /* Header */
-    .bakery-nav {
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .bakery-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      text-decoration: none;
-      color: var(--espresso);
-    }
-    .logo-text h1 {
-      font-size: 1.75rem;
-      line-height: 1;
-    }
-    .logo-text span {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--amber);
-      font-weight: 700;
-    }
-    .btn-cart-nav {
-      background: var(--amber);
-      color: #ffffff;
-      border: none;
-      padding: 0.65rem 1.2rem;
-      border-radius: 9999px;
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: background 0.2s;
-    }
-    .btn-cart-nav:hover { background: var(--amber-dark); }
-    .cart-pill {
-      background: #ffffff;
-      color: var(--amber-dark);
-      font-size: 0.75rem;
-      font-weight: 800;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Hero */
-    .hero-section {
-      max-width: 1200px;
-      margin: 1.5rem auto 3rem;
-      padding: 0 1.5rem;
-    }
-    .hero-card {
-      border-radius: 20px;
-      overflow: hidden;
-      min-height: 480px;
-      background: linear-gradient(to right, rgba(39, 23, 12, 0.92) 0%, rgba(39, 23, 12, 0.5) 60%, transparent 100%),
-                  url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80') center/cover;
-      display: flex;
-      align-items: center;
-      padding: 3.5rem;
-      color: #ffffff;
-    }
-    .hero-text-wrap {
-      max-width: 550px;
-    }
-    .hero-seal {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(254, 243, 199, 0.15);
-      border: 1px solid rgba(254, 243, 199, 0.3);
-      color: #fde68a;
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 1rem;
-    }
-    .hero-card h2 {
-      font-size: clamp(2.6rem, 5vw, 4rem);
-      line-height: 1.05;
-      margin-bottom: 1.25rem;
-      color: #ffffff;
-    }
-    .hero-card p {
-      font-size: 1.1rem;
-      color: #f3ede2;
-      margin-bottom: 2rem;
-    }
-    .btn-hero {
-      background: #f59e0b;
-      color: #27170c;
-      text-decoration: none;
-      font-weight: 800;
-      padding: 0.9rem 1.8rem;
-      border-radius: 9999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.2s;
-    }
-    .btn-hero:hover {
-      background: #d97706;
-      color: #ffffff;
-      transform: translateY(-2px);
-    }
-
-    /* Menu & Tabs */
-    .menu-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem 4rem;
-    }
-    .menu-header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-    .menu-header h2 {
-      font-size: 2.75rem;
-      margin-bottom: 0.5rem;
-    }
-    .menu-header p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-    }
-    .menu-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 2.5rem;
-    }
-    .tab-btn {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      color: var(--espresso);
-      padding: 0.6rem 1.3rem;
-      border-radius: 9999px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .tab-btn:hover { border-color: var(--amber); }
-    .tab-btn.active {
-      background: var(--amber);
-      color: #ffffff;
-      border-color: var(--amber);
-      box-shadow: 0 4px 12px rgba(180, 83, 9, 0.3);
-    }
-
-    /* Items Grid */
-    .items-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.75rem;
-    }
-    .item-card {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .item-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 24px rgba(39, 23, 12, 0.08);
-    }
-    .item-thumb {
-      height: 200px;
-      width: 100%;
-      object-fit: cover;
-    }
-    .item-content {
-      padding: 1.4rem;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-    .item-title {
-      font-size: 1.4rem;
-      margin-bottom: 0.4rem;
-    }
-    .item-desc {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.5;
-      margin-bottom: 1.25rem;
-      flex: 1;
-    }
-    .btn-add-item {
-      width: 100%;
-      background: var(--amber-light);
-      color: var(--amber-dark);
-      border: 1px solid #fde68a;
-      padding: 0.75rem;
-      border-radius: 8px;
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      transition: all 0.2s;
-    }
-    .btn-add-item:hover {
-      background: var(--amber);
-      color: #ffffff;
-      border-color: var(--amber);
-    }
-
-    /* Modal Carrinho Drawer */
-    .cart-drawer-backdrop {
+    /* Toast notification */
+    #toastContainer {
       position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 100;
-      display: none;
-      justify-content: flex-end;
-    }
-    .cart-drawer-backdrop.open { display: flex; }
-    .cart-drawer {
-      background: #ffffff;
-      width: 100%;
-      max-width: 420px;
-      height: 100vh;
+      top: 20px;
+      right: 20px;
+      z-index: 99999;
+      pointer-events: none;
       display: flex;
       flex-direction: column;
-      padding: 1.5rem;
-      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+      gap: 10px;
+      max-width: calc(100vw - 40px);
     }
-    .cart-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1rem;
-      margin-bottom: 1rem;
+    .toast {
+      pointer-events: auto;
+      transform: translateX(120%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+      opacity: 0;
     }
-    .cart-list {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+    .toast.show {
+      transform: translateX(0);
+      opacity: 1;
     }
-    .cart-item-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #f4f4f5;
-      padding-bottom: 0.6rem;
-    }
-    .cart-item-name { font-weight: 600; font-size: 0.95rem; }
-    .btn-del-item {
-      background: transparent;
-      border: none;
-      color: #ef4444;
-      cursor: pointer;
-      font-size: 0.8rem;
-    }
-    .btn-whatsapp-order {
-      width: 100%;
-      background: #16a34a;
-      color: #ffffff;
-      border: none;
-      padding: 1rem;
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      transition: background 0.2s;
-    }
-    .btn-whatsapp-order:hover { background: #15803d; }
 
-    /* Footer */
-    .bakery-footer {
-      background: var(--espresso);
-      color: #fef3c7;
-      text-align: center;
-      padding: 3.5rem 1.5rem 2rem;
+    /* Product card image hover */
+    .product-img-wrap img {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .bakery-footer h3 {
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
+    .product-card:hover .product-img-wrap img {
+      transform: scale(1.07);
     }
-    .bakery-footer p {
-      color: #d1c7b7;
-      font-size: 0.95rem;
+
+    /* Smooth drawer transition */
+    .cart-drawer-overlay {
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+    .cart-drawer-content {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cart-drawer-overlay.closed {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .cart-drawer-overlay.closed .cart-drawer-content {
+      transform: translateX(100%);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F4ECE0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBB494;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B86A14;
     }
   </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col selection:bg-amber-200 selection:text-bakery-espresso">
 
-  <div class="fresh-strip">
-    <i data-lucide="flame" style="width: 16px; height: 16px; color: #f59e0b;"></i>
-    <span>Fornada fresca saindo a cada 30 minutos • Pedidos pelo WhatsApp com entrega local</span>
-  </div>
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" aria-live="polite"></div>
 
-  <header class="bakery-nav">
-    <div class="nav-inner">
-      <a href="#" class="bakery-logo">
-        <i data-lucide="croissant" style="width: 32px; height: 32px; color: var(--amber);"></i>
-        <div class="logo-text">
-          <h1>Forno D'Ouro</h1>
-          <span>PANIFICAÇÃO ARTESANAL & CAFÉ</span>
+  <!-- Top Strip: Fresh Batch Status -->
+  <aside class="bg-bakery-espresso text-amber-100 py-2.5 px-4 text-xs font-medium sticky top-0 z-40 border-b border-amber-950/40">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 text-center sm:text-left">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/20 text-amber-400">
+          <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-400 animate-pulse"></i>
+        </span>
+        <span class="font-semibold text-white">FORNADA QUENTE:</span>
+        <span class="text-amber-200">Sourdoughs e Croissants saídos do forno agora há pouco!</span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px] text-amber-300">
+        <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> Terça a Domingo: 06h30 — 20h00</span>
+        <span class="hidden md:inline text-amber-400/50">•</span>
+        <span class="hidden md:flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> Vila Mariana, SP</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Navigation Header -->
+  <header class="bg-white/95 backdrop-blur-md border-b border-bakery-wheat/40 sticky top-9 z-30 shadow-warm-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group" aria-label="Forno D'Ouro Início">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-500 via-bakery-amber to-bakery-crust flex items-center justify-center text-white shadow-md shadow-amber-900/10 group-hover:scale-105 transition-transform">
+          <i data-lucide="croissant" class="w-6 h-6 stroke-[2.2]"></i>
+        </div>
+        <div>
+          <span class="font-serif text-2xl font-bold tracking-tight text-bakery-espresso block leading-none">
+            Forno D'Ouro
+          </span>
+          <span class="text-[10px] uppercase tracking-[0.2em] font-extrabold text-bakery-amber block mt-1">
+            Panificação Artesanal & Café
+          </span>
         </div>
       </a>
 
-      <button class="btn-cart-nav" onclick="toggleCart()">
-        <i data-lucide="shopping-basket" style="width: 18px; height: 18px;"></i>
-        <span>Sua Cesta</span>
-        <span class="cart-pill" id="cart-counter">0</span>
-      </button>
+      <!-- Quick Nav Links (Desktop) -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-bakery-espresso-light">
+        <a href="#cardapio" class="hover:text-bakery-amber transition-colors">Cardápio & Cesta</a>
+        <a href="#fornadas" class="hover:text-bakery-amber transition-colors">Horários das Fornadas</a>
+        <a href="#historia" class="hover:text-bakery-amber transition-colors">Nossa Fermentação</a>
+        <a href="#contato" class="hover:text-bakery-amber transition-colors">Localização & Contato</a>
+      </nav>
+
+      <!-- Cart Button Trigger -->
+      <div class="flex items-center gap-3">
+        <button 
+          onclick="toggleCart(true)" 
+          class="relative bg-bakery-amber hover:bg-bakery-amber-hover text-white px-4 sm:px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm flex items-center gap-2.5 shadow-md shadow-amber-900/15 hover:shadow-lg transition-all active:scale-95"
+          aria-label="Abrir Cesta de Compras"
+        >
+          <i data-lucide="shopping-basket" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+          <span>Minha Cesta</span>
+          <span id="cartCountBadge" class="bg-white text-bakery-espresso w-5 h-5 rounded-full text-xs font-extrabold flex items-center justify-center shadow-inner">
+            0
+          </span>
+          <span id="cartTotalNav" class="hidden sm:inline font-extrabold border-l border-amber-400/40 pl-2">
+            R$ 0,00
+          </span>
+        </button>
+      </div>
+
     </div>
   </header>
 
-  <section class="hero-section">
-    <div class="hero-card">
-      <div class="hero-text-wrap">
-        <span class="hero-seal">
-          <i data-lucide="award" style="width: 14px; height: 14px;"></i>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden pt-6 pb-12 sm:pt-10 sm:pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="relative rounded-3xl overflow-hidden shadow-warm-lg border border-amber-900/10 min-h-[460px] flex items-center">
+      
+      <!-- Background Image with appetizing overlay -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1800&q=85" 
+          alt="Pães artesanais recém assados saindo do forno a lenha" 
+          class="w-full h-full object-cover object-center transform scale-105"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-bakery-espresso/95 via-bakery-espresso/80 to-bakery-espresso/30 sm:to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-bakery-espresso/80 via-transparent to-transparent sm:hidden"></div>
+      </div>
+
+      <!-- Hero Content Box -->
+      <div class="relative z-10 max-w-2xl p-6 sm:p-12 lg:p-16 text-white">
+        
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4 backdrop-blur-sm">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
           Fermentação Natural de 48 Horas
-        </span>
-        <h2>O Pão de Verdade, Feito Sem Pressa</h2>
-        <p>Farinhas selecionadas, casca crocante dourada e miolo macio e aerado. Saboreie o verdadeiro pão artesanal feito com afeto todos os dias.</p>
-        <a href="#cardapio" class="btn-hero">
-          <i data-lucide="coffee" style="width: 18px; height: 18px;"></i>
-          Ver Nosso Cardápio
-        </a>
+        </div>
+
+        <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] mb-4 text-white">
+          O Pão de Verdade, Feito com Tempo & Alma.
+        </h1>
+
+        <p class="text-sm sm:text-base text-amber-100/90 mb-8 max-w-lg leading-relaxed">
+          Farinha orgânica de moinho de pedra, fermento selvagem (levain) e hidratação perfeita. Casca crocante caramelizada e alvéolos macios para transformar o seu café da manhã.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+          <a 
+            href="#cardapio" 
+            class="bg-gradient-to-r from-amber-500 to-bakery-amber hover:from-amber-600 hover:to-bakery-amber-hover text-white font-extrabold text-sm sm:text-base px-6 sm:px-8 py-3.5 rounded-full shadow-lg shadow-amber-950/30 flex items-center gap-2 hover:scale-105 active:scale-95 transition-all"
+          >
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+            <span>Montar Minha Cesta</span>
+          </a>
+          <button 
+            onclick="openFornadasModal()" 
+            class="bg-white/10 hover:bg-white/20 text-white font-semibold text-sm sm:text-base px-5 py-3.5 rounded-full backdrop-blur-sm border border-white/20 flex items-center gap-2 transition-all"
+          >
+            <i data-lucide="bell" class="w-4 h-4 text-amber-400"></i>
+            <span>Horários do Forno</span>
+          </button>
+        </div>
+
+        <!-- Badges / Trust -->
+        <div class="grid grid-cols-3 gap-3 sm:gap-6 mt-10 pt-6 border-t border-white/15 max-w-lg">
+          <div>
+            <span class="block font-serif text-xl sm:text-2xl font-bold text-amber-400">48h</span>
+            <span class="block text-[11px] text-amber-200/80">Fermentação Lenta</span>
+          </div>
+          <div>
+            <span class="block font-serif text-xl sm:text-2xl font-bold text-amber-400">100%</span>
+            <span class="block text-[11px] text-amber-200/80">Sem Conservantes</span>
+          </div>
+          <div>
+            <span class="block font-serif text-xl sm:text-2xl font-bold text-amber-400">40 min</span>
+            <span class="block text-[11px] text-amber-200/80">Entrega Local Quente</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <main class="menu-wrap" id="cardapio">
-    <div class="menu-header">
-      <h2>Nosso Cardápio Artesanal</h2>
-      <p>Escolha os itens que deseja encomendar e envie direto para o nosso balcão.</p>
+  <!-- Live Fresh Batch Announcement Box (Fornadas do Dia) -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mb-10" id="fornadas">
+    <div class="bg-gradient-to-r from-amber-100/90 via-orange-50 to-amber-100/90 border border-amber-300/80 rounded-2xl p-4 sm:p-6 shadow-warm-sm flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-md">
+          <i data-lucide="sun-medium" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h2 class="font-serif text-base sm:text-lg font-bold text-bakery-espresso flex items-center gap-2">
+            Fornadas do Dia — Sempre Quentinho
+            <span class="text-[10px] font-sans font-bold bg-amber-500 text-white px-2 py-0.5 rounded-full uppercase">Ao Vivo</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-bakery-espresso-light">
+            Nossos mestres padeiros assam fornadas distribuídas ao longo de todo o dia para garantir frescor incomparável.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+        <div class="px-3 py-1.5 rounded-xl bg-white border border-amber-200 text-center shadow-xs">
+          <span class="block text-[10px] text-stone-500 font-bold uppercase">Manhã</span>
+          <span class="font-bold text-xs text-bakery-espresso">07:00 • 09:30</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-amber-500 text-white text-center shadow-sm">
+          <span class="block text-[10px] text-amber-100 font-bold uppercase">Tarde (Agora)</span>
+          <span class="font-bold text-xs">15:30 • 17:00</span>
+        </div>
+        <div class="px-3 py-1.5 rounded-xl bg-white border border-amber-200 text-center shadow-xs">
+          <span class="block text-[10px] text-stone-500 font-bold uppercase">Fim de Tarde</span>
+          <span class="font-bold text-xs text-bakery-espresso">18:30 • 19:15</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Menu & Basket Builder Section -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 mb-20 scroll-mt-24" id="cardapio">
+    
+    <!-- Menu Header -->
+    <div class="text-center max-w-2xl mx-auto mb-8">
+      <span class="text-xs font-bold uppercase tracking-widest text-bakery-amber block mb-1">
+        Receitas Artesanais Autênticas
+      </span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-bakery-espresso mb-2">
+        Nosso Cardápio do Dia
+      </h2>
+      <p class="text-xs sm:text-sm text-stone-600">
+        Selecione os produtos abaixo para montar sua cesta personalizada. Calculamos o valor em tempo real e você envia direto ao balcão pelo WhatsApp!
+      </p>
     </div>
 
-    <div class="menu-tabs">
-      <button class="tab-btn active" onclick="filterBakery('all', this)">Todos os Sabores</button>
-      <button class="tab-btn" onclick="filterBakery('paes', this)">Pães de Fermentação</button>
-      <button class="tab-btn" onclick="filterBakery('doces', this)">Confeitaria & Bolos</button>
-      <button class="tab-btn" onclick="filterBakery('cafes', this)">Cafés Especiais</button>
-    </div>
-
-    <div class="items-grid" id="bakery-items">
-
-      <div class="item-card" data-cat="paes">
-        <img src="https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=800&q=80" alt="Pão Sourdough Rústico" class="item-thumb">
-        <div class="item-content">
-          <h3 class="item-title">Sourdough Rústico Tradicional</h3>
-          <p class="item-desc">Massa de fermentação lenta com levain selvagem de 48h, crosta caramelizada e miolo incrivelmente aromático.</p>
-          <button class="btn-add-item" onclick="addItemToBasket('Sourdough Rústico Tradicional')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
-          </button>
-        </div>
-      </div>
-
-      <div class="item-card" data-cat="paes">
-        <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=800&q=80" alt="Pão de Queijo Canastra" class="item-thumb">
-        <div class="item-content">
-          <h3 class="item-title">Pão de Queijo da Canastra</h3>
-          <p class="item-desc">Feito artesanalmente com polvilho caipira e queijo curado da Serra da Canastra. Casquinha dourada e puxa-puxa.</p>
-          <button class="btn-add-item" onclick="addItemToBasket('Porção de Pão de Queijo da Canastra')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
-          </button>
-        </div>
-      </div>
-
-      <div class="item-card" data-cat="doces">
-        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80" alt="Croissant Francês de Amêndoas" class="item-thumb">
-        <div class="item-content">
-          <h3 class="item-title">Croissant Francês com Amêndoas</h3>
-          <p class="item-desc">Folhado tradicional com manteiga francesa, recheio de creme de amêndoas suave e lascas crocantes tostadas.</p>
-          <button class="btn-add-item" onclick="addItemToBasket('Croissant Francês com Amêndoas')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
-          </button>
-        </div>
-      </div>
-
-      <div class="item-card" data-cat="doces">
-        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" alt="Bolo Caseiro de Cenoura" class="item-thumb">
-        <div class="item-content">
-          <h3 class="item-title">Bolo de Cenoura com Calda Quente</h3>
-          <p class="item-desc">Receita tradicional fofíssima coberta com generosa cascata de brigadeiro artesanal meio amargo 50% cacau.</p>
-          <button class="btn-add-item" onclick="addItemToBasket('Bolo de Cenoura com Calda de Chocolate')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
-          </button>
-        </div>
-      </div>
-
-      <div class="item-card" data-cat="cafes">
-        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" alt="Cappuccino Italiano Cremoso" class="item-thumb">
-        <div class="item-content">
-          <h3 class="item-title">Cappuccino Cremoso Especial</h3>
-          <p class="item-desc">Grãos 100% arábica do Sul de Minas, leite vaporizado aveludado e finalização com cacau belga polvilhado.</p>
-          <button class="btn-add-item" onclick="addItemToBasket('Cappuccino Cremoso Especial')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
-          </button>
-        </div>
-      </div>
-
-      <div class="item-card" data-cat="paes">
-        <img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=800&q=80" alt="Focaccia de Alecrim e Tomate Confit" class="item-thumb">
-        <div class="item-content">
-          <h3 class="item-title">Focaccia Alecrim & Tomate Confit</h3>
-          <p class="item-desc">Massa aerada e dourada regada com azeite extravirgem de oliva, flor de sal, alecrim fresco e tomatinhos assados.</p>
-          <button class="btn-add-item" onclick="addItemToBasket('Focaccia Alecrim & Tomate Confit')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Cesta
-          </button>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- Drawer Cesta -->
-  <div class="cart-drawer-backdrop" id="cart-drawer" onclick="handleDrawerClick(event)">
-    <div class="cart-drawer">
-      <div class="cart-head">
-        <h3 class="serif" style="font-size: 1.6rem;">Sua Cesta de Pães</h3>
-        <button onclick="toggleCart()" style="background:transparent; border:none; cursor:pointer; color:var(--text-muted);">
-          <i data-lucide="x" style="width: 22px; height: 22px;"></i>
+    <!-- Category Filters & Search -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+      
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap items-center justify-center gap-2" id="categoryFilters" role="tablist">
+        <button 
+          onclick="filterMenu('all', this)" 
+          class="cat-filter-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-bold bg-bakery-amber text-white shadow-sm transition-all"
+        >
+          Todos os Produtos
+        </button>
+        <button 
+          onclick="filterMenu('paes', this)" 
+          class="cat-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white border border-bakery-wheat text-bakery-espresso hover:border-bakery-amber transition-all"
+        >
+          🥖 Pães & Fermentação
+        </button>
+        <button 
+          onclick="filterMenu('doces', this)" 
+          class="cat-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white border border-bakery-wheat text-bakery-espresso hover:border-bakery-amber transition-all"
+        >
+          🥐 Confeitaria & Bolos
+        </button>
+        <button 
+          onclick="filterMenu('cafes', this)" 
+          class="cat-filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-white border border-bakery-wheat text-bakery-espresso hover:border-bakery-amber transition-all"
+        >
+          ☕ Cafeteria Especial
         </button>
       </div>
 
-      <div class="cart-list" id="cart-list-body">
-        <p style="color: var(--text-muted); text-align:center; margin: auto;">Sua cesta está vazia.</p>
+      <!-- Quick Search input -->
+      <div class="relative w-full sm:w-64">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400"></i>
+        <input 
+          type="text" 
+          id="productSearchInput" 
+          oninput="searchProducts(this.value)" 
+          placeholder="Buscar pão, croissant, café..." 
+          class="w-full bg-white border border-bakery-wheat rounded-full py-2 pl-9 pr-4 text-xs sm:text-sm text-bakery-espresso placeholder-stone-400 focus:outline-none focus:border-bakery-amber transition-colors shadow-xs"
+        />
       </div>
 
-      <button class="btn-whatsapp-order" onclick="sendWhatsAppOrder()">
-        <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
-        Enviar Encomenda no WhatsApp
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="productsGrid">
+      
+      <!-- ITEM 1: Sourdough Rústico -->
+      <div class="product-card bg-white rounded-2xl border border-bakery-wheat/80 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-all flex flex-col justify-between" data-category="paes" data-id="1">
+        <div>
+          <div class="relative product-img-wrap h-48 overflow-hidden bg-stone-100">
+            <img 
+              src="https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=700&q=80" 
+              alt="Sourdough Rústico Tradicional" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <!-- Fornada Quente Badge -->
+            <div class="absolute top-3 left-3 bg-gradient-to-r from-red-600 to-amber-600 text-white text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1 badge-fornada">
+              <i data-lucide="flame" class="w-3 h-3 fill-white"></i>
+              Fornada Quente
+            </div>
+            <div class="absolute top-3 right-3 bg-bakery-espresso/80 text-amber-200 text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-xs">
+              48h Levain
+            </div>
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-serif text-lg font-bold text-bakery-espresso mb-1">
+              Sourdough Rústico Tradicional
+            </h3>
+            <p class="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-3">
+              Massa de fermentação selvagem lenta de 48h, crosta dourada hiper crocante e miolo incrivelmente aromático e macio.
+            </p>
+            <div class="flex items-center gap-1.5 text-[11px] text-amber-700 font-semibold mb-3">
+              <i data-lucide="award" class="w-3.5 h-3.5"></i>
+              <span>Campeão de vendas da casa</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 pt-0">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-stone-400 font-medium">Aprox. 750g</span>
+            <span class="font-serif text-xl font-bold text-bakery-crust">R$ 28,00</span>
+          </div>
+          <button 
+            onclick="addToBasket(1, 'Sourdough Rústico Tradicional', 28.00, 'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=150&q=80')" 
+            class="w-full bg-bakery-cream-dark hover:bg-bakery-amber text-bakery-espresso hover:text-white font-bold text-xs py-2.5 px-4 rounded-xl border border-bakery-wheat hover:border-bakery-amber transition-all flex items-center justify-center gap-2 active:scale-95 group"
+          >
+            <i data-lucide="plus" class="w-4 h-4 text-bakery-amber group-hover:text-white transition-colors"></i>
+            <span>Adicionar à Cesta</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ITEM 2: Croissant Francês de Amêndoas -->
+      <div class="product-card bg-white rounded-2xl border border-bakery-wheat/80 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-all flex flex-col justify-between" data-category="doces" data-id="2">
+        <div>
+          <div class="relative product-img-wrap h-48 overflow-hidden bg-stone-100">
+            <img 
+              src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=700&q=80" 
+              alt="Croissant Francês com Amêndoas" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div class="absolute top-3 left-3 bg-gradient-to-r from-red-600 to-amber-600 text-white text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1 badge-fornada">
+              <i data-lucide="flame" class="w-3 h-3 fill-white"></i>
+              Fornada Quente
+            </div>
+            <div class="absolute top-3 right-3 bg-bakery-espresso/80 text-amber-200 text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-xs">
+              Manteiga Francesa
+            </div>
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-serif text-lg font-bold text-bakery-espresso mb-1">
+              Croissant com Creme de Amêndoas
+            </h3>
+            <p class="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-3">
+              Folhado clássico com camadas perfeitas, recheio aveludado de frangipane e cobertura de lascas tostadas crocantes.
+            </p>
+            <div class="flex items-center gap-1.5 text-[11px] text-amber-700 font-semibold mb-3">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              <span>Textura incrivelmente leve</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 pt-0">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-stone-400 font-medium">Unidade artesanal</span>
+            <span class="font-serif text-xl font-bold text-bakery-crust">R$ 18,50</span>
+          </div>
+          <button 
+            onclick="addToBasket(2, 'Croissant com Creme de Amêndoas', 18.50, 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=150&q=80')" 
+            class="w-full bg-bakery-cream-dark hover:bg-bakery-amber text-bakery-espresso hover:text-white font-bold text-xs py-2.5 px-4 rounded-xl border border-bakery-wheat hover:border-bakery-amber transition-all flex items-center justify-center gap-2 active:scale-95 group"
+          >
+            <i data-lucide="plus" class="w-4 h-4 text-bakery-amber group-hover:text-white transition-colors"></i>
+            <span>Adicionar à Cesta</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ITEM 3: Pão de Queijo da Canastra -->
+      <div class="product-card bg-white rounded-2xl border border-bakery-wheat/80 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-all flex flex-col justify-between" data-category="paes" data-id="3">
+        <div>
+          <div class="relative product-img-wrap h-48 overflow-hidden bg-stone-100">
+            <img 
+              src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=700&q=80" 
+              alt="Porção Pão de Queijo Canastra" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div class="absolute top-3 left-3 bg-gradient-to-r from-red-600 to-amber-600 text-white text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1 badge-fornada">
+              <i data-lucide="flame" class="w-3 h-3 fill-white"></i>
+              Fornada Quente
+            </div>
+            <div class="absolute top-3 right-3 bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-md">
+              Queijo Curado
+            </div>
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-serif text-lg font-bold text-bakery-espresso mb-1">
+              Pão de Queijo da Canastra (Porção)
+            </h3>
+            <p class="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-3">
+              Feito artesanalmente com polvilho caipira e generosa porção de queijo curado da Serra da Canastra (6 unidades).
+            </p>
+            <div class="flex items-center gap-1.5 text-[11px] text-amber-700 font-semibold mb-3">
+              <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+              <span>Casca crocante e puxa-puxa</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 pt-0">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-stone-400 font-medium">Porção com 6 un</span>
+            <span class="font-serif text-xl font-bold text-bakery-crust">R$ 22,00</span>
+          </div>
+          <button 
+            onclick="addToBasket(3, 'Pão de Queijo da Canastra (Porção 6un)', 22.00, 'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=150&q=80')" 
+            class="w-full bg-bakery-cream-dark hover:bg-bakery-amber text-bakery-espresso hover:text-white font-bold text-xs py-2.5 px-4 rounded-xl border border-bakery-wheat hover:border-bakery-amber transition-all flex items-center justify-center gap-2 active:scale-95 group"
+          >
+            <i data-lucide="plus" class="w-4 h-4 text-bakery-amber group-hover:text-white transition-colors"></i>
+            <span>Adicionar à Cesta</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ITEM 4: Focaccia Alecrim & Tomate Confit -->
+      <div class="product-card bg-white rounded-2xl border border-bakery-wheat/80 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-all flex flex-col justify-between" data-category="paes" data-id="4">
+        <div>
+          <div class="relative product-img-wrap h-48 overflow-hidden bg-stone-100">
+            <img 
+              src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=700&q=80" 
+              alt="Focaccia Alecrim e Tomate Confit" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div class="absolute top-3 right-3 bg-bakery-espresso/80 text-amber-200 text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-xs">
+              Azeite Extravirgem
+            </div>
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-serif text-lg font-bold text-bakery-espresso mb-1">
+              Focaccia Alecrim & Tomate Confit
+            </h3>
+            <p class="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-3">
+              Massa italiana hiper aerada e dourada regada com azeite extravirgem, flor de sal, alecrim fresco e tomatinhos assados.
+            </p>
+            <div class="flex items-center gap-1.5 text-[11px] text-amber-700 font-semibold mb-3">
+              <i data-lucide="utensils" class="w-3.5 h-3.5"></i>
+              <span>Ideal para aperitivos e café</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 pt-0">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-stone-400 font-medium">Fatia generosa ~400g</span>
+            <span class="font-serif text-xl font-bold text-bakery-crust">R$ 24,00</span>
+          </div>
+          <button 
+            onclick="addToBasket(4, 'Focaccia Alecrim & Tomate Confit', 24.00, 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=150&q=80')" 
+            class="w-full bg-bakery-cream-dark hover:bg-bakery-amber text-bakery-espresso hover:text-white font-bold text-xs py-2.5 px-4 rounded-xl border border-bakery-wheat hover:border-bakery-amber transition-all flex items-center justify-center gap-2 active:scale-95 group"
+          >
+            <i data-lucide="plus" class="w-4 h-4 text-bakery-amber group-hover:text-white transition-colors"></i>
+            <span>Adicionar à Cesta</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ITEM 5: Bolo de Cenoura com Calda de Brigadeiro -->
+      <div class="product-card bg-white rounded-2xl border border-bakery-wheat/80 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-all flex flex-col justify-between" data-category="doces" data-id="5">
+        <div>
+          <div class="relative product-img-wrap h-48 overflow-hidden bg-stone-100">
+            <img 
+              src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80" 
+              alt="Bolo Caseiro de Cenoura com Chocolate" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div class="absolute top-3 right-3 bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-md">
+              Chocolate 50% Cacau
+            </div>
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-serif text-lg font-bold text-bakery-espresso mb-1">
+              Bolo de Cenoura c/ Calda Quente
+            </h3>
+            <p class="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-3">
+              Massa fofíssima tradicional coberta com generosa cascata de brigadeiro artesanal cremoso meio amargo.
+            </p>
+            <div class="flex items-center gap-1.5 text-[11px] text-amber-700 font-semibold mb-3">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              <span>O favorito da tarde</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 pt-0">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-stone-400 font-medium">Fatia grande (250g)</span>
+            <span class="font-serif text-xl font-bold text-bakery-crust">R$ 18,00</span>
+          </div>
+          <button 
+            onclick="addToBasket(5, 'Bolo de Cenoura c/ Calda Quente', 18.00, 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=150&q=80')" 
+            class="w-full bg-bakery-cream-dark hover:bg-bakery-amber text-bakery-espresso hover:text-white font-bold text-xs py-2.5 px-4 rounded-xl border border-bakery-wheat hover:border-bakery-amber transition-all flex items-center justify-center gap-2 active:scale-95 group"
+          >
+            <i data-lucide="plus" class="w-4 h-4 text-bakery-amber group-hover:text-white transition-colors"></i>
+            <span>Adicionar à Cesta</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ITEM 6: Cappuccino Italiano Especial -->
+      <div class="product-card bg-white rounded-2xl border border-bakery-wheat/80 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-all flex flex-col justify-between" data-category="cafes" data-id="6">
+        <div>
+          <div class="relative product-img-wrap h-48 overflow-hidden bg-stone-100">
+            <img 
+              src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80" 
+              alt="Cappuccino Italiano Especial" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div class="absolute top-3 left-3 bg-gradient-to-r from-red-600 to-amber-600 text-white text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1 badge-fornada">
+              <i data-lucide="flame" class="w-3 h-3 fill-white"></i>
+              Fornada Quente
+            </div>
+            <div class="absolute top-3 right-3 bg-bakery-espresso/80 text-amber-200 text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-xs">
+              100% Arábica
+            </div>
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-serif text-lg font-bold text-bakery-espresso mb-1">
+              Cappuccino Cremoso Especial
+            </h3>
+            <p class="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-3">
+              Espresso duplo com grãos especiais do Sul de Minas, leite vaporizado aveludado e finalização com cacau belga.
+            </p>
+            <div class="flex items-center gap-1.5 text-[11px] text-amber-700 font-semibold mb-3">
+              <i data-lucide="coffee" class="w-3.5 h-3.5"></i>
+              <span>Cremosidade perfeita</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 pt-0">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-stone-400 font-medium">Copo 240ml</span>
+            <span class="font-serif text-xl font-bold text-bakery-crust">R$ 15,00</span>
+          </div>
+          <button 
+            onclick="addToBasket(6, 'Cappuccino Cremoso Especial', 15.00, 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=150&q=80')" 
+            class="w-full bg-bakery-cream-dark hover:bg-bakery-amber text-bakery-espresso hover:text-white font-bold text-xs py-2.5 px-4 rounded-xl border border-bakery-wheat hover:border-bakery-amber transition-all flex items-center justify-center gap-2 active:scale-95 group"
+          >
+            <i data-lucide="plus" class="w-4 h-4 text-bakery-amber group-hover:text-white transition-colors"></i>
+            <span>Adicionar à Cesta</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ITEM 7: Baguette Francesa de Tradição -->
+      <div class="product-card bg-white rounded-2xl border border-bakery-wheat/80 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-all flex flex-col justify-between" data-category="paes" data-id="7">
+        <div>
+          <div class="relative product-img-wrap h-48 overflow-hidden bg-stone-100">
+            <img 
+              src="https://images.unsplash.com/photo-1589367920369-026848039209?auto=format&fit=crop&w=700&q=80" 
+              alt="Baguette Francesa Tradicional" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div class="absolute top-3 right-3 bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-md">
+              Crocância Extrema
+            </div>
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-serif text-lg font-bold text-bakery-espresso mb-1">
+              Baguette Francesa de Tradição
+            </h3>
+            <p class="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-3">
+              Massa de alta hidratação segundo os preceitos de Paris. Casca estaladiça e miolo aerado com sabor amanteigado.
+            </p>
+            <div class="flex items-center gap-1.5 text-[11px] text-amber-700 font-semibold mb-3">
+              <i data-lucide="award" class="w-3.5 h-3.5"></i>
+              <span>Receita 100% autêntica</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 pt-0">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-stone-400 font-medium">Unidade (~280g)</span>
+            <span class="font-serif text-xl font-bold text-bakery-crust">R$ 16,00</span>
+          </div>
+          <button 
+            onclick="addToBasket(7, 'Baguette Francesa de Tradição', 16.00, 'https://images.unsplash.com/photo-1589367920369-026848039209?auto=format&fit=crop&w=150&q=80')" 
+            class="w-full bg-bakery-cream-dark hover:bg-bakery-amber text-bakery-espresso hover:text-white font-bold text-xs py-2.5 px-4 rounded-xl border border-bakery-wheat hover:border-bakery-amber transition-all flex items-center justify-center gap-2 active:scale-95 group"
+          >
+            <i data-lucide="plus" class="w-4 h-4 text-bakery-amber group-hover:text-white transition-colors"></i>
+            <span>Adicionar à Cesta</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ITEM 8: Cinnamon Roll Glaceado -->
+      <div class="product-card bg-white rounded-2xl border border-bakery-wheat/80 overflow-hidden shadow-warm-sm hover:shadow-warm-md transition-all flex flex-col justify-between" data-category="doces" data-id="8">
+        <div>
+          <div class="relative product-img-wrap h-48 overflow-hidden bg-stone-100">
+            <img 
+              src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=700&q=80" 
+              alt="Cinnamon Roll Glaceado" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div class="absolute top-3 right-3 bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-md">
+              Canela do Ceilão
+            </div>
+          </div>
+
+          <div class="p-4">
+            <h3 class="font-serif text-lg font-bold text-bakery-espresso mb-1">
+              Cinnamon Roll com Cream Cheese
+            </h3>
+            <p class="text-xs text-stone-500 line-clamp-2 leading-relaxed mb-3">
+              Enroladinho sueco quentinho e macio, aromatizado com canela do Ceilão e generosa cobertura de glacê de cream cheese.
+            </p>
+            <div class="flex items-center gap-1.5 text-[11px] text-amber-700 font-semibold mb-3">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              <span>Desmancha na boca</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 pt-0">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-stone-400 font-medium">Unidade grande</span>
+            <span class="font-serif text-xl font-bold text-bakery-crust">R$ 17,50</span>
+          </div>
+          <button 
+            onclick="addToBasket(8, 'Cinnamon Roll com Cream Cheese', 17.50, 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=150&q=80')" 
+            class="w-full bg-bakery-cream-dark hover:bg-bakery-amber text-bakery-espresso hover:text-white font-bold text-xs py-2.5 px-4 rounded-xl border border-bakery-wheat hover:border-bakery-amber transition-all flex items-center justify-center gap-2 active:scale-95 group"
+          >
+            <i data-lucide="plus" class="w-4 h-4 text-bakery-amber group-hover:text-white transition-colors"></i>
+            <span>Adicionar à Cesta</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Empty search state -->
+    <div id="noResultsState" class="hidden text-center py-16 bg-white rounded-3xl border border-bakery-wheat/80 my-8">
+      <i data-lucide="search-x" class="w-12 h-12 text-stone-400 mx-auto mb-3"></i>
+      <h3 class="font-serif text-lg font-bold text-bakery-espresso">Nenhum produto encontrado</h3>
+      <p class="text-xs text-stone-500 mt-1">Tente buscar por "pão", "croissant" ou selecione "Todos os Produtos".</p>
+      <button onclick="clearSearch()" class="mt-4 px-4 py-2 bg-bakery-amber text-white text-xs font-bold rounded-full">
+        Ver Todos os Produtos
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Section: O Segredo da Nossa Fermentação (Storytelling) -->
+  <section class="bg-white border-y border-bakery-wheat/60 py-16" id="historia">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-bakery-amber block mb-2">
+            Nossa Filosofia Artesanal
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-bakery-espresso mb-4 leading-tight">
+            Por que 48 horas de fermentação natural mudam tudo?
+          </h2>
+          <p class="text-xs sm:text-sm text-stone-600 leading-relaxed mb-4">
+            A maioria dos pães industriais leva aditivos químicos para crescer em menos de 1 hora. Na Forno D'Ouro, nós respeitamos o ciclo da natureza: nossa massa descansa por 48 horas inteiras com o nosso levain selvagem alimentado diariamente.
+          </p>
+          <p class="text-xs sm:text-sm text-stone-600 leading-relaxed mb-6">
+            O resultado? Os açúcares e o glúten são pré-digeridos pelas bactérias benéficas, resultando em um pão de índice glicêmico muito mais equilibrado, digestão leve e sabor inigualável.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-4 rounded-2xl bg-bakery-cream border border-bakery-wheat/80">
+              <i data-lucide="shield-check" class="w-5 h-5 text-bakery-amber mb-2"></i>
+              <h3 class="font-bold text-xs text-bakery-espresso">Fácil Digestão</h3>
+              <p class="text-[11px] text-stone-500 mt-1">Menos inchaço e rica presença de probióticos naturais.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-bakery-cream border border-bakery-wheat/80">
+              <i data-lucide="leaf" class="w-5 h-5 text-bakery-amber mb-2"></i>
+              <h3 class="font-bold text-xs text-bakery-espresso">Sem Química</h3>
+              <p class="text-[11px] text-stone-500 mt-1">Apenas 4 ingredientes: farinha, água pura, sal e fermento natural.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="rounded-3xl overflow-hidden shadow-warm-lg border-4 border-white">
+            <img 
+              src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=900&q=80" 
+              alt="Mestre padeiro modelando sourdough artesanal" 
+              class="w-full h-80 sm:h-96 object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-bakery-espresso text-white p-5 rounded-2xl shadow-xl hidden sm:block max-w-xs border border-amber-900/20">
+            <span class="block font-serif text-2xl font-bold text-amber-400">Levain 2018</span>
+            <p class="text-xs text-amber-100/90 mt-1">Nossa colônia de fermento vivo é cultivada e cuidada com carinho há mais de 8 anos.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Drawer: Cesta de Compras (Cart Drawer) -->
+  <div 
+    id="cartDrawer" 
+    class="cart-drawer-overlay closed fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex justify-end"
+    onclick="handleDrawerBackdrop(event)"
+    aria-modal="true"
+    role="dialog"
+  >
+    <div class="cart-drawer-content bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between overflow-hidden">
+      
+      <!-- Cart Header -->
+      <div class="p-5 border-b border-stone-200 bg-bakery-cream flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-bakery-amber text-white flex items-center justify-center">
+            <i data-lucide="shopping-basket" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-serif text-lg font-bold text-bakery-espresso">Sua Cesta Artesanal</h3>
+            <span class="text-xs text-stone-500" id="cartItemCountLabel">0 itens na cesta</span>
+          </div>
+        </div>
+
+        <button 
+          onclick="toggleCart(false)" 
+          class="p-2 text-stone-400 hover:text-bakery-espresso hover:bg-stone-200/50 rounded-full transition-colors"
+          aria-label="Fechar cesta"
+        >
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Cart Items List (Scrollable) -->
+      <div class="flex-1 overflow-y-auto p-5 space-y-3" id="cartItemsList">
+        <!-- Rendered via JavaScript -->
+      </div>
+
+      <!-- Cart Footer / Checkout Form -->
+      <div class="p-5 border-t border-stone-200 bg-stone-50 space-y-4">
+        
+        <!-- Modalidade de Entrega -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">
+            Tipo de Pedido
+          </label>
+          <div class="grid grid-cols-2 gap-2">
+            <button 
+              type="button" 
+              onclick="setDeliveryType('retirada', this)" 
+              class="delivery-type-btn active p-2.5 rounded-xl border border-bakery-amber bg-amber-50 text-xs font-bold text-bakery-amber flex items-center justify-center gap-1.5 transition-all"
+            >
+              <i data-lucide="store" class="w-4 h-4"></i>
+              <span>Retirada Balcão (Grátis)</span>
+            </button>
+            <button 
+              type="button" 
+              onclick="setDeliveryType('entrega', this)" 
+              class="delivery-type-btn p-2.5 rounded-xl border border-stone-200 bg-white text-xs font-semibold text-stone-600 flex items-center justify-center gap-1.5 hover:border-stone-300 transition-all"
+            >
+              <i data-lucide="bike" class="w-4 h-4"></i>
+              <span>Entrega Local (+R$ 8,00)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Nome e Endereço Input -->
+        <div class="space-y-2">
+          <input 
+            type="text" 
+            id="orderCustomerName" 
+            placeholder="Seu nome (obrigatório)" 
+            class="w-full bg-white border border-stone-300 rounded-xl px-3 py-2 text-xs text-bakery-espresso focus:outline-none focus:border-bakery-amber transition-colors"
+          />
+          <input 
+            type="text" 
+            id="orderAddressOrNote" 
+            placeholder="Endereço de entrega ou observações (opcional)" 
+            class="w-full bg-white border border-stone-300 rounded-xl px-3 py-2 text-xs text-bakery-espresso focus:outline-none focus:border-bakery-amber transition-colors"
+          />
+        </div>
+
+        <!-- Cálculo Dinâmico de Valores -->
+        <div class="bg-white p-3.5 rounded-xl border border-stone-200 text-xs space-y-1.5">
+          <div class="flex justify-between text-stone-600">
+            <span>Subtotal dos produtos:</span>
+            <span class="font-semibold text-stone-800" id="cartSubtotalText">R$ 0,00</span>
+          </div>
+          <div class="flex justify-between text-stone-600">
+            <span>Taxa de serviço/entrega:</span>
+            <span class="font-semibold text-stone-800" id="cartDeliveryText">R$ 0,00</span>
+          </div>
+          <div class="pt-2 border-t border-stone-200 flex justify-between items-center text-sm">
+            <span class="font-bold text-bakery-espresso">Total a pagar:</span>
+            <span class="font-serif text-xl font-bold text-bakery-crust" id="cartTotalText">R$ 0,00</span>
+          </div>
+        </div>
+
+        <!-- WhatsApp Checkout Action -->
+        <button 
+          type="button" 
+          onclick="checkoutWhatsApp()" 
+          class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-700/20 hover:shadow-emerald-700/30 transition-all flex items-center justify-center gap-2 active:scale-95"
+        >
+          <i data-lucide="message-circle" class="w-5 h-5"></i>
+          <span>Enviar Pedido pelo WhatsApp</span>
+        </button>
+
+        <p class="text-[11px] text-stone-400 text-center">
+          Você será redirecionado para o WhatsApp com o pedido formatado para confirmação instantânea.
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Horários do Forno -->
+  <div id="fornadasModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4" onclick="handleModalBackdrop(event, 'fornadasModal')">
+    <div class="bg-white max-w-sm w-full p-6 rounded-3xl border border-amber-900/10 shadow-2xl relative">
+      <button onclick="closeModal('fornadasModal')" class="absolute top-4 right-4 text-stone-400 hover:text-stone-800 p-1 rounded-full">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-5">
+        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-bakery-amber flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="clock" class="w-6 h-6"></i>
+        </div>
+        <h3 class="font-serif text-xl font-bold text-bakery-espresso">Grade de Fornadas</h3>
+        <p class="text-xs text-stone-500 mt-1">Programe sua visita para pegar o pão saindo estalando!</p>
+      </div>
+
+      <div class="space-y-2.5 text-xs mb-6">
+        <div class="p-3 rounded-xl bg-bakery-cream border border-bakery-wheat/80 flex items-center justify-between">
+          <div>
+            <p class="font-bold text-bakery-espresso">Fornada Matinal</p>
+            <p class="text-[11px] text-stone-500">Sourdoughs, Baguettes & Pão de Queijo</p>
+          </div>
+          <span class="font-bold text-bakery-amber bg-white px-2 py-1 rounded-md border border-amber-200">07:00</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-bakery-cream border border-bakery-wheat/80 flex items-center justify-between">
+          <div>
+            <p class="font-bold text-bakery-espresso">Fornada do Almoço</p>
+            <p class="text-[11px] text-stone-500">Focaccias, Croissants & Brioches</p>
+          </div>
+          <span class="font-bold text-bakery-amber bg-white px-2 py-1 rounded-md border border-amber-200">11:30</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-bakery-cream border border-bakery-wheat/80 flex items-center justify-between">
+          <div>
+            <p class="font-bold text-bakery-espresso">Fornada do Lanche</p>
+            <p class="text-[11px] text-stone-500">Pães recheados, Rolls & Confeitaria</p>
+          </div>
+          <span class="font-bold text-bakery-amber bg-white px-2 py-1 rounded-md border border-amber-200">15:30</span>
+        </div>
+
+        <div class="p-3 rounded-xl bg-bakery-cream border border-bakery-wheat/80 flex items-center justify-between">
+          <div>
+            <p class="font-bold text-bakery-espresso">Fornada Noturna</p>
+            <p class="text-[11px] text-stone-500">Sourdoughs para o jantar & Baguettes</p>
+          </div>
+          <span class="font-bold text-bakery-amber bg-white px-2 py-1 rounded-md border border-amber-200">18:15</span>
+        </div>
+      </div>
+
+      <button onclick="closeModal('fornadasModal'); toggleCart(true);" class="w-full py-3 bg-bakery-amber text-white text-xs font-bold rounded-xl shadow-md">
+        Ver Minha Cesta
       </button>
     </div>
   </div>
 
-  <footer class="bakery-footer">
-    <h3>Forno D'Ouro</h3>
-    <p>Rua das Amendoeiras, 340 • Vila Mariana, São Paulo - SP</p>
-    <p style="margin-top: 0.5rem;">Aberto de Terça a Domingo das 06:30 às 20:00</p>
-    <div style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.6;">
-      © 2026 Forno D'Ouro • Tradição e sabor artesanal
+  <!-- Footer -->
+  <footer class="bg-bakery-espresso text-amber-100 py-12 px-4 sm:px-6 lg:px-8 mt-auto" id="contato">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-amber-950/80">
+      
+      <!-- Coluna 1: Marca -->
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <i data-lucide="croissant" class="w-6 h-6 text-amber-400"></i>
+          <span class="font-serif text-xl font-bold text-white">Forno D'Ouro</span>
+        </div>
+        <p class="text-xs text-amber-200/80 leading-relaxed max-w-sm">
+          A tradição dos mestres artesãos aliada aos melhores ingredientes naturais. Panificação de verdade, sem conservantes, com amor e tempo.
+        </p>
+      </div>
+
+      <!-- Coluna 2: Endereço & Horários -->
+      <div class="text-xs text-amber-200/80 space-y-1.5">
+        <h4 class="font-serif text-sm font-bold text-white mb-2 uppercase tracking-wider">Onde Encontrar</h4>
+        <p class="flex items-center gap-1.5">
+          <i data-lucide="map-pin" class="w-4 h-4 text-amber-400"></i>
+          Rua das Amendoeiras, 340 • Vila Mariana, São Paulo - SP
+        </p>
+        <p class="flex items-center gap-1.5">
+          <i data-lucide="clock" class="w-4 h-4 text-amber-400"></i>
+          Terça a Domingo das 06:30 às 20:00 (Segunda fechado)
+        </p>
+        <p class="flex items-center gap-1.5">
+          <i data-lucide="phone" class="w-4 h-4 text-amber-400"></i>
+          WhatsApp Pedidos: (11) 98390-9578
+        </p>
+      </div>
+
+      <!-- Coluna 3: Encomendas Rápidas -->
+      <div>
+        <h4 class="font-serif text-sm font-bold text-white mb-2 uppercase tracking-wider">Encomendas Especiais</h4>
+        <p class="text-xs text-amber-200/80 mb-3">
+          Aceitamos encomendas para brunches corporativos, eventos de família e cestas de café da manhã sob medida.
+        </p>
+        <a 
+          href="https://wa.me/5511983909578?text=Ol%C3%A1%20Forno%20D'Ouro!%20Gostaria%20de%20saber%20mais%20sobre%20encomendas%20especiais." 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 hover:text-amber-300 transition-colors"
+        >
+          <span>Falar com o Padeiro-Chefe</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-amber-400/60 gap-2">
+      <p>© 2026 Forno D'Ouro • Todos os direitos reservados.</p>
+      <p class="text-amber-300/80 font-medium">Desenvolvido com excelência por Felipe Junqueira Leite</p>
     </div>
   </footer>
 
+  <!-- JAVASCRIPT LOGIC -->
   <script>
+    // Init Lucide Icons
     lucide.createIcons();
 
-    function filterBakery(cat, btn) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const cards = document.querySelectorAll('#bakery-items .item-card');
+    // App State
+    const whatsappNumber = '5511983909578';
+    let basket = [];
+    let deliveryType = 'retirada'; // 'retirada' or 'entrega'
+    const deliveryFee = 8.00;
+
+    // Toast Notification System (replaces ugly alert)
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+
+      const iconMap = {
+        success: '<i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0"></i>',
+        warning: '<i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 shrink-0"></i>',
+        info: '<i data-lucide="info" class="w-4 h-4 text-bakery-amber shrink-0"></i>'
+      };
+
+      const borderColors = {
+        success: 'border-emerald-300 bg-white text-emerald-950',
+        warning: 'border-amber-300 bg-white text-amber-950',
+        info: 'border-amber-200 bg-white text-bakery-espresso'
+      };
+
+      toast.className = `toast flex items-center gap-2.5 p-3.5 rounded-xl border ${borderColors[type] || borderColors.info} text-xs shadow-xl backdrop-blur-md`;
+      toast.innerHTML = `
+        ${iconMap[type] || iconMap.info}
+        <span class="font-bold">${message}</span>
+      `;
+
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      requestAnimationFrame(() => {
+        toast.classList.add('show');
+      });
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+      }, 3500);
+    }
+
+    // Filter Menu by Category
+    function filterMenu(category, btn) {
+      document.querySelectorAll('.cat-filter-btn').forEach(b => {
+        b.classList.remove('active', 'bg-bakery-amber', 'text-white', 'shadow-sm');
+        b.classList.add('bg-white', 'text-bakery-espresso', 'border', 'border-bakery-wheat');
+      });
+
+      btn.classList.add('active', 'bg-bakery-amber', 'text-white', 'shadow-sm');
+      btn.classList.remove('bg-white', 'text-bakery-espresso', 'border', 'border-bakery-wheat');
+
+      const cards = document.querySelectorAll('#productsGrid .product-card');
+      let visibleCount = 0;
+
       cards.forEach(card => {
-        if (cat === 'all' || card.getAttribute('data-cat') === cat) {
-          card.style.display = 'flex';
+        const itemCat = card.getAttribute('data-category');
+        if (category === 'all' || itemCat === category) {
+          card.classList.remove('hidden');
+          visibleCount++;
         } else {
-          card.style.display = 'none';
+          card.classList.add('hidden');
         }
       });
+
+      checkEmptyState(visibleCount);
     }
 
-    let basket = [];
+    // Search Products
+    function searchProducts(query) {
+      const q = query.toLowerCase().trim();
+      const cards = document.querySelectorAll('#productsGrid .product-card');
+      let visibleCount = 0;
 
-    function toggleCart() {
-      document.getElementById('cart-drawer').classList.toggle('open');
+      cards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const desc = card.querySelector('p').textContent.toLowerCase();
+
+        if (title.includes(q) || desc.includes(q)) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      checkEmptyState(visibleCount);
     }
 
-    function handleDrawerClick(e) {
-      if (e.target.id === 'cart-drawer') toggleCart();
+    function clearSearch() {
+      document.getElementById('productSearchInput').value = '';
+      const allBtn = document.querySelector('.cat-filter-btn');
+      filterMenu('all', allBtn);
     }
 
-    function addItemToBasket(name) {
-      basket.push(name);
+    function checkEmptyState(count) {
+      const emptyState = document.getElementById('noResultsState');
+      if (count === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+      }
+    }
+
+    // Cart Management
+    function toggleCart(forceOpen = null) {
+      const drawer = document.getElementById('cartDrawer');
+      const isCurrentlyOpen = !drawer.classList.contains('closed');
+      const shouldOpen = forceOpen !== null ? forceOpen : !isCurrentlyOpen;
+
+      if (shouldOpen) {
+        drawer.classList.remove('closed');
+        document.body.style.overflow = 'hidden';
+      } else {
+        drawer.classList.add('closed');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    function handleDrawerBackdrop(e) {
+      if (e.target.id === 'cartDrawer') {
+        toggleCart(false);
+      }
+    }
+
+    // Add item to basket
+    function addToBasket(id, name, price, image) {
+      const existing = basket.find(item => item.id === id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        basket.push({ id, name, price, image, quantity: 1 });
+      }
+
+      showToast(`"${name}" adicionado à sua cesta!`, 'success');
       renderBasket();
-      toggleCart();
+      // Animate cart badge
+      const badge = document.getElementById('cartCountBadge');
+      badge.classList.add('scale-125');
+      setTimeout(() => badge.classList.remove('scale-125'), 200);
     }
 
-    function removeBasketItem(idx) {
-      basket.splice(idx, 1);
+    // Change quantity
+    function updateItemQuantity(id, delta) {
+      const item = basket.find(item => item.id === id);
+      if (!item) return;
+
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        basket = basket.filter(i => i.id !== id);
+        showToast(`Item removido da cesta.`, 'info');
+      }
+
       renderBasket();
     }
 
+    // Set delivery type
+    function setDeliveryType(type, btn) {
+      deliveryType = type;
+      document.querySelectorAll('.delivery-type-btn').forEach(b => {
+        b.classList.remove('active', 'border-bakery-amber', 'bg-amber-50', 'text-bakery-amber', 'font-bold');
+        b.classList.add('border-stone-200', 'bg-white', 'text-stone-600', 'font-semibold');
+      });
+
+      btn.classList.add('active', 'border-bakery-amber', 'bg-amber-50', 'text-bakery-amber', 'font-bold');
+      btn.classList.remove('border-stone-200', 'bg-white', 'text-stone-600', 'font-semibold');
+
+      renderBasket();
+    }
+
+    // Render basket
     function renderBasket() {
-      document.getElementById('cart-counter').textContent = basket.length;
-      const list = document.getElementById('cart-list-body');
+      const listEl = document.getElementById('cartItemsList');
+      const countLabel = document.getElementById('cartItemCountLabel');
+      const badge = document.getElementById('cartCountBadge');
+      const totalNav = document.getElementById('cartTotalNav');
+      const subtotalText = document.getElementById('cartSubtotalText');
+      const deliveryText = document.getElementById('cartDeliveryText');
+      const totalText = document.getElementById('cartTotalText');
+
+      const totalItems = basket.reduce((acc, item) => acc + item.quantity, 0);
+      const subtotal = basket.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+      const fee = (deliveryType === 'entrega' && totalItems > 0) ? deliveryFee : 0.00;
+      const grandTotal = subtotal + fee;
+
+      // Update counters
+      badge.textContent = totalItems;
+      countLabel.textContent = `${totalItems} ${totalItems === 1 ? 'item' : 'itens'} na cesta`;
+      totalNav.textContent = grandTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      subtotalText.textContent = subtotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      deliveryText.textContent = fee === 0 ? 'Grátis' : fee.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      totalText.textContent = grandTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
       if (basket.length === 0) {
-        list.innerHTML = '<p style="color: var(--text-muted); text-align:center; margin: auto;">Sua cesta está vazia.</p>';
+        listEl.innerHTML = `
+          <div class="text-center py-12 text-stone-400">
+            <i data-lucide="shopping-basket" class="w-12 h-12 mx-auto mb-2 text-stone-300"></i>
+            <p class="font-serif text-base text-stone-600 font-bold">Sua cesta está vazia</p>
+            <p class="text-xs text-stone-400 mt-1">Adicione nossos pães quentinhos e doces artesanais para começar!</p>
+          </div>
+        `;
+        lucide.createIcons();
         return;
       }
-      list.innerHTML = basket.map((item, i) => `
-        <div class="cart-item-row">
-          <span class="cart-item-name">${item}</span>
-          <button class="btn-del-item" onclick="removeBasketItem(${i})">Remover</button>
+
+      listEl.innerHTML = basket.map(item => `
+        <div class="flex items-center gap-3 p-3 rounded-xl border border-stone-100 bg-white shadow-xs">
+          <img src="${item.image}" alt="${item.name}" class="w-14 h-14 rounded-lg object-cover shrink-0" />
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-bakery-espresso truncate">${item.name}</h4>
+            <span class="text-xs font-semibold text-bakery-crust block">
+              ${item.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+            </span>
+          </div>
+
+          <div class="flex items-center gap-1.5 shrink-0 bg-stone-100 rounded-lg p-1">
+            <button 
+              onclick="updateItemQuantity(${item.id}, -1)" 
+              class="w-6 h-6 rounded bg-white text-stone-700 hover:bg-stone-200 flex items-center justify-center font-bold text-xs"
+              aria-label="Diminuir quantidade"
+            >
+              -
+            </button>
+            <span class="w-6 text-center text-xs font-bold text-bakery-espresso">${item.quantity}</span>
+            <button 
+              onclick="updateItemQuantity(${item.id}, 1)" 
+              class="w-6 h-6 rounded bg-white text-stone-700 hover:bg-stone-200 flex items-center justify-center font-bold text-xs"
+              aria-label="Aumentar quantidade"
+            >
+              +
+            </button>
+          </div>
         </div>
       `).join('');
+
+      lucide.createIcons();
     }
 
-    function sendWhatsAppOrder() {
+    // Checkout via WhatsApp
+    function checkoutWhatsApp() {
       if (basket.length === 0) {
-        alert('Por favor, adicione itens à sua cesta antes de enviar!');
+        showToast('Adicione pelo menos um item à sua cesta antes de finalizar!', 'warning');
         return;
       }
-      const itens = basket.map(i => `• ${i}`).join('%0A');
-      const msg = `Olá Forno D'Ouro! Gostaria de fazer uma encomenda:%0A%0A${itens}%0A%0APoderiam confirmar se está disponível para entrega?`;
-      window.open(`https://wa.me/5511983909578?text=${msg}`, '_blank');
+
+      const clientName = document.getElementById('orderCustomerName').value.trim();
+      if (!clientName) {
+        showToast('Por favor, informe seu nome antes de enviar o pedido.', 'warning');
+        document.getElementById('orderCustomerName').focus();
+        return;
+      }
+
+      const notes = document.getElementById('orderAddressOrNote').value.trim();
+      const subtotal = basket.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+      const fee = (deliveryType === 'entrega') ? deliveryFee : 0.00;
+      const grandTotal = subtotal + fee;
+
+      let itemsListText = basket.map(item => {
+        const itemTotal = (item.price * item.quantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        return `• ${item.quantity}x ${item.name} — ${itemTotal}`;
+      }).join('\n');
+
+      let message = `🥖 *NOVO PEDIDO ARTESANAL - FORNO D'OURO* 🥖\n\n`;
+      message += `👤 *Cliente:* ${clientName}\n`;
+      message += `📦 *Modalidade:* ${deliveryType === 'entrega' ? 'Entrega Local em Domicílio (+R$ 8,00)' : 'Retirada no Balcão (Grátis)'}\n`;
+      
+      if (notes) {
+        message += `📍 *Endereço / Obs:* ${notes}\n`;
+      }
+
+      message += `\n🛒 *Itens da Cesta:*\n${itemsListText}\n\n`;
+      message += `Subtotal: ${subtotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n`;
+      if (fee > 0) {
+        message += `Taxa de Entrega: ${fee.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n`;
+      }
+      message += `*TOTAL A PAGAR: ${grandTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}*\n\n`;
+      message += `Poderiam confirmar se os itens da fornada estão disponíveis e o tempo estimado?`;
+
+      showToast('Redirecionando para o WhatsApp do balcão...', 'success');
+
+      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      setTimeout(() => {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }, 600);
     }
+
+    // Modal Helpers
+    function openFornadasModal() {
+      const modal = document.getElementById('fornadasModal');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    function handleModalBackdrop(e, modalId) {
+      if (e.target.id === modalId) {
+        closeModal(modalId);
+      }
+    }
+
+    // Close with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        toggleCart(false);
+        closeModal('fornadasModal');
+      }
+    });
+
+    // Initial render
+    renderBasket();
   </script>
 </body>
 </html>

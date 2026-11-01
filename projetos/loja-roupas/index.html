@@ -3,120 +3,237 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maison Nilo | Boutique & Moda Feminina</title>
-  <meta name="description" content="Maison Nilo — Moda feminina sofisticada, tecidos nobres, alfaiataria contemporânea e compras com atendimento exclusivo via WhatsApp.">
-  
+  <title>Maison Nilo | Boutique de Alta Moda & Alfaiataria Feminina</title>
+  <meta name="description" content="Maison Nilo — Moda feminina autoral, alfaiataria sob medida, sedas nobres e linho puro. Atendimento concierge exclusivo via WhatsApp.">
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     :root {
-      --bg: #faf7f2;
-      --surface: #ffffff;
-      --ink: #18181b;
-      --muted: #71717a;
-      --line: #e4e4e7;
-      --terracotta: #9a3412;
-      --terracotta-light: #ffedd5;
-      --gold: #b45309;
-      --radius: 12px;
+      --bg-page: #faf8f5;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f5efe6;
+      --bg-dark: #121110;
+      --ink-primary: #181615;
+      --ink-secondary: #57524e;
+      --ink-muted: #8c827a;
+      --line-subtle: #ede6dc;
+      --line-strong: #d8cdbe;
+      --terracotta: #9e3d24;
+      --terracotta-hover: #822e18;
+      --terracotta-light: #faece7;
+      --gold: #bfa15f;
+      --gold-light: #fbf7ee;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 2px 8px rgba(24, 22, 21, 0.04);
+      --shadow-md: 0 10px 30px rgba(24, 22, 21, 0.07);
+      --shadow-lg: 0 20px 45px rgba(24, 22, 21, 0.12);
+      --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg);
-      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--ink-primary);
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3, .serif {
+    /* Tipografia de Prestígio Editorial */
+    h1, h2, h3, h4, .serif {
       font-family: 'Cormorant Garamond', Georgia, serif;
+      letter-spacing: -0.01em;
       font-weight: 600;
     }
 
-    /* Top Banner */
-    .top-announcement {
-      background: var(--ink);
-      color: #f4f4f5;
-      text-align: center;
-      padding: 0.55rem 1rem;
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 500;
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
     }
 
-    /* Navbar */
-    .nav-header {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Top Announcement Bar */
+    .top-bar {
+      background: var(--bg-dark);
+      color: #ede8e3;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.65rem 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+      z-index: 60;
+    }
+    .top-bar-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .top-bar-divider {
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0.8;
+    }
+
+    /* Header e Navegação */
+    .site-header {
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line-subtle);
       position: sticky;
       top: 0;
       z-index: 50;
+      transition: var(--transition);
     }
     .nav-container {
-      max-width: 1200px;
+      max-width: 1320px;
       margin: 0 auto;
-      padding: 1rem 1.5rem;
+      padding: 1.1rem 1.75rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 1.5rem;
     }
-    .nav-brand {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-    }
-    .nav-brand span {
-      color: var(--terracotta);
-      font-style: italic;
-    }
-    .nav-links {
+    .brand-group {
       display: flex;
-      gap: 1.75rem;
+      flex-direction: column;
+    }
+    .brand-logo {
+      font-size: 2.15rem;
+      font-weight: 700;
+      color: var(--ink-primary);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+    }
+    .brand-logo span {
+      font-style: italic;
+      color: var(--terracotta);
+      font-weight: 400;
+      margin-left: 0.15rem;
+    }
+    .brand-tagline {
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
       list-style: none;
     }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--ink);
-      font-size: 0.95rem;
+    .nav-link {
+      font-size: 0.92rem;
       font-weight: 500;
+      color: var(--ink-secondary);
+      position: relative;
+      padding: 0.25rem 0;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--terracotta); }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--terracotta);
+      transition: width 0.25s ease;
+    }
+    .nav-link:hover {
+      color: var(--ink-primary);
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.9rem;
     }
-    .btn-cart-nav {
-      background: var(--terracotta);
-      color: #ffffff;
-      border: none;
-      padding: 0.6rem 1.1rem;
-      border-radius: 9999px;
-      font-family: inherit;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: flex;
+    .btn-concierge-nav {
+      display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      transition: background 0.2s;
+      padding: 0.6rem 1.1rem;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink-primary);
+      transition: var(--transition);
     }
-    .btn-cart-nav:hover { background: #7c2d12; }
-    .cart-badge {
-      background: #ffffff;
-      color: var(--terracotta);
-      font-size: 0.75rem;
+    .btn-concierge-nav:hover {
+      border-color: var(--ink-primary);
+      background: var(--bg-surface);
+    }
+
+    .btn-bag-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.65rem 1.25rem;
+      background: var(--ink-primary);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(24, 22, 21, 0.15);
+    }
+    .btn-bag-trigger:hover {
+      background: var(--terracotta);
+      transform: translateY(-1px);
+    }
+    .bag-badge {
+      background: var(--terracotta);
+      color: #ffffff;
+      font-size: 0.72rem;
       font-weight: 800;
       width: 20px;
       height: 20px;
@@ -124,729 +241,2170 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-bag-trigger:hover .bag-badge {
+      background: #ffffff;
+      color: var(--terracotta);
+    }
+    .btn-mobile-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem;
+      cursor: pointer;
+      color: var(--ink-primary);
     }
 
-    /* Hero Section */
-    .hero-banner {
-      max-width: 1200px;
-      margin: 1.5rem auto 3rem;
+    /* Hero Editorial de Moda */
+    .hero-section {
+      max-width: 1320px;
+      margin: 1.5rem auto 3.5rem;
       padding: 0 1.5rem;
     }
-    .hero-box {
-      border-radius: 20px;
-      overflow: hidden;
+    .hero-canvas {
       position: relative;
-      min-height: 480px;
-      background: linear-gradient(to right, rgba(24, 24, 27, 0.85) 0%, rgba(24, 24, 27, 0.4) 60%, transparent 100%),
-                  url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80') center/cover;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      min-height: 580px;
       display: flex;
       align-items: center;
-      padding: 3rem;
+      background: #1c1a19;
+      box-shadow: var(--shadow-lg);
+    }
+    .hero-bg-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      filter: brightness(0.82);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(18, 17, 16, 0.88) 0%, rgba(18, 17, 16, 0.55) 55%, rgba(18, 17, 16, 0.15) 100%);
     }
     .hero-content {
-      max-width: 540px;
+      position: relative;
+      z-index: 2;
+      max-width: 620px;
+      padding: 4rem 3.5rem;
       color: #ffffff;
     }
-    .hero-tag {
-      display: inline-block;
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 0.4rem 0.95rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
       font-weight: 700;
-      color: #fed7aa;
-      margin-bottom: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f7dfbe;
+      margin-bottom: 1.5rem;
     }
-    .hero-title {
-      font-size: clamp(2.6rem, 5vw, 4rem);
-      line-height: 1.05;
-      margin-bottom: 1.25rem;
+    .hero-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .hero-headline {
+      font-size: clamp(2.8rem, 5.2vw, 4.4rem);
+      line-height: 1.04;
+      margin-bottom: 1.35rem;
+      font-weight: 600;
       color: #ffffff;
     }
-    .hero-sub {
-      font-size: 1.05rem;
-      color: #e4e4e7;
-      margin-bottom: 2rem;
+    .hero-headline em {
+      font-style: italic;
+      color: #f5d6b3;
       font-weight: 400;
     }
-    .btn-hero {
+    .hero-lead {
+      font-size: 1.12rem;
+      color: #e4ded7;
+      line-height: 1.65;
+      margin-bottom: 2.4rem;
+      font-weight: 300;
+    }
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+    .btn-hero-primary {
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
       background: #ffffff;
-      color: var(--ink);
-      text-decoration: none;
+      color: var(--ink-primary);
+      padding: 0.95rem 2rem;
+      border-radius: var(--radius-pill);
       font-weight: 700;
-      padding: 0.9rem 1.8rem;
-      border-radius: 9999px;
-      transition: all 0.2s;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
     }
-    .btn-hero:hover {
-      background: #f4f4f5;
+    .btn-hero-primary:hover {
+      background: #fbf7ee;
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+    .btn-hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      padding: 0.95rem 1.8rem;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+    .btn-hero-secondary:hover {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: #ffffff;
     }
 
-    /* Filters */
-    .catalog-wrap {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem 4rem;
+    /* Features / Diferenciais de Ateliê */
+    .atelier-perks {
+      max-width: 1320px;
+      margin: 0 auto 4rem;
+      padding: 0 1.5rem;
     }
-    .section-head {
+    .perks-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--line-subtle);
+      border-radius: var(--radius-md);
+      padding: 2rem 2.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .perk-item {
       display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1.25rem;
+      align-items: flex-start;
       gap: 1rem;
     }
-    .section-head h2 {
-      font-size: 2.5rem;
-      color: var(--ink);
+    .perk-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-subtle);
+      color: var(--terracotta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .perk-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink-primary);
+      margin-bottom: 0.2rem;
+    }
+    .perk-desc {
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      line-height: 1.45;
+    }
+
+    /* Vitrine & Lookbook Interativo */
+    .catalog-section {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+    .catalog-header {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2.75rem;
+      border-bottom: 1px solid var(--line-subtle);
+      padding-bottom: 1.75rem;
+    }
+    .catalog-header-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1.25rem;
+    }
+    .catalog-title-group h2 {
+      font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+      color: var(--ink-primary);
+      line-height: 1.1;
+    }
+    .catalog-title-group p {
+      color: var(--ink-secondary);
+      font-size: 1rem;
+      margin-top: 0.4rem;
+    }
+
+    .catalog-filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
     .filter-pills {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
-    .filter-btn {
+    .btn-filter {
       background: transparent;
-      border: 1px solid var(--line);
-      color: var(--muted);
-      padding: 0.5rem 1rem;
-      border-radius: 9999px;
-      font-size: 0.88rem;
+      border: 1px solid var(--line-strong);
+      color: var(--ink-secondary);
+      padding: 0.55rem 1.2rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.86rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: var(--transition);
     }
-    .filter-btn:hover { color: var(--ink); border-color: var(--ink); }
-    .filter-btn.active {
-      background: var(--ink);
+    .btn-filter:hover {
+      border-color: var(--ink-primary);
+      color: var(--ink-primary);
+    }
+    .btn-filter.active {
+      background: var(--ink-primary);
       color: #ffffff;
-      border-color: var(--ink);
+      border-color: var(--ink-primary);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    }
+    .filter-search {
+      position: relative;
+      min-width: 240px;
+    }
+    .filter-search input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-pill);
+      padding: 0.55rem 1rem 0.55rem 2.4rem;
+      font-size: 0.88rem;
+      color: var(--ink-primary);
+      outline: none;
+      transition: var(--transition);
+    }
+    .filter-search input:focus {
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px rgba(158, 61, 36, 0.1);
+    }
+    .filter-search i {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink-muted);
+      pointer-events: none;
     }
 
-    /* Product Grid */
+    /* Grid de Produtos */
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 2rem 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+      gap: 2.25rem 1.75rem;
     }
+
     .product-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
+      background: var(--bg-surface);
+      border: 1px solid var(--line-subtle);
+      border-radius: var(--radius-md);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.25s, box-shadow 0.25s;
+      transition: var(--transition);
+      position: relative;
     }
     .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.07);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--line-strong);
     }
-    .product-thumb-wrap {
+
+    .product-media {
       position: relative;
-      height: 340px;
+      aspect-ratio: 3 / 4;
       overflow: hidden;
-      background: #f4f4f5;
+      background: #f0eae1;
+      cursor: pointer;
     }
     .product-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease;
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .product-card:hover .product-img {
-      transform: scale(1.05);
+      transform: scale(1.06);
     }
-    .badge-collection {
+
+    .product-badges {
       position: absolute;
-      top: 12px;
-      left: 12px;
-      background: rgba(255, 255, 255, 0.95);
-      color: var(--ink);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.65rem;
-      border-radius: 9999px;
+      top: 14px;
+      left: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      z-index: 3;
     }
-    .product-body {
-      padding: 1.25rem;
+    .badge-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--ink-primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      width: fit-content;
+    }
+    .badge-tag.highlight {
+      background: var(--terracotta);
+      color: #ffffff;
+    }
+
+    .product-quick-btn {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      color: var(--ink-primary);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: 0.55rem 1.1rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      transition: all 0.25s ease;
+      z-index: 4;
+      white-space: nowrap;
+    }
+    .product-card:hover .product-quick-btn {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    .product-quick-btn:hover {
+      background: var(--ink-primary);
+      color: #ffffff;
+    }
+
+    .product-info {
+      padding: 1.35rem;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
-    .product-category {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      margin-bottom: 0.25rem;
+    .product-header-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.35rem;
     }
-    .product-name {
-      font-size: 1.4rem;
-      color: var(--ink);
-      margin-bottom: 0.4rem;
+    .product-category {
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .product-price {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--ink-primary);
+    }
+    .product-title {
+      font-size: 1.45rem;
+      color: var(--ink-primary);
       line-height: 1.2;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .product-title:hover {
+      color: var(--terracotta);
     }
     .product-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.45;
-      margin-bottom: 1rem;
+      font-size: 0.86rem;
+      color: var(--ink-secondary);
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
       flex: 1;
     }
-    .product-options {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 0.75rem;
-      border-top: 1px solid #f4f4f5;
+
+    /* Seletor Interativo de Cores */
+    .product-selector-group {
       margin-bottom: 1rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--line-subtle);
     }
-    .sizes-list {
+    .selector-label-row {
       display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--ink-secondary);
+      margin-bottom: 0.45rem;
+    }
+    .selector-label-row span.current-choice {
+      font-weight: 700;
+      color: var(--ink-primary);
+    }
+
+    .swatches-row {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .color-swatch {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px var(--line-strong);
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .color-swatch:hover {
+      transform: scale(1.15);
+    }
+    .color-swatch.active {
+      box-shadow: 0 0 0 2px var(--ink-primary);
+      transform: scale(1.1);
+    }
+
+    /* Seletor Interativo de Tamanhos */
+    .sizes-row {
+      display: flex;
+      flex-wrap: wrap;
       gap: 0.35rem;
     }
-    .size-badge {
-      font-size: 0.75rem;
-      padding: 0.2rem 0.45rem;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      color: var(--muted);
-      font-weight: 600;
+    .size-chip {
+      background: var(--bg-page);
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      min-width: 34px;
+      height: 30px;
+      padding: 0 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ink-secondary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
     }
-    .btn-add-bag {
+    .size-chip:hover {
+      border-color: var(--ink-primary);
+      color: var(--ink-primary);
+    }
+    .size-chip.active {
+      background: var(--ink-primary);
+      color: #ffffff;
+      border-color: var(--ink-primary);
+    }
+
+    /* Botão Adicionar à Sacola */
+    .btn-add-cart {
       width: 100%;
-      background: var(--ink);
+      background: var(--ink-primary);
       color: #ffffff;
       border: none;
-      padding: 0.85rem;
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-weight: 600;
-      font-size: 0.92rem;
+      padding: 0.88rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      transition: background 0.2s;
+      transition: var(--transition);
+      margin-top: 0.85rem;
     }
-    .btn-add-bag:hover {
+    .btn-add-cart:hover {
       background: var(--terracotta);
+      transform: translateY(-1px);
+    }
+    .btn-add-cart.added {
+      background: #166534;
     }
 
-    /* Carrinho / Sacola Drawer */
-    .cart-drawer-backdrop {
+    /* Drawer / Sacola de Compras Deslizante (Slide-Over) */
+    .bag-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(4px);
+      background: rgba(18, 17, 16, 0.6);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       z-index: 100;
-      display: none;
-      justify-content: flex-end;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.32s ease, visibility 0.32s ease;
     }
-    .cart-drawer-backdrop.open { display: flex; }
-    .cart-drawer {
-      background: #ffffff;
+    .bag-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .bag-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
       width: 100%;
-      max-width: 440px;
-      height: 100vh;
+      max-width: 480px;
+      background: var(--bg-surface);
+      z-index: 101;
       display: flex;
       flex-direction: column;
-      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
-      animation: slideLeft 0.3s ease;
+      box-shadow: -15px 0 45px rgba(0, 0, 0, 0.25);
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    @keyframes slideLeft {
-      from { transform: translateX(100%); }
-      to { transform: translateX(0); }
+    .bag-backdrop.open .bag-drawer {
+      transform: translateX(0);
     }
-    .cart-head {
-      padding: 1.5rem;
-      border-bottom: 1px solid var(--line);
+
+    .bag-header {
+      padding: 1.6rem 1.8rem;
+      border-bottom: 1px solid var(--line-subtle);
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .cart-head h3 { font-size: 1.6rem; }
-    .btn-close-cart {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      color: var(--muted);
+    .bag-header h3 {
+      font-size: 1.8rem;
+      color: var(--ink-primary);
     }
-    .cart-items-wrap {
+    .btn-close-drawer {
+      background: var(--bg-subtle);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink-primary);
+      transition: var(--transition);
+    }
+    .btn-close-drawer:hover {
+      background: var(--ink-primary);
+      color: #ffffff;
+    }
+
+    /* Barra de Frete Grátis na Sacola */
+    .shipping-bar-wrap {
+      padding: 0.85rem 1.8rem;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--line-subtle);
+    }
+    .shipping-bar-text {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .shipping-progress {
+      height: 6px;
+      background: #e2d9cd;
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+    .shipping-progress-fill {
+      height: 100%;
+      background: var(--terracotta);
+      border-radius: var(--radius-pill);
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .bag-items-list {
       flex: 1;
       overflow-y: auto;
-      padding: 1.5rem;
+      padding: 1.5rem 1.8rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.25rem;
     }
-    .cart-empty {
-      text-align: center;
-      color: var(--muted);
+    .bag-empty-state {
       margin: auto 0;
-      padding: 2rem;
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--ink-muted);
     }
-    .cart-item {
+    .bag-empty-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.2rem;
+      color: var(--line-strong);
+    }
+    .bag-empty-state h4 {
+      font-size: 1.4rem;
+      color: var(--ink-primary);
+      margin-bottom: 0.5rem;
+    }
+    .bag-empty-state p {
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .bag-item-card {
       display: flex;
-      gap: 1rem;
-      align-items: center;
-      border-bottom: 1px solid #f4f4f5;
-      padding-bottom: 1rem;
+      gap: 1.1rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--line-subtle);
+      animation: fadeInItem 0.25s ease;
     }
-    .cart-item-thumb {
-      width: 60px;
-      height: 75px;
+    @keyframes fadeInItem {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bag-item-thumb {
+      width: 78px;
+      height: 98px;
+      border-radius: var(--radius-sm);
       object-fit: cover;
-      border-radius: 6px;
+      background: #f0eae1;
+      flex-shrink: 0;
     }
-    .cart-item-info { flex: 1; }
-    .cart-item-title { font-weight: 700; font-size: 0.95rem; }
-    .cart-item-cat { font-size: 0.8rem; color: var(--muted); }
+    .bag-item-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .bag-item-title {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--ink-primary);
+      line-height: 1.2;
+    }
+    .bag-item-meta {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      margin: 0.25rem 0 0.6rem;
+    }
+    .bag-item-price {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--terracotta);
+    }
+    .bag-item-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .quantity-stepper {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      background: var(--bg-page);
+    }
+    .btn-step {
+      background: transparent;
+      border: none;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink-primary);
+    }
+    .btn-step:hover {
+      background: var(--line-subtle);
+    }
+    .step-value {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0 0.4rem;
+      min-width: 22px;
+      text-align: center;
+    }
     .btn-remove-item {
       background: transparent;
       border: none;
-      color: #ef4444;
-      cursor: pointer;
+      color: var(--ink-muted);
       font-size: 0.8rem;
-      margin-top: 0.3rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: color 0.2s;
     }
-    .cart-footer {
-      padding: 1.5rem;
-      border-top: 1px solid var(--line);
-      background: #fafafa;
+    .btn-remove-item:hover {
+      color: #dc2626;
     }
-    .btn-checkout-wa {
+
+    .bag-footer {
+      padding: 1.5rem 1.8rem;
+      border-top: 1px solid var(--line-subtle);
+      background: #faf7f2;
+    }
+    .bag-summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.92rem;
+      color: var(--ink-secondary);
+      margin-bottom: 0.5rem;
+    }
+    .bag-summary-row.total-row {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--ink-primary);
+      border-top: 1px solid var(--line-subtle);
+      padding-top: 0.75rem;
+      margin-top: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+    .btn-checkout-whatsapp {
       width: 100%;
-      background: #16a34a;
+      background: #15803d;
       color: #ffffff;
       border: none;
       padding: 1rem;
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-weight: 700;
+      border-radius: var(--radius-sm);
       font-size: 1rem;
+      font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      transition: background 0.2s;
+      gap: 0.65rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(21, 128, 61, 0.25);
     }
-    .btn-checkout-wa:hover { background: #15803d; }
-
-    /* Depoimentos */
-    .reviews-section {
-      background: #f4f1ea;
-      padding: 4rem 1.5rem;
-      border-top: 1px solid var(--line);
+    .btn-checkout-whatsapp:hover {
+      background: #166534;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(21, 128, 61, 0.35);
     }
-    .reviews-container {
-      max-width: 1200px;
-      margin: 0 auto;
+    .checkout-hint {
       text-align: center;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      margin-top: 0.7rem;
     }
-    .reviews-container h2 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
+
+    /* Modal Quick View */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 17, 16, 0.65);
+      backdrop-filter: blur(8px);
+      z-index: 110;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
     }
-    .reviews-grid {
+    .modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .quickview-card {
+      background: var(--bg-surface);
+      max-width: 880px;
+      width: 100%;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      text-align: left;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      animation: modalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .review-card {
-      background: #ffffff;
-      padding: 1.75rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
+    @keyframes modalSlide {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
-    .review-quote {
-      font-size: 1.05rem;
-      font-style: italic;
-      color: #3f3f46;
-      margin-bottom: 1rem;
+    .btn-close-modal {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: var(--transition);
     }
-    .review-author {
+    .btn-close-modal:hover {
+      background: var(--ink-primary);
+      color: #ffffff;
+    }
+    .quickview-media {
+      background: #f0eae1;
+      position: relative;
+    }
+    .quickview-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 440px;
+    }
+    .quickview-body {
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      max-height: 85vh;
+    }
+    .quickview-cat {
+      font-size: 0.76rem;
       font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--ink);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.3rem;
+    }
+    .quickview-title {
+      font-size: 2rem;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+    .quickview-price {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--terracotta);
+      margin-bottom: 1.25rem;
+    }
+    .quickview-desc {
+      font-size: 0.92rem;
+      color: var(--ink-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .quickview-details-box {
+      background: var(--bg-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--ink-secondary);
+    }
+    .quickview-details-box ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .quickview-details-box li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Depoimentos / Experiência de Clientes */
+    .experience-section {
+      background: #f3ece2;
+      padding: 5.5rem 1.5rem;
+      border-top: 1px solid var(--line-subtle);
+      border-bottom: 1px solid var(--line-subtle);
+    }
+    .experience-container {
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+    .experience-head {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+    }
+    .experience-head h2 {
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
+      margin-bottom: 0.6rem;
+    }
+    .experience-head p {
+      color: var(--ink-secondary);
+      font-size: 1.05rem;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+    .testimonial-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--line-subtle);
+      border-radius: var(--radius-md);
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .testimonial-stars {
+      display: flex;
+      gap: 0.25rem;
+      color: #eab308;
+      margin-bottom: 1.1rem;
+    }
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.22rem;
+      font-style: italic;
+      color: var(--ink-primary);
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line-subtle);
+    }
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .author-name {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--ink-primary);
+    }
+    .author-location {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+    }
+
+    /* Ateliê / Manifesto */
+    .manifesto-section {
+      max-width: 1320px;
+      margin: 5rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .manifesto-media {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      box-shadow: var(--shadow-md);
+    }
+    .manifesto-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .manifesto-content h2 {
+      font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .manifesto-content p {
+      color: var(--ink-secondary);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .btn-whatsapp-direct {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: var(--terracotta);
+      color: #ffffff;
+      padding: 0.95rem 1.8rem;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(158, 61, 36, 0.25);
+    }
+    .btn-whatsapp-direct:hover {
+      background: var(--terracotta-hover);
+      transform: translateY(-2px);
     }
 
     /* Footer */
-    .boutique-footer {
-      background: var(--ink);
-      color: #d4d4d8;
-      padding: 3.5rem 1.5rem 2rem;
-      text-align: center;
+    .site-footer {
+      background: var(--bg-dark);
+      color: #e5ded7;
+      padding: 5rem 1.5rem 2.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .boutique-footer h3 {
+    .footer-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .footer-brand h3 {
+      font-size: 2.3rem;
       color: #ffffff;
-      font-size: 2.2rem;
       margin-bottom: 0.5rem;
     }
-    .boutique-footer p {
-      max-width: 500px;
-      margin: 0 auto 1.5rem;
-      font-size: 0.95rem;
-      color: #a1a1aa;
+    .footer-brand p {
+      font-size: 0.92rem;
+      color: #a89f95;
+      line-height: 1.6;
+      max-width: 340px;
+      margin-bottom: 1.5rem;
+    }
+    .footer-col h4 {
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 1.2rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .footer-col a {
+      color: #a89f95;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover {
+      color: #ffffff;
+    }
+    .footer-bottom {
+      max-width: 1320px;
+      margin: 2rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.82rem;
+      color: #837a71;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 120;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+    .toast-box {
+      pointer-events: auto;
+      background: var(--bg-dark);
+      color: #ffffff;
+      padding: 0.85rem 1.4rem;
+      border-radius: var(--radius-pill);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      animation: toastSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    @keyframes toastSlideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Mobile Menu Drawer */
+    .mobile-menu-drawer {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-page);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      padding: 5rem 2rem 2rem;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    .mobile-menu-drawer.open {
+      transform: translateY(0);
+    }
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .mobile-nav-links a {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--ink-primary);
+    }
+
+    /* Responsividade */
+    @media (max-width: 1024px) {
+      .perks-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .manifesto-section { grid-template-columns: 1fr; }
+      .footer-container { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 768px) {
-      .hero-box { min-height: 400px; padding: 2rem 1.5rem; }
-      .nav-links { display: none; }
+      .nav-menu, .btn-concierge-nav { display: none; }
+      .btn-mobile-toggle { display: block; }
+      .hero-content { padding: 3rem 1.5rem; }
+      .hero-canvas { min-height: 480px; }
+      .perks-grid { grid-template-columns: 1fr; padding: 1.5rem; }
+      .catalog-header-top { flex-direction: column; align-items: flex-start; }
+      .quickview-card { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; }
+      .quickview-media img { min-height: 280px; height: 280px; }
+      .footer-container { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <div class="top-announcement">
-    Envio Exclusivo para Todo o Brasil • Atendimento Personalizado no WhatsApp
-  </div>
+  <!-- Barra de Notícias Superior -->
+  <aside class="top-bar" aria-label="Informações de Envio e Atendimento">
+    <div class="top-bar-item">
+      <i data-lucide="sparkles" style="width: 14px; height: 14px; color: var(--gold);" aria-hidden="true"></i>
+      <span>Coleção Cápsula 2026 Disponível</span>
+    </div>
+    <span class="top-bar-divider" aria-hidden="true"></span>
+    <div class="top-bar-item">
+      <span>Frete Cortesia acima de R$ 600</span>
+    </div>
+    <span class="top-bar-divider" aria-hidden="true"></span>
+    <div class="top-bar-item">
+      <i data-lucide="message-circle" style="width: 14px; height: 14px; color: var(--gold);" aria-hidden="true"></i>
+      <span>Atendimento Concierge pelo WhatsApp</span>
+    </div>
+  </aside>
 
-  <header class="nav-header">
+  <!-- Navbar -->
+  <header class="site-header">
     <div class="nav-container">
-      <a href="#" class="nav-brand">Maison <span>Nilo</span></a>
-      <ul class="nav-links">
-        <li><a href="#colecao">Coleções</a></li>
-        <li><a href="#novidades">Novidades</a></li>
-        <li><a href="#depoimentos">Depoimentos</a></li>
-      </ul>
+      <button class="btn-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Abrir Menu Principal">
+        <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
+      </button>
+
+      <a href="#" class="brand-group" aria-label="Maison Nilo - Página Inicial">
+        <span class="brand-logo">Maison<span>Nilo</span></span>
+        <span class="brand-tagline">Atelier & Prêt-à-Porter</span>
+      </a>
+
+      <nav aria-label="Navegação Principal">
+        <ul class="nav-menu">
+          <li><a href="#lookbook" class="nav-link">Lookbook</a></li>
+          <li><a href="#diferenciais" class="nav-link">O Ateliê</a></li>
+          <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+          <li><a href="#manifesto" class="nav-link">Filosofia</a></li>
+        </ul>
+      </nav>
+
       <div class="nav-actions">
-        <button class="btn-cart-nav" onclick="toggleCart()">
-          <i data-lucide="shopping-bag" style="width: 18px; height: 18px;"></i>
+        <a href="https://wa.me/5511983909578?text=Olá!%20Gostaria%20de%20consultoria%20de%20estilo%20com%20a%20Maison%20Nilo" target="_blank" rel="noopener noreferrer" class="btn-concierge-nav" aria-label="Falar com Consultora de Estilo no WhatsApp">
+          <i data-lucide="help-circle" style="width: 16px; height: 16px;" aria-hidden="true"></i>
+          <span>Consultoria VIP</span>
+        </a>
+
+        <button class="btn-bag-trigger" onclick="toggleBagDrawer(true)" aria-label="Ver sacola de compras">
+          <i data-lucide="shopping-bag" style="width: 18px; height: 18px;" aria-hidden="true"></i>
           <span>Sacola</span>
-          <span class="cart-badge" id="cart-count">0</span>
+          <span class="bag-badge" id="cart-counter">0</span>
         </button>
       </div>
     </div>
   </header>
 
-  <section class="hero-banner">
-    <div class="hero-box">
+  <!-- Menu Mobile Deslizante -->
+  <div class="mobile-menu-drawer" id="mobile-menu">
+    <button class="btn-close-drawer" style="align-self: flex-end; margin-bottom: 2rem;" onclick="toggleMobileMenu()" aria-label="Fechar Menu">
+      <i data-lucide="x" style="width: 22px; height: 22px;"></i>
+    </button>
+    <ul class="mobile-nav-links">
+      <li><a href="#lookbook" onclick="toggleMobileMenu()">Lookbook 2026</a></li>
+      <li><a href="#diferenciais" onclick="toggleMobileMenu()">Diferenciais do Ateliê</a></li>
+      <li><a href="#depoimentos" onclick="toggleMobileMenu()">Experiência de Clientes</a></li>
+      <li><a href="#manifesto" onclick="toggleMobileMenu()">Nossa Filosofia</a></li>
+    </ul>
+    <a href="https://wa.me/5511983909578?text=Olá!%20Gostaria%20de%20atendimento%20Maison%20Nilo" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-direct">
+      <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
+      Atendimento no WhatsApp
+    </a>
+  </div>
+
+  <!-- Hero Section Editorial -->
+  <section class="hero-section" aria-label="Destaque da Coleção">
+    <div class="hero-canvas">
+      <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80" alt="Coleção Cápsula Maison Nilo Alfaiataria & Seda" class="hero-bg-media">
+      <div class="hero-overlay"></div>
+
       <div class="hero-content">
-        <span class="hero-tag">Coleção Cápsula 2026</span>
-        <h1 class="hero-title">A Arte da Alfaiataria & Fluidez</h1>
-        <p class="hero-sub">Peças pensadas para mulheres contemporâneas que valorizam cortes impecáveis, linho puro e tecidos de caimento natural.</p>
-        <a href="#colecao" class="btn-hero">
-          <i data-lucide="arrow-down" style="width: 18px; height: 18px;"></i>
-          Explorar Peças
-        </a>
+        <div class="hero-pill">
+          <span class="hero-pill-dot"></span>
+          <span>Edição Limitada 2026</span>
+        </div>
+        <h1 class="hero-headline">A Poesia da <em>Alfaiataria</em> & Tecidos Nobres</h1>
+        <p class="hero-lead">Peças exclusivas confeccionadas em linho puro europeu, viscose acetinada e seda pura. Caimento impecável desenhado para mulheres contemporâneas.</p>
+
+        <div class="hero-cta-group">
+          <a href="#lookbook" class="btn-hero-primary">
+            <span>Explorar Lookbook</span>
+            <i data-lucide="arrow-down-right" style="width: 18px; height: 18px;" aria-hidden="true"></i>
+          </a>
+          <a href="https://wa.me/5511983909578?text=Olá!%20Gostaria%20de%20conhecer%20as%20peças%20sob%20medida%20da%20Maison%20Nilo" target="_blank" rel="noopener noreferrer" class="btn-hero-secondary">
+            <i data-lucide="message-circle" style="width: 18px; height: 18px;" aria-hidden="true"></i>
+            <span>Atendimento Personalizado</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <main class="catalog-wrap" id="colecao">
-    <div class="section-head">
-      <div>
-        <h2>Lookbook Exclusivo</h2>
-        <p style="color: var(--muted);">Escolha suas peças e monte seu look para atendimento imediato.</p>
+  <!-- Diferenciais do Ateliê -->
+  <section class="atelier-perks" id="diferenciais" aria-label="Compromissos Maison Nilo">
+    <div class="perks-grid">
+      <div class="perk-item">
+        <div class="perk-icon" aria-hidden="true">
+          <i data-lucide="feather" style="width: 22px; height: 22px;"></i>
+        </div>
+        <div>
+          <div class="perk-title">Fibras Naturais Puras</div>
+          <div class="perk-desc">Linho francês, seda amoreira e algodão pima com toque suave e respirabilidade natural.</div>
+        </div>
       </div>
-      <div class="filter-pills">
-        <button class="filter-btn active" onclick="filterBoutique('all', this)">Todas as Peças</button>
-        <button class="filter-btn" onclick="filterBoutique('vestidos', this)">Vestidos</button>
-        <button class="filter-btn" onclick="filterBoutique('alfaiataria', this)">Alfaiataria</button>
-        <button class="filter-btn" onclick="filterBoutique('conjuntos', this)">Conjuntos</button>
+
+      <div class="perk-item">
+        <div class="perk-icon" aria-hidden="true">
+          <i data-lucide="scissors" style="width: 22px; height: 22px;"></i>
+        </div>
+        <div>
+          <div class="perk-title">Modelagem de Ateliê</div>
+          <div class="perk-desc">Cortes estruturados com forros de toque sedoso e acabamentos internos de alta costura.</div>
+        </div>
+      </div>
+
+      <div class="perk-item">
+        <div class="perk-icon" aria-hidden="true">
+          <i data-lucide="shield-check" style="width: 22px; height: 22px;"></i>
+        </div>
+        <div>
+          <div class="perk-title">Ajuste de Bainha Cortesia</div>
+          <div class="perk-desc">Consultoria de medidas pré-envio e primeira troca garantida sem complicações em 30 dias.</div>
+        </div>
+      </div>
+
+      <div class="perk-item">
+        <div class="perk-icon" aria-hidden="true">
+          <i data-lucide="gift" style="width: 22px; height: 22px;"></i>
+        </div>
+        <div>
+          <div class="perk-title">Embalagem Perfumada</div>
+          <div class="perk-desc">Experiência sensorial única com caixa rígida, papel seda e essência exclusiva de âmbar e figo.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lookbook & Vitrine Interativa -->
+  <main class="catalog-section" id="lookbook" aria-label="Vitrine de Produtos">
+    <div class="catalog-header">
+      <div class="catalog-header-top">
+        <div class="catalog-title-group">
+          <h2>Lookbook & Curadoria</h2>
+          <p>Selecione seu tamanho e tom favorito com pré-visualização instantânea na sacola.</p>
+        </div>
+        <div class="filter-search">
+          <i data-lucide="search" style="width: 16px; height: 16px;" aria-hidden="true"></i>
+          <input type="text" id="catalog-search" placeholder="Buscar por peça, tecido ou cor..." oninput="handleCatalogSearch(this.value)" aria-label="Buscar produtos">
+        </div>
+      </div>
+
+      <div class="catalog-filters">
+        <div class="filter-pills" role="tablist" aria-label="Categorias de produtos">
+          <button class="btn-filter active" onclick="applyCategoryFilter('all', this)" role="tab" aria-selected="true">Todas as Peças</button>
+          <button class="btn-filter" onclick="applyCategoryFilter('vestidos', this)" role="tab" aria-selected="false">Vestidos & Caftans</button>
+          <button class="btn-filter" onclick="applyCategoryFilter('alfaiataria', this)" role="tab" aria-selected="false">Alfaiataria & Blazers</button>
+          <button class="btn-filter" onclick="applyCategoryFilter('conjuntos', this)" role="tab" aria-selected="false">Conjuntos & Sedas</button>
+          <button class="btn-filter" onclick="applyCategoryFilter('pantalonas', this)" role="tab" aria-selected="false">Pantalonas & Calças</button>
+        </div>
+        <span style="font-size: 0.85rem; color: var(--ink-muted);" id="visible-count">Exibindo 6 criações autorais</span>
       </div>
     </div>
 
-    <div class="products-grid" id="boutique-grid">
-
-      <!-- Produto 1 -->
-      <div class="product-card" data-cat="vestidos">
-        <div class="product-thumb-wrap">
-          <span class="badge-collection">Novo</span>
-          <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=80" alt="Vestido Linho Terracota" class="product-img">
-        </div>
-        <div class="product-body">
-          <span class="product-category">Vestidos</span>
-          <h3 class="product-name">Vestido Midi Aurora</h3>
-          <p class="product-desc">Tecido 100% linho puro com fenda lateral sutil, decote quadrado e abotoamento traseiro delicado.</p>
-          <div class="product-options">
-            <span style="font-size: 0.8rem; color: var(--muted);">Tamanhos:</span>
-            <div class="sizes-list">
-              <span class="size-badge">P</span>
-              <span class="size-badge">M</span>
-              <span class="size-badge">G</span>
-            </div>
-          </div>
-          <button class="btn-add-bag" onclick="addToBag('Vestido Midi Aurora', 'Vestidos', 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=200&q=80')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Sacola
-          </button>
-        </div>
-      </div>
-
-      <!-- Produto 2 -->
-      <div class="product-card" data-cat="alfaiataria">
-        <div class="product-thumb-wrap">
-          <span class="badge-collection">Destaque</span>
-          <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=800&q=80" alt="Blazer Estruturado Nude" class="product-img">
-        </div>
-        <div class="product-body">
-          <span class="product-category">Alfaiataria</span>
-          <h3 class="product-name">Blazer Estruturado Vogue</h3>
-          <p class="product-desc">Corte italiano reto, ombreiras suaves e forro acetinado. A elegância essencial para o ambiente executivo.</p>
-          <div class="product-options">
-            <span style="font-size: 0.8rem; color: var(--muted);">Tamanhos:</span>
-            <div class="sizes-list">
-              <span class="size-badge">PP</span>
-              <span class="size-badge">P</span>
-              <span class="size-badge">M</span>
-              <span class="size-badge">G</span>
-            </div>
-          </div>
-          <button class="btn-add-bag" onclick="addToBag('Blazer Estruturado Vogue', 'Alfaiataria', 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=200&q=80')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Sacola
-          </button>
-        </div>
-      </div>
-
-      <!-- Produto 3 -->
-      <div class="product-card" data-cat="conjuntos">
-        <div class="product-thumb-wrap">
-          <span class="badge-collection">Edição Limitada</span>
-          <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" alt="Conjunto Seda Serena" class="product-img">
-        </div>
-        <div class="product-body">
-          <span class="product-category">Conjuntos</span>
-          <h3 class="product-name">Conjunto Seda & Viscose Serena</h3>
-          <p class="product-desc">Calça pantalona fluida acompanhada de regata com alças reguláveis e toque macio ao corpo.</p>
-          <div class="product-options">
-            <span style="font-size: 0.8rem; color: var(--muted);">Tamanhos:</span>
-            <div class="sizes-list">
-              <span class="size-badge">P</span>
-              <span class="size-badge">M</span>
-              <span class="size-badge">G</span>
-            </div>
-          </div>
-          <button class="btn-add-bag" onclick="addToBag('Conjunto Seda Serena', 'Conjuntos', 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=200&q=80')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Sacola
-          </button>
-        </div>
-      </div>
-
-      <!-- Produto 4 -->
-      <div class="product-card" data-cat="vestidos">
-        <div class="product-thumb-wrap">
-          <span class="badge-collection">Atemporal</span>
-          <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80" alt="Vestido Slip Dress" class="product-img">
-        </div>
-        <div class="product-body">
-          <span class="product-category">Vestidos</span>
-          <h3 class="product-name">Vestido Slip Satin Noir</h3>
-          <p class="product-desc">Cetim com brilho sofisticado, decote degagê e caimento suave. Peça-chave para jantares e eventos.</p>
-          <div class="product-options">
-            <span style="font-size: 0.8rem; color: var(--muted);">Tamanhos:</span>
-            <div class="sizes-list">
-              <span class="size-badge">P</span>
-              <span class="size-badge">M</span>
-              <span class="size-badge">G</span>
-            </div>
-          </div>
-          <button class="btn-add-bag" onclick="addToBag('Vestido Slip Satin Noir', 'Vestidos', 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=200&q=80')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Sacola
-          </button>
-        </div>
-      </div>
-
-      <!-- Produto 5 -->
-      <div class="product-card" data-cat="alfaiataria">
-        <div class="product-thumb-wrap">
-          <span class="badge-collection">Tendência</span>
-          <img src="https://images.unsplash.com/photo-1550614000-4895a10e1bfd?auto=format&fit=crop&w=800&q=80" alt="Calça Pantalona Alfaiataria" class="product-img">
-        </div>
-        <div class="product-body">
-          <span class="product-category">Alfaiataria</span>
-          <h3 class="product-name">Pantalona Plissada Milano</h3>
-          <p class="product-desc">Cintura alta com cós duplo estruturado, pregas frontais clássicas e bolsos faca funcionais.</p>
-          <div class="product-options">
-            <span style="font-size: 0.8rem; color: var(--muted);">Tamanhos:</span>
-            <div class="sizes-list">
-              <span class="size-badge">36</span>
-              <span class="size-badge">38</span>
-              <span class="size-badge">40</span>
-              <span class="size-badge">42</span>
-            </div>
-          </div>
-          <button class="btn-add-bag" onclick="addToBag('Pantalona Plissada Milano', 'Alfaiataria', 'https://images.unsplash.com/photo-1550614000-4895a10e1bfd?auto=format&fit=crop&w=200&q=80')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Sacola
-          </button>
-        </div>
-      </div>
-
-      <!-- Produto 6 -->
-      <div class="product-card" data-cat="conjuntos">
-        <div class="product-thumb-wrap">
-          <span class="badge-collection">Brisa Tropical</span>
-          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80" alt="Chemise Linho Areia" class="product-img">
-        </div>
-        <div class="product-body">
-          <span class="product-category">Conjuntos</span>
-          <h3 class="product-name">Chemise Oversized Saint-Tropez</h3>
-          <p class="product-desc">Modelagem ampla e fluida com botões em madrepérola natural. Perfeita para sobreposições elegantes.</p>
-          <div class="product-options">
-            <span style="font-size: 0.8rem; color: var(--muted);">Tamanhos:</span>
-            <div class="sizes-list">
-              <span class="size-badge">Único</span>
-            </div>
-          </div>
-          <button class="btn-add-bag" onclick="addToBag('Chemise Oversized Saint-Tropez', 'Conjuntos', 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=200&q=80')">
-            <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Adicionar à Sacola
-          </button>
-        </div>
-      </div>
-
+    <!-- Grid dos Produtos -->
+    <div class="products-grid" id="products-container">
+      <!-- Inserido dinamicamente via JavaScript para interatividade completa de tamanhos, cores e lookbook -->
     </div>
   </main>
 
-  <!-- Depoimentos de Clientes -->
-  <section class="reviews-section" id="depoimentos">
-    <div class="reviews-container">
-      <h2>Experiência de Nossas Clientes</h2>
-      <div class="reviews-grid">
-        <div class="review-card">
-          <p class="review-quote">"O linho do Vestido Aurora é incomparável. Chegou perfumado em 2 dias e o caimento parecia sob medida para o meu corpo."</p>
-          <div class="review-author">Helena Albuquerque • São Paulo, SP</div>
-        </div>
-        <div class="review-card">
-          <p class="review-quote">"O atendimento pelo WhatsApp é rápido e super atencioso. As meninas tiraram dúvidas de medidas antes do envio. Virei fã!"</p>
-          <div class="review-author">Camila Medeiros • Curitiba, PR</div>
-        </div>
-        <div class="review-card">
-          <p class="review-quote">"O blazer tem estrutura impecável de loja de luxo internacional. Uma das melhores compras de moda que já fiz online."</p>
-          <div class="review-author">Mariana Siqueira • Belo Horizonte, MG</div>
-        </div>
+  <!-- Depoimentos e Avaliações de Clientes -->
+  <section class="experience-section" id="depoimentos" aria-label="Depoimentos de Clientes">
+    <div class="experience-container">
+      <div class="experience-head">
+        <h2>Experiência de Nossas Clientes</h2>
+        <p>A percepção de quem vive a elegância atemporal da Maison Nilo no cotidiano.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <article class="testimonial-card">
+          <div class="testimonial-stars" aria-label="5 estrelas de 5">
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+          </div>
+          <p class="testimonial-text">"O linho do Vestido Aurora é incomparável. Chegou embalado com uma fragrância maravilhosa em 48h. A consultora me orientou perfeitamente sobre as medidas de busto e o caimento parecia sob medida!"</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Helena Albuquerque" class="author-avatar">
+            <div>
+              <div class="author-name">Helena Albuquerque</div>
+              <div class="author-location">Jardins, São Paulo • SP</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="testimonial-stars" aria-label="5 estrelas de 5">
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+          </div>
+          <p class="testimonial-text">"O Blazer Vogue tem um corte italiano impecável. Uso para reuniões de conselho e eventos noturnos. A estrutura dos ombros e a textura do tecido superam marcas internacionais de luxo."</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&q=80" alt="Dra. Camila Medeiros" class="author-avatar">
+            <div>
+              <div class="author-name">Dra. Camila Medeiros</div>
+              <div class="author-location">Batel, Curitiba • PR</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="testimonial-stars" aria-label="5 estrelas de 5">
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <i data-lucide="star" style="width: 16px; height: 16px; fill: currentColor;"></i>
+          </div>
+          <p class="testimonial-text">"Comprar pelo WhatsApp com a Maison Nilo é como estar no ateliê particular. Atendimento refinado, carinho nos detalhes e o conjunto de seda Serena tem um toque inigualável na pele."</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80" alt="Mariana Siqueira" class="author-avatar">
+            <div>
+              <div class="author-name">Mariana Siqueira</div>
+              <div class="author-location">Lourdes, Belo Horizonte • MG</div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- Carrinho / Sacola Drawer -->
-  <div class="cart-drawer-backdrop" id="cart-drawer" onclick="handleDrawerClick(event)">
-    <div class="cart-drawer">
-      <div class="cart-head">
-        <h3>Sua Sacola</h3>
-        <button class="btn-close-cart" onclick="toggleCart()">
-          <i data-lucide="x" style="width: 22px; height: 22px;"></i>
+  <!-- Manifesto do Ateliê -->
+  <section class="manifesto-section" id="manifesto" aria-label="Sobre a Maison Nilo">
+    <div class="manifesto-media">
+      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=80" alt="Ateliê Maison Nilo - Confecção Artesanal">
+    </div>
+
+    <div class="manifesto-content">
+      <span style="font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta);">Nossa Origem</span>
+      <h2>Slow Fashion & Elegância Consciente</h2>
+      <p>Acreditamos que a verdadeira sofisticação não segue tendências descartáveis. Cada criação da Maison Nilo nasce do respeito aos materiais nobres, da modelagem precisa e da valorização das mãos artesãs brasileiras.</p>
+      <p>Nossas séries são limitadas e numeradas, garantindo que você vista exclusividade com propósito e sustentabilidade em cada detalhe.</p>
+      <a href="https://wa.me/5511983909578?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20peças%20e%20o%20ateliê%20da%20Maison%20Nilo" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-direct">
+        <i data-lucide="message-circle" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+        <span>Conversar com a Estilista</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Slide-Over Drawer da Sacola -->
+  <div class="bag-backdrop" id="bag-backdrop" onclick="handleBackdropClick(event)" aria-modal="true" role="dialog" aria-label="Sacola de Compras">
+    <aside class="bag-drawer">
+      <div class="bag-header">
+        <div>
+          <h3>Sua Sacola</h3>
+          <span style="font-size: 0.82rem; color: var(--ink-muted);" id="bag-subtitle">0 itens selecionados</span>
+        </div>
+        <button class="btn-close-drawer" onclick="toggleBagDrawer(false)" aria-label="Fechar Sacola">
+          <i data-lucide="x" style="width: 20px; height: 20px;"></i>
         </button>
       </div>
 
-      <div class="cart-items-wrap" id="cart-items-list">
-        <div class="cart-empty" id="cart-empty-msg">
-          <i data-lucide="shopping-bag" style="width: 44px; height: 44px; margin-bottom: 0.8rem; opacity: 0.4;"></i>
-          <p>Sua sacola está vazia no momento.</p>
-          <p style="font-size: 0.85rem; margin-top: 0.3rem;">Escolha suas peças favoritas no lookbook!</p>
+      <!-- Barra de Frete Grátis -->
+      <div class="shipping-bar-wrap">
+        <div class="shipping-bar-text">
+          <span id="shipping-msg">Frete Cortesia acima de R$ 600</span>
+          <span id="shipping-percent" style="font-weight: 700; color: var(--terracotta);">0%</span>
+        </div>
+        <div class="shipping-progress">
+          <div class="shipping-progress-fill" id="shipping-bar"></div>
         </div>
       </div>
 
-      <div class="cart-footer">
-        <button class="btn-checkout-wa" onclick="checkoutWhatsApp()">
-          <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
-          Enviar Pedido para Atendimento
+      <!-- Lista de Itens -->
+      <div class="bag-items-list" id="bag-items-container">
+        <!-- Renderizado dinamicamente -->
+      </div>
+
+      <!-- Rodapé da Sacola com Cálculos e Finalização no WhatsApp -->
+      <div class="bag-footer">
+        <div class="bag-summary-row">
+          <span>Subtotal das Peças:</span>
+          <span id="bag-subtotal" style="font-weight: 600;">R$ 0,00</span>
+        </div>
+        <div class="bag-summary-row">
+          <span>Envio Exclusivo:</span>
+          <span id="bag-shipping" style="color: #166534; font-weight: 700;">Calculando...</span>
+        </div>
+        <div class="bag-summary-row total-row">
+          <span>Total Estimado:</span>
+          <span id="bag-total">R$ 0,00</span>
+        </div>
+
+        <button class="btn-checkout-whatsapp" onclick="checkoutWhatsApp()">
+          <i data-lucide="message-circle" style="width: 22px; height: 22px;" aria-hidden="true"></i>
+          <span>Finalizar Pedido pelo WhatsApp</span>
+        </button>
+        <p class="checkout-hint">🔒 Atendimento humanizado • Confirmação de estoque e medidas imediata</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Modal Quick View Editorial -->
+  <div class="modal-backdrop" id="quickview-modal" onclick="handleModalBackdropClick(event)" aria-modal="true" role="dialog" aria-label="Detalhes da Peça">
+    <div class="quickview-card" id="quickview-card">
+      <button class="btn-close-modal" onclick="closeQuickView()" aria-label="Fechar visualização rápida">
+        <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+      </button>
+      <div class="quickview-media">
+        <img id="qv-img" src="" alt="Peça em destaque">
+      </div>
+      <div class="quickview-body">
+        <div class="quickview-cat" id="qv-cat">Categoria</div>
+        <h3 class="quickview-title" id="qv-title">Nome da Peça</h3>
+        <div class="quickview-price" id="qv-price">R$ 0,00</div>
+        <p class="quickview-desc" id="qv-desc">Descrição detalhada</p>
+
+        <div class="quickview-details-box">
+          <ul>
+            <li><i data-lucide="check" style="width: 16px; height: 16px; color: var(--terracotta);"></i> <span id="qv-fabric">Composição: Tecido Nobre</span></li>
+            <li><i data-lucide="check" style="width: 16px; height: 16px; color: var(--terracotta);"></i> <span>Acabamento: Costura inglesa e forro acetinado</span></li>
+            <li><i data-lucide="check" style="width: 16px; height: 16px; color: var(--terracotta);"></i> <span>Origem: Ateliê Maison Nilo - Série Limitada</span></li>
+          </ul>
+        </div>
+
+        <div class="product-selector-group">
+          <div class="selector-label-row">
+            <span>Cor Selecionada:</span>
+            <span class="current-choice" id="qv-color-name">Areia</span>
+          </div>
+          <div class="swatches-row" id="qv-swatches"></div>
+        </div>
+
+        <div class="product-selector-group" style="margin-bottom: 1.5rem;">
+          <div class="selector-label-row">
+            <span>Tamanho:</span>
+            <span class="current-choice" id="qv-size-name">M</span>
+          </div>
+          <div class="sizes-row" id="qv-sizes"></div>
+        </div>
+
+        <button class="btn-add-cart" id="qv-add-btn" onclick="addCurrentQuickViewToBag()">
+          <i data-lucide="plus" style="width: 18px; height: 18px;"></i>
+          <span>Adicionar à Sacola</span>
         </button>
       </div>
     </div>
   </div>
 
-  <footer class="boutique-footer">
-    <h3>Maison Nilo</h3>
-    <p>Ateliê e vitrine digital de moda contemporânea. Atendimento exclusivo e consultoria de estilo pelo WhatsApp.</p>
-    <div style="font-size: 0.85rem; color: #71717a;">
-      © 2026 Maison Nilo • Todos os direitos reservados
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Rodapé -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>Maison Nilo</h3>
+        <p>Ateliê de alta moda contemporânea. Peças com propósito atemporal, matérias-primas nobres e alfaiataria primorosa.</p>
+        <div style="font-size: 0.88rem; color: #a89f95;">
+          📍 Ateliê & Showroom: Jardins • São Paulo - SP
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Coleções</h4>
+        <ul>
+          <li><a href="#lookbook">Vestidos Fluidos</a></li>
+          <li><a href="#lookbook">Alfaiataria Feminina</a></li>
+          <li><a href="#lookbook">Conjuntos em Linho</a></li>
+          <li><a href="#lookbook">Camisaria & Sedas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Atendimento</h4>
+        <ul>
+          <li><a href="https://wa.me/5511983909578" target="_blank" rel="noopener noreferrer">Consultoria pelo WhatsApp</a></li>
+          <li><a href="#">Guia de Medidas & Tamanhos</a></li>
+          <li><a href="#">Política de Envios & Entregas</a></li>
+          <li><a href="#">Trocas & Devoluções Cortesia</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Privilégios</h4>
+        <p style="font-size: 0.85rem; color: #a89f95; margin-bottom: 1rem;">Cadastre-se para receber acesso prioritário aos lançamentos de cápsulas limitadas.</p>
+        <form onsubmit="handleNewsletter(event)" style="display: flex; gap: 0.4rem;">
+          <input type="email" placeholder="Seu melhor e-mail" required style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: var(--radius-sm); padding: 0.6rem 0.8rem; color: #ffffff; font-size: 0.85rem; flex: 1;">
+          <button type="submit" style="background: var(--terracotta); border: none; color: #fff; padding: 0.6rem 0.9rem; border-radius: var(--radius-sm); font-weight: 700; cursor: pointer;">OK</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 Maison Nilo. Todos os direitos reservados. CNPJ: 45.890.123/0001-90</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <span>Pagamento seguro via Pix & Cartão em até 6x</span>
+        <span>Atendimento VIP 100% humanizado</span>
+      </div>
     </div>
   </footer>
 
+  <!-- Lógica Javascript da Vitrine, Lookbook, Filtros e Sacola -->
   <script>
-    lucide.createIcons();
-
-    // Filtros
-    function filterBoutique(cat, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const cards = document.querySelectorAll('#boutique-grid .product-card');
-      cards.forEach(card => {
-        if (cat === 'all' || card.getAttribute('data-cat') === cat) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    // Sacola Interativa
-    let bag = [];
-
-    function toggleCart() {
-      const drawer = document.getElementById('cart-drawer');
-      drawer.classList.toggle('open');
-    }
-
-    function handleDrawerClick(e) {
-      if (e.target.id === 'cart-drawer') {
-        toggleCart();
+    // Banco de Produtos da Coleção Cápsula 2026
+    const PRODUCTS = [
+      {
+        id: 'aurora-vestido',
+        name: 'Vestido Midi Aurora',
+        category: 'vestidos',
+        categoryLabel: 'Vestidos & Caftans',
+        price: 580.00,
+        badge: 'Novo • Best Seller',
+        isHighlight: true,
+        desc: 'Tecido 100% linho puro com fenda lateral sutil, decote quadrado estruturado e delicado abotoamento traseiro artesanal.',
+        fabric: '100% Linho Francês Pura Fibra',
+        img: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=80',
+        colors: [
+          { name: 'Terracota Queimado', hex: '#9e3d24' },
+          { name: 'Areia Natural', hex: '#ded1bd' },
+          { name: 'Preto Noir', hex: '#1c1a19' }
+        ],
+        sizes: ['P', 'M', 'G', 'GG'],
+        selectedColor: 0,
+        selectedSize: 'M'
+      },
+      {
+        id: 'blazer-vogue',
+        name: 'Blazer Estruturado Vogue',
+        category: 'alfaiataria',
+        categoryLabel: 'Alfaiataria & Blazers',
+        price: 890.00,
+        badge: 'Destaque de Alfaiataria',
+        isHighlight: false,
+        desc: 'Corte italiano contemporâneo com ombreiras sutis e forro em cetim de seda. Peça-chave indispensável para produções de alto impacto.',
+        fabric: 'Alfaiataria Nobre de Lã Fria & Viscose Italiana',
+        img: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=800&q=80',
+        colors: [
+          { name: 'Areia Nude', hex: '#dfd2c0' },
+          { name: 'Preto Noir', hex: '#1c1a19' },
+          { name: 'Off-White Crepe', hex: '#faf7f0' }
+        ],
+        sizes: ['PP', 'P', 'M', 'G'],
+        selectedColor: 0,
+        selectedSize: 'P'
+      },
+      {
+        id: 'conjunto-serena',
+        name: 'Conjunto Seda Serena',
+        category: 'conjuntos',
+        categoryLabel: 'Conjuntos & Sedas',
+        price: 740.00,
+        badge: 'Edição Limitada',
+        isHighlight: true,
+        desc: 'Calça pantalona fluida de cintura anatômica acompanhada de regata com alças reguláveis e toque acetinado macio ao corpo.',
+        fabric: 'Seda de Amoreira e Viscose Fluida Sustentável',
+        img: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80',
+        colors: [
+          { name: 'Champagne Perolado', hex: '#eee3cd' },
+          { name: 'Terracota Rústico', hex: '#9e3d24' },
+          { name: 'Verde Salvia', hex: '#8a9a86' }
+        ],
+        sizes: ['P', 'M', 'G'],
+        selectedColor: 0,
+        selectedSize: 'M'
+      },
+      {
+        id: 'vestido-satin-noir',
+        name: 'Vestido Slip Satin Noir',
+        category: 'vestidos',
+        categoryLabel: 'Vestidos & Caftans',
+        price: 620.00,
+        badge: 'Atemporal',
+        isHighlight: false,
+        desc: 'Cetim encorpado de brilho sutil, decote degagê nas costas e caimento fluido que acompanha o movimento feminino com elegância magnética.',
+        fabric: 'Cetim de Alta Gramatura com Efeito Seda',
+        img: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80',
+        colors: [
+          { name: 'Preto Noir', hex: '#181716' },
+          { name: 'Pérola Acetinado', hex: '#f4ede1' },
+          { name: 'Esmeralda Noturno', hex: '#1a3328' }
+        ],
+        sizes: ['PP', 'P', 'M', 'G'],
+        selectedColor: 0,
+        selectedSize: 'P'
+      },
+      {
+        id: 'pantalona-milano',
+        name: 'Pantalona Plissada Milano',
+        category: 'pantalonas',
+        categoryLabel: 'Pantalonas & Calças',
+        price: 490.00,
+        badge: 'Tendência 2026',
+        isHighlight: false,
+        desc: 'Cintura alta esculpida, pregas frontais clássicas de alfaiataria e caimento reto impecável com bolsos faca funcionais.',
+        fabric: 'Crepe de Linho e Viscose com Caimento Pesado',
+        img: 'https://images.unsplash.com/photo-1550614000-4895a10e1bfd?auto=format&fit=crop&w=800&q=80',
+        colors: [
+          { name: 'Areia Fina', hex: '#d9cdbb' },
+          { name: 'Preto Clássico', hex: '#1b1a19' },
+          { name: 'Azul Marinho Riviera', hex: '#1e293b' }
+        ],
+        sizes: ['36', '38', '40', '42'],
+        selectedColor: 0,
+        selectedSize: '38'
+      },
+      {
+        id: 'chemise-st-tropez',
+        name: 'Chemise Oversized Saint-Tropez',
+        category: 'conjuntos',
+        categoryLabel: 'Conjuntos & Sedas',
+        price: 520.00,
+        badge: 'Brisa Tropical',
+        isHighlight: false,
+        desc: 'Modelagem ampla e fluida com botões em madrepérola natural talhada. Perfeita para sobreposições elegantes ou como vestido casual chic.',
+        fabric: '100% Linho Púbico Pré-Lavado Amaciado',
+        img: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80',
+        colors: [
+          { name: 'Branco Puro', hex: '#ffffff' },
+          { name: 'Areia Tostada', hex: '#d6c4ae' },
+          { name: 'Terracota Solar', hex: '#a64a32' }
+        ],
+        sizes: ['Único (P ao GG)'],
+        selectedColor: 0,
+        selectedSize: 'Único (P ao GG)'
       }
-    }
+    ];
 
-    function addToBag(title, cat, img) {
-      bag.push({ title, cat, img });
+    // Estado da Sacola
+    let bagState = [];
+    let currentCategory = 'all';
+    let searchQuery = '';
+    let quickViewProductId = null;
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProductsGrid();
       updateBagUI();
-      toggleCart();
-    }
+      lucide.createIcons();
+    });
 
-    function removeFromBag(index) {
-      bag.splice(index, 1);
-      updateBagUI();
-    }
+    // Renderiza a Vitrine de Produtos
+    function renderProductsGrid() {
+      const container = document.getElementById('products-container');
+      const filtered = PRODUCTS.filter(prod => {
+        const matchesCat = currentCategory === 'all' || prod.category === currentCategory;
+        const matchesSearch = prod.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              prod.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              prod.categoryLabel.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCat && matchesSearch;
+      });
 
-    function updateBagUI() {
-      const countEl = document.getElementById('cart-count');
-      const listEl = document.getElementById('cart-items-list');
-      const emptyEl = document.getElementById('cart-empty-msg');
+      document.getElementById('visible-count').textContent = `Exibindo ${filtered.length} criações autorais`;
 
-      countEl.textContent = bag.length;
-
-      if (bag.length === 0) {
-        listEl.innerHTML = `
-          <div class="cart-empty">
-            <i data-lucide="shopping-bag" style="width: 44px; height: 44px; margin-bottom: 0.8rem; opacity: 0.4;"></i>
-            <p>Sua sacola está vazia no momento.</p>
-            <p style="font-size: 0.85rem; margin-top: 0.3rem;">Escolha suas peças favoritas no lookbook!</p>
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: var(--ink-muted);">
+            <i data-lucide="search-x" style="width: 48px; height: 48px; margin: 0 auto 1rem; opacity: 0.5;"></i>
+            <h3 style="font-size: 1.5rem; color: var(--ink-primary); margin-bottom: 0.4rem;">Nenhuma peça encontrada</h3>
+            <p>Tente ajustar o termo de busca ou navegar por outras categorias.</p>
           </div>
         `;
         lucide.createIcons();
         return;
       }
 
-      listEl.innerHTML = bag.map((item, idx) => `
-        <div class="cart-item">
-          <img src="${item.img}" alt="${item.title}" class="cart-item-thumb">
-          <div class="cart-item-info">
-            <div class="cart-item-title">${item.title}</div>
-            <div class="cart-item-cat">${item.cat}</div>
-            <button class="btn-remove-item" onclick="removeFromBag(${idx})">Remover</button>
-          </div>
-        </div>
-      `).join('');
+      container.innerHTML = filtered.map(product => {
+        const currentColor = product.colors[product.selectedColor] || product.colors[0];
+
+        return `
+          <article class="product-card" id="card-${product.id}">
+            <div class="product-media" onclick="openQuickView('${product.id}')" aria-label="Ver detalhes de ${product.name}">
+              <img src="${product.img}" alt="${product.name}" class="product-img" loading="lazy">
+              <div class="product-badges">
+                <span class="badge-tag ${product.isHighlight ? 'highlight' : ''}">${product.badge}</span>
+              </div>
+              <button class="product-quick-btn" type="button" onclick="event.stopPropagation(); openQuickView('${product.id}')">
+                <i data-lucide="eye" style="width: 15px; height: 15px;"></i>
+                <span>Detalhes da Peça</span>
+              </button>
+            </div>
+
+            <div class="product-info">
+              <div class="product-header-line">
+                <span class="product-category">${product.categoryLabel}</span>
+                <span class="product-price">R$ ${product.price.toFixed(2).replace('.', ',')}</span>
+              </div>
+              <h3 class="product-title" onclick="openQuickView('${product.id}')">${product.name}</h3>
+              <p class="product-desc">${product.desc}</p>
+
+              <!-- Seletor de Cor -->
+              <div class="product-selector-group">
+                <div class="selector-label-row">
+                  <span>Cor:</span>
+                  <span class="current-choice" id="color-label-${product.id}">${currentColor.name}</span>
+                </div>
+                <div class="swatches-row">
+                  ${product.colors.map((c, idx) => `
+                    <button type="button" class="color-swatch ${idx === product.selectedColor ? 'active' : ''}"
+                            style="background-color: ${c.hex};"
+                            onclick="selectCardColor('${product.id}', ${idx})"
+                            title="${c.name}"
+                            aria-label="Cor ${c.name}"></button>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Seletor de Tamanho -->
+              <div class="product-selector-group">
+                <div class="selector-label-row">
+                  <span>Tamanho:</span>
+                  <span class="current-choice" id="size-label-${product.id}">${product.selectedSize}</span>
+                </div>
+                <div class="sizes-row">
+                  ${product.sizes.map(size => `
+                    <button type="button" class="size-chip ${size === product.selectedSize ? 'active' : ''}"
+                            onclick="selectCardSize('${product.id}', '${size}')"
+                            aria-label="Tamanho ${size}">${size}</button>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Botão Adicionar à Sacola -->
+              <button class="btn-add-cart" id="btn-add-${product.id}" onclick="addProductToBag('${product.id}')">
+                <i data-lucide="shopping-bag" style="width: 17px; height: 17px;"></i>
+                <span>Adicionar à Sacola</span>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
       lucide.createIcons();
     }
 
-    function checkoutWhatsApp() {
-      if (bag.length === 0) {
-        alert('Adicione pelo menos uma peça na sacola antes de enviar o pedido!');
+    // Interações de Filtro e Busca
+    function applyCategoryFilter(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-pills .btn-filter').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      renderProductsGrid();
+    }
+
+    function handleCatalogSearch(query) {
+      searchQuery = query;
+      renderProductsGrid();
+    }
+
+    // Interações de Tamanho e Cor por Card
+    function selectCardColor(productId, colorIndex) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+      product.selectedColor = colorIndex;
+
+      const card = document.getElementById(`card-${productId}`);
+      if (card) {
+        const swatches = card.querySelectorAll('.color-swatch');
+        swatches.forEach((sw, idx) => {
+          sw.classList.toggle('active', idx === colorIndex);
+        });
+        const label = document.getElementById(`color-label-${productId}`);
+        if (label) label.textContent = product.colors[colorIndex].name;
+      }
+    }
+
+    function selectCardSize(productId, size) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+      product.selectedSize = size;
+
+      const card = document.getElementById(`card-${productId}`);
+      if (card) {
+        const chips = card.querySelectorAll('.size-chip');
+        chips.forEach(chip => {
+          chip.classList.toggle('active', chip.textContent.trim() === size);
+        });
+        const label = document.getElementById(`size-label-${productId}`);
+        if (label) label.textContent = size;
+      }
+    }
+
+    // Sacola de Compras / Cart Drawer
+    function addProductToBag(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+
+      const chosenColor = product.colors[product.selectedColor] || product.colors[0];
+      const chosenSize = product.selectedSize || product.sizes[0];
+
+      // Verifica se já existe item igual com mesma cor e tamanho
+      const existingIndex = bagState.findIndex(item => 
+        item.id === product.id && item.color === chosenColor.name && item.size === chosenSize
+      );
+
+      if (existingIndex > -1) {
+        bagState[existingIndex].quantity += 1;
+      } else {
+        bagState.push({
+          id: product.id,
+          name: product.name,
+          category: product.categoryLabel,
+          price: product.price,
+          img: product.img,
+          color: chosenColor.name,
+          colorHex: chosenColor.hex,
+          size: chosenSize,
+          quantity: 1
+        });
+      }
+
+      // Feedback no botão
+      const btn = document.getElementById(`btn-add-${productId}`);
+      if (btn) {
+        btn.classList.add('added');
+        btn.innerHTML = `<i data-lucide="check" style="width: 17px; height: 17px;"></i> <span>Peça Adicionada!</span>`;
+        lucide.createIcons();
+        setTimeout(() => {
+          btn.classList.remove('added');
+          btn.innerHTML = `<i data-lucide="shopping-bag" style="width: 17px; height: 17px;"></i> <span>Adicionar à Sacola</span>`;
+          lucide.createIcons();
+        }, 1400);
+      }
+
+      showToast(`✨ "${product.name}" foi adicionado à sua sacola.`);
+      updateBagUI();
+      toggleBagDrawer(true);
+    }
+
+    function changeItemQuantity(index, delta) {
+      if (bagState[index]) {
+        bagState[index].quantity += delta;
+        if (bagState[index].quantity <= 0) {
+          bagState.splice(index, 1);
+          showToast(`Peça removida da sacola.`);
+        }
+        updateBagUI();
+      }
+    }
+
+    function removeItemFromBag(index) {
+      if (bagState[index]) {
+        const removed = bagState[index].name;
+        bagState.splice(index, 1);
+        showToast(`"${removed}" removido da sacola.`);
+        updateBagUI();
+      }
+    }
+
+    function updateBagUI() {
+      const counter = document.getElementById('cart-counter');
+      const subtitle = document.getElementById('bag-subtitle');
+      const container = document.getElementById('bag-items-container');
+      const subtotalEl = document.getElementById('bag-subtotal');
+      const shippingEl = document.getElementById('bag-shipping');
+      const totalEl = document.getElementById('bag-total');
+      const progressBar = document.getElementById('shipping-bar');
+      const progressPercent = document.getElementById('shipping-percent');
+      const progressMsg = document.getElementById('shipping-msg');
+
+      const totalItems = bagState.reduce((acc, item) => acc + item.quantity, 0);
+      const subtotal = bagState.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
+      counter.textContent = totalItems;
+      subtitle.textContent = `${totalItems} ${totalItems === 1 ? 'peça selecionada' : 'peças selecionadas'}`;
+
+      // Barra de Frete Grátis (Meta de R$ 600,00)
+      const freeShippingGoal = 600.00;
+      const progress = Math.min(100, Math.round((subtotal / freeShippingGoal) * 100));
+      progressBar.style.width = `${progress}%`;
+      progressPercent.textContent = `${progress}%`;
+
+      if (subtotal >= freeShippingGoal) {
+        progressMsg.textContent = '🎉 Parabéns! Você ganhou Frete Cortesia.';
+        shippingEl.textContent = 'Grátis (Cortesia)';
+        shippingEl.style.color = '#15803d';
+      } else if (subtotal > 0) {
+        const diff = (freeShippingGoal - subtotal).toFixed(2).replace('.', ',');
+        progressMsg.textContent = `Faltam apenas R$ ${diff} para Frete Cortesia!`;
+        shippingEl.textContent = 'R$ 29,90';
+        shippingEl.style.color = 'var(--ink-secondary)';
+      } else {
+        progressMsg.textContent = 'Frete Cortesia acima de R$ 600';
+        shippingEl.textContent = 'Calculando...';
+        shippingEl.style.color = 'var(--ink-muted)';
+      }
+
+      const shippingCost = (subtotal >= freeShippingGoal || subtotal === 0) ? 0 : 29.90;
+      const finalTotal = subtotal + shippingCost;
+
+      subtotalEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+      totalEl.textContent = `R$ ${finalTotal.toFixed(2).replace('.', ',')}`;
+
+      // Renderiza itens
+      if (bagState.length === 0) {
+        container.innerHTML = `
+          <div class="bag-empty-state">
+            <i data-lucide="shopping-bag" class="bag-empty-icon"></i>
+            <h4>Sua sacola está vazia</h4>
+            <p>Descubra nossa alfaiataria autoral e adicione suas peças prediletas.</p>
+            <button class="btn-filter active" style="margin: 0 auto; display: inline-flex;" onclick="toggleBagDrawer(false)">
+              Explorar Coleção
+            </button>
+          </div>
+        `;
+        lucide.createIcons();
         return;
       }
-      const itens = bag.map(item => `• ${item.title} (${item.cat})`).join('%0A');
-      const text = `Olá! Gostaria de consultar a disponibilidade das seguintes peças da Maison Nilo:%0A%0A${itens}%0A%0APoderiam me informar sobre prazos de entrega?`;
-      window.open(`https://wa.me/5511983909578?text=${text}`, '_blank');
+
+      container.innerHTML = bagState.map((item, idx) => `
+        <div class="bag-item-card">
+          <img src="${item.img}" alt="${item.name}" class="bag-item-thumb">
+          <div class="bag-item-details">
+            <h4 class="bag-item-title">${item.name}</h4>
+            <div class="bag-item-meta">
+              <span>Cor: <strong>${item.color}</strong></span> • 
+              <span>Tam: <strong>${item.size}</strong></span>
+            </div>
+            <div class="bag-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
+
+            <div class="bag-item-actions">
+              <div class="quantity-stepper">
+                <button class="btn-step" onclick="changeItemQuantity(${idx}, -1)" aria-label="Diminuir quantidade">−</button>
+                <span class="step-value">${item.quantity}</span>
+                <button class="btn-step" onclick="changeItemQuantity(${idx}, 1)" aria-label="Aumentar quantidade">+</button>
+              </div>
+              <button class="btn-remove-item" onclick="removeItemFromBag(${idx})">
+                <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                <span>Remover</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function toggleBagDrawer(open) {
+      const backdrop = document.getElementById('bag-backdrop');
+      if (open) {
+        backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      } else {
+        backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === 'bag-backdrop') {
+        toggleBagDrawer(false);
+      }
+    }
+
+    // Finalizar Pedido pelo WhatsApp com Mensagem Formatada Elegante
+    function checkoutWhatsApp() {
+      if (bagState.length === 0) {
+        showToast('⚠️ Sua sacola está vazia. Escolha ao menos uma peça.');
+        return;
+      }
+
+      const totalItems = bagState.reduce((acc, item) => acc + item.quantity, 0);
+      const subtotal = bagState.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+      const freeShipping = subtotal >= 600.00;
+      const shippingText = freeShipping ? 'Cortesia (Grátis)' : 'R$ 29,90';
+      const grandTotal = freeShipping ? subtotal : (subtotal + 29.90);
+
+      const itemsFormatted = bagState.map(item => 
+        `• ${item.quantity}x ${item.name}%0A  - Cor: ${item.color}%0A  - Tamanho: ${item.size}%0A  - Valor: R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}`
+      ).join('%0A%0A');
+
+      const message = `Olá, Maison Nilo! 🕊️%0A%0AGostaria de concluir meu pedido com atendimento exclusivo:%0A%0A${itemsFormatted}%0A%0A━━━━━━━━━━━━━━━━━━━━━%0A📦 Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}%0A🚚 Envio: ${shippingText}%0A💰 Total Estimado: R$ ${grandTotal.toFixed(2).replace('.', ',')}%0A━━━━━━━━━━━━━━━━━━━━━%0A%0APoderiam me confirmar a disponibilidade para entrega no meu CEP e as formas de pagamento?`;
+
+      window.open(`https://wa.me/5511983909578?text=${message}`, '_blank');
+    }
+
+    // Modal Quick View
+    function openQuickView(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+      quickViewProductId = productId;
+
+      document.getElementById('qv-img').src = product.img;
+      document.getElementById('qv-img').alt = product.name;
+      document.getElementById('qv-cat').textContent = product.categoryLabel;
+      document.getElementById('qv-title').textContent = product.name;
+      document.getElementById('qv-price').textContent = `R$ ${product.price.toFixed(2).replace('.', ',')}`;
+      document.getElementById('qv-desc').textContent = product.desc;
+      document.getElementById('qv-fabric').textContent = `Composição: ${product.fabric}`;
+
+      const currentColor = product.colors[product.selectedColor] || product.colors[0];
+      document.getElementById('qv-color-name').textContent = currentColor.name;
+      document.getElementById('qv-size-name').textContent = product.selectedSize;
+
+      // Swatches do modal
+      const swatchesEl = document.getElementById('qv-swatches');
+      swatchesEl.innerHTML = product.colors.map((c, idx) => `
+        <button type="button" class="color-swatch ${idx === product.selectedColor ? 'active' : ''}"
+                style="background-color: ${c.hex};"
+                onclick="selectQuickViewColor(${idx})"
+                title="${c.name}"></button>
+      `).join('');
+
+      // Tamanhos do modal
+      const sizesEl = document.getElementById('qv-sizes');
+      sizesEl.innerHTML = product.sizes.map(size => `
+        <button type="button" class="size-chip ${size === product.selectedSize ? 'active' : ''}"
+                onclick="selectQuickViewSize('${size}')">${size}</button>
+      `).join('');
+
+      document.getElementById('quickview-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function selectQuickViewColor(idx) {
+      if (!quickViewProductId) return;
+      selectCardColor(quickViewProductId, idx);
+      const product = PRODUCTS.find(p => p.id === quickViewProductId);
+      document.getElementById('qv-color-name').textContent = product.colors[idx].name;
+      const swatches = document.querySelectorAll('#qv-swatches .color-swatch');
+      swatches.forEach((s, i) => s.classList.toggle('active', i === idx));
+    }
+
+    function selectQuickViewSize(size) {
+      if (!quickViewProductId) return;
+      selectCardSize(quickViewProductId, size);
+      document.getElementById('qv-size-name').textContent = size;
+      const chips = document.querySelectorAll('#qv-sizes .size-chip');
+      chips.forEach(c => c.classList.toggle('active', c.textContent.trim() === size));
+    }
+
+    function addCurrentQuickViewToBag() {
+      if (!quickViewProductId) return;
+      addProductToBag(quickViewProductId);
+      closeQuickView();
+    }
+
+    function closeQuickView() {
+      document.getElementById('quickview-modal').classList.remove('open');
+      document.body.style.overflow = '';
+      quickViewProductId = null;
+    }
+
+    function handleModalBackdropClick(e) {
+      if (e.target.id === 'quickview-modal') {
+        closeQuickView();
+      }
+    }
+
+    // Menu Mobile
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('open');
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    }
+
+    // Toast Notifications elegantes (sem alert)
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast-box';
+      toast.innerHTML = `
+        <i data-lucide="sparkle" style="width: 16px; height: 16px; color: var(--gold);"></i>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      setTimeout(() => {
+        toast.style.transition = 'opacity 0.3s, transform 0.3s';
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        setTimeout(() => toast.remove(), 320);
+      }, 3500);
+    }
+
+    function handleNewsletter(e) {
+      e.preventDefault();
+      showToast('Obrigada! Você receberá nossos lançamentos com prioridade.');
+      e.target.reset();
     }
   </script>
 </body>
