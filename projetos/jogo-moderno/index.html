@@ -2,352 +2,2161 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neon Runner X | Futuristic Arcade</title>
-  <meta name="description" content="Neon Runner X — arcade moderno com visual cyber, progressão de velocidade, score em tempo real e replay rápido." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Neon Runner X | Cyberpunk Endless Arcade</title>
+  <meta name="description" content="Neon Runner X — Arcade cyberpunk futurista em HTML5 Canvas 60 FPS, Web Audio API procedural, High-DPI e física de saltos e dash." />
+  <meta name="theme-color" content="#040714" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root{--ink:#e5e7eb;--muted:#9ca3af;--line:#374151;--brand:#22d3ee;--brand2:#34d399;--danger:#fb7185}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Rajdhani,sans-serif;color:var(--ink);background:linear-gradient(150deg,#030712,#111827);min-height:100vh}
-    .wrap{width:min(1120px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
-    .hero{background:#050b17d8;border:1px solid #ffffff2a;border-radius:20px;overflow:hidden;box-shadow:0 18px 44px #0008}
-    .hero-img{height:170px;background:url('https://images.unsplash.com/photo-1511882150382-421056c89033?auto=format&fit=crop&w=1600&q=80') center/cover}
-    @media(min-width:640px){.hero-img{height:230px}}
-    .body{padding:1rem}
-    @media(min-width:640px){.body{padding:1.2rem 1.6rem}}
-    h1{margin:0 0 .4rem;font:700 clamp(1.8rem,5vw,3rem) Orbitron,sans-serif;color:var(--brand)}
-    .lead{color:var(--muted);max-width:74ch;line-height:1.6}
-    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.8rem}
-    .tab-btn{border:1px solid var(--line);background:#0b1220;color:var(--ink);padding:.5rem .85rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
-    .tab-btn:hover{border-color:var(--brand2);color:var(--brand2);transform:translateY(-1px)}
-    .tab-btn.active{background:var(--brand2);color:#022c22;border-color:var(--brand2)}
-    .panel{display:none;padding:.9rem 0}
-    .panel.active{display:block;animation:fadeUp .28s ease}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    /* HUD */
-    .hud{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.6rem}
-    .pill{border:1px solid var(--line);border-radius:999px;padding:.4rem .8rem;background:#0b1220;font-size:.9rem}
-    .pill strong{color:var(--brand)}
-    /* Canvas */
-    canvas{width:100%;height:auto;border-radius:14px;border:1px solid #1f2937;background:linear-gradient(180deg,#031425,#020617);display:block}
-    /* Controls */
-    .controls{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.7rem}
-    button{border:0;border-radius:999px;padding:.65rem 1rem;font:700 .95rem Rajdhani,sans-serif;cursor:pointer;transition:.15s ease}
-    button:hover{transform:translateY(-1px);opacity:.9}
-    .start{background:var(--brand2);color:#022c22}
-    .restart{background:var(--danger);color:#3f1020}
-    /* Touch controls (mobile) */
-    .touch{display:none;grid-template-columns:repeat(2,1fr);gap:.5rem;margin-top:.7rem}
-    .touch button{background:#0ea5e9;color:#082f49}
-    @media(max-width:720px){.touch{display:grid}}
-    /* Info cards */
-    .grid{display:grid;grid-template-columns:1fr;gap:.7rem}
-    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{border:1px solid var(--line);border-radius:12px;padding:.9rem;background:#0b1220;transition:.2s ease}
-    .card:hover{border-color:var(--brand2)}
-    .card h3{margin:0 0 .4rem;color:var(--brand2);font-size:.95rem}
-    .card p{margin:0;color:var(--muted);font-size:.88rem;line-height:1.55}
-    .gallery{display:grid;grid-template-columns:1fr;gap:.65rem}
-    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
-    .gallery img{width:100%;height:170px;object-fit:cover;border-radius:10px;border:1px solid var(--line);transition:.2s ease}
-    .gallery img:hover{transform:scale(1.03)}
-    /* Footer */
-    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#0f172a80;border-radius:0 0 20px 20px}
-    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
-    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
-    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
-    .cert{background:var(--brand);color:#082f49;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
-    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+    :root {
+      --bg-dark: #040714;
+      --bg-deep: #070c1e;
+      --bg-card: rgba(12, 20, 42, 0.78);
+      --border-card: rgba(0, 240, 255, 0.22);
+      --border-highlight: rgba(0, 240, 255, 0.65);
+      --cyan: #00f0ff;
+      --cyan-glow: rgba(0, 240, 255, 0.45);
+      --magenta: #ff007f;
+      --magenta-glow: rgba(255, 0, 127, 0.45);
+      --emerald: #00ff9d;
+      --yellow: #ffe600;
+      --ink: #f8fafc;
+      --ink-dim: #cbd5e1;
+      --muted: #94a3b8;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #150f2e 0%, var(--bg-dark) 55%, #020308 100%);
+      font-family: 'Rajdhani', sans-serif;
+      color: var(--ink);
+      min-height: 100dvh;
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Container Principal */
+    .app-wrap {
+      width: min(1140px, calc(100% - 2rem));
+      margin: 1.5rem auto 3.5rem;
+      position: relative;
+    }
+
+    /* Header e Banner de Destaque */
+    .cyber-header {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(7, 12, 30, 0.92));
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.8rem;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65), 0 0 24px rgba(0, 240, 255, 0.08);
+      backdrop-filter: blur(12px);
+      margin-bottom: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cyber-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), transparent);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .brand-badge {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      background: rgba(0, 240, 255, 0.12);
+      color: var(--cyan);
+      border: 1px solid var(--border-highlight);
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+    }
+
+    .brand-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.82rem;
+      color: var(--emerald);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
+      animation: pulse 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 30%, var(--cyan) 80%, var(--magenta) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 35px rgba(0, 240, 255, 0.35);
+      margin-bottom: 0.35rem;
+    }
+
+    .header-desc {
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      max-width: 78ch;
+      font-weight: 500;
+    }
+
+    /* Navegação por Abas */
+    .tabs-nav {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.8rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .tabs-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--ink-dim);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 0.6rem 1.1rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 240, 255, 0.2);
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(0, 240, 255, 0.05));
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 16px rgba(0, 240, 255, 0.3);
+    }
+
+    /* Painéis de Conteúdo */
+    .panel {
+      display: none;
+      animation: panelFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    @keyframes panelFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Arena do Jogo */
+    .game-arena {
+      background: linear-gradient(180deg, rgba(8, 14, 30, 0.95), rgba(4, 7, 20, 0.98));
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 240, 255, 0.07);
+      backdrop-filter: blur(14px);
+      position: relative;
+    }
+
+    /* HUD Superior */
+    .hud-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .hud-card {
+      background: rgba(11, 18, 38, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius-md);
+      padding: 0.65rem 0.9rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .hud-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--cyan);
+    }
+
+    .hud-card.gold::after { background: var(--yellow); }
+    .hud-card.magenta::after { background: var(--magenta); }
+    .hud-card.emerald::after { background: var(--emerald); }
+
+    .hud-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hud-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      margin-top: 0.15rem;
+    }
+
+    .hud-value.glow-cyan { color: var(--cyan); text-shadow: 0 0 12px var(--cyan-glow); }
+    .hud-value.glow-gold { color: var(--yellow); text-shadow: 0 0 12px rgba(255, 230, 0, 0.45); }
+    .hud-value.glow-magenta { color: var(--magenta); text-shadow: 0 0 12px var(--magenta-glow); }
+    .hud-value.glow-emerald { color: var(--emerald); text-shadow: 0 0 12px rgba(0, 255, 157, 0.45); }
+
+    /* Container do Canvas com High-DPI */
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #020612;
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.18), inset 0 0 40px rgba(0, 0, 0, 0.85);
+    }
+
+    canvas#gameCanvas {
+      width: 100%;
+      aspect-ratio: 960 / 420;
+      max-height: 480px;
+      display: block;
+      outline: none;
+      user-select: none;
+      touch-action: none;
+    }
+
+    /* Painel de Controles Desktop e Atalhos */
+    .game-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      padding-top: 0.5rem;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .cyber-btn {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 0.7rem 1.3rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      text-transform: uppercase;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .cyber-btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-start {
+      background: linear-gradient(135deg, #00ff9d, #059669);
+      color: #022c22;
+      border-color: #34d399;
+      box-shadow: 0 0 18px rgba(0, 255, 157, 0.35);
+    }
+
+    .btn-start:hover {
+      box-shadow: 0 0 25px rgba(0, 255, 157, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .btn-restart {
+      background: linear-gradient(135deg, #ff007f, #be123c);
+      color: #fff;
+      border-color: #fb7185;
+      box-shadow: 0 0 16px rgba(255, 0, 127, 0.35);
+    }
+
+    .btn-restart:hover {
+      box-shadow: 0 0 24px rgba(255, 0, 127, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .btn-action {
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--ink);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .btn-action:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 14px rgba(0, 240, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .btn-sound.muted {
+      color: var(--magenta);
+      border-color: rgba(255, 0, 127, 0.4);
+    }
+
+    /* Keymap badges */
+    .controls-hint {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .key-badge {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--cyan);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    /* Controles Mobile Touch */
+    .touch-overlay {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 820px) {
+      .touch-overlay {
+        display: grid;
+      }
+    }
+
+    .touch-btn {
+      background: linear-gradient(135deg, rgba(14, 25, 54, 0.95), rgba(7, 12, 30, 0.92));
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1rem;
+      color: var(--ink);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      transition: var(--transition);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .touch-btn span.hint {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .touch-btn:active, .touch-btn.pressed {
+      transform: scale(0.96);
+      background: rgba(0, 240, 255, 0.2);
+      border-color: var(--cyan);
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.45);
+    }
+
+    .touch-btn.jump-btn {
+      border-color: rgba(0, 240, 255, 0.45);
+      color: var(--cyan);
+    }
+
+    .touch-btn.dash-btn {
+      border-color: rgba(255, 0, 127, 0.45);
+      color: var(--magenta);
+    }
+
+    .touch-btn.dash-btn:active, .touch-btn.dash-btn.pressed {
+      background: rgba(255, 0, 127, 0.2);
+      border-color: var(--magenta);
+      box-shadow: 0 0 24px rgba(255, 0, 127, 0.45);
+    }
+
+    /* Cartões e Grid das Abas Informações */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 0.8rem;
+    }
+
+    .cyber-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 1.4rem;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .cyber-card:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 16px 36px rgba(0, 240, 255, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+      display: inline-block;
+    }
+
+    .cyber-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.15rem;
+      color: var(--cyan);
+      margin-bottom: 0.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cyber-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    .cyber-card .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.9rem;
+    }
+
+    .cyber-tag {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--emerald);
+      background: rgba(0, 255, 157, 0.1);
+      border: 1px solid rgba(0, 255, 157, 0.25);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    /* Rodapé Comercial */
+    .cyber-footer {
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 2.2rem 1.5rem;
+      background: linear-gradient(180deg, rgba(10, 16, 36, 0.8), rgba(4, 7, 20, 0.95));
+      border-radius: var(--radius-lg);
+      text-align: center;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+    }
+
+    .footer-author {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: var(--cyan);
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-desc {
+      color: var(--ink-dim);
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1.4rem;
+    }
+
+    .tech-pill {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      color: var(--cyan);
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      transition: var(--transition);
+    }
+
+    .tech-pill:hover {
+      background: var(--cyan);
+      color: #040714;
+      box-shadow: 0 0 14px var(--cyan);
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    /* Redução de movimento para Acessibilidade */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="hero-img"></div>
-      <div class="body">
-        <h1>Neon Runner X</h1>
-        <p class="lead">Arcade moderno com visual cyber, progressão de velocidade, score em tempo real e replay rápido. Projeto pensado para parecer produto pronto para app store e demonstração comercial.</p>
 
-        <nav class="tabs" aria-label="Seções">
-          <button class="tab-btn active" data-tab="jogar">Jogar</button>
-          <button class="tab-btn" data-tab="sobre">Sobre</button>
-          <button class="tab-btn" data-tab="features">Features</button>
-          <button class="tab-btn" data-tab="galeria">Galeria</button>
-        </nav>
+  <main class="app-wrap">
+    <!-- Header Principal -->
+    <header class="cyber-header">
+      <div class="header-top">
+        <div class="brand-title">
+          <span class="brand-badge">Arcade Edition v2.5</span>
+          <div class="brand-status">
+            <span class="status-dot"></span>
+            <span>SYSTEM ONLINE · 60 FPS</span>
+          </div>
+        </div>
+        <div class="controls-hint">
+          <span>Controles:</span>
+          <span class="key-badge">ESPAÇO / ↑ / W</span> Pular
+          <span class="key-badge">↓ / S</span> Deslizar
+          <span class="key-badge">SHIFT / D</span> Dash
+          <span class="key-badge">P</span> Pausa
+          <span class="key-badge">R</span> Reiniciar
+        </div>
+      </div>
 
-        <section class="panel active" id="jogar">
-          <div class="hud">
-            <div class="pill">Pontos: <strong id="score">0</strong></div>
-            <div class="pill">Recorde: <strong id="best">0</strong></div>
-            <div class="pill">Velocidade: <strong id="speed">1.0x</strong></div>
-          </div>
-          <canvas id="game" width="860" height="340"></canvas>
-          <div class="controls">
-            <button id="startBtn"   class="start">Iniciar</button>
-            <button id="restartBtn" class="restart">Reiniciar</button>
-          </div>
-          <div class="touch">
-            <button id="jumpTouch">Pular ↑</button>
-            <button id="startTouch">Iniciar ▶</button>
-          </div>
-        </section>
+      <h1>Neon Runner X</h1>
+      <p class="header-desc">
+        Endless runner arcade futurista de alta precisão. Acelere pelas artérias cibernéticas de Neo-Kyoto, desvie de drones de laser e barreiras elétricas, colete núcleos de energia e ative o escudo protetor holográfico.
+      </p>
 
-        <section class="panel" id="sobre">
-          <div class="grid">
-            <article class="card"><h3>🌆 Narrativa</h3><p>Corra por uma metrópole neon desviando de barreiras digitais.</p></article>
-            <article class="card"><h3>📈 Curva de Dificuldade</h3><p>A velocidade cresce gradualmente para manter tensão sem frustrar.</p></article>
-            <article class="card"><h3>🎯 Objetivo</h3><p>Sobreviver o máximo possível e bater seu próprio recorde.</p></article>
-          </div>
-        </section>
+      <!-- Abas de Navegação -->
+      <nav class="tabs-nav" role="tablist" aria-label="Navegação do Jogo">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="tab-jogar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="4"></rect><path d="M6 12h4m-2-2v4m10-2h.01m-3-1h.01"></path></svg>
+          Jogar Agora
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-sobre">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          Sobre o Jogo
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-mecanicas">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          Mecânicas & Power-Ups
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-tecnologia">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          Arquitetura Técnica
+        </button>
+      </nav>
+    </header>
 
-        <section class="panel" id="features">
-          <div class="grid">
-            <article class="card"><h3>🎮 Controles</h3><p>Teclado, espaço, seta para cima e suporte touch no mobile.</p></article>
-            <article class="card"><h3>💾 Estado Persistente</h3><p>Recorde salvo localmente no navegador do jogador.</p></article>
-            <article class="card"><h3>⚡ Feedback Instantâneo</h3><p>HUD responsivo com score, best score e fator de velocidade.</p></article>
+    <!-- ABA 1: JOGAR -->
+    <section class="panel active" id="tab-jogar">
+      <div class="game-arena">
+        <!-- HUD Superior -->
+        <div class="hud-bar">
+          <div class="hud-card">
+            <span class="hud-label">Distância / Score</span>
+            <div class="hud-value glow-cyan" id="hudScore">0 m</div>
           </div>
-        </section>
+          <div class="hud-card gold">
+            <span class="hud-label">Recorde Máximo 🏆</span>
+            <div class="hud-value glow-gold" id="hudBest">0 m</div>
+          </div>
+          <div class="hud-card magenta">
+            <span class="hud-label">Multiplicador Combo</span>
+            <div class="hud-value glow-magenta" id="hudCombo">x1.0</div>
+          </div>
+          <div class="hud-card emerald">
+            <span class="hud-label">Blindagem / Escudo</span>
+            <div class="hud-value glow-emerald" id="hudShield">DESATIVADO</div>
+          </div>
+          <div class="hud-card">
+            <span class="hud-label">Velocidade Warp</span>
+            <div class="hud-value" id="hudSpeed">1.0x</div>
+          </div>
+        </div>
 
-        <section class="panel" id="galeria">
-          <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80" alt="Setup gamer neon" />
-            <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=900&q=80" alt="Controle de videogame" />
-            <img src="https://images.unsplash.com/photo-1486572788966-cfd3df1f5b42?auto=format&fit=crop&w=900&q=80" alt="Cidade futurista" />
+        <!-- Canvas com Suporte a High-DPI -->
+        <div class="canvas-container" id="canvasContainer">
+          <canvas id="gameCanvas" width="960" height="420" tabindex="0" aria-label="Área de gameplay do Neon Runner X"></canvas>
+        </div>
+
+        <!-- Barra de Ações do Jogo -->
+        <div class="game-toolbar">
+          <div class="btn-group">
+            <button class="cyber-btn btn-start" id="btnStart" aria-label="Iniciar Partida">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <span>Iniciar</span>
+            </button>
+            <button class="cyber-btn btn-action" id="btnPause" aria-label="Pausar Partida">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+              <span>Pausar</span>
+            </button>
+            <button class="cyber-btn btn-restart" id="btnRestart" aria-label="Reiniciar Partida">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+              <span>Reiniciar</span>
+            </button>
           </div>
-        </section>
+
+          <div class="btn-group">
+            <button class="cyber-btn btn-action btn-sound" id="btnAudioToggle" aria-label="Alternar Áudio">
+              <svg id="iconAudioOn" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              <svg id="iconAudioOff" style="display:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+              <span id="labelAudio">Áudio: ON</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Controles Touch Otimizados para Mobile -->
+        <div class="touch-overlay">
+          <button class="touch-btn jump-btn" id="touchJump" aria-label="Pular ou Pulo Duplo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+            <span>PULAR</span>
+            <span class="hint">Toque duplo = Pulo Duplo</span>
+          </button>
+          <button class="touch-btn dash-btn" id="touchDash" aria-label="Deslizar ou Dash">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            <span>DESLIZAR / DASH</span>
+            <span class="hint">Esquiva de Lasers</span>
+          </button>
+        </div>
       </div>
     </section>
 
-    <footer class="footer">
-      <p class="footer-name">Felipe Junqueira Leite</p>
-      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
-      <div class="footer-badges">
-        <span class="cert">HTML5</span>
-        <span class="cert">CSS3</span>
-        <span class="cert">JavaScript</span>
-        <span class="cert">Canvas/Games</span>
-        <span class="cert">Mobile‑First</span>
-        <span class="cert">UX/UI</span>
+    <!-- ABA 2: SOBRE O JOGO -->
+    <section class="panel" id="tab-sobre">
+      <div class="info-grid">
+        <article class="cyber-card">
+          <div class="card-icon">🌆</div>
+          <h3>Metrópole Neon 2099</h3>
+          <p>
+            Em uma megalópole futurista movida a dados e energia sintética, você pilota um corredor cibernético de elite. O objetivo é cruzar as vias de dados interconectadas, desviando de defesas automatizadas e quebrando recordes de distância.
+          </p>
+          <div class="tag-list">
+            <span class="cyber-tag">Cenário Parallax</span>
+            <span class="cyber-tag">Synthwave</span>
+            <span class="cyber-tag">60 FPS</span>
+          </div>
+        </article>
+
+        <article class="cyber-card">
+          <div class="card-icon">⚡</div>
+          <h3>Física & Precisão Tátil</h3>
+          <p>
+            Motor de física com gravidade vetorial, inércia ajustada e hitboxes justas. O sistema de pulo duplo e slide permite transições suaves para escapar de barreiras duplas e drones sentinela sem perda de fluidez.
+          </p>
+          <div class="tag-list">
+            <span class="cyber-tag">Double Jump</span>
+            <span class="cyber-tag">Fast Slide</span>
+            <span class="cyber-tag">Ghost Dash</span>
+          </div>
+        </article>
+
+        <article class="cyber-card">
+          <div class="card-icon">🛡️</div>
+          <h3>Sistema de Blindagem</h3>
+          <p>
+            Colete 3 núcleos de energia consecutivos (Energy Cores) ou encontre orbes de blindagem para criar uma cúpula protetora holográfica. O escudo absorve 1 impacto fatal de obstáculo, garantindo uma segunda chance na sua corrida.
+          </p>
+          <div class="tag-list">
+            <span class="cyber-tag">Shield Core</span>
+            <span class="cyber-tag">Combo Chain</span>
+            <span class="cyber-tag">Score Booster</span>
+          </div>
+        </article>
       </div>
-      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
+    </section>
+
+    <!-- ABA 3: MECÂNICAS & POWER-UPS -->
+    <section class="panel" id="tab-mecanicas">
+      <div class="info-grid">
+        <article class="cyber-card">
+          <div class="card-icon">🚀</div>
+          <h3>Pulo Duplo (Double Jump)</h3>
+          <p>
+            Pressione a tecla de pulo novamente no ar para acionar os propulsores iônicos secundários, gerando uma onda de choque neon e alcançando plataformas elevadas e orbes altas.
+          </p>
+          <div class="tag-list">
+            <span class="cyber-tag">Comando: ESPAÇO x2</span>
+            <span class="cyber-tag">Propulsão Neon</span>
+          </div>
+        </article>
+
+        <article class="cyber-card">
+          <div class="card-icon">⚡</div>
+          <h3>Cyber Slide & Dash</h3>
+          <p>
+            Mantenha a tecla para baixo (↓ / S) para diminuir a sua altura em 50% e deslizar velozmente sob drones de laser suspensos. Pressione Shift ou D para um impulso de warp com intangibilidade temporal.
+          </p>
+          <div class="tag-list">
+            <span class="cyber-tag">Comando: SETA BAIXO</span>
+            <span class="cyber-tag">Esquiva Aérea</span>
+          </div>
+        </article>
+
+        <article class="cyber-card">
+          <div class="card-icon">🛸</div>
+          <h3>Obstáculos Dinâmicos</h3>
+          <p>
+            Barreiras terrestres de cristal neon (Cyber Spikes), Drones de vigilância suspensos com feixe de laser vertical e portões elétricos com arcos voltaicos aleatórios. A velocidade do jogo escala progressivamente.
+          </p>
+          <div class="tag-list">
+            <span class="cyber-tag">Drones Aéreos</span>
+            <span class="cyber-tag">Laser Spikes</span>
+            <span class="cyber-tag">Shock Gates</span>
+          </div>
+        </article>
+
+        <article class="cyber-card">
+          <div class="card-icon">💎</div>
+          <h3>Orbes & Multiplicador</h3>
+          <p>
+            Colete Energy Cores douradas e ciano ao longo do caminho para elevar seu multiplicador de pontos até x5.0. Cada orbe estende o tempo do multiplicador e contribui para a pontuação máxima.
+          </p>
+          <div class="tag-list">
+            <span class="cyber-tag">+100 Pontos</span>
+            <span class="cyber-tag">Combo Multiplier</span>
+            <span class="cyber-tag">Energy Core</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABA 4: ARQUITETURA TÉCNICA -->
+    <section class="panel" id="tab-tecnologia">
+      <div class="info-grid">
+        <article class="cyber-card">
+          <div class="card-icon">🖥️</div>
+          <h3>HTML5 Canvas High-DPI</h3>
+          <p>
+            Escalação de resolução inteligente baseada em <code>window.devicePixelRatio</code>. Renderiza com nitidez absoluta em telas Retina e displays móveis de alta densidade sem blur de pixel.
+          </p>
+          <div class="tag-list">
+            <span class="cyber-tag">devicePixelRatio</span>
+            <span class="cyber-tag">Sub-pixel AA</span>
+            <span class="cyber-tag">Smooth Glow</span>
+          </div>
+        </article>
+
+        <article class="cyber-card">
+          <div class="card-icon">🔊</div>
+          <h3>Web Audio API Procedural</h3>
+          <p>
+            100% dos efeitos sonoros são gerados via síntese harmônica e modulação FM/AM no próprio navegador (osciladores Sine, Triangle, Sawtooth e ruído filtrado), com zero carregamento de arquivos externos de áudio.
+          </p>
+          <div class="tag-list">
+            <span class="cyber-tag">Zero Asset Wait</span>
+            <span class="cyber-tag">Biquad Filter</span>
+            <span class="cyber-tag">FM Synthesis</span>
+          </div>
+        </article>
+
+        <article class="cyber-card">
+          <div class="card-icon">⚡</div>
+          <h3>Loop 60 FPS Desacoplado</h3>
+          <p>
+            Executado via <code>requestAnimationFrame</code> com controle de delta-time para garantir velocidade física constante independente da taxa de atualização do monitor (60Hz, 120Hz ou 144Hz).
+          </p>
+          <div class="tag-list">
+            <span class="cyber-tag">Delta Timing</span>
+            <span class="cyber-tag">State Machine</span>
+            <span class="cyber-tag">AABB Collision</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Rodapé Comercial -->
+    <footer class="cyber-footer">
+      <p class="footer-author">Felipe Junqueira Leite</p>
+      <p class="footer-desc">Desenvolvedor Frontend & Engenheiro de Software · Soluções Digitais de Alta Performance</p>
+      <div class="footer-badges">
+        <span class="tech-pill">HTML5 Canvas 2D</span>
+        <span class="tech-pill">Web Audio API</span>
+        <span class="tech-pill">High-DPI Retina Ready</span>
+        <span class="tech-pill">60 FPS Delta Loop</span>
+        <span class="tech-pill">Mobile-First Touch</span>
+        <span class="tech-pill">LocalStorage API</span>
+      </div>
+      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Prumo Tech. Todos os direitos reservados.</p>
     </footer>
   </main>
 
+  <!-- Script do Motor do Jogo (Neon Runner X) -->
   <script>
-    // ── Tab navigation ──
-    const tabBtns   = [...document.querySelectorAll('.tab-btn')];
-    const tabPanels = [...document.querySelectorAll('.panel')];
-    tabBtns.forEach(btn => btn.addEventListener('click', () => {
-      tabBtns.forEach(b  => b.classList.remove('active'));
-      tabPanels.forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    }));
+    /* ==========================================================================
+       1. GERENCIADOR DE ÁUDIO VIA WEB AUDIO API (100% PROCEDURAL NATIVO)
+       ========================================================================== */
+    class CyberAudio {
+      constructor() {
+        this.ctx = null;
+        this.muted = false;
+        this.initialized = false;
+      }
 
-    // ── Game engine ──
-    const canvas     = document.getElementById('game');
-    const ctx        = canvas.getContext('2d');
-    const scoreEl    = document.getElementById('score');
-    const bestEl     = document.getElementById('best');
-    const speedEl    = document.getElementById('speed');
-    const startBtn   = document.getElementById('startBtn');
-    const restartBtn = document.getElementById('restartBtn');
-    const jumpTouch  = document.getElementById('jumpTouch');
-    const startTouch = document.getElementById('startTouch');
+      init() {
+        if (this.initialized && this.ctx) return;
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) {
+            this.ctx = new AudioContextClass();
+            this.initialized = true;
+          }
+        } catch (e) {
+          console.warn('Web Audio indisponível no navegador:', e);
+        }
+      }
 
-    const GRAVITY    = 0.6;
-    const JUMP_FORCE = -12;
-    const BASE_SPEED = 4;
+      resume() {
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
 
+      toggleMute() {
+        this.muted = !this.muted;
+        return this.muted;
+      }
+
+      // Som de pulo: modulação de frequência ascendente rápida
+      playJump() {
+        if (this.muted || !this.ctx) return;
+        this.resume();
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(160, t);
+        osc.frequency.exponentialRampToValueAtTime(480, t + 0.14);
+
+        gain.gain.setValueAtTime(0.18, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.14);
+      }
+
+      // Pulo duplo: chirp duplo em tom mais agudo
+      playDoubleJump() {
+        if (this.muted || !this.ctx) return;
+        this.resume();
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(320, t);
+        osc.frequency.exponentialRampToValueAtTime(740, t + 0.16);
+
+        gain.gain.setValueAtTime(0.22, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.16);
+      }
+
+      // Slide / Deslize: ruído filtrado tipo "whoosh" futurista
+      playSlide() {
+        if (this.muted || !this.ctx) return;
+        this.resume();
+        const t = this.ctx.currentTime;
+        const bufferSize = Math.floor(this.ctx.sampleRate * 0.14);
+        const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+
+        const noise = this.ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = this.ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1200, t);
+        filter.frequency.exponentialRampToValueAtTime(350, t + 0.14);
+
+        const gain = this.ctx.createGain();
+        gain.gain.setValueAtTime(0.12, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.ctx.destination);
+        noise.start(t);
+        noise.stop(t + 0.14);
+      }
+
+      // Dash de alta velocidade: warp synth
+      playDash() {
+        if (this.muted || !this.ctx) return;
+        this.resume();
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(650, t);
+        osc.frequency.exponentialRampToValueAtTime(220, t + 0.2);
+
+        gain.gain.setValueAtTime(0.18, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.2);
+      }
+
+      // Coleta de Orbe de Energia: arpeggio cristalino em tríade
+      playCollect() {
+        if (this.muted || !this.ctx) return;
+        this.resume();
+        const t = this.ctx.currentTime;
+        const freqs = [659.25, 830.61, 1046.50]; // E5, G#5, C6
+        freqs.forEach((freq, idx) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, t + idx * 0.04);
+
+          gain.gain.setValueAtTime(0.14, t + idx * 0.04);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + idx * 0.04 + 0.12);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t + idx * 0.04);
+          osc.stop(t + idx * 0.04 + 0.12);
+        });
+      }
+
+      // Escudo Ativado: acorde estelar em ascensão
+      playShieldUp() {
+        if (this.muted || !this.ctx) return;
+        this.resume();
+        const t = this.ctx.currentTime;
+        const chord = [440, 554.37, 659.25, 880];
+        chord.forEach((freq, i) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, t + i * 0.03);
+
+          gain.gain.setValueAtTime(0.15, t + i * 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + i * 0.03 + 0.32);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t + i * 0.03);
+          osc.stop(t + i * 0.03 + 0.32);
+        });
+      }
+
+      // Impacto quebrando o escudo: estilhaço metálico
+      playShieldBreak() {
+        if (this.muted || !this.ctx) return;
+        this.resume();
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(380, t);
+        osc.frequency.exponentialRampToValueAtTime(70, t + 0.28);
+
+        gain.gain.setValueAtTime(0.3, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.28);
+      }
+
+      // Game Over: sub-bass crash e drop estridente
+      playGameOver() {
+        if (this.muted || !this.ctx) return;
+        this.resume();
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(160, t);
+        osc.frequency.exponentialRampToValueAtTime(28, t + 0.65);
+
+        gain.gain.setValueAtTime(0.35, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.7);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.7);
+      }
+    }
+
+    const sound = new CyberAudio();
+
+    /* ==========================================================================
+       2. NAVEGAÇÃO DE ABAS
+       ========================================================================== */
+    const tabButtons = [...document.querySelectorAll('.tab-btn')];
+    const panels = [...document.querySelectorAll('.panel')];
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sound.init();
+        tabButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        const targetPanel = document.getElementById(btn.dataset.tab);
+        if (targetPanel) {
+          targetPanel.classList.add('active');
+        }
+      });
+    });
+
+    /* ==========================================================================
+       3. ENGINE PRINCIPAL DO JOGO (HIGH-DPI CANVAS, PARALLAX & FÍSICA)
+       ========================================================================== */
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Elementos do HUD
+    const hudScore = document.getElementById('hudScore');
+    const hudBest = document.getElementById('hudBest');
+    const hudCombo = document.getElementById('hudCombo');
+    const hudShield = document.getElementById('hudShield');
+    const hudSpeed = document.getElementById('hudSpeed');
+
+    // Botões
+    const btnStart = document.getElementById('btnStart');
+    const btnPause = document.getElementById('btnPause');
+    const btnRestart = document.getElementById('btnRestart');
+    const btnAudioToggle = document.getElementById('btnAudioToggle');
+    const iconAudioOn = document.getElementById('iconAudioOn');
+    const iconAudioOff = document.getElementById('iconAudioOff');
+    const labelAudio = document.getElementById('labelAudio');
+
+    // Touch Mobile
+    const touchJump = document.getElementById('touchJump');
+    const touchDash = document.getElementById('touchDash');
+
+    // Dimensões lógicas internas do Canvas
+    const VIRTUAL_WIDTH = 960;
+    const VIRTUAL_HEIGHT = 420;
+    const GROUND_Y = 345;
+
+    // Resolução High-DPI (Retina)
+    function resizeCanvasDPI() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(VIRTUAL_WIDTH * dpr);
+      canvas.height = Math.floor(VIRTUAL_HEIGHT * dpr);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    }
+    resizeCanvasDPI();
+    window.addEventListener('resize', resizeCanvasDPI);
+
+    // Constantes de Física
+    const GRAVITY = 0.58;
+    const JUMP_IMPULSE = -12.4;
+    const DOUBLE_JUMP_IMPULSE = -10.6;
+    const BASE_SPEED = 5.2;
+    const MAX_SPEED = 14.5;
+    const SPEED_GROWTH = 0.0012;
+
+    // Estado Geral do Jogo
     const state = {
       running: false,
+      paused: false,
       over: false,
       score: 0,
-      best: Number(localStorage.getItem('neonRunnerBest') || 0),
+      best: Number(localStorage.getItem('neonRunnerBest_v2') || 0),
       speed: BASE_SPEED,
+      combo: 1.0,
+      comboTimer: 0,
+      coresCollected: 0,
+      spawnTimer: 45,
+      cameraShake: 0,
+      gameTime: 0,
+      particles: [],
       obstacles: [],
-      spawnTimer: 30,
+      cores: [],
+      floatingTexts: [],
     };
-    const player = { x: 90, y: 0, w: 36, h: 46, vy: 0, onGround: true };
-    const groundY = canvas.height - 58;
-    player.y = groundY - player.h;
 
-    function drawBackground() {
-      ctx.fillStyle = '#031425';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      // Star particles
-      for (let i = 0; i < 40; i++) {
-        const x = ((i * 73 + state.score * 0.4) % (canvas.width + 10));
-        const y = ((i * 37) % (canvas.height - 90));
-        ctx.fillStyle = i % 2 === 0 ? '#22d3ee44' : '#34d39933';
-        ctx.fillRect(x, y, 2, 2);
+    // Parallax Skyline
+    const skyline = {
+      stars: Array.from({ length: 50 }, () => ({
+        x: Math.random() * VIRTUAL_WIDTH,
+        y: Math.random() * (GROUND_Y - 80),
+        size: Math.random() * 2 + 1,
+        twinkle: Math.random() * Math.PI,
+        speed: Math.random() * 0.3 + 0.1,
+      })),
+      bgBuildings: [
+        { x: 0, w: 90, h: 170, winColor: '#38bdf822' },
+        { x: 110, w: 80, h: 220, winColor: '#a855f722' },
+        { x: 210, w: 100, h: 150, winColor: '#38bdf822' },
+        { x: 330, w: 75, h: 190, winColor: '#f43f5e22' },
+        { x: 425, w: 110, h: 240, winColor: '#38bdf822' },
+        { x: 555, w: 85, h: 160, winColor: '#a855f722' },
+        { x: 660, w: 95, h: 210, winColor: '#38bdf822' },
+        { x: 775, w: 80, h: 180, winColor: '#f43f5e22' },
+        { x: 875, w: 110, h: 230, winColor: '#38bdf822' },
+        { x: 1005, w: 90, h: 165, winColor: '#a855f722' },
+      ],
+      fgBuildings: [
+        { x: 20, w: 110, h: 120, neon: '#00f0ff', beacon: true },
+        { x: 160, w: 95, h: 145, neon: '#ff007f', beacon: false },
+        { x: 290, w: 125, h: 110, neon: '#ffe600', beacon: true },
+        { x: 450, w: 105, h: 160, neon: '#00f0ff', beacon: false },
+        { x: 590, w: 115, h: 130, neon: '#00ff9d', beacon: true },
+        { x: 740, w: 100, h: 155, neon: '#ff007f', beacon: false },
+        { x: 880, w: 130, h: 125, neon: '#00f0ff', beacon: true },
+        { x: 1040, w: 110, h: 140, neon: '#ffe600', beacon: false },
+      ],
+      gridOffset: 0,
+    };
+
+    // Objeto do Jogador
+    const player = {
+      x: 130,
+      y: 0,
+      baseW: 36,
+      baseH: 52,
+      w: 36,
+      h: 52,
+      vy: 0,
+      isGrounded: true,
+      jumpsLeft: 2,
+      isSliding: false,
+      slideTimer: 0,
+      isDashing: false,
+      dashTimer: 0,
+      dashCooldown: 0,
+      shield: false,
+      shieldHitAnim: 0,
+      runAnim: 0,
+      trail: [],
+    };
+    player.y = GROUND_Y - player.h;
+
+    /* ==========================================================================
+       4. SISTEMA DE PARTÍCULAS E FEEDBACK VISUAL
+       ========================================================================== */
+    function spawnParticles(x, y, count, color, speedMult = 1, isSpark = false) {
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const spd = (Math.random() * 4 + 1.5) * speedMult;
+        state.particles.push({
+          x,
+          y,
+          vx: Math.cos(angle) * spd,
+          vy: Math.sin(angle) * spd + (isSpark ? 0.5 : 0),
+          life: 1.0,
+          decay: Math.random() * 0.035 + 0.02,
+          color,
+          size: Math.random() * 3 + 2,
+        });
       }
-      // Ground line
-      ctx.strokeStyle = '#22d3ee66';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(0, groundY + 1);
-      ctx.lineTo(canvas.width, groundY + 1);
-      ctx.stroke();
-      // Ground glow
-      const grd = ctx.createLinearGradient(0, groundY, 0, canvas.height);
-      grd.addColorStop(0, '#22d3ee18');
-      grd.addColorStop(1, 'transparent');
-      ctx.fillStyle = grd;
-      ctx.fillRect(0, groundY, canvas.width, canvas.height - groundY);
     }
 
-    function drawPlayer() {
-      // Glow
-      ctx.shadowColor = '#22d3ee';
-      ctx.shadowBlur  = player.onGround ? 10 : 20;
-      ctx.fillStyle   = '#22d3ee';
-      ctx.fillRect(player.x, player.y, player.w, player.h);
-      // Eyes
-      ctx.fillStyle  = '#031425';
-      ctx.shadowBlur = 0;
-      ctx.fillRect(player.x + player.w - 10, player.y + 8, 6, 6);
-    }
-
-    function drawObstacles() {
-      state.obstacles.forEach(o => {
-        ctx.shadowColor = '#fb7185';
-        ctx.shadowBlur  = 12;
-        ctx.fillStyle   = '#fb7185';
-        ctx.fillRect(o.x, o.y, o.w, o.h);
-        ctx.shadowBlur = 0;
+    function addFloatingText(text, x, y, color = '#00f0ff') {
+      state.floatingTexts.push({
+        text,
+        x,
+        y,
+        alpha: 1.0,
+        vy: -1.4,
+        color,
       });
     }
 
-    function hit(a, b) {
-      const margin = 4;
-      return (a.x + margin) < (b.x + b.w) &&
-             (a.x + a.w - margin) > b.x &&
-             (a.y + margin) < (b.y + b.h) &&
-             (a.y + a.h - margin) > b.y;
-    }
+    /* ==========================================================================
+       5. SPAWNER DE OBSTÁCULOS E NÚCLEOS DE ENERGIA
+       ========================================================================== */
+    function spawnObstacleOrCore() {
+      const rand = Math.random();
 
-    function spawn() {
-      const h = 24 + Math.random() * 44;
-      const w = 16 + Math.random() * 22;
-      state.obstacles.push({ x: canvas.width + 10, y: groundY - h, w, h });
-    }
+      // 1. Drones Voadores (Exigem Slide/Abaixar)
+      if (rand < 0.35) {
+        state.obstacles.push({
+          type: 'drone',
+          x: VIRTUAL_WIDTH + 40,
+          y: GROUND_Y - 95,
+          w: 46,
+          h: 34,
+          hoverOffset: Math.random() * Math.PI * 2,
+        });
+      }
+      // 2. Barreiras Terrestres de Laser (Exigem Pulo)
+      else if (rand < 0.70) {
+        const height = 38 + Math.random() * 24;
+        state.obstacles.push({
+          type: 'barrier',
+          x: VIRTUAL_WIDTH + 30,
+          y: GROUND_Y - height,
+          w: 24,
+          h: height,
+        });
+      }
+      // 3. Portão Elétrico de Choque (Exigem pulo preciso ou dash)
+      else {
+        state.obstacles.push({
+          type: 'shock_gate',
+          x: VIRTUAL_WIDTH + 40,
+          y: GROUND_Y - 60,
+          w: 32,
+          h: 60,
+          sparkTimer: 0,
+        });
+      }
 
-    function jump() {
-      if (!state.running || state.over) return;
-      if (player.onGround) {
-        player.vy       = JUMP_FORCE;
-        player.onGround = false;
+      // Chance de spawnar orbes de energia
+      if (Math.random() < 0.65) {
+        const isHigh = Math.random() > 0.45;
+        const orbY = isHigh ? GROUND_Y - 110 : GROUND_Y - 45;
+        state.cores.push({
+          x: VIRTUAL_WIDTH + 140,
+          y: orbY,
+          radius: 11,
+          rot: 0,
+          collected: false,
+        });
       }
     }
 
-    function overlay() {
-      if (state.running) return;
-      ctx.fillStyle = '#020617bb';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle  = '#e5e7eb';
-      ctx.textAlign  = 'center';
-      ctx.font       = '700 38px Orbitron, sans-serif';
-      ctx.shadowColor = state.over ? '#fb7185' : '#22d3ee';
-      ctx.shadowBlur  = 16;
-      ctx.fillText(state.over ? 'GAME OVER' : 'NEON RUNNER X', canvas.width / 2, canvas.height / 2 - 10);
-      ctx.shadowBlur = 0;
-      ctx.font       = '700 18px Rajdhani, sans-serif';
-      ctx.fillStyle  = '#9ca3af';
-      ctx.fillText(
-        state.over ? `Pontuação: ${state.score} · Clique em Reiniciar` : 'Clique em Iniciar ou pressione Enter',
-        canvas.width / 2, canvas.height / 2 + 26
+    /* ==========================================================================
+       6. COMANDOS DO JOGADOR (PULO, DOUBLE JUMP, SLIDE, DASH)
+       ========================================================================== */
+    function triggerJump() {
+      sound.init();
+      if (!state.running) {
+        startGame();
+        return;
+      }
+      if (state.over || state.paused) return;
+
+      if (player.isGrounded) {
+        // Primeiro salto
+        player.vy = JUMP_IMPULSE;
+        player.isGrounded = false;
+        player.jumpsLeft = 1;
+        player.isSliding = false;
+        sound.playJump();
+        spawnParticles(player.x + player.w / 2, player.y + player.h, 8, '#00f0ff', 0.8, true);
+      } else if (player.jumpsLeft > 0) {
+        // Double jump no ar
+        player.vy = DOUBLE_JUMP_IMPULSE;
+        player.jumpsLeft = 0;
+        sound.playDoubleJump();
+        spawnParticles(player.x + player.w / 2, player.y + player.h, 14, '#ff007f', 1.3);
+        addFloatingText('DOUBLE JUMP!', player.x - 10, player.y - 12, '#ff007f');
+      }
+    }
+
+    function triggerSlide() {
+      sound.init();
+      if (!state.running || state.over || state.paused) return;
+
+      if (player.isGrounded) {
+        player.isSliding = true;
+        player.slideTimer = 28; // frames de duração
+        sound.playSlide();
+        spawnParticles(player.x, player.y + player.h - 4, 6, '#ffe600', 1.1, true);
+      } else {
+        // Queda rápida (Fast Fall)
+        player.vy = Math.max(player.vy + 8, 12);
+        sound.playSlide();
+      }
+    }
+
+    function triggerDash() {
+      sound.init();
+      if (!state.running || state.over || state.paused) return;
+      if (player.dashCooldown > 0) return;
+
+      player.isDashing = true;
+      player.dashTimer = 18;
+      player.dashCooldown = 120; // 2 segundos a 60fps
+      state.cameraShake = 5;
+      sound.playDash();
+      spawnParticles(player.x, player.y + player.h / 2, 16, '#00f0ff', 1.8);
+      addFloatingText('WARP DASH!', player.x, player.y - 15, '#00f0ff');
+    }
+
+    /* ==========================================================================
+       7. COLISÕES AABB DE ALTA PRECISÃO
+       ========================================================================== */
+    function checkCollision(p, o) {
+      const margin = 5;
+      return (
+        p.x + margin < o.x + o.w &&
+        p.x + p.w - margin > o.x &&
+        p.y + margin < o.y + o.h &&
+        p.y + p.h - margin > o.y
       );
     }
 
-    function update() {
-      if (!state.running || state.over) return;
-      state.score  += 1;
-      state.speed  += 0.0015;
-      // Physics
-      player.vy    += GRAVITY;
-      player.y     += player.vy;
-      if (player.y >= groundY - player.h) {
-        player.y        = groundY - player.h;
-        player.vy       = 0;
-        player.onGround = true;
+    /* ==========================================================================
+       8. ATUALIZAÇÃO DO GAME LOOP (PHYSICS & STATE)
+       ========================================================================== */
+    function updateGame() {
+      if (!state.running || state.paused || state.over) return;
+
+      state.gameTime++;
+      state.score += Math.floor(state.speed * 0.12 * state.combo);
+      state.speed = Math.min(MAX_SPEED, state.speed + SPEED_GROWTH);
+
+      // Decaimento do Combo
+      if (state.comboTimer > 0) {
+        state.comboTimer--;
+        if (state.comboTimer === 0) {
+          state.combo = 1.0;
+        }
       }
-      // Spawn
-      state.spawnTimer -= 1;
+
+      // Temporizador de Dash
+      if (player.isDashing) {
+        player.dashTimer--;
+        if (player.dashTimer <= 0) {
+          player.isDashing = false;
+        }
+      }
+      if (player.dashCooldown > 0) {
+        player.dashCooldown--;
+      }
+
+      // Temporizador de Slide
+      if (player.isSliding) {
+        player.slideTimer--;
+        player.h = 24; // Abaixa hitbox
+        player.w = 44;
+        if (player.slideTimer <= 0) {
+          player.isSliding = false;
+          player.h = player.baseH;
+          player.w = player.baseW;
+          player.y = GROUND_Y - player.h;
+        }
+      } else {
+        player.h = player.baseH;
+        player.w = player.baseW;
+      }
+
+      // Física do Jogador
+      player.vy += GRAVITY;
+      player.y += player.vy;
+
+      if (player.y >= GROUND_Y - player.h) {
+        player.y = GROUND_Y - player.h;
+        player.vy = 0;
+        if (!player.isGrounded) {
+          // Aterrissagem
+          spawnParticles(player.x + player.w / 2, GROUND_Y, 4, '#00f0ff', 0.6, true);
+        }
+        player.isGrounded = true;
+        player.jumpsLeft = 2;
+      }
+
+      // Animação de corrida e faíscas no chão
+      if (player.isGrounded && !player.isSliding) {
+        player.runAnim += 0.22;
+        if (state.gameTime % 6 === 0) {
+          spawnParticles(player.x + 4, GROUND_Y - 2, 1, '#00f0ff88', 0.5, true);
+        }
+      }
+
+      // Rastro Neon (Trail / Ghost)
+      if (state.gameTime % 3 === 0) {
+        player.trail.unshift({
+          x: player.x,
+          y: player.y,
+          w: player.w,
+          h: player.h,
+          alpha: player.isDashing ? 0.8 : 0.45,
+          color: player.isDashing ? '#00f0ff' : (player.shield ? '#00ff9d' : '#ff007f'),
+        });
+        if (player.trail.length > 7) player.trail.pop();
+      }
+
+      player.trail.forEach(t => { t.alpha -= 0.055; });
+      player.trail = player.trail.filter(t => t.alpha > 0);
+
+      // Shake da câmera
+      if (state.cameraShake > 0) {
+        state.cameraShake--;
+      }
+
+      // Spawner de Obstáculos
+      state.spawnTimer--;
       if (state.spawnTimer <= 0) {
-        spawn();
-        state.spawnTimer = 60 + Math.random() * 65;
+        spawnObstacleOrCore();
+        const baseInterval = Math.max(34, 75 - (state.speed - BASE_SPEED) * 4.5);
+        state.spawnTimer = baseInterval + Math.random() * 25;
       }
-      // Move obstacles
-      state.obstacles.forEach(o => { o.x -= state.speed; });
-      state.obstacles = state.obstacles.filter(o => o.x + o.w > -5);
-      // Collision
-      const p = { x: player.x, y: player.y, w: player.w, h: player.h };
+
+      // Mover Obstáculos
+      state.obstacles.forEach(o => {
+        o.x -= state.speed;
+        if (o.type === 'drone') {
+          o.hoverOffset += 0.08;
+          o.y = (GROUND_Y - 95) + Math.sin(o.hoverOffset) * 14;
+        }
+      });
+      state.obstacles = state.obstacles.filter(o => o.x + o.w > -40);
+
+      // Mover Orbes de Energia
+      state.cores.forEach(c => {
+        c.x -= state.speed;
+        c.rot += 0.06;
+
+        // Coleta de Orbe
+        const dist = Math.hypot((player.x + player.w / 2) - c.x, (player.y + player.h / 2) - c.y);
+        if (dist < c.radius + player.w / 2 && !c.collected) {
+          c.collected = true;
+          state.coresCollected++;
+          sound.playCollect();
+
+          // Incrementa Combo
+          state.combo = Math.min(5.0, Number((state.combo + 0.5).toFixed(1)));
+          state.comboTimer = 220; // ~3.6s
+          const pointsGained = Math.floor(100 * state.combo);
+          state.score += pointsGained;
+
+          spawnParticles(c.x, c.y, 16, '#ffe600', 1.4);
+          addFloatingText(`+${pointsGained} COMBO x${state.combo}!`, c.x, c.y - 10, '#ffe600');
+
+          // Concede Escudo a cada 3 orbes
+          if (state.coresCollected % 3 === 0 && !player.shield) {
+            player.shield = true;
+            sound.playShieldUp();
+            addFloatingText('CYBER SHIELD ATIVADO!', player.x, player.y - 28, '#00ff9d');
+          }
+        }
+      });
+      state.cores = state.cores.filter(c => !c.collected && c.x > -30);
+
+      // Teste de Colisão com Obstáculos
+      const pBox = { x: player.x, y: player.y, w: player.w, h: player.h };
       for (const o of state.obstacles) {
-        if (hit(p, o)) {
-          state.over    = true;
-          state.running = false;
-          state.best    = Math.max(state.best, state.score);
-          localStorage.setItem('neonRunnerBest', String(state.best));
+        if (checkCollision(pBox, o)) {
+          // Se estiver em Dash, ignora colisão (invulnerabilidade temporária)
+          if (player.isDashing) {
+            spawnParticles(o.x + o.w / 2, o.y + o.h / 2, 8, '#00f0ff', 1.2);
+            continue;
+          }
+
+          // Se tiver Escudo, consome o escudo e quebra o obstáculo
+          if (player.shield) {
+            player.shield = false;
+            sound.playShieldBreak();
+            state.cameraShake = 12;
+            spawnParticles(player.x + player.w / 2, player.y + player.h / 2, 22, '#00ff9d', 2.0);
+            addFloatingText('SHIELD ABSORVEU IMPACTO!', player.x - 20, player.y - 20, '#00ff9d');
+            // Remove o obstáculo
+            o.x = -100;
+            break;
+          }
+
+          // Game Over Fatal
+          triggerGameOver();
           break;
         }
       }
-      // HUD
-      scoreEl.textContent = state.score;
-      bestEl.textContent  = state.best;
-      speedEl.textContent = (state.speed / BASE_SPEED).toFixed(1) + 'x';
+
+      // Atualizar Partículas
+      state.particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= p.decay;
+      });
+      state.particles = state.particles.filter(p => p.life > 0);
+
+      // Textos Flutuantes
+      state.floatingTexts.forEach(t => {
+        t.y += t.vy;
+        t.alpha -= 0.022;
+      });
+      state.floatingTexts = state.floatingTexts.filter(t => t.alpha > 0);
+
+      // Atualizar HUD
+      updateHUD();
     }
 
-    function renderFrame() {
-      drawBackground();
-      drawPlayer();
-      drawObstacles();
-      overlay();
+    function triggerGameOver() {
+      state.over = true;
+      state.running = false;
+      state.cameraShake = 16;
+      sound.playGameOver();
+
+      spawnParticles(player.x + player.w / 2, player.y + player.h / 2, 35, '#ff007f', 2.4);
+
+      if (state.score > state.best) {
+        state.best = state.score;
+        localStorage.setItem('neonRunnerBest_v2', String(state.best));
+      }
+      updateHUD();
     }
 
-    function loop() {
-      update();
-      renderFrame();
-      requestAnimationFrame(loop);
+    function updateHUD() {
+      hudScore.textContent = `${state.score} m`;
+      hudBest.textContent = `${state.best} m`;
+      hudCombo.textContent = `x${state.combo.toFixed(1)}`;
+      hudSpeed.textContent = `${(state.speed / BASE_SPEED).toFixed(1)}x`;
+
+      if (player.shield) {
+        hudShield.textContent = 'ATIVO [100%]';
+        hudShield.className = 'hud-value glow-emerald';
+      } else {
+        hudShield.textContent = 'DESATIVADO';
+        hudShield.className = 'hud-value';
+      }
+    }
+
+    /* ==========================================================================
+       9. RENDERIZAÇÃO GRÁFICA NO CANVAS (60 FPS CYBERPUNK)
+       ========================================================================== */
+    function render() {
+      ctx.save();
+
+      // Camera Shake
+      if (state.cameraShake > 0) {
+        const shakeX = (Math.random() - 0.5) * state.cameraShake;
+        const shakeY = (Math.random() - 0.5) * state.cameraShake;
+        ctx.translate(shakeX, shakeY);
+      }
+
+      // Céu Noturno Gradiente
+      const skyGrad = ctx.createLinearGradient(0, 0, 0, GROUND_Y);
+      skyGrad.addColorStop(0, '#040714');
+      skyGrad.addColorStop(0.65, '#0b1129');
+      skyGrad.addColorStop(1, '#1b0d2d');
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
+
+      // Estrelas piscantes
+      skyline.stars.forEach(s => {
+        s.twinkle += 0.05;
+        const alpha = 0.35 + Math.sin(s.twinkle) * 0.3;
+        ctx.fillStyle = `rgba(0, 240, 255, ${alpha})`;
+        ctx.fillRect(s.x, s.y, s.size, s.size);
+      });
+
+      // Sol / Orbe Synthwave no Horizonte
+      const sunGrad = ctx.createRadialGradient(VIRTUAL_WIDTH / 2, GROUND_Y - 40, 10, VIRTUAL_WIDTH / 2, GROUND_Y - 40, 85);
+      sunGrad.addColorStop(0, '#ffe600');
+      sunGrad.addColorStop(0.4, '#ff007f');
+      sunGrad.addColorStop(0.9, '#a855f700');
+      ctx.fillStyle = sunGrad;
+      ctx.beginPath();
+      ctx.arc(VIRTUAL_WIDTH / 2, GROUND_Y - 40, 85, 0, Math.PI, true);
+      ctx.fill();
+
+      // Linhas horizontais no Sol (Efeito Synthwave 80s)
+      for (let y = GROUND_Y - 80; y < GROUND_Y - 40; y += 8) {
+        ctx.fillStyle = '#0b1129';
+        ctx.fillRect(VIRTUAL_WIDTH / 2 - 80, y, 160, 2.5);
+      }
+
+      // ── Parallax Camada 1: Arranha-céus Distantes ──
+      const bgOffset = (state.gameTime * 0.35) % 1100;
+      ctx.fillStyle = '#0a1024';
+      skyline.bgBuildings.forEach(b => {
+        let drawX = (b.x - bgOffset);
+        if (drawX < -150) drawX += 1100;
+        ctx.fillRect(drawX, GROUND_Y - b.h, b.w, b.h);
+
+        // Janelas suaves
+        ctx.fillStyle = b.winColor;
+        for (let wy = GROUND_Y - b.h + 12; wy < GROUND_Y - 20; wy += 18) {
+          for (let wx = drawX + 8; wx < drawX + b.w - 12; wx += 14) {
+            ctx.fillRect(wx, wy, 6, 8);
+          }
+        }
+        ctx.fillStyle = '#0a1024';
+      });
+
+      // ── Parallax Camada 2: Arranha-céus Médios com Néons ──
+      const fgOffset = (state.gameTime * 0.8) % 1150;
+      skyline.fgBuildings.forEach(b => {
+        let drawX = (b.x - fgOffset);
+        if (drawX < -160) drawX += 1150;
+
+        ctx.fillStyle = '#070b1a';
+        ctx.fillRect(drawX, GROUND_Y - b.h, b.w, b.h);
+
+        // Borda com linha neon no topo
+        ctx.fillStyle = b.neon;
+        ctx.fillRect(drawX, GROUND_Y - b.h, b.w, 2);
+
+        // Antena piscante
+        if (b.beacon) {
+          ctx.strokeStyle = '#334155';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(drawX + b.w / 2, GROUND_Y - b.h);
+          ctx.lineTo(drawX + b.w / 2, GROUND_Y - b.h - 18);
+          ctx.stroke();
+
+          const beaconGlow = Math.sin(state.gameTime * 0.1) > 0;
+          ctx.fillStyle = beaconGlow ? b.neon : 'rgba(255,255,255,0.2)';
+          ctx.beginPath();
+          ctx.arc(drawX + b.w / 2, GROUND_Y - b.h - 18, 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+
+      // ── Chão e Grid Cibernético 3D ──
+      skyline.gridOffset = (skyline.gridOffset + state.speed) % 40;
+
+      // Glow no horizonte
+      ctx.strokeStyle = '#00f0ff';
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 14;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(0, GROUND_Y);
+      ctx.lineTo(VIRTUAL_WIDTH, GROUND_Y);
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Superfície do piso
+      const groundGrad = ctx.createLinearGradient(0, GROUND_Y, 0, VIRTUAL_HEIGHT);
+      groundGrad.addColorStop(0, '#040d22');
+      groundGrad.addColorStop(1, '#020409');
+      ctx.fillStyle = groundGrad;
+      ctx.fillRect(0, GROUND_Y, VIRTUAL_WIDTH, VIRTUAL_HEIGHT - GROUND_Y);
+
+      // Linhas de perspectiva do Grid (profundidade)
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.22)';
+      ctx.lineWidth = 1.2;
+      for (let x = -200; x <= VIRTUAL_WIDTH + 200; x += 60) {
+        ctx.beginPath();
+        ctx.moveTo(VIRTUAL_WIDTH / 2 + (x - VIRTUAL_WIDTH / 2) * 0.2, GROUND_Y);
+        ctx.lineTo(x, VIRTUAL_HEIGHT);
+        ctx.stroke();
+      }
+
+      // Linhas horizontais em movimento contínuo
+      for (let y = GROUND_Y; y < VIRTUAL_HEIGHT; y += 14) {
+        const p = (y - GROUND_Y) / (VIRTUAL_HEIGHT - GROUND_Y);
+        const curY = GROUND_Y + Math.pow(p, 1.8) * (VIRTUAL_HEIGHT - GROUND_Y);
+        ctx.strokeStyle = `rgba(0, 240, 255, ${0.1 + p * 0.35})`;
+        ctx.beginPath();
+        ctx.moveTo(0, curY);
+        ctx.lineTo(VIRTUAL_WIDTH, curY);
+        ctx.stroke();
+      }
+
+      // ── Renderizar Orbes de Energia (Energy Cores) ──
+      state.cores.forEach(c => {
+        ctx.save();
+        ctx.translate(c.x, c.y);
+
+        // Glow externo
+        ctx.shadowColor = '#ffe600';
+        ctx.shadowBlur = 16;
+        ctx.fillStyle = '#ffe600';
+        ctx.beginPath();
+        ctx.arc(0, 0, c.radius - 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Anel orbital rotativo
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = '#00f0ff';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, c.radius + 6, (c.radius + 6) * 0.45, c.rot, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.restore();
+      });
+
+      // ── Renderizar Obstáculos ──
+      state.obstacles.forEach(o => {
+        if (o.type === 'barrier') {
+          // Torre / Cristal de Laser Terrestre
+          ctx.shadowColor = '#ff007f';
+          ctx.shadowBlur = 14;
+          ctx.fillStyle = '#ff007f';
+          ctx.fillRect(o.x, o.y, o.w, o.h);
+
+          // Núcleo de alta energia
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(o.x + o.w / 2 - 2, o.y + 4, 4, o.h - 8);
+          ctx.shadowBlur = 0;
+        } else if (o.type === 'drone') {
+          // Drone Voador Cibernético
+          ctx.save();
+          ctx.translate(o.x + o.w / 2, o.y + o.h / 2);
+
+          // Corpo do drone
+          ctx.shadowColor = '#00f0ff';
+          ctx.shadowBlur = 12;
+          ctx.fillStyle = '#0f172a';
+          ctx.strokeStyle = '#00f0ff';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.roundRect(-o.w / 2, -o.h / 2, o.w, o.h, 6);
+          ctx.fill();
+          ctx.stroke();
+
+          // Olho de Laser Vermelho
+          ctx.fillStyle = '#ff0055';
+          ctx.beginPath();
+          ctx.arc(0, 0, 5, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Feixe de laser de alerta para baixo
+          ctx.fillStyle = 'rgba(255, 0, 85, 0.18)';
+          ctx.fillRect(-6, o.h / 2, 12, GROUND_Y - (o.y + o.h));
+
+          ctx.restore();
+        } else if (o.type === 'shock_gate') {
+          // Portão de Choque Elétrico
+          ctx.shadowColor = '#ffe600';
+          ctx.shadowBlur = 10;
+          ctx.fillStyle = '#334155';
+          ctx.fillRect(o.x, o.y, 6, o.h);
+          ctx.fillRect(o.x + o.w - 6, o.y, 6, o.h);
+
+          // Arco voltaico crepitante
+          ctx.strokeStyle = '#ffe600';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(o.x + 3, o.y + 8);
+          ctx.lineTo(o.x + o.w / 2 + (Math.random() - 0.5) * 12, o.y + o.h / 2);
+          ctx.lineTo(o.x + o.w - 3, o.y + o.h - 8);
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+        }
+      });
+
+      // ── Renderizar Ghost Trail (Rastro Neon do Jogador) ──
+      player.trail.forEach(t => {
+        ctx.save();
+        ctx.fillStyle = t.color;
+        ctx.globalAlpha = t.alpha;
+        ctx.fillRect(t.x, t.y, t.w, t.h);
+        ctx.restore();
+      });
+
+      // ── Renderizar Personagem (Cyber Runner) ──
+      ctx.save();
+      // Glow ao redor do corredor
+      ctx.shadowColor = player.isDashing ? '#00f0ff' : (player.shield ? '#00ff9d' : '#00f0ff');
+      ctx.shadowBlur = player.isDashing ? 24 : 12;
+
+      // Corpo da Armadura
+      ctx.fillStyle = player.isDashing ? '#ffffff' : '#00f0ff';
+      ctx.beginPath();
+      ctx.roundRect(player.x, player.y, player.w, player.h, player.isSliding ? 4 : 8);
+      ctx.fill();
+
+      // Visor Holográfico
+      ctx.fillStyle = '#040714';
+      ctx.shadowBlur = 0;
+      if (player.isSliding) {
+        ctx.fillRect(player.x + player.w - 12, player.y + 4, 8, 8);
+      } else {
+        ctx.fillRect(player.x + player.w - 14, player.y + 8, 10, 10);
+      }
+
+      // Propulsor de Plasma nos pés durante o pulo
+      if (!player.isGrounded) {
+        ctx.fillStyle = '#ff007f';
+        ctx.beginPath();
+        ctx.arc(player.x + player.w / 2, player.y + player.h + 3, 5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Cúpula do Escudo (Se Ativo)
+      if (player.shield) {
+        ctx.save();
+        ctx.strokeStyle = '#00ff9d';
+        ctx.shadowColor = '#00ff9d';
+        ctx.shadowBlur = 18;
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.arc(player.x + player.w / 2, player.y + player.h / 2, player.h * 0.72, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.fillStyle = 'rgba(0, 255, 157, 0.12)';
+        ctx.fill();
+        ctx.restore();
+      }
+      ctx.restore();
+
+      // ── Renderizar Partículas ──
+      state.particles.forEach(p => {
+        ctx.save();
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = Math.max(0, p.life);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // ── Renderizar Textos Flutuantes ──
+      state.floatingTexts.forEach(t => {
+        ctx.save();
+        ctx.font = '700 16px "Orbitron", sans-serif';
+        ctx.fillStyle = t.color;
+        ctx.globalAlpha = Math.max(0, t.alpha);
+        ctx.shadowColor = t.color;
+        ctx.shadowBlur = 8;
+        ctx.fillText(t.text, t.x, t.y);
+        ctx.restore();
+      });
+
+      // ── Overlays de Estado (Pausa / Game Over / Início) ──
+      if (state.paused) {
+        drawPauseOverlay();
+      } else if (state.over) {
+        drawGameOverOverlay();
+      } else if (!state.running) {
+        drawStartOverlay();
+      }
+
+      ctx.restore();
+    }
+
+    function drawStartOverlay() {
+      ctx.fillStyle = 'rgba(4, 7, 20, 0.78)';
+      ctx.fillRect(0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
+
+      ctx.textAlign = 'center';
+      ctx.font = '900 36px "Orbitron", sans-serif';
+      ctx.fillStyle = '#00f0ff';
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 20;
+      ctx.fillText('NEON RUNNER X', VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2 - 25);
+      ctx.shadowBlur = 0;
+
+      ctx.font = '600 18px "Rajdhani", sans-serif';
+      ctx.fillStyle = '#cbd5e1';
+      ctx.fillText('Pressione INICIAR, ESPAÇO ou toque na tela para acelerar', VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2 + 15);
+
+      ctx.font = '700 14px "Orbitron", sans-serif';
+      ctx.fillStyle = '#ffe600';
+      ctx.fillText('PULO DUPLO: ESPAÇO x2  |  DESLIZAR: SETA BAIXO  |  DASH: SHIFT', VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2 + 50);
+    }
+
+    function drawPauseOverlay() {
+      ctx.fillStyle = 'rgba(4, 7, 20, 0.82)';
+      ctx.fillRect(0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
+
+      ctx.textAlign = 'center';
+      ctx.font = '900 34px "Orbitron", sans-serif';
+      ctx.fillStyle = '#ffe600';
+      ctx.shadowColor = '#ffe600';
+      ctx.shadowBlur = 20;
+      ctx.fillText('JOGO PAUSADO', VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2 - 10);
+      ctx.shadowBlur = 0;
+
+      ctx.font = '600 18px "Rajdhani", sans-serif';
+      ctx.fillStyle = '#cbd5e1';
+      ctx.fillText('Pressione P ou clique em Continuar para retomar a corrida', VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2 + 30);
+    }
+
+    function drawGameOverOverlay() {
+      ctx.fillStyle = 'rgba(4, 7, 20, 0.85)';
+      ctx.fillRect(0, 0, VIRTUAL_WIDTH, VIRTUAL_HEIGHT);
+
+      ctx.textAlign = 'center';
+      ctx.font = '900 42px "Orbitron", sans-serif';
+      ctx.fillStyle = '#ff007f';
+      ctx.shadowColor = '#ff007f';
+      ctx.shadowBlur = 24;
+      ctx.fillText('SISTEMA OFFLINE', VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2 - 40);
+      ctx.shadowBlur = 0;
+
+      ctx.font = '700 22px "Rajdhani", sans-serif';
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillText(`Distância Percorrida: ${state.score} m  ·  Recorde: ${state.best} m`, VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2 + 5);
+
+      ctx.font = '600 16px "Rajdhani", sans-serif';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillText(`Núcleos de Energia Coletados: ${state.coresCollected}`, VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2 + 35);
+
+      ctx.font = '700 16px "Orbitron", sans-serif';
+      ctx.fillStyle = '#00f0ff';
+      ctx.fillText('Pressione R ou clique em Reiniciar para tentar novamente', VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2 + 75);
+    }
+
+    /* ==========================================================================
+       10. GAME LOOP RAF
+       ========================================================================== */
+    function gameLoop() {
+      updateGame();
+      render();
+      requestAnimationFrame(gameLoop);
     }
 
     function startGame() {
-      if (state.over) return;   // must resetGame first
+      sound.init();
+      if (state.over) {
+        resetGame();
+      }
       state.running = true;
+      state.paused = false;
+      btnStart.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg><span>Correndo</span>`;
+    }
+
+    function togglePause() {
+      sound.init();
+      if (!state.running || state.over) return;
+      state.paused = !state.paused;
+      btnPause.innerHTML = state.paused
+        ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg><span>Continuar</span>`
+        : `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg><span>Pausar</span>`;
     }
 
     function resetGame() {
-      state.running   = false;
-      state.over      = false;
-      state.score     = 0;
-      state.speed     = BASE_SPEED;
+      sound.init();
+      state.running = true;
+      state.paused = false;
+      state.over = false;
+      state.score = 0;
+      state.speed = BASE_SPEED;
+      state.combo = 1.0;
+      state.comboTimer = 0;
+      state.coresCollected = 0;
+      state.spawnTimer = 40;
+      state.cameraShake = 0;
+      state.particles = [];
       state.obstacles = [];
-      state.spawnTimer = 30;
-      player.y        = groundY - player.h;
-      player.vy       = 0;
-      player.onGround = true;
-      scoreEl.textContent = '0';
-      speedEl.textContent = '1.0x';
+      state.cores = [];
+      state.floatingTexts = [];
+
+      player.y = GROUND_Y - player.baseH;
+      player.vy = 0;
+      player.isGrounded = true;
+      player.jumpsLeft = 2;
+      player.isSliding = false;
+      player.isDashing = false;
+      player.dashCooldown = 0;
+      player.shield = false;
+      player.trail = [];
+
+      btnStart.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg><span>Correndo</span>`;
+      btnPause.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg><span>Pausar</span>`;
+      updateHUD();
     }
 
-    startBtn.addEventListener('click',   startGame);
-    restartBtn.addEventListener('click', resetGame);
-    jumpTouch.addEventListener('click',  jump);
-    startTouch.addEventListener('click', startGame);
+    /* ==========================================================================
+       11. EVENT LISTENERS (TECLADO, TOUCH, BOTÕES)
+       ========================================================================== */
+    btnStart.addEventListener('click', startGame);
+    btnPause.addEventListener('click', togglePause);
+    btnRestart.addEventListener('click', resetGame);
 
-    window.addEventListener('keydown', e => {
-      const k = e.key.toLowerCase();
-      if (k === ' ' || k === 'arrowup' || k === 'w') { e.preventDefault(); jump(); }
-      if (k === 'enter') startGame();
-      if (k === 'r')     resetGame();
+    btnAudioToggle.addEventListener('click', () => {
+      sound.init();
+      const isMuted = sound.toggleMute();
+      if (isMuted) {
+        iconAudioOn.style.display = 'none';
+        iconAudioOff.style.display = 'inline';
+        labelAudio.textContent = 'Áudio: OFF';
+        btnAudioToggle.classList.add('muted');
+      } else {
+        iconAudioOn.style.display = 'inline';
+        iconAudioOff.style.display = 'none';
+        labelAudio.textContent = 'Áudio: ON';
+        btnAudioToggle.classList.remove('muted');
+        sound.playCollect();
+      }
     });
 
-    bestEl.textContent = state.best;
-    resetGame();
-    loop();
+    // Touch Mobile Handlers
+    touchJump.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      touchJump.classList.add('pressed');
+      triggerJump();
+    }, { passive: false });
+
+    touchJump.addEventListener('touchend', () => {
+      touchJump.classList.remove('pressed');
+    });
+
+    touchDash.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      touchDash.classList.add('pressed');
+      if (player.isGrounded) {
+        triggerSlide();
+      } else {
+        triggerDash();
+      }
+    }, { passive: false });
+
+    touchDash.addEventListener('touchend', () => {
+      touchDash.classList.remove('pressed');
+    });
+
+    // Clique direto no Canvas para Pular
+    canvas.addEventListener('pointerdown', (e) => {
+      sound.init();
+      if (!state.running) {
+        startGame();
+      } else if (state.over) {
+        resetGame();
+      } else {
+        triggerJump();
+      }
+    });
+
+    // Teclado
+    window.addEventListener('keydown', (e) => {
+      const k = e.key.toLowerCase();
+
+      if (k === ' ' || k === 'arrowup' || k === 'w') {
+        e.preventDefault();
+        triggerJump();
+      } else if (k === 'arrowdown' || k === 's') {
+        e.preventDefault();
+        triggerSlide();
+      } else if (k === 'shift' || k === 'd' || k === 'e') {
+        e.preventDefault();
+        triggerDash();
+      } else if (k === 'p') {
+        e.preventDefault();
+        togglePause();
+      } else if (k === 'r') {
+        e.preventDefault();
+        resetGame();
+      } else if (k === 'm') {
+        e.preventDefault();
+        btnAudioToggle.click();
+      } else if (k === 'enter') {
+        e.preventDefault();
+        if (!state.running) startGame();
+        else if (state.over) resetGame();
+      }
+    });
+
+    // Inicialização
+    hudBest.textContent = `${state.best} m`;
+    updateHUD();
+    requestAnimationFrame(gameLoop);
   </script>
 </body>
 </html>

@@ -3,245 +3,2455 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arcade Clássico | Jogo da Velha Deluxe</title>
-  <meta name="description" content="Jogo da Velha com identidade retrô, placar persistente e modo competitivo local." />
+  <title>Arcade Retrô Deluxe | Jogo da Velha com IA Minimax & 2 Jogadores</title>
+  <meta name="description" content="Jogo da Velha Arcade Retrô Deluxe com IA Minimax Imbatível, modo 2 jogadores, áudio sintetizado em Web Audio API, efeitos CRT e placar persistente." />
+
+  <!-- Google Fonts: VT323 (display/terminal), Press Start 2P (pixel badges), Plus Jakarta Sans (UI moderna) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+
   <style>
-    :root{--ink:#e2e8f0;--muted:#94a3b8;--line:#334155;--card:#0f172acc;--brand:#22d3ee;--brand2:#f59e0b;--x:#22d3ee;--o:#f59e0b}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Manrope,sans-serif;color:var(--ink);background:linear-gradient(160deg,#0f172a,#020617);min-height:100vh}
-    .wrap{width:min(1080px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
-    .hero{border:1px solid #ffffff2a;border-radius:20px;overflow:hidden;background:#020617d0;box-shadow:0 20px 46px #0008}
-    .hero-img{height:180px;background:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80') center/cover}
-    @media(min-width:640px){.hero-img{height:240px}}
-    .body{padding:1.2rem}
-    @media(min-width:640px){.body{padding:1.4rem 1.8rem}}
-    h1{margin:0 0 .4rem;font:700 clamp(2rem,5vw,3.1rem) VT323,monospace;color:var(--brand);letter-spacing:.04em}
-    .lead{color:var(--muted);max-width:72ch;line-height:1.6}
-    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.8rem}
-    .tab-btn{border:1px solid var(--line);background:#0f172a;color:var(--ink);padding:.5rem .85rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
-    .tab-btn:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
-    .tab-btn.active{background:var(--brand);color:#082f49;border-color:var(--brand)}
-    .panel{display:none;padding:1rem 0}
-    .panel.active{display:block;animation:fadeUp .28s ease}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    .grid{display:grid;grid-template-columns:1fr;gap:.75rem}
-    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9rem;transition:.2s ease}
-    .card:hover{border-color:var(--brand)}
-    .card h3{margin:0 0 .4rem;color:var(--brand);font-size:.95rem}
-    .card p{margin:0;color:var(--muted);font-size:.88rem;line-height:1.55}
-    /* Game */
-    .status{padding:.7rem .9rem;border-radius:12px;border:1px solid var(--line);background:#0f172a;font-weight:700;margin-bottom:.8rem;font-size:1rem;transition:.3s ease}
-    .status.x-turn{border-color:var(--x);color:var(--x)}
-    .status.o-turn{border-color:var(--o);color:var(--o)}
-    .status.win{background:#0f2a1a;border-color:#4ade80;color:#4ade80}
-    .status.draw{border-color:#9ca3af;color:#9ca3af}
-    .board{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;max-width:360px}
-    @media(min-width:640px){.board{max-width:none}}
-    .cell{aspect-ratio:1/1;border:1px solid var(--line);border-radius:12px;background:#111827;color:var(--ink);font:700 clamp(2rem,9vw,4rem) VT323,monospace;cursor:pointer;transition:.15s ease}
-    .cell:hover:not(:disabled){border-color:var(--brand);background:#0f2233}
-    .cell:disabled{cursor:default}
-    .cell.x{color:var(--x);border-color:#22d3ee44}
-    .cell.o{color:var(--o);border-color:#f59e0b44}
-    .cell.winner{background:#0d2a1a;border-color:#4ade80;box-shadow:0 0 12px #4ade8066;animation:pulse .6s ease infinite alternate}
-    @keyframes pulse{from{box-shadow:0 0 6px #4ade8066}to{box-shadow:0 0 18px #4ade80cc}}
-    .actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}
-    button{border:0;border-radius:999px;padding:.65rem .95rem;font:700 .9rem Manrope,sans-serif;cursor:pointer;transition:.15s ease}
-    .reset{background:var(--brand);color:#082f49}
-    .reset:hover{opacity:.85;transform:translateY(-1px)}
-    .clear{background:var(--brand2);color:#1c1002}
-    .clear:hover{opacity:.85;transform:translateY(-1px)}
-    .score{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin-top:.8rem}
-    @media(min-width:640px){.score{max-width:360px}}
-    .score div{border:1px solid var(--line);border-radius:10px;padding:.55rem;text-align:center;background:#0f172a}
-    .score div.active-score{border-color:var(--brand)}
-    .gallery{display:grid;grid-template-columns:1fr;gap:.65rem}
-    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
-    .gallery img{width:100%;height:170px;object-fit:cover;border-radius:10px;border:1px solid var(--line);transition:.2s ease}
-    .gallery img:hover{transform:scale(1.03)}
-    /* Footer */
-    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#0f172a80;border-radius:0 0 20px 20px}
-    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
-    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
-    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
-    .cert{background:var(--brand);color:#082f49;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
-    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+    /* ─── DESIGN TOKENS & RESET ─── */
+    :root {
+      --bg-dark: #070913;
+      --bg-cabinet: #0d1222;
+      --bg-card: #131b32;
+      --bg-card-hover: #182342;
+      --line: #223055;
+      --line-bright: #394d7c;
+      --ink: #f8fafc;
+      --ink-muted: #94a3b8;
+      --ink-subtle: #64748b;
+
+      /* Neon Palette */
+      --cyan: #00f0ff;
+      --cyan-glow: 0 0 12px rgba(0, 240, 255, 0.65), 0 0 25px rgba(0, 240, 255, 0.25);
+      --magenta: #ff2d78;
+      --magenta-glow: 0 0 12px rgba(255, 45, 120, 0.65), 0 0 25px rgba(255, 45, 120, 0.25);
+      --amber: #f59e0b;
+      --amber-glow: 0 0 12px rgba(245, 158, 11, 0.6);
+      --green: #10b981;
+      --green-glow: 0 0 12px rgba(16, 185, 129, 0.6);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-pixel: 'Press Start 2P', monospace;
+      --font-retro: 'VT323', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--ink);
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(circle at 50% 0%, #151e38 0%, transparent 65%),
+        linear-gradient(rgba(34, 48, 85, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 48, 85, 0.15) 1px, transparent 1px);
+      background-size: 100% 100%, 36px 36px, 36px 36px;
+      min-height: 100vh;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Acessibilidade: Skip Link */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 1rem;
+      background: var(--cyan);
+      color: #04101e;
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      z-index: 9999;
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* Leitor de tela */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ─── FILTRO CRT RETRÔ ─── */
+    .crt-wrapper {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .crt-active::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(18, 16, 26, 0) 50%, rgba(0, 0, 0, 0.32) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+      z-index: 900;
+      opacity: 0.85;
+    }
+
+    .crt-active::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 65%, rgba(4, 7, 16, 0.65) 100%);
+      pointer-events: none;
+      z-index: 901;
+    }
+
+    /* ─── LAYOUT GERAL ─── */
+    .wrap {
+      width: min(1040px, calc(100% - 1.75rem));
+      margin: 1.5rem auto 3rem;
+      flex: 1;
+    }
+
+    /* ─── MARQUEE & HEADER ARCADE ─── */
+    .arcade-header {
+      background: linear-gradient(180deg, #10172e 0%, #0a0f20 100%);
+      border: 2px solid var(--line);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      border-bottom: 2px solid var(--line);
+    }
+
+    .marquee-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-badge {
+      font-family: var(--font-pixel);
+      font-size: 0.6rem;
+      background: linear-gradient(135deg, var(--cyan), #0077ff);
+      color: #030a16;
+      padding: 0.35rem 0.55rem;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: var(--cyan-glow);
+    }
+
+    .arcade-title {
+      font-family: var(--font-retro);
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--cyan);
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.2);
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    .quick-toggles {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .icon-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(19, 27, 50, 0.8);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-family: var(--font-pixel);
+      font-size: 0.58rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+    .icon-toggle-btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
+      transform: translateY(-1px);
+    }
+    .icon-toggle-btn.active {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+    .icon-toggle-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* ─── CORPO PRINCIPAL DO GABINETE ─── */
+    .arcade-body {
+      background: rgba(13, 18, 34, 0.95);
+      backdrop-filter: blur(12px);
+      border-inline: 2px solid var(--line);
+      border-bottom: 2px solid var(--line);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.7);
+    }
+    @media (min-width: 768px) {
+      .arcade-body {
+        padding: 2rem 2.25rem;
+      }
+    }
+
+    /* ─── ABAS DE NAVEGAÇÃO ─── */
+    .tabs-nav {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #11172b;
+      border: 1px solid var(--line);
+      color: var(--ink-muted);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 0.6rem 1.15rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+    .tab-btn:hover {
+      color: var(--ink);
+      border-color: var(--cyan);
+      transform: translateY(-1px);
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--cyan), #0284c7);
+      color: #030e1e;
+      border-color: var(--cyan);
+      box-shadow: var(--cyan-glow);
+    }
+
+    .tab-panel {
+      display: none;
+      animation: tabFade 0.3s ease forwards;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    @keyframes tabFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── PAINEL: JOGAR ─── */
+    .game-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 860px) {
+      .game-layout {
+        grid-template-columns: 1fr 340px;
+        align-items: start;
+      }
+    }
+
+    /* ─── ÁREA CENTRAL DO TABULEIRO ─── */
+    .board-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* LED Status Display */
+    .led-display {
+      width: 100%;
+      max-width: 420px;
+      background: #080c18;
+      border: 2px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+    .led-display::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    }
+
+    .led-status {
+      font-family: var(--font-retro);
+      font-size: 1.55rem;
+      color: var(--cyan);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.25s ease;
+    }
+    .led-status.x-turn {
+      color: var(--cyan);
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+    }
+    .led-status.o-turn {
+      color: var(--magenta);
+      text-shadow: 0 0 10px rgba(255, 45, 120, 0.6);
+    }
+    .led-status.win-x {
+      color: var(--cyan);
+      text-shadow: 0 0 14px rgba(0, 240, 255, 0.9);
+      animation: ledPulse 0.8s infinite alternate;
+    }
+    .led-status.win-o {
+      color: var(--magenta);
+      text-shadow: 0 0 14px rgba(255, 45, 120, 0.9);
+      animation: ledPulse 0.8s infinite alternate;
+    }
+    .led-status.draw {
+      color: var(--amber);
+      text-shadow: 0 0 12px rgba(245, 158, 11, 0.8);
+    }
+    @keyframes ledPulse {
+      from { opacity: 0.85; }
+      to { opacity: 1; transform: scale(1.02); }
+    }
+
+    .led-indicator-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: var(--cyan-glow);
+      display: inline-block;
+      flex-shrink: 0;
+      animation: blinkDot 1s infinite;
+    }
+    .led-status.o-turn .led-indicator-dot {
+      background: var(--magenta);
+      box-shadow: var(--magenta-glow);
+    }
+    .led-status.draw .led-indicator-dot {
+      background: var(--amber);
+      box-shadow: var(--amber-glow);
+    }
+    @keyframes blinkDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .turn-badge {
+      font-family: var(--font-pixel);
+      font-size: 0.55rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      background: #151d38;
+      border: 1px solid var(--line);
+      color: var(--ink-muted);
+    }
+
+    /* ─── TABULEIRO 3x3 COM LINHA VENCEDORA ─── */
+    .board-container {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      aspect-ratio: 1 / 1;
+      background: #090e1d;
+      border: 3px solid var(--line-bright);
+      border-radius: var(--radius-lg);
+      padding: 0.85rem;
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.7),
+        inset 0 0 30px rgba(0, 0, 0, 0.8);
+      user-select: none;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 0.65rem;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cell-btn {
+      background: #11182c;
+      border: 2px solid var(--line);
+      border-radius: var(--radius-md);
+      color: var(--ink);
+      font-family: var(--font-retro);
+      font-size: clamp(3.2rem, 11vw, 4.6rem);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      outline: none;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      touch-action: manipulation;
+    }
+    .cell-btn:hover:not(:disabled) {
+      background: #192444;
+      border-color: var(--cyan);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    .cell-btn:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+    .cell-btn:disabled {
+      cursor: default;
+    }
+
+    /* X & O Marcados */
+    .cell-btn.x-marked {
+      color: var(--cyan);
+      text-shadow: var(--cyan-glow);
+      border-color: rgba(0, 240, 255, 0.4);
+      background: rgba(0, 240, 255, 0.05);
+      animation: markPop 0.22s ease-out;
+    }
+    .cell-btn.o-marked {
+      color: var(--magenta);
+      text-shadow: var(--magenta-glow);
+      border-color: rgba(255, 45, 120, 0.4);
+      background: rgba(255, 45, 120, 0.05);
+      animation: markPop 0.22s ease-out;
+    }
+    @keyframes markPop {
+      0% { transform: scale(0.6); opacity: 0; }
+      70% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .cell-btn.winning-cell {
+      background: rgba(16, 185, 129, 0.15) !important;
+      border-color: var(--green) !important;
+      box-shadow: var(--green-glow) !important;
+    }
+
+    /* Dica sutil de tecla rápida no canto */
+    .cell-key-hint {
+      position: absolute;
+      top: 5px;
+      right: 8px;
+      font-family: var(--font-pixel);
+      font-size: 0.5rem;
+      color: var(--ink-subtle);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* ─── SVG OVERLAY DA LINHA DE VITÓRIA DINÂMICA ─── */
+    .win-line-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .win-line-path {
+      stroke-width: 8px;
+      stroke-linecap: round;
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      transition: stroke-dashoffset 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .win-line-path.draw-active {
+      stroke-dashoffset: 0;
+    }
+    .win-line-path.line-x {
+      stroke: var(--cyan);
+      filter: drop-shadow(0 0 8px var(--cyan)) drop-shadow(0 0 16px var(--cyan));
+    }
+    .win-line-path.line-o {
+      stroke: var(--magenta);
+      filter: drop-shadow(0 0 8px var(--magenta)) drop-shadow(0 0 16px var(--magenta));
+    }
+
+    /* ─── CANVAS PARA PARTÍCULAS / CONFETES ─── */
+    .fx-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 12;
+      border-radius: var(--radius-lg);
+    }
+
+    /* Ações rápidas abaixo do tabuleiro */
+    .board-actions {
+      display: flex;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 420px;
+      margin-top: 1.25rem;
+    }
+
+    .btn-action {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+    .btn-action svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), #0284c7);
+      color: #04101e;
+      box-shadow: var(--cyan-glow);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #131b32;
+      border-color: var(--line);
+      color: var(--ink-muted);
+    }
+    .btn-secondary:hover {
+      border-color: var(--line-bright);
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    /* ─── SIDEBAR: CONTROLES & PLACAR ─── */
+    .sidebar-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .control-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-heading {
+      font-family: var(--font-pixel);
+      font-size: 0.65rem;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Modo de Jogo & Dificuldade */
+    .pill-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.45rem;
+      background: #090e1c;
+      padding: 0.35rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+    }
+
+    .pill-btn {
+      background: transparent;
+      border: 0;
+      color: var(--ink-muted);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.55rem 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+    }
+    .pill-btn:hover {
+      color: var(--ink);
+    }
+    .pill-btn.active {
+      background: #1b2647;
+      color: var(--cyan);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .diff-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.35rem;
+      margin-top: 0.65rem;
+    }
+    .diff-btn {
+      background: #0b1122;
+      border: 1px solid var(--line);
+      color: var(--ink-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.45rem 0.35rem;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .diff-btn:hover {
+      border-color: var(--line-bright);
+      color: var(--ink);
+    }
+    .diff-btn.active {
+      background: #1b2647;
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    /* Seletor de primeiro a jogar */
+    .starter-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.45rem;
+      margin-top: 0.5rem;
+    }
+    .starter-btn {
+      background: #0b1122;
+      border: 1px solid var(--line);
+      color: var(--ink-muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 0.45rem 0.35rem;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .starter-btn:hover {
+      color: var(--ink);
+      border-color: var(--line-bright);
+    }
+    .starter-btn.active {
+      background: #16203d;
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* Placar Arcade */
+    .scoreboard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .score-card {
+      background: #0a0f20;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.4rem;
+      text-align: center;
+      position: relative;
+    }
+    .score-card.x-score {
+      border-color: rgba(0, 240, 255, 0.3);
+    }
+    .score-card.o-score {
+      border-color: rgba(255, 45, 120, 0.3);
+    }
+    .score-card.d-score {
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    .score-label {
+      font-family: var(--font-pixel);
+      font-size: 0.52rem;
+      color: var(--ink-muted);
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+    .score-card.x-score .score-label { color: var(--cyan); }
+    .score-card.o-score .score-label { color: var(--magenta); }
+    .score-card.d-score .score-label { color: var(--amber); }
+
+    .score-num {
+      font-family: var(--font-retro);
+      font-size: 2.1rem;
+      line-height: 1;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .streak-container {
+      display: flex;
+      justify-content: space-between;
+      background: #0a0f20;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.85rem;
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+    }
+    .streak-val {
+      font-weight: 800;
+      color: var(--amber);
+      font-family: var(--font-retro);
+      font-size: 1.25rem;
+    }
+
+    /* Dicas de Teclado */
+    .keyboard-guide {
+      font-size: 0.76rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+    .key-badge {
+      display: inline-block;
+      font-family: var(--font-pixel);
+      font-size: 0.5rem;
+      background: #1a233e;
+      border: 1px solid var(--line-bright);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      color: var(--cyan);
+      margin: 0 0.15rem;
+    }
+
+    /* ─── ABA: COMO VENCER (ESTRATÉGIAS) ─── */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 680px) {
+      .strategy-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .strategy-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .strategy-card:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .strategy-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.75rem;
+    }
+    .strategy-icon {
+      font-size: 1.4rem;
+    }
+    .strategy-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--cyan);
+    }
+
+    .strategy-text {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+
+    .mini-tactics {
+      background: #090e1c;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .mini-board-preview {
+      display: grid;
+      grid-template-columns: repeat(3, 20px);
+      gap: 2px;
+      background: var(--line);
+      padding: 2px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .mini-cell {
+      width: 20px;
+      height: 20px;
+      background: #11182c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-retro);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .mini-cell.x { color: var(--cyan); }
+    .mini-cell.o { color: var(--magenta); }
+    .mini-cell.target { background: rgba(0, 240, 255, 0.25); color: var(--cyan); }
+
+    .tactics-note {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      line-height: 1.4;
+    }
+
+    /* ─── ABA: MINIMAX (EXPLICAÇÃO TÉCNICA) ─── */
+    .minimax-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .article-box {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+    }
+
+    .article-box h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--cyan);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .article-box p {
+      font-size: 0.92rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .tree-diagram {
+      background: #090e1c;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      margin: 1.25rem 0;
+      overflow-x: auto;
+    }
+
+    .tree-step {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.85rem;
+    }
+    .step-tag {
+      font-family: var(--font-pixel);
+      font-size: 0.55rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .tag-max { background: rgba(0, 240, 255, 0.15); border: 1px solid var(--cyan); color: var(--cyan); }
+    .tag-min { background: rgba(255, 45, 120, 0.15); border: 1px solid var(--magenta); color: var(--magenta); }
+    .tag-eval { background: rgba(245, 158, 11, 0.15); border: 1px solid var(--amber); color: var(--amber); }
+
+    .code-block {
+      background: #050811;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.82rem;
+      color: #38bdf8;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+
+    /* ─── ABA: HISTÓRIA & CRÉDITOS ─── */
+    .history-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    @media (min-width: 680px) {
+      .history-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ─── MODAL CONFIRMAÇÃO MODERNO (<dialog>) ─── */
+    /* Regras conformes ao Modern Web Guidance para <dialog> */
+    dialog#resetModal {
+      background: #0d1428;
+      color: var(--ink);
+      border: 2px solid var(--line-bright);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      max-width: 420px;
+      width: calc(100% - 2rem);
+      margin: auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 240, 255, 0.2);
+    }
+    dialog#resetModal:modal {
+      overscroll-behavior: contain; /* Trava o scroll do fundo */
+    }
+    dialog#resetModal::backdrop {
+      background: rgba(3, 7, 18, 0.75);
+      backdrop-filter: blur(6px);
+      overflow: hidden;
+      overscroll-behavior: contain;
+    }
+
+    .modal-title {
+      font-family: var(--font-pixel);
+      font-size: 0.85rem;
+      color: var(--amber);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .modal-desc {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+    }
+    .btn-danger {
+      background: #dc2626;
+      color: #fff;
+    }
+    .btn-danger:hover {
+      background: #ef4444;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
+    }
+
+    /* ─── TOAST NOTIFICAÇÃO ─── */
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .toast-msg {
+      background: #0f1830;
+      border: 1px solid var(--cyan);
+      color: var(--ink);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--cyan-glow);
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      animation: toastIn 0.3s ease, toastOut 0.3s 2.2s ease forwards;
+    }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes toastOut {
+      to { opacity: 0; transform: translateY(-8px); }
+    }
+
+    /* ─── RODAPÉ COMERCIAL ─── */
+    .arcade-footer {
+      margin-top: 3rem;
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 1.5rem 2rem;
+      background: #080d1e;
+      border-radius: var(--radius-lg);
+      text-align: center;
+    }
+
+    .footer-developer {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--cyan);
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-brand-title {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-badge {
+      background: #111a34;
+      border: 1px solid var(--line);
+      color: var(--ink-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+    }
+    .tech-badge:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .whatsapp-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #25d366;
+      color: #03210d;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      margin-bottom: 1.5rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    }
+    .whatsapp-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+      background: #2ee672;
+    }
+    .whatsapp-cta svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .footer-copyright {
+      font-size: 0.78rem;
+      color: var(--ink-subtle);
+    }
+
+    /* ─── SUPORTE A MOVIMENTO REDUZIDO ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .crt-active::before,
+      .crt-active::after {
+        display: none !important;
+      }
+    }
   </style>
 </head>
-<body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="hero-img"></div>
-      <div class="body">
-        <h1>Jogo da Velha Deluxe</h1>
-        <p class="lead">Versão clássica com identidade retrô, placar persistente da sessão e modo competitivo local. Além da jogabilidade, a página traz contexto histórico, regras e apresentação visual mais rica.</p>
+<body class="crt-wrapper">
+  <!-- Skip Link Acessível -->
+  <a href="#board" class="skip-link">Pular direto para o jogo</a>
 
-        <nav class="tabs" aria-label="Seções">
-          <button class="tab-btn active" data-tab="jogar">Jogar</button>
-          <button class="tab-btn" data-tab="sobre">Sobre</button>
-          <button class="tab-btn" data-tab="historia">História</button>
-          <button class="tab-btn" data-tab="galeria">Galeria</button>
+  <!-- Announcer para leitores de tela -->
+  <div id="liveAnnouncer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <main class="wrap">
+    <!-- GABINETE ARCADE -->
+    <div class="arcade-cabinet">
+      <!-- HEADER COM MARQUEE & TOGGLES -->
+      <header class="arcade-header">
+        <div class="marquee-strip">
+          <div class="brand-title">
+            <span class="brand-badge">Arcade FX</span>
+            <h1 class="arcade-title">TIC-TAC-TOE 3000</h1>
+          </div>
+          <div class="quick-toggles" role="toolbar" aria-label="Ajustes de Áudio e Efeitos Visuais">
+            <button id="toggleSoundBtn" class="icon-toggle-btn active" aria-label="Som: Ligado" title="Alternar som (Tecla M)">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zm-2.5 9h-3.5v-4.5h3.5l4-4v12.5l-4-4zm-8-3h2v3h-2z"/>
+              </svg>
+              <span id="soundLabel">SOM: ON</span>
+            </button>
+
+            <button id="toggleCrtBtn" class="icon-toggle-btn active" aria-label="Filtro CRT: Ligado" title="Alternar filtro CRT / Scanlines (Tecla C)">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/>
+              </svg>
+              <span id="crtLabel">CRT: ON</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- CORPO PRINCIPAL DO GABINETE -->
+      <div class="arcade-body">
+        <!-- NAVEGAÇÃO DE ABAS -->
+        <nav class="tabs-nav" role="tablist" aria-label="Navegação do Jogo e Informações">
+          <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-jogar" id="tab-jogar" data-tab="panel-jogar">
+            🎮 Jogar
+          </button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-estrategia" id="tab-estrategia" data-tab="panel-estrategia">
+            💡 Como Vencer (Estratégia)
+          </button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-minimax" id="tab-minimax" data-tab="panel-minimax">
+            🧠 Algoritmo Minimax (IA)
+          </button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-historia" id="tab-historia" data-tab="panel-historia">
+            📜 Histórico & Créditos
+          </button>
         </nav>
 
-        <section class="panel active" id="jogar">
-          <div id="status" class="status x-turn">Vez do jogador X</div>
-          <div id="board" class="board" role="grid" aria-label="Tabuleiro">
-            <button class="cell" data-index="0"></button>
-            <button class="cell" data-index="1"></button>
-            <button class="cell" data-index="2"></button>
-            <button class="cell" data-index="3"></button>
-            <button class="cell" data-index="4"></button>
-            <button class="cell" data-index="5"></button>
-            <button class="cell" data-index="6"></button>
-            <button class="cell" data-index="7"></button>
-            <button class="cell" data-index="8"></button>
-          </div>
-          <div class="actions">
-            <button id="resetRound" class="reset">Reiniciar rodada</button>
-            <button id="resetAll"   class="clear">Zerar placar</button>
-          </div>
-          <div class="score">
-            <div id="scoreBoxX">X: <strong id="scoreX">0</strong></div>
-            <div>Empates: <strong id="scoreD">0</strong></div>
-            <div>O: <strong id="scoreO">0</strong></div>
+        <!-- ══ ABA 1: JOGAR ══ -->
+        <section class="tab-panel active" id="panel-jogar" role="tabpanel" aria-labelledby="tab-jogar">
+          <div class="game-layout">
+            <!-- TABULEIRO CENTRAL -->
+            <div class="board-section">
+              <!-- DISPLAY LED DE STATUS -->
+              <div class="led-display" aria-live="polite">
+                <div id="ledStatus" class="led-status x-turn">
+                  <span class="led-indicator-dot"></span>
+                  <span id="statusText">Vez do Jogador X</span>
+                </div>
+                <span id="modeBadge" class="turn-badge">HUMANO VS IA</span>
+              </div>
+
+              <!-- TABULEIRO 3X3 INTERATIVO -->
+              <div class="board-container">
+                <!-- Grid de Botões -->
+                <div id="board" class="board-grid" role="grid" aria-label="Tabuleiro do Jogo da Velha">
+                  <button class="cell-btn" data-index="0" role="gridcell" aria-label="Casa 1: Superior Esquerda, Vazia">
+                    <span class="cell-key-hint">1</span>
+                  </button>
+                  <button class="cell-btn" data-index="1" role="gridcell" aria-label="Casa 2: Superior Centro, Vazia">
+                    <span class="cell-key-hint">2</span>
+                  </button>
+                  <button class="cell-btn" data-index="2" role="gridcell" aria-label="Casa 3: Superior Direita, Vazia">
+                    <span class="cell-key-hint">3</span>
+                  </button>
+                  <button class="cell-btn" data-index="3" role="gridcell" aria-label="Casa 4: Meio Esquerda, Vazia">
+                    <span class="cell-key-hint">4</span>
+                  </button>
+                  <button class="cell-btn" data-index="4" role="gridcell" aria-label="Casa 5: Centro, Vazia">
+                    <span class="cell-key-hint">5</span>
+                  </button>
+                  <button class="cell-btn" data-index="5" role="gridcell" aria-label="Casa 6: Meio Direita, Vazia">
+                    <span class="cell-key-hint">6</span>
+                  </button>
+                  <button class="cell-btn" data-index="6" role="gridcell" aria-label="Casa 7: Inferior Esquerda, Vazia">
+                    <span class="cell-key-hint">7</span>
+                  </button>
+                  <button class="cell-btn" data-index="7" role="gridcell" aria-label="Casa 8: Inferior Centro, Vazia">
+                    <span class="cell-key-hint">8</span>
+                  </button>
+                  <button class="cell-btn" data-index="8" role="gridcell" aria-label="Casa 9: Inferior Direita, Vazia">
+                    <span class="cell-key-hint">9</span>
+                  </button>
+                </div>
+
+                <!-- SVG da Linha de Vitória Dinâmica -->
+                <svg id="winSvg" class="win-line-svg" viewBox="0 0 300 300" aria-hidden="true">
+                  <line id="winLine" class="win-line-path" x1="0" y1="0" x2="0" y2="0" />
+                </svg>
+
+                <!-- Canvas de Partículas Comemorativas -->
+                <canvas id="fxCanvas" class="fx-canvas" aria-hidden="true"></canvas>
+              </div>
+
+              <!-- Ações Rápidas -->
+              <div class="board-actions">
+                <button id="resetRoundBtn" class="btn-action btn-primary" title="Reiniciar partida atual (Tecla R)">
+                  <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                  Nova Rodada
+                </button>
+                <button id="openResetModalBtn" class="btn-action btn-secondary" title="Zerar histórico e pontuações salvas">
+                  <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                  Zerar Placar
+                </button>
+              </div>
+            </div>
+
+            <!-- SIDEBAR: CONFIGURAÇÕES & PLACAR -->
+            <aside class="sidebar-panel">
+              <!-- Card: Modo de Jogo -->
+              <div class="control-card">
+                <h2 class="card-heading">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                  Modo de Jogo
+                </h2>
+                <div class="pill-selector" role="radiogroup" aria-label="Modo de Jogo">
+                  <button class="pill-btn active" id="modeAiBtn" role="radio" aria-checked="true" data-mode="ai">
+                    🤖 vs IA
+                  </button>
+                  <button class="pill-btn" id="modePvpBtn" role="radio" aria-checked="false" data-mode="pvp">
+                    👥 2 Jogadores
+                  </button>
+                </div>
+
+                <!-- Nível de IA (visível apenas no modo vs IA) -->
+                <div id="aiDiffSection" style="margin-top: 0.85rem;">
+                  <span class="score-label">Dificuldade da IA:</span>
+                  <div class="diff-selector" role="radiogroup" aria-label="Dificuldade da IA">
+                    <button class="diff-btn" data-diff="easy" role="radio" aria-checked="false">Fácil</button>
+                    <button class="diff-btn" data-diff="medium" role="radio" aria-checked="false">Médio</button>
+                    <button class="diff-btn active" data-diff="hard" role="radio" aria-checked="true">Imbatível</button>
+                  </div>
+                </div>
+
+                <!-- Quem Começa -->
+                <div style="margin-top: 0.85rem;">
+                  <span class="score-label">Primeiro a Jogar:</span>
+                  <div class="starter-selector" role="radiogroup" aria-label="Quem começa a rodada">
+                    <button class="starter-btn active" data-starter="X" role="radio" aria-checked="true">Jogador X</button>
+                    <button class="starter-btn" data-starter="O" role="radio" aria-checked="false">Jogador O</button>
+                    <button class="starter-btn" data-starter="random" role="radio" aria-checked="false">🎲 Sorteio</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card: Placar & Estatísticas Persistentes -->
+              <div class="control-card">
+                <h2 class="card-heading">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+                  Placar Persistente
+                </h2>
+
+                <div class="scoreboard-grid">
+                  <div class="score-card x-score">
+                    <span class="score-label">VITÓRIAS X</span>
+                    <span id="scoreX" class="score-num">0</span>
+                  </div>
+                  <div class="score-card d-score">
+                    <span class="score-label">EMPATES</span>
+                    <span id="scoreD" class="score-num">0</span>
+                  </div>
+                  <div class="score-card o-score">
+                    <span class="score-label">VITÓRIAS O</span>
+                    <span id="scoreO" class="score-num">0</span>
+                  </div>
+                </div>
+
+                <div class="streak-container">
+                  <span>Sequência Atual (Win Streak):</span>
+                  <span id="streakCount" class="streak-val">🔥 0</span>
+                </div>
+                <div class="streak-container" style="margin-top: 0.4rem;">
+                  <span>Recorde Histórico:</span>
+                  <span id="bestStreakCount" class="streak-val" style="color: var(--cyan);">🏆 0</span>
+                </div>
+                <div class="streak-container" style="margin-top: 0.4rem;">
+                  <span>Total de Partidas:</span>
+                  <span id="totalMatches" class="streak-val" style="color: var(--ink);">0</span>
+                </div>
+              </div>
+
+              <!-- Card: Atalhos de Teclado -->
+              <div class="control-card">
+                <h2 class="card-heading">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-1 2H5v-2h2v2zm0-3H5V8h2v2zm9 7H8v-2h8v2zm0-4h-2v-2h2v2zm0-3h-2V8h2v2zm3 3h-2v-2h2v2zm0-3h-2V8h2v2z"/></svg>
+                  Atalhos de Teclado
+                </h2>
+                <div class="keyboard-guide">
+                  <p><span class="key-badge">1</span>..<span class="key-badge">9</span> ou Teclado Numérico <span class="key-badge">Numpad</span> joga na casa correspondente.</p>
+                  <p style="margin-top: 0.35rem;"><span class="key-badge">Setas</span> navegam entre as casas e <span class="key-badge">Enter</span> confirma a jogada.</p>
+                  <p style="margin-top: 0.35rem;"><span class="key-badge">R</span> reinicia · <span class="key-badge">M</span> muta áudio · <span class="key-badge">C</span> alterna CRT.</p>
+                </div>
+              </div>
+            </aside>
           </div>
         </section>
 
-        <section class="panel" id="sobre">
-          <div class="grid">
-            <article class="card"><h3>🎯 Objetivo</h3><p>Formar uma linha com três símbolos iguais em horizontal, vertical ou diagonal.</p></article>
-            <article class="card"><h3>🖥️ Interface</h3><p>Feedback visual claro, estados de turno coloridos e ações rápidas para reinício.</p></article>
-            <article class="card"><h3>📱 Uso</h3><p>Ideal para ativações, mini eventos e experiências casuais no celular.</p></article>
+        <!-- ══ ABA 2: COMO VENCER (ESTRATÉGIAS) ══ -->
+        <section class="tab-panel" id="panel-estrategia" role="tabpanel" aria-labelledby="tab-estrategia">
+          <div class="strategy-grid">
+            <article class="strategy-card">
+              <div class="strategy-header">
+                <span class="strategy-icon">🎯</span>
+                <h3 class="strategy-title">1. O Poder do Primeiro Canto</h3>
+              </div>
+              <p class="strategy-text">
+                Se você joga primeiro (X), a jogada mais forte matematicamente é ocupar um dos quatro <strong>cantos</strong>. Isso cria armadilhas imediatas: se o jogador O responder em qualquer lugar que não seja o centro exato, X terá uma vitória forçada garantida em poucas rodadas.
+              </p>
+              <div class="mini-tactics">
+                <div class="mini-board-preview" aria-hidden="true">
+                  <div class="mini-cell x">X</div><div class="mini-cell"></div><div class="mini-cell"></div>
+                  <div class="mini-cell"></div><div class="mini-cell o">O</div><div class="mini-cell"></div>
+                  <div class="mini-cell"></div><div class="mini-cell"></div><div class="mini-cell target">X</div>
+                </div>
+                <div class="tactics-note">
+                  <strong>Abertura de Canto:</strong> Força o adversário a jogar com precisão cirúrgica no centro para não perder.
+                </div>
+              </div>
+            </article>
+
+            <article class="strategy-card">
+              <div class="strategy-header">
+                <span class="strategy-icon">⚔️</span>
+                <h3 class="strategy-title">2. A Técnica do Fork (Ataque Duplo)</h3>
+              </div>
+              <p class="strategy-text">
+                Um <em>Fork</em> (bifurcação) ocorre quando você cria <strong>duas ameaças simultâneas de vitória</strong> na mesma rodada. Como o oponente só pode bloquear uma casa por vez, a vitória torna-se inevitável na rodada seguinte!
+              </p>
+              <div class="mini-tactics">
+                <div class="mini-board-preview" aria-hidden="true">
+                  <div class="mini-cell x">X</div><div class="mini-cell"></div><div class="mini-cell x">X</div>
+                  <div class="mini-cell o">O</div><div class="mini-cell x">X</div><div class="mini-cell"></div>
+                  <div class="mini-cell"></div><div class="mini-cell"></div><div class="mini-cell o">O</div>
+                </div>
+                <div class="tactics-note">
+                  <strong>Fork Imparável:</strong> X tem duas linhas prontas para fechar (linha superior ou diagonal).
+                </div>
+              </div>
+            </article>
+
+            <article class="strategy-card">
+              <div class="strategy-header">
+                <span class="strategy-icon">🛡️</span>
+                <h3 class="strategy-title">3. Defesa Perfeita com O</h3>
+              </div>
+              <p class="strategy-text">
+                Se você começar em segundo, a regra de sobrevivência é absoluta: se X jogar no canto, <strong>SEMPRE jogue no centro</strong>. Se X jogar no centro, você deve <strong>SEMPRE responder em um canto</strong>. Qualquer erro nas bordas laterais resulta em derrota.
+              </p>
+              <div class="mini-tactics">
+                <div class="mini-board-preview" aria-hidden="true">
+                  <div class="mini-cell x">X</div><div class="mini-cell"></div><div class="mini-cell"></div>
+                  <div class="mini-cell"></div><div class="mini-cell target">O</div><div class="mini-cell"></div>
+                  <div class="mini-cell"></div><div class="mini-cell"></div><div class="mini-cell"></div>
+                </div>
+                <div class="tactics-note">
+                  <strong>Controle Central:</strong> Neutraliza as linhas diagonais e verticais do primeiro jogador.
+                </div>
+              </div>
+            </article>
+
+            <article class="strategy-card">
+              <div class="strategy-header">
+                <span class="strategy-icon">🧩</span>
+                <h3 class="strategy-title">4. Desarmando os Cantos Opostos</h3>
+              </div>
+              <p class="strategy-text">
+                Quando X joga em dois cantos diagonalmente opostos, uma armadilha sutil é criada para forçar o jogador O ao erro. O contra-ataque correto para O é <strong>jogar em uma das bordas (arestas laterais)</strong>, forçando X a se defender em vez de criar um fork.
+              </p>
+              <div class="mini-tactics">
+                <div class="mini-board-preview" aria-hidden="true">
+                  <div class="mini-cell x">X</div><div class="mini-cell target">O</div><div class="mini-cell"></div>
+                  <div class="mini-cell"></div><div class="mini-cell o">O</div><div class="mini-cell"></div>
+                  <div class="mini-cell"></div><div class="mini-cell"></div><div class="mini-cell x">X</div>
+                </div>
+                <div class="tactics-note">
+                  <strong>Resposta na Aresta:</strong> Quebra o ciclo de ataque e garante o empate seguro.
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 
-        <section class="panel" id="historia">
-          <div class="grid">
-            <article class="card"><h3>🏛️ Origem</h3><p>O jogo da velha tem registros históricos em civilizações antigas e virou clássico mundial.</p></article>
-            <article class="card"><h3>🌍 Popularidade</h3><p>Poucas regras, partida rápida e alto fator competitivo fazem dele um evergreen.</p></article>
-            <article class="card"><h3>💎 Versão Digital</h3><p>Aqui ele ganha acabamento premium sem perder a simplicidade original.</p></article>
+        <!-- ══ ABA 3: MINIMAX (EXPLICAÇÃO TÉCNICA) ══ -->
+        <section class="tab-panel" id="panel-minimax" role="tabpanel" aria-labelledby="tab-minimax">
+          <div class="minimax-container">
+            <article class="article-box">
+              <h3>🤖 Como a IA deste jogo pensa: O Algoritmo Minimax</h3>
+              <p>
+                No modo <strong>Imbatível</strong>, a IA não usa regras improvisadas nem "sorte". Ela executa o clássico algoritmo da Teoria dos Jogos conhecido como <strong>Minimax</strong>, formulado pelo matemático John von Neumann em 1928 para jogos de soma zero com informação perfeita.
+              </p>
+
+              <div class="tree-diagram">
+                <div class="tree-step">
+                  <span class="step-tag tag-max">NÍVEL MAX (IA)</span>
+                  <span>A IA busca a jogada que resulta na <strong>maior pontuação</strong> possível (+10 para vitória).</span>
+                </div>
+                <div class="tree-step">
+                  <span class="step-tag tag-min">NÍVEL MIN (HUMANO)</span>
+                  <span>A IA assume que você jogará com perfeição para <strong>minimizar</strong> os pontos dela (-10 para derrota).</span>
+                </div>
+                <div class="tree-step">
+                  <span class="step-tag tag-eval">AVALIAÇÃO DE FOLHA</span>
+                  <span>Estados terminais recebem nota: <code>+10 - profundidade</code> para vitórias rápidas, <code>0</code> para empates.</span>
+                </div>
+              </div>
+
+              <h4 style="color: var(--amber); margin: 1rem 0 0.5rem; font-size: 1.05rem;">Por que o jogo é matematicamente invencível?</h4>
+              <p>
+                O Jogo da Velha possui apenas <strong>255.168 estados possíveis</strong> de tabuleiro (ou meros 26.830 considerando simetrias e rotações). Como o espaço de busca é minúsculo para processadores modernos, o algoritmo avalia a totalidade de todos os finais possíveis instantaneamente (em menos de 2 milissegundos). Se você jogar com perfeição, o resultado será sempre <strong>Empate</strong>. Se cometer um único deslize, a IA vencerá infalivelmente.
+              </p>
+
+              <h4 style="color: var(--cyan); margin: 1rem 0 0.5rem; font-size: 1.05rem;">Código Conceitual da Recursão Minimax:</h4>
+              <pre class="code-block"><code>function minimax(tabuleiro, profundidade, isMaximizing) {
+  const vencedor = verificarVitoria(tabuleiro);
+  if (vencedor === 'IA') return 10 - profundidade;
+  if (vencedor === 'Humano') return profundidade - 10;
+  if (tabuleiroCheio(tabuleiro)) return 0;
+
+  if (isMaximizing) {
+    let melhor = -Infinity;
+    for (const casa of casasLivres(tabuleiro)) {
+      tabuleiro[casa] = 'IA';
+      melhor = Math.max(melhor, minimax(tabuleiro, profundidade + 1, false));
+      tabuleiro[casa] = '';
+    }
+    return melhor;
+  } else {
+    let melhor = +Infinity;
+    for (const casa of casasLivres(tabuleiro)) {
+      tabuleiro[casa] = 'Humano';
+      melhor = Math.min(melhor, minimax(tabuleiro, profundidade + 1, true));
+      tabuleiro[casa] = '';
+    }
+    return melhor;
+  }
+}</code></pre>
+            </article>
           </div>
         </section>
 
-        <section class="panel" id="galeria">
-          <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1553481187-be93c21490a9?auto=format&fit=crop&w=900&q=80" alt="Arcade retrô" />
-            <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=900&q=80" alt="Controles de jogo" />
-            <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&w=900&q=80" alt="Setup gamer" />
+        <!-- ══ ABA 4: HISTÓRIA & CRÉDITOS ══ -->
+        <section class="tab-panel" id="panel-historia" role="tabpanel" aria-labelledby="tab-historia">
+          <div class="history-grid">
+            <article class="strategy-card">
+              <div class="strategy-header">
+                <span class="strategy-icon">🏛️</span>
+                <h3 class="strategy-title">Terni Lapilli (Império Romano)</h3>
+              </div>
+              <p class="strategy-text">
+                O ancestral mais documentado do Jogo da Velha data do século I a.C. em Roma antiga, chamado de <em>Terni Lapilli</em>. Os cidadãos romanos entalhavam tabuleiros de nove casas diretamente nas calçadas de mármore e pedras dos fóruns de Roma para jogar com pedrinhas coloridas.
+              </p>
+            </article>
+
+            <article class="strategy-card">
+              <div class="strategy-header">
+                <span class="strategy-icon">💾</span>
+                <h3 class="strategy-title">OXO (1952) – O Pioneiro da Computação</h3>
+              </div>
+              <p class="strategy-text">
+                Em 1952, o cientista da computação britânico Alexander S. Douglas criou o <strong>OXO</strong> para o supercomputador EDSAC da Universidade de Cambridge como parte de sua tese sobre interação humano-computador. Foi um dos primeiros videogames gráficos da história da humanidade e já contava com IA perfeita!
+              </p>
+            </article>
           </div>
+
+          <article class="article-box">
+            <h3>⚙️ Engenharia e Arquitetura Desta Aplicação</h3>
+            <p>
+              Esta versão <strong>Arcade Retrô Deluxe</strong> foi construída com rigorosos padrões de engenharia de software frontend:
+            </p>
+            <ul style="color: var(--ink-muted); margin-left: 1.5rem; line-height: 1.8; font-size: 0.9rem;">
+              <li><strong>Zero Dependências Externas:</strong> HTML5 semântico nativo, CSS Grid de alta precisão e JavaScript ES6+ puro.</li>
+              <li><strong>Web Audio API Sintetizado:</strong> 100% dos efeitos sonoros (bips 8-bit, arpeggios e buzzers) são sintetizados em tempo real via osciladores matemáticos, eliminando carregamento de arquivos de áudio pesados.</li>
+              <li><strong>Acessibilidade WCAG 2.1 AA:</strong> Suporte completo a navegação por teclado (numpad, setas e números), leitor de tela dinâmico (<code>aria-live</code>) e respeito às preferências de movimento reduzido (<code>prefers-reduced-motion</code>).</li>
+              <li><strong>Design CRT Retrô:</strong> Efeito autêntico de scanlines e fósforo de tubo arcade com toggle instantâneo.</li>
+            </ul>
+          </article>
         </section>
       </div>
-    </section>
+    </div>
 
-    <footer class="footer">
-      <p class="footer-name">Felipe Junqueira Leite</p>
-      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
+    <!-- ══ RODAPÉ COMERCIAL & CRÉDITOS ══ -->
+    <footer class="arcade-footer">
+      <p class="footer-developer">Felipe Junqueira Leite</p>
+      <p class="footer-brand-title">Prumo Tech · Engenharia de Software, Aplicações Web de Alta Performance & Experiências Interativas</p>
+
       <div class="footer-badges">
-        <span class="cert">HTML5</span>
-        <span class="cert">CSS3</span>
-        <span class="cert">JavaScript</span>
-        <span class="cert">Mobile‑First</span>
-        <span class="cert">Canvas/Games</span>
-        <span class="cert">UX/UI</span>
+        <span class="tech-badge">HTML5 Semântico</span>
+        <span class="tech-badge">CSS Grid & Neon FX</span>
+        <span class="tech-badge">JavaScript ES6+</span>
+        <span class="tech-badge">Web Audio API 8-Bit</span>
+        <span class="tech-badge">Minimax Game AI</span>
+        <span class="tech-badge">Acessibilidade WCAG</span>
+        <span class="tech-badge">Mobile-First</span>
       </div>
-      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
+
+      <div>
+        <a href="https://wa.me/5532999482319?text=Ol%C3%A1%20Felipe!%20Vi%20o%20projeto%20Arcade%20Jogo%20da%20Velha%20e%20gostaria%20de%20conversar%20sobre%20desenvolvimento%20de%20projetos." target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+          <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.61c.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.29z"/></svg>
+          Solicitar Orçamento no WhatsApp
+        </a>
+      </div>
+
+      <p class="footer-copyright">© 2025 Felipe Junqueira Leite (Prumo Tech) — Todos os direitos reservados.</p>
     </footer>
   </main>
 
+  <!-- ══ MODAL DE CONFIRMAÇÃO NATIVO (<dialog>) ══ -->
+  <dialog id="resetModal" aria-labelledby="modalTitle" closedby="any">
+    <h2 id="modalTitle" class="modal-title">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+      Zerar Placar e Histórico?
+    </h2>
+    <p class="modal-desc">
+      Esta ação irá zerar todas as estatísticas salvas na memória desta máquina: vitórias de X, vitórias de O, empates e sequências registradas.
+    </p>
+    <form method="dialog" class="modal-actions">
+      <button value="cancel" class="btn-action btn-secondary" autofocus>Cancelar</button>
+      <button value="confirm" class="btn-action btn-danger">Confirmar e Zerar</button>
+    </form>
+  </dialog>
+
+  <!-- Container de Toasts -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- ════════════════════════════════════════════════════════════════════════ -->
+  <!-- SCRIPT: LÓGICA DO JOGO, MINIMAX, ÁUDIO, PARTICULAS E ACESSIBILIDADE     -->
+  <!-- ════════════════════════════════════════════════════════════════════════ -->
   <script>
-    // ── Tab navigation ──
-    const tabBtns  = [...document.querySelectorAll('.tab-btn')];
-    const tabPanels = [...document.querySelectorAll('.panel')];
-    tabBtns.forEach(btn => btn.addEventListener('click', () => {
-      tabBtns.forEach(b  => b.classList.remove('active'));
-      tabPanels.forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    }));
+    (function () {
+      'use strict';
 
-    // ── Game logic ──
-    const statusEl    = document.getElementById('status');
-    const boardEl     = document.getElementById('board');
-    const cells       = [...document.querySelectorAll('.cell')];
-    const scoreXEl    = document.getElementById('scoreX');
-    const scoreOEl    = document.getElementById('scoreO');
-    const scoreDEl    = document.getElementById('scoreD');
-    const scoreBoxX   = document.getElementById('scoreBoxX');
-    const resetRoundB = document.getElementById('resetRound');
-    const resetAllB   = document.getElementById('resetAll');
+      // ── ESTADO DA APLICAÇÃO ──
+      const STORAGE_KEY = 'arcade_tictactoe_deluxe_v2';
+      let board = Array(9).fill('');
+      let currentPlayer = 'X';
+      let startingPlayer = 'X'; // 'X', 'O', ou 'random'
+      let gameMode = 'ai'; // 'ai' ou 'pvp'
+      let difficulty = 'hard'; // 'easy', 'medium', 'hard'
+      let isGameLocked = false;
+      let focusedIndex = 4; // Começa focado no centro
+      let soundEnabled = true;
+      let crtEnabled = true;
 
-    let board  = Array(9).fill('');
-    let player = 'X';
-    let locked = false;
-    let score  = { X: 0, O: 0, D: 0 };
-    const WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+      // Estatísticas
+      let stats = {
+        scoreX: 0,
+        scoreO: 0,
+        scoreD: 0,
+        streak: 0,
+        bestStreak: 0,
+        total: 0
+      };
 
-    function findWinner() {
-      for (const [a,b,c] of WINS) {
-        if (board[a] && board[a] === board[b] && board[b] === board[c]) return { player: board[a], line: [a,b,c] };
+      // Combinações de Vitória e Coordenadas SVG (viewBox 0 0 300 300)
+      const WIN_COMBINATIONS = [
+        // Linhas horizontais (y: 50, 150, 250)
+        { line: [0, 1, 2], coords: { x1: 25, y1: 50, x2: 275, y2: 50 } },
+        { line: [3, 4, 5], coords: { x1: 25, y1: 150, x2: 275, y2: 150 } },
+        { line: [6, 7, 8], coords: { x1: 25, y1: 250, x2: 275, y2: 250 } },
+        // Linhas verticais (x: 50, 150, 250)
+        { line: [0, 3, 6], coords: { x1: 50, y1: 25, x2: 50, y2: 275 } },
+        { line: [1, 4, 7], coords: { x1: 150, y1: 25, x2: 150, y2: 275 } },
+        { line: [2, 5, 8], coords: { x1: 250, y1: 25, x2: 250, y2: 275 } },
+        // Diagonais
+        { line: [0, 4, 8], coords: { x1: 30, y1: 30, x2: 270, y2: 270 } },
+        { line: [2, 4, 6], coords: { x1: 270, y1: 30, x2: 30, y2: 270 } }
+      ];
+
+      // Mapeamento dos botões da grade
+      const cellNames = [
+        'Superior Esquerda', 'Superior Centro', 'Superior Direita',
+        'Meio Esquerda', 'Centro', 'Meio Direita',
+        'Inferior Esquerda', 'Inferior Centro', 'Inferior Direita'
+      ];
+
+      // ── ELEMENTOS DOM ──
+      const bodyEl          = document.body;
+      const liveAnnouncer   = document.getElementById('liveAnnouncer');
+      const cells           = Array.from(document.querySelectorAll('.cell-btn'));
+      const ledStatusEl     = document.getElementById('ledStatus');
+      const statusTextEl    = document.getElementById('statusText');
+      const modeBadgeEl     = document.getElementById('modeBadge');
+      const winSvg          = document.getElementById('winSvg');
+      const winLine         = document.getElementById('winLine');
+      const fxCanvas        = document.getElementById('fxCanvas');
+      const resetRoundBtn   = document.getElementById('resetRoundBtn');
+      const openResetModalBtn = document.getElementById('openResetModalBtn');
+      const resetModal      = document.getElementById('resetModal');
+      const toastContainer  = document.getElementById('toastContainer');
+
+      // Toggles Topo
+      const toggleSoundBtn  = document.getElementById('toggleSoundBtn');
+      const soundLabel      = document.getElementById('soundLabel');
+      const toggleCrtBtn    = document.getElementById('toggleCrtBtn');
+      const crtLabel        = document.getElementById('crtLabel');
+
+      // Modos e Seletores
+      const modeAiBtn       = document.getElementById('modeAiBtn');
+      const modePvpBtn      = document.getElementById('modePvpBtn');
+      const aiDiffSection   = document.getElementById('aiDiffSection');
+      const diffBtns        = Array.from(document.querySelectorAll('.diff-btn'));
+      const starterBtns     = Array.from(document.querySelectorAll('.starter-btn'));
+
+      // Placar
+      const scoreXEl        = document.getElementById('scoreX');
+      const scoreOEl        = document.getElementById('scoreO');
+      const scoreDEl        = document.getElementById('scoreD');
+      const streakCountEl   = document.getElementById('streakCount');
+      const bestStreakEl    = document.getElementById('bestStreakCount');
+      const totalMatchesEl  = document.getElementById('totalMatches');
+
+      // Abas
+      const tabBtns         = Array.from(document.querySelectorAll('.tab-btn'));
+      const tabPanels       = Array.from(document.querySelectorAll('.tab-panel'));
+
+      // ── WEB AUDIO API: SINTETIZADOR 100% PROCEDURAL ──
+      let audioCtx = null;
+
+      function getAudioContext() {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) audioCtx = new AudioContextClass();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
       }
-      return null;
-    }
 
-    function render() {
-      cells.forEach((cell, i) => {
-        cell.textContent = board[i];
-        cell.disabled    = !!board[i] || locked;
-        cell.className   = 'cell' + (board[i] ? ' ' + board[i].toLowerCase() : '');
+      function playSound(type) {
+        if (!soundEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+
+          if (type === 'x-move') {
+            // Pulso 8-bit rápido em onda quadrada (agudo / ciano)
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(587.33, now); // D5
+            osc.frequency.exponentialRampToValueAtTime(880, now + 0.08); // A5
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.09);
+          } else if (type === 'o-move') {
+            // Tom de onda dente-de-serra modulado retrô (magenta)
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(392, now); // G4
+            osc.frequency.exponentialRampToValueAtTime(523.25, now + 0.09); // C5
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.1);
+          } else if (type === 'win') {
+            // Fanfarra clássica arcade em arpeggio de 5 notas
+            const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+            notes.forEach((freq, idx) => {
+              const osc = ctx.createOscillator();
+              const gain = ctx.createGain();
+              osc.type = 'triangle';
+              const startTime = now + (idx * 0.08);
+              osc.frequency.setValueAtTime(freq, startTime);
+              gain.gain.setValueAtTime(0.15, startTime);
+              gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.18);
+              osc.connect(gain);
+              gain.connect(ctx.destination);
+              osc.start(startTime);
+              osc.stop(startTime + 0.19);
+            });
+          } else if (type === 'draw') {
+            // Buzzer grave retrô descendente
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(220, now);
+            osc.frequency.linearRampToValueAtTime(110, now + 0.28);
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.29);
+          } else if (type === 'ui') {
+            // Bip curto de interface
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(900, now);
+            osc.frequency.exponentialRampToValueAtTime(450, now + 0.04);
+            gain.gain.setValueAtTime(0.06, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.05);
+          }
+        } catch (e) {
+          // Navegador bloqueou áudio ou sem suporte
+        }
+      }
+
+      // ── SISTEMA DE CONFETES / PARTÍCULAS EM CANVAS ──
+      let particles = [];
+      let animationFrameId = null;
+
+      function resizeCanvas() {
+        if (!fxCanvas) return;
+        const rect = fxCanvas.getBoundingClientRect();
+        fxCanvas.width = rect.width;
+        fxCanvas.height = rect.height;
+      }
+      window.addEventListener('resize', resizeCanvas);
+
+      function triggerVictoryParticles(winner) {
+        // Respeitar prefers-reduced-motion
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        resizeCanvas();
+        const ctx = fxCanvas.getContext('2d');
+        if (!ctx) return;
+
+        const count = 75;
+        const colors = winner === 'X'
+          ? ['#00f0ff', '#38bdf8', '#ffffff', '#ffd166']
+          : ['#ff2d78', '#f43f5e', '#ffffff', '#ffd166'];
+
+        particles = [];
+        const centerX = fxCanvas.width / 2;
+        const centerY = fxCanvas.height / 2;
+
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 2 + Math.random() * 5.5;
+          particles.push({
+            x: centerX,
+            y: centerY,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 1.5,
+            size: 3 + Math.random() * 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            alpha: 1,
+            gravity: 0.12,
+            drag: 0.985,
+            life: 0.015 + Math.random() * 0.015
+          });
+        }
+
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+        function renderParticles() {
+          ctx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
+          let alive = 0;
+
+          for (const p of particles) {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += p.gravity;
+            p.vx *= p.drag;
+            p.vy *= p.drag;
+            p.alpha -= p.life;
+
+            if (p.alpha > 0) {
+              alive++;
+              ctx.save();
+              ctx.globalAlpha = Math.max(0, p.alpha);
+              ctx.fillStyle = p.color;
+              ctx.shadowColor = p.color;
+              ctx.shadowBlur = 6;
+              ctx.fillRect(p.x, p.y, p.size, p.size);
+              ctx.restore();
+            }
+          }
+
+          if (alive > 0) {
+            animationFrameId = requestAnimationFrame(renderParticles);
+          } else {
+            ctx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
+          }
+        }
+
+        renderParticles();
+      }
+
+      // ── PERSISTÊNCIA LOCALSTORAGE ──
+      function loadStats() {
+        try {
+          const data = localStorage.getItem(STORAGE_KEY);
+          if (data) {
+            const parsed = JSON.parse(data);
+            stats = Object.assign(stats, parsed);
+          }
+        } catch (e) {
+          console.warn('Erro ao carregar dados salvos:', e);
+        }
+        renderStats();
+      }
+
+      function saveStats() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
+        } catch (e) {
+          console.warn('Erro ao salvar dados:', e);
+        }
+        renderStats();
+      }
+
+      function renderStats() {
+        scoreXEl.textContent = stats.scoreX;
+        scoreOEl.textContent = stats.scoreO;
+        scoreDEl.textContent = stats.scoreD;
+        streakCountEl.textContent = (stats.streak > 0 ? '🔥 ' : '') + stats.streak;
+        bestStreakEl.textContent = '🏆 ' + stats.bestStreak;
+        totalMatchesEl.textContent = stats.total;
+      }
+
+      // ── LEITOR DE TELA (ANNOUNCER) ──
+      function announce(msg) {
+        if (!liveAnnouncer) return;
+        liveAnnouncer.textContent = '';
+        setTimeout(() => {
+          liveAnnouncer.textContent = msg;
+        }, 50);
+      }
+
+      // ── TOAST DE NOTIFICAÇÃO ──
+      function showToast(text, icon = '✨') {
+        const toast = document.createElement('div');
+        toast.className = 'toast-msg';
+        toast.innerHTML = `<span>${icon}</span><span>${text}</span>`;
+        toastContainer.appendChild(toast);
+        setTimeout(() => {
+          if (toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 2600);
+      }
+
+      // ── VERIFICAÇÃO DE VENCEDOR ──
+      function checkWinner(state) {
+        for (const combo of WIN_COMBINATIONS) {
+          const [a, b, c] = combo.line;
+          if (state[a] && state[a] === state[b] && state[b] === state[c]) {
+            return {
+              winner: state[a],
+              line: combo.line,
+              coords: combo.coords
+            };
+          }
+        }
+        if (state.every(Boolean)) {
+          return { winner: 'draw' };
+        }
+        return null;
+      }
+
+      // ── ALGORITMO MINIMAX PARA IA IMBATÍVEL ──
+      function getAvailableMoves(state) {
+        const moves = [];
+        for (let i = 0; i < 9; i++) {
+          if (!state[i]) moves.push(i);
+        }
+        return moves;
+      }
+
+      function minimax(state, depth, isMaximizing, aiSymbol, humanSymbol) {
+        const res = checkWinner(state);
+        if (res) {
+          if (res.winner === aiSymbol) return 10 - depth;
+          if (res.winner === humanSymbol) return depth - 10;
+          if (res.winner === 'draw') return 0;
+        }
+
+        const avail = getAvailableMoves(state);
+        if (avail.length === 0) return 0;
+
+        if (isMaximizing) {
+          let best = -Infinity;
+          for (const move of avail) {
+            state[move] = aiSymbol;
+            const score = minimax(state, depth + 1, false, aiSymbol, humanSymbol);
+            state[move] = '';
+            best = Math.max(best, score);
+          }
+          return best;
+        } else {
+          let best = Infinity;
+          for (const move of avail) {
+            state[move] = humanSymbol;
+            const score = minimax(state, depth + 1, true, aiSymbol, humanSymbol);
+            state[move] = '';
+            best = Math.min(best, score);
+          }
+          return best;
+        }
+      }
+
+      function computeBestMove(state, aiSymbol, humanSymbol) {
+        const avail = getAvailableMoves(state);
+        if (avail.length === 0) return null;
+
+        // Otimização: Primeiro movimento se tabuleiro vazio
+        if (avail.length === 9) {
+          const cornersAndCenter = [0, 2, 4, 6, 8];
+          return cornersAndCenter[Math.floor(Math.random() * cornersAndCenter.length)];
+        }
+
+        let bestScore = -Infinity;
+        let bestMoves = [];
+
+        for (const move of avail) {
+          state[move] = aiSymbol;
+          const score = minimax(state, 0, false, aiSymbol, humanSymbol);
+          state[move] = '';
+
+          if (score > bestScore) {
+            bestScore = score;
+            bestMoves = [move];
+          } else if (score === bestScore) {
+            bestMoves.push(move);
+          }
+        }
+
+        return bestMoves[Math.floor(Math.random() * bestMoves.length)];
+      }
+
+      function getAiMove() {
+        const avail = getAvailableMoves(board);
+        if (avail.length === 0) return null;
+
+        const aiSymbol = 'O';
+        const humanSymbol = 'X';
+
+        // 1. Fácil: 80% aleatório, 20% tático
+        if (difficulty === 'easy') {
+          if (Math.random() < 0.8) {
+            return avail[Math.floor(Math.random() * avail.length)];
+          }
+          // Vitória imediata
+          for (const m of avail) {
+            board[m] = aiSymbol;
+            if (checkWinner(board)?.winner === aiSymbol) { board[m] = ''; return m; }
+            board[m] = '';
+          }
+          // Bloqueio imediato
+          for (const m of avail) {
+            board[m] = humanSymbol;
+            if (checkWinner(board)?.winner === humanSymbol) { board[m] = ''; return m; }
+            board[m] = '';
+          }
+          return avail[Math.floor(Math.random() * avail.length)];
+        }
+
+        // 2. Médio: 55% Minimax, 45% heurística
+        if (difficulty === 'medium') {
+          if (Math.random() < 0.55) {
+            return computeBestMove(board, aiSymbol, humanSymbol);
+          }
+          // Bloqueia e tenta vencer, senão centro ou canto
+          for (const m of avail) {
+            board[m] = aiSymbol;
+            if (checkWinner(board)?.winner === aiSymbol) { board[m] = ''; return m; }
+            board[m] = '';
+          }
+          for (const m of avail) {
+            board[m] = humanSymbol;
+            if (checkWinner(board)?.winner === humanSymbol) { board[m] = ''; return m; }
+            board[m] = '';
+          }
+          if (avail.includes(4)) return 4;
+          return avail[Math.floor(Math.random() * avail.length)];
+        }
+
+        // 3. Imbatível: 100% Minimax perfeito
+        return computeBestMove(board, aiSymbol, humanSymbol);
+      }
+
+      // ── DESENHO DA LINHA DE VITÓRIA (SVG) ──
+      function drawVictoryLine(coords, winner) {
+        winLine.setAttribute('x1', coords.x1);
+        winLine.setAttribute('y1', coords.y1);
+        winLine.setAttribute('x2', coords.x2);
+        winLine.setAttribute('y2', coords.y2);
+
+        winLine.className = 'win-line-path draw-active ' + (winner === 'X' ? 'line-x' : 'line-o');
+      }
+
+      function clearVictoryLine() {
+        winLine.className = 'win-line-path';
+        winLine.setAttribute('x1', '0');
+        winLine.setAttribute('y1', '0');
+        winLine.setAttribute('x2', '0');
+        winLine.setAttribute('y2', '0');
+      }
+
+      // ── RENDERIZAÇÃO DO TABULEIRO & INTERFACE ──
+      function renderBoard() {
+        cells.forEach((btn, index) => {
+          const val = board[index];
+          const isMarked = Boolean(val);
+
+          // Remove classes anteriores
+          btn.classList.remove('x-marked', 'o-marked');
+
+          if (val === 'X') {
+            btn.classList.add('x-marked');
+          } else if (val === 'O') {
+            btn.classList.add('o-marked');
+          }
+
+          // Mantém a dica visual de número (1 a 9 sequencial)
+          const keyNum = index + 1;
+          btn.innerHTML = val ? val : `<span class="cell-key-hint">${keyNum}</span>`;
+
+          btn.disabled = isMarked || isGameLocked;
+          btn.setAttribute('aria-label', `Casa ${index + 1}: ${cellNames[index]}, ${val ? 'Marcada com ' + val : 'Vazia'}`);
+        });
+
+        // Atualiza display LED se o jogo não tiver terminado
+        if (!isGameLocked) {
+          if (currentPlayer === 'X') {
+            ledStatusEl.className = 'led-status x-turn';
+            statusTextEl.textContent = gameMode === 'ai' ? 'Sua Vez (Jogador X)' : 'Vez do Jogador 1 (X)';
+          } else {
+            ledStatusEl.className = 'led-status o-turn';
+            statusTextEl.textContent = gameMode === 'ai' ? 'IA Pensando (O)...' : 'Vez do Jogador 2 (O)';
+          }
+        }
+      }
+
+      // ── EXECUÇÃO DE JOGADAS ──
+      function handleMove(index) {
+        if (isGameLocked || board[index]) return;
+
+        board[index] = currentPlayer;
+        playSound(currentPlayer === 'X' ? 'x-move' : 'o-move');
+        announce(`Jogador ${currentPlayer} marcou na casa ${cellNames[index]}.`);
+
+        const result = checkWinner(board);
+
+        if (result) {
+          endGame(result);
+        } else {
+          // Alternar turno
+          currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+          renderBoard();
+
+          // Se for vez da IA no modo vs IA
+          if (gameMode === 'ai' && currentPlayer === 'O') {
+            isGameLocked = true;
+            // Delay sutil para simular reflexão arcade
+            const delay = difficulty === 'hard' ? 320 : 250;
+            setTimeout(() => {
+              const aiIndex = getAiMove();
+              if (aiIndex !== null) {
+                isGameLocked = false;
+                handleMove(aiIndex);
+              }
+            }, delay);
+          }
+        }
+      }
+
+      // ── FINAL DA PARTIDA ──
+      function endGame(result) {
+        isGameLocked = true;
+        stats.total++;
+
+        if (result.winner === 'draw') {
+          stats.scoreD++;
+          stats.streak = 0;
+          ledStatusEl.className = 'led-status draw';
+          statusTextEl.textContent = '🤝 Fim de Jogo: Deu Velha!';
+          playSound('draw');
+          announce('A partida terminou em empate. Deu velha!');
+        } else {
+          const winner = result.winner;
+          if (winner === 'X') {
+            stats.scoreX++;
+            stats.streak++;
+            if (stats.streak > stats.bestStreak) stats.bestStreak = stats.streak;
+            ledStatusEl.className = 'led-status win-x';
+            statusTextEl.textContent = gameMode === 'ai' ? '🎉 Você Venceu a Máquina!' : '🎉 Jogador X Venceu!';
+          } else {
+            stats.scoreO++;
+            stats.streak = 0;
+            ledStatusEl.className = 'led-status win-o';
+            statusTextEl.textContent = gameMode === 'ai' ? '⚡ A Máquina Venceu!' : '🎉 Jogador O Venceu!';
+          }
+
+          // Destaca células vencedoras
+          result.line.forEach(idx => cells[idx].classList.add('winning-cell'));
+
+          // Desenha linha de vitória dinâmica e aciona partículas
+          drawVictoryLine(result.coords, winner);
+          triggerVictoryParticles(winner);
+          playSound('win');
+          announce(`Partida encerrada. O jogador ${winner} venceu formando uma linha conectada.`);
+        }
+
+        saveStats();
+        renderBoard();
+      }
+
+      // ── REINICIAR RODADA ──
+      function startNewRound() {
+        board = Array(9).fill('');
+        isGameLocked = false;
+        clearVictoryLine();
+        cells.forEach(c => c.classList.remove('winning-cell'));
+
+        // Determinar quem começa
+        if (startingPlayer === 'random') {
+          currentPlayer = Math.random() < 0.5 ? 'X' : 'O';
+        } else {
+          currentPlayer = startingPlayer;
+        }
+
+        renderBoard();
+        announce(`Nova rodada iniciada. Jogador ${currentPlayer} começa.`);
+
+        // Se a IA começar
+        if (gameMode === 'ai' && currentPlayer === 'O') {
+          isGameLocked = true;
+          setTimeout(() => {
+            const aiIndex = getAiMove();
+            if (aiIndex !== null) {
+              isGameLocked = false;
+              handleMove(aiIndex);
+            }
+          }, 350);
+        }
+      }
+
+      // ── TECLADO & NAVEGAÇÃO ACESSÍVEL ──
+      // Mapeamento numérico:
+      // Teclado numérico físico (Numpad):
+      // 7 8 9 (linha 0) -> 0, 1, 2
+      // 4 5 6 (linha 1) -> 3, 4, 5
+      // 1 2 3 (linha 2) -> 6, 7, 8
+      const numpadMap = {
+        'Numpad7': 0, 'Numpad8': 1, 'Numpad9': 2,
+        'Numpad4': 3, 'Numpad5': 4, 'Numpad6': 5,
+        'Numpad1': 6, 'Numpad2': 7, 'Numpad3': 8
+      };
+      // Números normais 1 a 9 no topo:
+      const digitMap = {
+        'Digit1': 0, 'Digit2': 1, 'Digit3': 2,
+        'Digit4': 3, 'Digit5': 4, 'Digit6': 5,
+        'Digit7': 6, 'Digit8': 7, 'Digit9': 8
+      };
+
+      window.addEventListener('keydown', (e) => {
+        // Se um modal estiver aberto, deixa o foco no modal
+        if (resetModal.open) return;
+
+        // Numpad direto
+        if (numpadMap[e.code] !== undefined) {
+          e.preventDefault();
+          handleMove(numpadMap[e.code]);
+          cells[numpadMap[e.code]].focus();
+          return;
+        }
+
+        // Dígitos do topo do teclado
+        if (digitMap[e.code] !== undefined) {
+          e.preventDefault();
+          handleMove(digitMap[e.code]);
+          cells[digitMap[e.code]].focus();
+          return;
+        }
+
+        // Navegação por setas quando em foco no grid
+        const activeEl = document.activeElement;
+        const activeIdx = cells.indexOf(activeEl);
+
+        if (activeIdx !== -1) {
+          let nextIdx = activeIdx;
+          if (e.key === 'ArrowUp' && activeIdx >= 3) nextIdx = activeIdx - 3;
+          else if (e.key === 'ArrowDown' && activeIdx <= 5) nextIdx = activeIdx + 3;
+          else if (e.key === 'ArrowLeft' && activeIdx % 3 !== 0) nextIdx = activeIdx - 1;
+          else if (e.key === 'ArrowRight' && activeIdx % 3 !== 2) nextIdx = activeIdx + 1;
+
+          if (nextIdx !== activeIdx) {
+            e.preventDefault();
+            cells[nextIdx].focus();
+            return;
+          }
+        }
+
+        // Tecla R: Reiniciar rodada
+        if ((e.key === 'r' || e.key === 'R') && !e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          playSound('ui');
+          startNewRound();
+          showToast('Rodada reiniciada!', '🔄');
+          return;
+        }
+
+        // Tecla M: Alternar som
+        if ((e.key === 'm' || e.key === 'M') && !e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          toggleSound();
+          return;
+        }
+
+        // Tecla C: Alternar CRT
+        if ((e.key === 'c' || e.key === 'C') && !e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          toggleCrt();
+          return;
+        }
       });
-      scoreXEl.textContent = score.X;
-      scoreOEl.textContent = score.O;
-      scoreDEl.textContent = score.D;
-    }
 
-    function move(index) {
-      if (locked || board[index]) return;
-      board[index] = player;
-      const result = findWinner();
-      if (result) {
-        locked = true;
-        score[result.player]++;
-        statusEl.className = 'status win';
-        statusEl.textContent = `🎉 Jogador ${result.player} venceu!`;
-        result.line.forEach(i => cells[i].classList.add('winner'));
-      } else if (board.every(Boolean)) {
-        locked = true;
-        score.D++;
-        statusEl.className = 'status draw';
-        statusEl.textContent = '🤝 Empate!';
-      } else {
-        player = player === 'X' ? 'O' : 'X';
-        statusEl.className = player === 'X' ? 'status x-turn' : 'status o-turn';
-        statusEl.textContent = `Vez do jogador ${player}`;
+      // ── TOGGLES DE SOM E CRT ──
+      function toggleSound() {
+        soundEnabled = !soundEnabled;
+        if (soundEnabled) {
+          toggleSoundBtn.classList.add('active');
+          soundLabel.textContent = 'SOM: ON';
+          toggleSoundBtn.setAttribute('aria-label', 'Som: Ligado');
+          playSound('ui');
+          showToast('Efeitos sonoros ativados', '🔊');
+        } else {
+          toggleSoundBtn.classList.remove('active');
+          soundLabel.textContent = 'SOM: MUDO';
+          toggleSoundBtn.setAttribute('aria-label', 'Som: Mudo');
+          showToast('Efeitos sonoros desativados', '🔇');
+        }
+        announce(`Som ${soundEnabled ? 'ligado' : 'desligado'}`);
       }
-      render();
-    }
 
-    function resetRound() {
-      board  = Array(9).fill('');
-      player = 'X';
-      locked = false;
-      statusEl.className   = 'status x-turn';
-      statusEl.textContent = 'Vez do jogador X';
-      cells.forEach(c => { c.className = 'cell'; c.textContent = ''; c.disabled = false; });
-      render();
-    }
+      function toggleCrt() {
+        crtEnabled = !crtEnabled;
+        if (crtEnabled) {
+          bodyEl.classList.add('crt-active');
+          toggleCrtBtn.classList.add('active');
+          crtLabel.textContent = 'CRT: ON';
+          toggleCrtBtn.setAttribute('aria-label', 'Filtro CRT: Ligado');
+          showToast('Filtro CRT e Scanlines ligados', '📺');
+        } else {
+          bodyEl.classList.remove('crt-active');
+          toggleCrtBtn.classList.remove('active');
+          crtLabel.textContent = 'CRT: OFF';
+          toggleCrtBtn.setAttribute('aria-label', 'Filtro CRT: Desligado');
+          showToast('Filtro CRT desativado', '🖥️');
+        }
+        playSound('ui');
+        announce(`Filtro CRT ${crtEnabled ? 'ativado' : 'desativado'}`);
+      }
 
-    function resetAll() {
-      score = { X: 0, O: 0, D: 0 };
-      resetRound();
-    }
+      toggleSoundBtn.addEventListener('click', toggleSound);
+      toggleCrtBtn.addEventListener('click', toggleCrt);
 
-    boardEl.addEventListener('click', e => {
-      const t = e.target.closest('.cell');
-      if (t) move(Number(t.dataset.index));
-    });
-    resetRoundB.addEventListener('click', resetRound);
-    resetAllB.addEventListener('click', resetAll);
-    render();
+      // Inicia com classe CRT
+      bodyEl.classList.add('crt-active');
+
+      // ── GERENCIAMENTO DE ABAS ──
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          playSound('ui');
+          tabBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          tabPanels.forEach(p => p.classList.remove('active'));
+
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          const panelId = btn.getAttribute('data-tab');
+          const activePanel = document.getElementById(panelId);
+          if (activePanel) {
+            activePanel.classList.add('active');
+            announce(`Aba ${btn.textContent.trim()} aberta.`);
+          }
+        });
+      });
+
+      // ── SELETORES DE CONFIGURAÇÃO (MODO, DIFICULDADE, INÍCIO) ──
+      modeAiBtn.addEventListener('click', () => {
+        if (gameMode === 'ai') return;
+        playSound('ui');
+        gameMode = 'ai';
+        modeAiBtn.classList.add('active');
+        modeAiBtn.setAttribute('aria-checked', 'true');
+        modePvpBtn.classList.remove('active');
+        modePvpBtn.setAttribute('aria-checked', 'false');
+        aiDiffSection.style.display = 'block';
+        modeBadgeEl.textContent = 'HUMANO VS IA';
+        showToast('Modo 1 Jogador vs IA ativado', '🤖');
+        startNewRound();
+      });
+
+      modePvpBtn.addEventListener('click', () => {
+        if (gameMode === 'pvp') return;
+        playSound('ui');
+        gameMode = 'pvp';
+        modePvpBtn.classList.add('active');
+        modePvpBtn.setAttribute('aria-checked', 'true');
+        modeAiBtn.classList.remove('active');
+        modeAiBtn.setAttribute('aria-checked', 'false');
+        aiDiffSection.style.display = 'none';
+        modeBadgeEl.textContent = '2 JOGADORES (LOCAL)';
+        showToast('Modo 2 Jogadores Local ativado', '👥');
+        startNewRound();
+      });
+
+      diffBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          playSound('ui');
+          diffBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-checked', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-checked', 'true');
+          difficulty = btn.getAttribute('data-diff');
+          const diffLabels = { easy: 'Fácil (Casual)', medium: 'Médio (Tático)', hard: 'Imbatível (Minimax)' };
+          showToast(`Dificuldade IA: ${diffLabels[difficulty]}`, '⚡');
+          startNewRound();
+        });
+      });
+
+      starterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          playSound('ui');
+          starterBtns.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-checked', 'false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-checked', 'true');
+          startingPlayer = btn.getAttribute('data-starter');
+          const startLabels = { X: 'Jogador X começa', O: 'Jogador O começa', random: 'Sorteio aleatório' };
+          showToast(`Início: ${startLabels[startingPlayer]}`, '🎲');
+          startNewRound();
+        });
+      });
+
+      // ── MODAL NATIVO PARA ZERAR PLACAR (<dialog>) ──
+      openResetModalBtn.addEventListener('click', () => {
+        playSound('ui');
+        if (typeof resetModal.showModal === 'function') {
+          resetModal.showModal();
+        } else {
+          // Fallback gracioso caso navegador não suporte dialog
+          if (confirm('Zerar placar e estatísticas salvas?')) {
+            clearAllStats();
+          }
+        }
+      });
+
+      // Trata fechamento com clique fora (Light Dismiss fallback) conforme Modern Web Guidance
+      resetModal.addEventListener('pointerdown', (e) => {
+        const rect = resetModal.getBoundingClientRect();
+        const isOutside = e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom;
+        if (isOutside) {
+          resetModal.close('cancel');
+        }
+      });
+
+      resetModal.addEventListener('close', () => {
+        if (resetModal.returnValue === 'confirm') {
+          clearAllStats();
+          playSound('draw');
+          showToast('Placar e histórico zerados!', '🧹');
+        } else {
+          playSound('ui');
+        }
+      });
+
+      function clearAllStats() {
+        stats = { scoreX: 0, scoreO: 0, scoreD: 0, streak: 0, bestStreak: 0, total: 0 };
+        saveStats();
+        startNewRound();
+      }
+
+      // ── CLIQUES NO TABULEIRO ──
+      cells.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = Number(btn.getAttribute('data-index'));
+          handleMove(idx);
+        });
+      });
+
+      resetRoundBtn.addEventListener('click', () => {
+        playSound('ui');
+        startNewRound();
+        showToast('Nova rodada iniciada', '🔄');
+      });
+
+      // Inicialização
+      loadStats();
+      startNewRound();
+      resizeCanvas();
+    })();
   </script>
 </body>
 </html>
