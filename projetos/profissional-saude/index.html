@@ -3,148 +3,1842 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clínica Aurora | Saúde Integrada</title>
-  <meta name="description" content="Clínica Aurora — atendimento humanizado, agendamento fácil e presença digital completa." />
+  <title>Clínica Aurora | Saúde Integrada & Bem-Estar</title>
+  <meta name="description" content="Clínica Aurora Saúde Integrada — Atendimento médico humanizado, Medicina da Família, Nutrição, Psicologia e Cardiologia com consultas presenciais e telemedicina." />
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Prata&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
   <style>
-    :root{--bg:#ecfeff;--ink:#0f172a;--muted:#475569;--card:#ffffff;--line:#cbd5e1;--brand:#0f766e;--brand2:#0891b2}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Manrope,sans-serif;color:var(--ink);background:linear-gradient(160deg,#cffafe,#eef2ff);min-height:100vh}
-    .wrap{width:min(1120px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
-    .hero{border:1px solid #ffffffa8;border-radius:20px;overflow:hidden;background:#ffffffd9;box-shadow:0 18px 45px #0f172a22}
-    .hero-img{height:200px;background:url('https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=1600&q=80') center/cover}
-    @media(min-width:640px){.hero-img{height:280px}}
-    .hero-body{padding:1.2rem}
-    @media(min-width:640px){.hero-body{padding:1.4rem 1.8rem}}
-    h1{margin:0 0 .5rem;font:400 clamp(2rem,6vw,3rem) Prata,serif;line-height:1.15}
-    .lead{max-width:72ch;color:var(--muted);line-height:1.65}
-    .meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
-    .badge{border:1px solid #99f6e4;background:#ecfeff;padding:.4rem .75rem;border-radius:999px;font-size:.82rem;font-weight:700}
-    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem}
-    .tab-btn{border:1px solid var(--line);background:#fff;padding:.5rem .9rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
-    .tab-btn:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
-    .tab-btn.active{background:var(--brand);color:#ecfeff;border-color:var(--brand)}
-    .panel{display:none;padding:1rem 0}
-    .panel.active{display:block;animation:fadeUp .28s ease}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    .grid{display:grid;grid-template-columns:1fr;gap:.8rem}
-    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;transition:.2s ease}
-    .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px #0f172a14}
-    .card h3{margin:0 0 .4rem;font-size:1rem;color:var(--brand)}
-    .card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
-    .gallery{display:grid;grid-template-columns:1fr;gap:.7rem}
-    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
-    .gallery img{width:100%;height:180px;object-fit:cover;border-radius:14px;border:1px solid var(--line);transition:.2s ease}
-    .gallery img:hover{transform:scale(1.03)}
-    .faq details{border:1px solid var(--line);border-radius:14px;padding:.75rem 1rem;background:#fff;margin-bottom:.6rem;transition:.2s ease}
-    .faq details[open]{border-color:var(--brand)}
-    .faq summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center}
-    .faq summary::after{content:'+';font-size:1.2rem;color:var(--brand)}
-    .faq details[open] summary::after{content:'−'}
-    .faq p{margin:.6rem 0 0;color:var(--muted);font-size:.9rem}
-    .cta{background:linear-gradient(130deg,var(--brand),var(--brand2));color:#ecfeff;padding:1.2rem 1.4rem;border-radius:16px;margin-top:1.2rem}
-    .cta a{display:inline-block;margin-top:.5rem;background:#ecfeff;color:#134e4a;text-decoration:none;padding:.65rem 1.2rem;border-radius:999px;font-weight:800;font-size:.9rem;transition:.2s ease}
-    .cta a:hover{transform:translateY(-2px);box-shadow:0 6px 18px #0f172a33}
-    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#ffffffb0;border-radius:0 0 20px 20px}
-    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
-    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
-    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
-    .cert{background:var(--brand);color:#ecfeff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
-    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+    :root {
+      --bg: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f0fdfa;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --border-accent: #ccfbf1;
+      
+      --brand: #0f766e;
+      --brand-dark: #115e59;
+      --brand-light: #14b8a6;
+      --brand-soft: #f0fdfa;
+      
+      --accent-blue: #0284c7;
+      --accent-blue-soft: #e0f2fe;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-light: #64748b;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 20px 35px -10px rgba(15, 118, 110, 0.12);
+      
+      --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(204, 251, 241, 0.5) 0px, transparent 50%),
+        radial-gradient(at 100% 10%, rgba(224, 242, 254, 0.5) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(240, 253, 250, 0.7) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      width: min(1200px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 0 0.5rem;
+    }
+
+    /* Navbar */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 0;
+      transition: var(--transition);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25);
+    }
+
+    .brand-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 2.5;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 1.8rem;
+    }
+
+    @media (min-width: 900px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--brand);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.68rem 1.35rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(15, 118, 110, 0.25);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(15, 118, 110, 0.38);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      border-color: var(--border);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-subtle);
+      border-color: var(--brand-light);
+      color: var(--brand);
+    }
+
+    .btn-wa {
+      background: #16a34a;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25);
+    }
+
+    .btn-wa:hover {
+      background: #15803d;
+      box-shadow: 0 6px 18px rgba(22, 163, 74, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      padding: 0.45rem 0.95rem;
+      font-size: 0.82rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 3rem 0 2rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    @media (min-width: 960px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--brand-soft);
+      border: 1px solid var(--border-accent);
+      color: var(--brand-dark);
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand-light);
+      box-shadow: 0 0 8px var(--brand-light);
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.3rem, 5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.1rem;
+      color: var(--text-main);
+    }
+
+    .text-teal {
+      color: var(--brand);
+    }
+
+    .hero-lead {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 1.8rem;
+      max-width: 54ch;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.2rem;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .trust-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trust-stat strong {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--brand-dark);
+      line-height: 1;
+    }
+
+    .trust-stat span {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-top: 0.25rem;
+    }
+
+    /* Hero Visual Card */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-card-img {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 4px solid #ffffff;
+      background: #ffffff;
+    }
+
+    .hero-card-img img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .floating-pill {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1.1rem;
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .pill-top {
+      top: 18px;
+      right: -10px;
+    }
+
+    .pill-bottom {
+      bottom: 20px;
+      left: -10px;
+    }
+
+    .floating-pill .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 4.5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--brand);
+      background: var(--brand-soft);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+
+    /* Specialties Cards */
+    .specialties-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .specialties-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .specialties-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .specialty-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .specialty-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border-accent);
+    }
+
+    .specialty-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      transition: var(--transition);
+    }
+
+    .specialty-card:hover .specialty-icon {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .specialty-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .specialty-desc {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
+    }
+
+    .specialty-specialist {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 0;
+      border-top: 1px solid var(--border);
+      margin-bottom: 1.2rem;
+    }
+
+    .doc-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .doc-info strong {
+      display: block;
+      font-size: 0.84rem;
+      color: var(--text-main);
+    }
+
+    .doc-info span {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--text-light);
+    }
+
+    .specialty-btn {
+      width: 100%;
+      text-align: center;
+      background: var(--bg-subtle);
+      color: var(--brand);
+      border: 1px solid var(--border-accent);
+      padding: 0.55rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .specialty-btn:hover {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    /* Interactive Appointment Booking System */
+    .booking-section {
+      background: linear-gradient(180deg, rgba(240, 253, 250, 0.6) 0%, rgba(255, 255, 255, 1) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .booking-wrapper {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 960px) {
+      .booking-wrapper {
+        grid-template-columns: 1.25fr 0.75fr;
+      }
+    }
+
+    .booking-form-pane {
+      padding: 2.2rem;
+    }
+
+    .booking-summary-pane {
+      background: #f8fafc;
+      border-left: 1px solid var(--border);
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .step-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--brand);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Modality Switch */
+    .modality-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .modality-btn {
+      padding: 0.9rem 1rem;
+      border: 2px solid var(--border);
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      text-align: left;
+    }
+
+    .modality-btn strong {
+      font-size: 0.92rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .modality-btn span {
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    .modality-btn.active {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+    }
+
+    .modality-btn.active strong {
+      color: var(--brand-dark);
+    }
+
+    /* Specialty & Doctor selector */
+    .select-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 600px) {
+      .select-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.7rem 0.95rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-family: inherit;
+      color: var(--text-main);
+      background: #fff;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+    }
+
+    /* Date & Time Picker */
+    .slots-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 1rem 0 0.5rem;
+    }
+
+    .date-scroll {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      scrollbar-width: thin;
+    }
+
+    .date-pill {
+      flex: 0 0 auto;
+      padding: 0.6rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: #fff;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      min-width: 72px;
+    }
+
+    .date-pill:hover {
+      border-color: var(--brand-light);
+    }
+
+    .date-pill.active {
+      background: var(--brand);
+      color: #fff;
+      border-color: var(--brand);
+      box-shadow: 0 4px 10px rgba(15, 118, 110, 0.25);
+    }
+
+    .date-pill .day {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .date-pill .num {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-top: 0.1rem;
+    }
+
+    .time-slots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 480px) {
+      .time-slots {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .time-btn {
+      padding: 0.5rem;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .time-btn:hover {
+      border-color: var(--brand-light);
+      color: var(--brand);
+    }
+
+    .time-btn.active {
+      background: var(--brand-soft);
+      border-color: var(--brand);
+      color: var(--brand-dark);
+      box-shadow: 0 0 0 1px var(--brand);
+    }
+
+    /* Summary Card Styling */
+    .summary-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.4rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+
+    .summary-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.86rem;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .summary-item .label {
+      color: var(--text-light);
+    }
+
+    .summary-item .value {
+      font-weight: 700;
+      color: var(--text-main);
+      text-align: right;
+    }
+
+    .summary-note {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-accent);
+      padding: 0.75rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    /* Insurance / Convênios Section */
+    .insurance-section {
+      background: #ffffff;
+    }
+
+    .search-insurance-box {
+      max-width: 450px;
+      margin: 0 auto 2.5rem;
+      position: relative;
+    }
+
+    .search-insurance-input {
+      width: 100%;
+      padding: 0.8rem 1rem 0.8rem 2.8rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .search-insurance-input:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+    }
+
+    .search-insurance-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--text-light);
+      pointer-events: none;
+    }
+
+    .insurance-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .insurance-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .insurance-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .insurance-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .insurance-card:hover {
+      background: #fff;
+      border-color: var(--brand-light);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .insurance-logo-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--brand);
+      border: 1px solid var(--border);
+      font-size: 1.1rem;
+    }
+
+    .insurance-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .insurance-status {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #15803d;
+      background: #dcfce7;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+    }
+
+    .insurance-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--text-muted);
+    }
+
+    /* FAQ Details */
+    .faq-list {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .faq-item {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .faq-item[open] {
+      border-color: var(--brand-light);
+      box-shadow: var(--shadow-md);
+    }
+
+    .faq-summary {
+      padding: 1.2rem 1.4rem;
+      font-weight: 700;
+      font-size: 0.96rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      color: var(--text-main);
+      list-style: none;
+    }
+
+    .faq-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.25s ease;
+      color: var(--brand);
+    }
+
+    .faq-item[open] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-content {
+      padding: 0 1.4rem 1.3rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      background: #ffffff;
+      padding: 3.5rem 0 2.5rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-author {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--brand-dark);
+    }
+
+    .footer-role {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .footer-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .tech-pill {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-accent);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--brand-dark);
+    }
+
+    .footer-copy {
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+
+    /* Toast Notification System */
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      pointer-events: none;
+    }
+
+    .toast {
+      pointer-events: auto;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.95rem 1.3rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15);
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      max-width: 400px;
+      border-left: 5px solid var(--brand);
+    }
+
+    .toast.success {
+      border-left-color: #16a34a;
+    }
+
+    .toast.info {
+      border-left-color: var(--accent-blue);
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(20px) scale(0.96); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    @keyframes toastOut {
+      from { transform: translateY(0) scale(1); opacity: 1; }
+      to { transform: translateY(20px) scale(0.96); opacity: 0; }
+    }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="hero-img"></div>
-      <div class="hero-body">
-        <h1>Clínica Aurora</h1>
-        <p class="lead">Projeto de presença digital para profissional de saúde com linguagem acolhedora, foco em confiança e jornada clara para agendamento. A página combina conteúdo educativo, prova social e conversão para WhatsApp.</p>
-        <div class="meta">
-          <span class="badge">📅 Agendamento Integrado</span>
-          <span class="badge">🔍 SEO Local</span>
-          <span class="badge">📱 Experiência Mobile</span>
+
+  <!-- Header Navigation -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="brand-logo" aria-label="Página inicial Clínica Aurora">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 2v20M2 12h20"></path>
+          </svg>
+        </div>
+        <span>Clínica <span class="text-teal">Aurora</span></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegação da Clínica">
+        <a href="#especialidades" class="nav-link">Especialidades</a>
+        <a href="#agendamento" class="nav-link">Agendamento Online</a>
+        <a href="#convenios" class="nav-link">Convênios Aceitos</a>
+        <a href="#faq" class="nav-link">Perguntas Frequentes</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="#agendamento" class="btn btn-primary btn-sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Agendar Consulta
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="dot"></span>
+            Saúde Integrada & Atendimento Humanizado
+          </div>
+          <h1>Cuidado médico de excelência, <span class="text-teal">onde você estiver</span>.</h1>
+          <p class="hero-lead">
+            Unimos medicina preventiva, cardiologia de ponta, acompanhamento nutricional e suporte psicológico para cuidar da sua saúde integral de forma acolhedora, presencialmente ou por telemedicina.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#agendamento" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              Marcar Consulta Agora
+            </a>
+            <a href="https://wa.me/5511983909578?text=Ol%C3%A1%2C%20gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20as%20consultas%20na%20Cl%C3%ADnica%20Aurora." target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              Falar com a Recepção
+            </a>
+          </div>
+
+          <div class="hero-trust">
+            <div class="trust-stat">
+              <strong>+12.000</strong>
+              <span>Pacientes Acompanhados</span>
+            </div>
+            <div class="trust-stat">
+              <strong>4.9 / 5.0</strong>
+              <span>Avaliação no Google</span>
+            </div>
+            <div class="trust-stat">
+              <strong>15+</strong>
+              <span>Convênios Credenciados</span>
+            </div>
+          </div>
         </div>
 
-        <nav class="tabs" aria-label="Seções">
-          <button class="tab-btn active" data-tab="visao">Visão Geral</button>
-          <button class="tab-btn" data-tab="servicos">Especialidades</button>
-          <button class="tab-btn" data-tab="galeria">Ambientes</button>
-          <button class="tab-btn" data-tab="depo">Depoimentos</button>
-          <button class="tab-btn" data-tab="faq">FAQ</button>
-        </nav>
-
-        <section class="panel active" id="visao">
-          <div class="grid">
-            <article class="card"><h3>🎯 Posicionamento</h3><p>Marca com tom humano, visual limpo e credibilidade clínica para atrair pacientes que valorizam acolhimento e consistência.</p></article>
-            <article class="card"><h3>🚀 Conversão</h3><p>Blocos estratégicos de CTA, horário de atendimento, localização e respostas rápidas para reduzir abandono.</p></article>
-            <article class="card"><h3>⚡ Performance</h3><p>Estrutura leve, imagens otimizadas e navegação por abas para consumo rápido no celular.</p></article>
+        <div class="hero-visual">
+          <div class="hero-card-img">
+            <img src="https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=1200&q=80" alt="Consultório moderno e acolhedor da Clínica Aurora" />
           </div>
-        </section>
 
-        <section class="panel" id="servicos">
-          <div class="grid">
-            <article class="card"><h3>🩺 Clínica Geral</h3><p>Avaliação preventiva, check-up e condutas personalizadas com acompanhamento contínuo.</p></article>
-            <article class="card"><h3>🥗 Nutrição</h3><p>Planos alimentares orientados por rotina, objetivo e histórico clínico.</p></article>
-            <article class="card"><h3>🧠 Saúde Mental</h3><p>Atendimento psicológico com foco em qualidade de vida e gestão emocional.</p></article>
+          <div class="floating-pill pill-top">
+            <div class="icon" style="background:#0284c7;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            </div>
+            <div>
+              <strong style="display:block; font-size:0.84rem;">Agendamento Express</strong>
+              <span style="font-size:0.75rem; color:var(--text-light);">Confirmação em minutos</span>
+            </div>
           </div>
-        </section>
 
-        <section class="panel" id="galeria">
-          <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=900&q=80" alt="Consultório moderno" />
-            <img src="https://images.unsplash.com/photo-1666214277657-bd337d815dfa?auto=format&fit=crop&w=900&q=80" alt="Atendimento profissional" />
-            <img src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=900&q=80" alt="Recepção da clínica" />
+          <div class="floating-pill pill-bottom">
+            <div class="icon" style="background:#16a34a;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div>
+              <strong style="display:block; font-size:0.84rem;">Telemedicina HD</strong>
+              <span style="font-size:0.75rem; color:var(--text-light);">Atendimento em todo o Brasil</span>
+            </div>
           </div>
-        </section>
-
-        <section class="panel" id="depo">
-          <div class="grid">
-            <article class="card"><p>⭐⭐⭐⭐⭐ "Consegui marcar consulta em menos de 2 minutos. Site lindo e muito claro."</p><strong>— Fernanda, 32 anos</strong></article>
-            <article class="card"><p>⭐⭐⭐⭐⭐ "Passei a confiar mais na clínica só de navegar. Conteúdo muito bem explicado."</p><strong>— João, 41 anos</strong></article>
-            <article class="card"><p>⭐⭐⭐⭐⭐ "Atendimento rápido e humano. A experiência digital refletiu isso."</p><strong>— Carla, 28 anos</strong></article>
-          </div>
-        </section>
-
-        <section class="panel faq" id="faq">
-          <details><summary>Atende convênio?</summary><p>Sim. Trabalhamos com os principais convênios da região e também atendimento particular.</p></details>
-          <details><summary>Qual o horário de atendimento?</summary><p>Segunda a sexta, das 8h às 19h, com agenda estendida em alguns dias.</p></details>
-          <details><summary>Como agendar?</summary><p>Pelo botão de WhatsApp com confirmação automática de dados.</p></details>
-        </section>
-
-        <div class="cta">
-          <strong>Pronto para transformar o atendimento da sua clínica? 🏥</strong><br />
-          <a href="#">Falar com consultoria</a>
         </div>
       </div>
     </section>
 
-    <footer class="footer">
-      <p class="footer-name">Felipe Junqueira Leite</p>
-      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
-      <div class="footer-badges">
-        <span class="cert">HTML5</span>
-        <span class="cert">CSS3</span>
-        <span class="cert">JavaScript</span>
-        <span class="cert">Mobile‑First</span>
-        <span class="cert">SEO</span>
-        <span class="cert">UX/UI</span>
+    <!-- Specialties Section -->
+    <section class="section container" id="especialidades">
+      <div class="section-header">
+        <span class="section-tag">Corpo Clínico Integrado</span>
+        <h2 class="section-title">Especialidades Médicas Integradas</h2>
+        <p class="section-desc">Uma equipe multidisciplinar atuando em sinergia para entender você por inteiro e garantir diagnósticos rápidos e precisos.</p>
       </div>
-      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
-    </footer>
+
+      <div class="specialties-grid">
+        <!-- Medicina da Família -->
+        <article class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h3 class="specialty-title">Medicina da Família</h3>
+          <p class="specialty-desc">Acompanhamento longitudinal, check-ups preventivos, rastreamento precoce e coordenação contínua do seu histórico de saúde.</p>
+          <div class="specialty-specialist">
+            <img class="doc-avatar" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=120&q=80" alt="Dra. Camila Torres" />
+            <div class="doc-info">
+              <strong>Dra. Camila Torres</strong>
+              <span>CRM 148.920 • Médica de Família</span>
+            </div>
+          </div>
+          <button type="button" class="specialty-btn select-spec-btn" data-spec="Medicina da Família" data-doc="Dra. Camila Torres">
+            Agendar nesta Especialidade →
+          </button>
+        </article>
+
+        <!-- Cardiologia Clínica -->
+        <article class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          </div>
+          <h3 class="specialty-title">Cardiologia Clínica</h3>
+          <p class="specialty-desc">Prevenção cardiovascular, eletrocardiograma de alta definição, controle de hipertensão, colesterol e avaliação pré-operatória.</p>
+          <div class="specialty-specialist">
+            <img class="doc-avatar" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=120&q=80" alt="Dr. Ricardo Silveira" />
+            <div class="doc-info">
+              <strong>Dr. Ricardo Silveira</strong>
+              <span>CRM 132.405 • Cardiologista</span>
+            </div>
+          </div>
+          <button type="button" class="specialty-btn select-spec-btn" data-spec="Cardiologia" data-doc="Dr. Ricardo Silveira">
+            Agendar nesta Especialidade →
+          </button>
+        </article>
+
+        <!-- Nutrição Clínica -->
+        <article class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.5-4.5 10-10 10S2 17.5 2 12A10 10 0 0 1 12 2z"></path><path d="M12 6v6l4 2"></path></svg>
+          </div>
+          <h3 class="specialty-title">Nutrição Clínica</h3>
+          <p class="specialty-desc">Avaliação de composição corporal por bioimpedância, reeducação alimentar, suporte para longevidade e nutrição esportiva.</p>
+          <div class="specialty-specialist">
+            <img class="doc-avatar" src="https://images.unsplash.com/photo-1594824813579-994344485593?auto=format&fit=crop&w=120&q=80" alt="Nutr. Larissa Prado" />
+            <div class="doc-info">
+              <strong>Nutr. Larissa Prado</strong>
+              <span>CRN 42.110 • Nutricionista Clínica</span>
+            </div>
+          </div>
+          <button type="button" class="specialty-btn select-spec-btn" data-spec="Nutrição Clínica" data-doc="Nutr. Larissa Prado">
+            Agendar nesta Especialidade →
+          </button>
+        </article>
+
+        <!-- Psicologia & Saúde Mental -->
+        <article class="specialty-card">
+          <div class="specialty-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z"></path></svg>
+          </div>
+          <h3 class="specialty-title">Psicologia Clínica</h3>
+          <p class="specialty-desc">Terapia Cognitivo-Comportamental (TCC) para gestão do estresse, ansiedade, burnout e fortalecimento da estabilidade emocional.</p>
+          <div class="specialty-specialist">
+            <img class="doc-avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&q=80" alt="Psic. Beatriz Mendes" />
+            <div class="doc-info">
+              <strong>Psic. Beatriz Mendes</strong>
+              <span>CRP 06/158.420 • Psicóloga Clínica</span>
+            </div>
+          </div>
+          <button type="button" class="specialty-btn select-spec-btn" data-spec="Psicologia" data-doc="Psic. Beatriz Mendes">
+            Agendar nesta Especialidade →
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <!-- Interactive Appointment Booking System -->
+    <section class="section booking-section" id="agendamento">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Agendamento Fácil & Rápido</span>
+          <h2 class="section-title">Marque sua Consulta em Poucos Passos</h2>
+          <p class="section-desc">Escolha entre atendimento presencial na clínica ou telemedicina por vídeo e receba a confirmação imediata pelo WhatsApp.</p>
+        </div>
+
+        <div class="booking-wrapper">
+          <!-- Form Pane -->
+          <div class="booking-form-pane">
+            <div class="step-label">1. Escolha a Modalidade de Atendimento</div>
+            <div class="modality-toggle">
+              <button type="button" class="modality-btn active" id="btn-modal-presencial">
+                <strong>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                  Consulta Presencial
+                </strong>
+                <span>Av. Paulista / Jardins • São Paulo, SP</span>
+              </button>
+
+              <button type="button" class="modality-btn" id="btn-modal-online">
+                <strong>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                  Telemedicina Online
+                </strong>
+                <span>Vídeo seguro em HD com receita digital</span>
+              </button>
+            </div>
+
+            <div class="step-label">2. Especialidade e Especialista</div>
+            <div class="select-grid">
+              <div class="form-group">
+                <label class="form-label" for="booking-spec">Especialidade</label>
+                <select class="form-control" id="booking-spec">
+                  <option value="Medicina da Família">Medicina da Família</option>
+                  <option value="Cardiologia">Cardiologia Clínica</option>
+                  <option value="Nutrição Clínica">Nutrição Clínica</option>
+                  <option value="Psicologia">Psicologia Clínica</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="booking-doc">Profissional Responsável</label>
+                <select class="form-control" id="booking-doc">
+                  <option value="Dra. Camila Torres">Dra. Camila Torres (Medicina da Família)</option>
+                  <option value="Dr. Ricardo Silveira">Dr. Ricardo Silveira (Cardiologista)</option>
+                  <option value="Nutr. Larissa Prado">Nutr. Larissa Prado (Nutrição)</option>
+                  <option value="Psic. Beatriz Mendes">Psic. Beatriz Mendes (Psicologia)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="step-label">3. Escolha a Data e Horário Disponível</div>
+            <div class="date-scroll" id="date-scroll-container">
+              <!-- Dynamically populated dates -->
+            </div>
+
+            <div class="slots-title">Horários Disponíveis no Dia:</div>
+            <div class="time-slots" id="time-slots-container">
+              <button type="button" class="time-btn active">08:30</button>
+              <button type="button" class="time-btn">09:45</button>
+              <button type="button" class="time-btn">11:00</button>
+              <button type="button" class="time-btn">14:15</button>
+              <button type="button" class="time-btn">15:30</button>
+              <button type="button" class="time-btn">17:00</button>
+            </div>
+
+            <div class="step-label">4. Seus Dados de Contato</div>
+            <form id="booking-form">
+              <div class="select-grid">
+                <div class="form-group">
+                  <label class="form-label" for="patient-name">Nome Completo do Paciente *</label>
+                  <input type="text" class="form-control" id="patient-name" placeholder="Ex: Mariana Silva" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="patient-phone">WhatsApp para Confirmação *</label>
+                  <input type="tel" class="form-control" id="patient-phone" placeholder="(11) 98765-4321" required />
+                </div>
+              </div>
+
+              <div class="select-grid" style="margin-top: 0.8rem;">
+                <div class="form-group">
+                  <label class="form-label" for="patient-email">E-mail (para confirmação e lembretes)</label>
+                  <input type="email" class="form-control" id="patient-email" placeholder="mariana@exemplo.com" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="patient-insurance">Forma de Atendimento / Convênio</label>
+                  <select class="form-control" id="patient-insurance">
+                    <option value="Particular">Particular (Nota para Reembolso)</option>
+                    <option value="Bradesco Saúde">Bradesco Saúde</option>
+                    <option value="SulAmérica">SulAmérica</option>
+                    <option value="Amil">Amil</option>
+                    <option value="Unimed">Unimed Seguros</option>
+                    <option value="NotreDame Intermédica">NotreDame Intermédica</option>
+                    <option value="Porto Seguro">Porto Seguro Saúde</option>
+                    <option value="Care Plus">Care Plus</option>
+                    <option value="Outro Convênio">Outro Convênio</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: 0.8rem;">
+                <label class="form-label" for="patient-notes">Observações ou Sintomas (Opcional)</label>
+                <input type="text" class="form-control" id="patient-notes" placeholder="Ex: Primeira consulta, check-up de rotina, acompanhamento de exames..." />
+              </div>
+            </form>
+          </div>
+
+          <!-- Summary Pane -->
+          <div class="booking-summary-pane">
+            <div>
+              <div class="summary-card">
+                <h3 class="summary-heading">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Resumo do Agendamento
+                </h3>
+                <div class="summary-list">
+                  <div class="summary-item">
+                    <span class="label">Modalidade:</span>
+                    <span class="value" id="summary-modality">Consulta Presencial</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="label">Especialidade:</span>
+                    <span class="value" id="summary-spec">Medicina da Família</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="label">Profissional:</span>
+                    <span class="value" id="summary-doc">Dra. Camila Torres</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="label">Data & Horário:</span>
+                    <span class="value" id="summary-datetime" style="color:var(--brand-dark);">03/11 às 08:30</span>
+                  </div>
+                  <div class="summary-item">
+                    <span class="label">Local / Sala:</span>
+                    <span class="value" id="summary-location">Aurora Paulista, Andar 12</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="summary-note">
+                🔒 <strong>Atendimento Seguro:</strong> Seus dados são protegidos conforme a LGPD Médica. A confirmação é enviada em tempo real para a recepção via WhatsApp.
+              </div>
+            </div>
+
+            <div>
+              <button type="button" class="btn btn-wa" id="btn-submit-booking" style="width: 100%; font-size: 1rem; padding: 0.85rem;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                Confirmar no WhatsApp da Recepção
+              </button>
+              <div style="font-size: 0.76rem; text-align: center; color: var(--text-light); margin-top: 0.6rem;">
+                Recepção: (11) 98390-9578 • Resposta média: 5 minutos
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Health Insurance / Convênios Section -->
+    <section class="section insurance-section" id="convenios">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Ampla Cobertura</span>
+          <h2 class="section-title">Convênios Médicos Aceitos</h2>
+          <p class="section-desc">Atendemos os principais planos de saúde por credenciamento direto ou sistema de reembolso assistido com emissão de relatório completo.</p>
+        </div>
+
+        <div class="search-insurance-box">
+          <svg class="search-insurance-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="search" class="search-insurance-input" id="insurance-search" placeholder="Buscar seu convênio (ex: Bradesco, Amil, Unimed...)" aria-label="Pesquisar convênio médico" />
+        </div>
+
+        <div class="insurance-grid" id="insurance-grid">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section container" id="faq">
+      <div class="section-header">
+        <span class="section-tag">Tire Suas Dúvidas</span>
+        <h2 class="section-title">Perguntas Frequentes</h2>
+        <p class="section-desc">Informações transparentes sobre consultas, políticas de retorno, estacionamento e reembolso.</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-summary">
+            Como funciona a consulta por Telemedicina?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="faq-content">
+            A telemedicina ocorre através de uma sala de vídeo criptografada e segura, acessível direto pelo navegador do celular ou computador, sem necessidade de instalar aplicativos pesados. O médico tem acesso ao seu prontuário eletrônico e pode emitir receitas médicas digitais com certificado ICP-Brasil, válidas em todas as farmácias do país, além de pedidos de exames e atestados.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Como funciona o reembolso para convênios não credenciados diretamente?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="faq-content">
+            Nossa equipe administrativa prepara toda a documentação necessária: nota fiscal eletrônica detalhada, recibo com CRM do médico responsável e laudo justificativo de conduta clínica para você anexar no aplicativo do seu convênio e obter o reembolso máximo previsto na sua apólice.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Qual a política de retorno da consulta?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="faq-content">
+            Para consultas que demandam avaliação de exames laboratoriais ou de imagem solicitados durante o atendimento, o paciente tem direito a um retorno dentro do prazo de até 30 dias corridos, conforme preconizado pelas normas do Conselho Federal de Medicina (CFM).
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            A clínica possui estacionamento no local?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="faq-content">
+            Sim, o edifício conta com serviço de valet e estacionamento coberto no próprio subsolo, com elevador panorâmico e total acessibilidade para pessoas com mobilidade reduzida ou cadeirantes.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Quais são as formas de pagamento aceitas para atendimentos particulares?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="faq-content">
+            Aceitamos PIX, cartões de crédito (com possibilidade de parcelamento para planos terapêuticos integrados) e cartões de débito. Todos os comprovantes fiscais são emitidos imediatamente.
+          </div>
+        </details>
+      </div>
+    </section>
   </main>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Professional Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-author">Felipe Junqueira Leite</p>
+      <p class="footer-role">Desenvolvedor Frontend & Engenheiro de Software · Criação de Sites e Plataformas Digitais de Saúde</p>
+      <div class="footer-badges">
+        <span class="tech-pill">HTML5 Semântico</span>
+        <span class="tech-pill">CSS Moderno</span>
+        <span class="tech-pill">Design Humanizado</span>
+        <span class="tech-pill">Acessibilidade WCAG</span>
+        <span class="tech-pill">Mobile-First</span>
+        <span class="tech-pill">Agendamento WhatsApp</span>
+      </div>
+      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Clínica Aurora Saúde Integrada. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript -->
   <script>
-    const tabs=[...document.querySelectorAll('.tab-btn')];
-    const panels=[...document.querySelectorAll('.panel')];
-    tabs.forEach(btn=>btn.addEventListener('click',()=>{
-      tabs.forEach(b=>b.classList.remove('active'));
-      panels.forEach(p=>p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    }));
+    (function () {
+      'use strict';
+
+      // Insurance Directory Data
+      const insurances = [
+        { name: 'Bradesco Saúde', tag: 'Credenciado', initial: 'B' },
+        { name: 'SulAmérica Saúde', tag: 'Credenciado', initial: 'S' },
+        { name: 'Amil Assistência', tag: 'Credenciado', initial: 'A' },
+        { name: 'Unimed Seguros', tag: 'Credenciado', initial: 'U' },
+        { name: 'NotreDame Intermédica', tag: 'Credenciado', initial: 'N' },
+        { name: 'Porto Seguro Saúde', tag: 'Credenciado', initial: 'P' },
+        { name: 'Care Plus', tag: 'Credenciado', initial: 'C' },
+        { name: 'Allianz Saúde', tag: 'Reembolso Ágil', initial: 'A' },
+        { name: 'Omint Saúde', tag: 'Reembolso Ágil', initial: 'O' },
+        { name: 'Sompo Saúde', tag: 'Credenciado', initial: 'S' },
+        { name: 'Golden Cross', tag: 'Credenciado', initial: 'G' },
+        { name: 'Prevent Senior', tag: 'Reembolso Ágil', initial: 'P' }
+      ];
+
+      // State
+      let selectedModality = 'Consulta Presencial';
+      let selectedSpec = 'Medicina da Família';
+      let selectedDoc = 'Dra. Camila Torres';
+      let selectedDate = '';
+      let selectedTime = '08:30';
+
+      const doctorMap = {
+        'Medicina da Família': 'Dra. Camila Torres',
+        'Cardiologia': 'Dr. Ricardo Silveira',
+        'Nutrição Clínica': 'Nutr. Larissa Prado',
+        'Psicologia': 'Psic. Beatriz Mendes'
+      };
+
+      // Toast function
+      window.showToast = function (message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        let iconSvg = '';
+        if (type === 'success') {
+          iconSvg = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+        } else {
+          iconSvg = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`;
+        }
+
+        toast.innerHTML = `${iconSvg} <span>${message}</span>`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.animation = 'toastOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+          setTimeout(() => toast.remove(), 300);
+        }, 3600);
+      };
+
+      // Populate Dates for next 10 days
+      const dateScroll = document.getElementById('date-scroll-container');
+      const dayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+      const monthNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+      
+      const today = new Date();
+      let firstAvailableDateStr = '';
+
+      for (let i = 1; i <= 10; i++) {
+        const d = new Date();
+        d.setDate(today.getDate() + i);
+        
+        // Skip Sundays
+        if (d.getDay() === 0) continue;
+
+        const dayName = dayNames[d.getDay()];
+        const dayNum = String(d.getDate()).padStart(2, '0');
+        const monthName = monthNames[d.getMonth()];
+        const dateStr = `${dayNum}/${monthName}`;
+
+        if (!firstAvailableDateStr) {
+          firstAvailableDateStr = `${dayName}, ${dateStr}`;
+          selectedDate = firstAvailableDateStr;
+        }
+
+        const pill = document.createElement('button');
+        pill.type = 'button';
+        pill.className = `date-pill ${firstAvailableDateStr === `${dayName}, ${dateStr}` ? 'active' : ''}`;
+        pill.innerHTML = `
+          <span class="day">${dayName}</span>
+          <span class="num">${dayNum}</span>
+        `;
+
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.date-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          selectedDate = `${dayName}, ${dateStr}`;
+          updateSummary();
+        });
+
+        dateScroll.appendChild(pill);
+      }
+
+      // Time slots click handlers
+      const timeBtns = document.querySelectorAll('.time-btn');
+      timeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          timeBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          selectedTime = btn.textContent.trim();
+          updateSummary();
+        });
+      });
+
+      // Modality buttons
+      const btnPresencial = document.getElementById('btn-modal-presencial');
+      const btnOnline = document.getElementById('btn-modal-online');
+
+      btnPresencial.addEventListener('click', () => {
+        btnPresencial.classList.add('active');
+        btnOnline.classList.remove('active');
+        selectedModality = 'Consulta Presencial';
+        updateSummary();
+      });
+
+      btnOnline.addEventListener('click', () => {
+        btnOnline.classList.add('active');
+        btnPresencial.classList.remove('active');
+        selectedModality = 'Telemedicina Online';
+        updateSummary();
+      });
+
+      // Select elements
+      const bookingSpec = document.getElementById('booking-spec');
+      const bookingDoc = document.getElementById('booking-doc');
+
+      bookingSpec.addEventListener('change', (e) => {
+        selectedSpec = e.target.value;
+        const matchedDoc = doctorMap[selectedSpec];
+        if (matchedDoc) {
+          bookingDoc.value = matchedDoc;
+          selectedDoc = matchedDoc;
+        }
+        updateSummary();
+      });
+
+      bookingDoc.addEventListener('change', (e) => {
+        selectedDoc = e.target.value;
+        updateSummary();
+      });
+
+      // Specialty cards quick select buttons
+      document.querySelectorAll('.select-spec-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const spec = btn.getAttribute('data-spec');
+          const doc = btn.getAttribute('data-doc');
+          
+          if (spec && bookingSpec) {
+            bookingSpec.value = spec;
+            selectedSpec = spec;
+          }
+          if (doc && bookingDoc) {
+            bookingDoc.value = doc;
+            selectedDoc = doc;
+          }
+          updateSummary();
+
+          // Scroll smoothly to appointment section
+          const agendamentoEl = document.getElementById('agendamento');
+          if (agendamentoEl) {
+            agendamentoEl.scrollIntoView({ behavior: 'smooth' });
+          }
+          showToast(`Especialidade ${spec} selecionada no formulário de agendamento!`, 'info');
+        });
+      });
+
+      // Update Summary Card
+      function updateSummary() {
+        const sumModality = document.getElementById('summary-modality');
+        const sumSpec = document.getElementById('summary-spec');
+        const sumDoc = document.getElementById('summary-doc');
+        const sumDatetime = document.getElementById('summary-datetime');
+        const sumLocation = document.getElementById('summary-location');
+
+        if (sumModality) sumModality.textContent = selectedModality;
+        if (sumSpec) sumSpec.textContent = selectedSpec;
+        if (sumDoc) sumDoc.textContent = selectedDoc;
+        if (sumDatetime) sumDatetime.textContent = `${selectedDate} às ${selectedTime}`;
+        if (sumLocation) {
+          sumLocation.textContent = selectedModality === 'Telemedicina Online' 
+            ? 'Sala Virtual HD (Link no WhatsApp)' 
+            : 'Aurora Paulista, Andar 12 (SP)';
+        }
+      }
+
+      updateSummary();
+
+      // Phone Input Mask (11) 98888-8888
+      const phoneInput = document.getElementById('patient-phone');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+          let v = e.target.value.replace(/\D/g, '');
+          if (v.length > 11) v = v.slice(0, 11);
+          if (v.length > 6) {
+            v = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+          } else if (v.length > 2) {
+            v = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+          }
+          e.target.value = v;
+        });
+      }
+
+      // Submit Booking to WhatsApp
+      const btnSubmitBooking = document.getElementById('btn-submit-booking');
+      if (btnSubmitBooking) {
+        btnSubmitBooking.addEventListener('click', (e) => {
+          e.preventDefault();
+          const nameInput = document.getElementById('patient-name');
+          const emailInput = document.getElementById('patient-email');
+          const insuranceSelect = document.getElementById('patient-insurance');
+          const notesInput = document.getElementById('patient-notes');
+
+          const name = nameInput ? nameInput.value.trim() : '';
+          const phone = phoneInput ? phoneInput.value.trim() : '';
+          const email = emailInput ? emailInput.value.trim() : '';
+          const insurance = insuranceSelect ? insuranceSelect.value : 'Particular';
+          const notes = notesInput ? notesInput.value.trim() : '';
+
+          if (!name) {
+            showToast('Por favor, informe seu nome completo para o agendamento.', 'info');
+            nameInput.focus();
+            return;
+          }
+
+          if (!phone || phone.length < 14) {
+            showToast('Por favor, informe um WhatsApp válido com DDD.', 'info');
+            phoneInput.focus();
+            return;
+          }
+
+          const message = `*SOLICITAÇÃO DE AGENDAMENTO — CLÍNICA AURORA*\n\n` +
+            `🩺 *Modalidade:* ${selectedModality}\n` +
+            `📋 *Especialidade:* ${selectedSpec}\n` +
+            `👨‍⚕️ *Profissional:* ${selectedDoc}\n` +
+            `📅 *Data e Horário:* ${selectedDate} às ${selectedTime}\n\n` +
+            `👤 *Paciente:* ${name}\n` +
+            `📱 *WhatsApp:* ${phone}\n` +
+            (email ? `✉️ *E-mail:* ${email}\n` : '') +
+            `🏥 *Convênio / Atendimento:* ${insurance}\n` +
+            (notes ? `📝 *Observações:* ${notes}\n` : '') +
+            `\nAguardo a confirmação do horário pela recepção. Obrigado!`;
+
+          const waUrl = `https://wa.me/5511983909578?text=${encodeURIComponent(message)}`;
+
+          showToast('Redirecionando para o WhatsApp da recepção para confirmação...', 'success');
+          
+          setTimeout(() => {
+            window.open(waUrl, '_blank');
+          }, 600);
+        });
+      }
+
+      // Render Insurance Grid & Search
+      const insuranceGrid = document.getElementById('insurance-grid');
+      const insuranceSearch = document.getElementById('insurance-search');
+
+      function renderInsurances(query = '') {
+        if (!insuranceGrid) return;
+        insuranceGrid.innerHTML = '';
+        const q = query.toLowerCase().trim();
+
+        const filtered = insurances.filter(ins => ins.name.toLowerCase().includes(q));
+
+        if (filtered.length === 0) {
+          insuranceGrid.innerHTML = `
+            <div class="insurance-empty">
+              <p>Nenhum convênio encontrado com o termo "<strong>${query}</strong>".</p>
+              <p style="font-size:0.86rem; margin-top:0.4rem;">
+                Consulte nossa recepção para saber sobre <strong>reembolso assistido</strong> para sua operadora.
+              </p>
+              <a href="https://wa.me/5511983909578?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20se%20meu%20conv%C3%AAnio%20possui%20reembolso%20na%20Cl%C3%ADnica%20Aurora." target="_blank" class="btn btn-secondary btn-sm" style="margin-top:1rem;">
+                Consultar via WhatsApp
+              </a>
+            </div>
+          `;
+          return;
+        }
+
+        filtered.forEach(ins => {
+          const card = document.createElement('div');
+          card.className = 'insurance-card';
+          card.innerHTML = `
+            <div class="insurance-logo-badge">${ins.initial}</div>
+            <div class="insurance-name">${ins.name}</div>
+            <span class="insurance-status">${ins.tag}</span>
+          `;
+          insuranceGrid.appendChild(card);
+        });
+      }
+
+      if (insuranceSearch) {
+        insuranceSearch.addEventListener('input', (e) => {
+          renderInsurances(e.target.value);
+        });
+      }
+
+      renderInsurances();
+
+    })();
   </script>
 </body>
 </html>

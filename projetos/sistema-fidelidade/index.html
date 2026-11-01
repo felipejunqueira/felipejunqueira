@@ -1,553 +1,1565 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Fidelidade e Indicação</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="min-h-screen bg-[radial-gradient(circle_at_top,_#dbeafe_0%,_#f8fafc_45%,_#eef2ff_100%)] p-3 sm:p-4 md:p-8 font-sans text-slate-800">
+    <title>Clube Fideliza+ | Cartão VIP & Recompensas Gamificadas</title>
+    <meta name="description" content="Plataforma gamificada de fidelidade para varejo: cartão VIP digital com QR Code, cartela de carimbos, resgate de vouchers e simulador de compras em tempo real.">
 
-    <div class="max-w-6xl mx-auto space-y-4 sm:space-y-6">
-        <header class="relative overflow-hidden rounded-3xl bg-slate-950 text-white shadow-2xl ring-1 ring-slate-900/5">
-            <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(59,130,246,.28),transparent_35%,rgba(16,185,129,.18),transparent_75%)]"></div>
-            <div class="relative p-5 sm:p-6 md:p-8 flex flex-col gap-4">
-                <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                    <div class="max-w-2xl space-y-2">
-                        <span class="inline-flex w-fit rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-200">Admin / Operação</span>
-                        <div>
-                            <h1 class="text-2xl sm:text-3xl font-black tracking-tight">Painel de Fidelidade</h1>
-                            <p class="mt-1 max-w-xl text-sm sm:text-base text-slate-300">Cadastre clientes, indique por nome ou telefone e acompanhe saldo, bônus e indicações em uma tela pensada para celular.</p>
-                        </div>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        brand: {
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca'
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        }
+                    },
+                    boxShadow: {
+                        'card-vip': '0 20px 40px -15px rgba(15, 23, 42, 0.4)',
+                        'glow-gold': '0 0 30px rgba(245, 158, 11, 0.35)',
+                        'glow-indigo': '0 0 30px rgba(99, 102, 241, 0.35)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Efeitos visuais para o cartão e animações */
+        .vip-card-shine {
+            background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 60%);
+        }
+        @keyframes stamp-pop {
+            0% { transform: scale(2.2) rotate(-15deg); opacity: 0; }
+            70% { transform: scale(0.9) rotate(5deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .animate-stamp {
+            animation: stamp-pop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        .stamp-pulse {
+            animation: pulse 2s infinite;
+        }
+        canvas#confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-900 text-slate-100 font-sans selection:bg-indigo-500 selection:text-white pb-12 antialiased">
+    <!-- Canvas de Confetes para Celebrações -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-6 space-y-6">
+        <!-- HEADER PRINCIPAL COM ALTERNADOR DE VISÃO (CLIENTE vs LOJISTA) -->
+        <header class="bg-slate-950/80 backdrop-blur-md rounded-3xl p-5 sm:p-6 border border-slate-800 shadow-2xl">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-5">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
                     </div>
-                    <button onclick="limparDados()" class="inline-flex items-center justify-center rounded-xl bg-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/40">
-                        Zerar sistema
-                    </button>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+                                Fideliza<span class="text-indigo-400">+</span> Gamificado
+                            </h1>
+                            <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full">
+                                Varejo 2.0
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-400">Cartão digital de carimbos, cashback inteligente e recompensas exclusivas.</p>
+                    </div>
                 </div>
 
-                <div class="grid gap-3 sm:grid-cols-3">
-                    <div class="rounded-2xl bg-white/10 p-4 backdrop-blur">
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-slate-300">Clientes</p>
-                        <p id="totalClientes" class="mt-1 text-2xl font-bold">0</p>
-                    </div>
-                    <div class="rounded-2xl bg-white/10 p-4 backdrop-blur">
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-slate-300">Saldo total</p>
-                        <p id="totalSaldo" class="mt-1 text-2xl font-bold">R$ 0,00</p>
-                    </div>
-                    <div class="rounded-2xl bg-white/10 p-4 backdrop-blur">
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-slate-300">Indicações</p>
-                        <p id="totalIndicacoes" class="mt-1 text-2xl font-bold">0</p>
-                    </div>
-                    <div class="rounded-2xl bg-white/10 p-4 backdrop-blur sm:col-span-3 lg:col-span-1">
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-slate-300">Cashback resgatado</p>
-                        <p id="totalResgatado" class="mt-1 text-2xl font-bold">R$ 0,00</p>
-                    </div>
+                {/* Alternador de Abas: Visão do Cliente vs Painel Admin */}
+                <div class="flex items-center bg-slate-900 p-1.5 rounded-2xl border border-slate-800 self-start md:self-auto shadow-inner">
+                    <button
+                        id="tabBtnCliente"
+                        onclick="alternarAba('cliente')"
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                        <span>Visão do Cliente</span>
+                    </button>
+                    <button
+                        id="tabBtnAdmin"
+                        onclick="alternarAba('admin')"
+                        class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
+                        <span>Painel do Estabelecimento</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Barra de Seleção de Cliente Ativo para Demonstração em Tempo Real -->
+            <div class="mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div class="flex items-center gap-2">
+                    <span class="text-slate-400 font-semibold">Cliente ativo na simulação:</span>
+                    <select
+                        id="seletorClienteAtivo"
+                        onchange="mudarClienteAtivo(this.value)"
+                        class="bg-slate-900 border border-slate-700 text-indigo-300 font-bold px-3 py-1.5 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                        <!-- Preenchido via JavaScript -->
+                    </select>
+                </div>
+
+                <div class="flex items-center gap-3 text-[11px] text-slate-400">
+                    <span class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Som e Confetes Ativos
+                    </span>
+                    <span>•</span>
+                    <button onclick="tocarSomCelebraTest()" class="text-indigo-400 hover:underline font-bold">
+                        🔊 Testar Som de Conquista
+                    </button>
                 </div>
             </div>
         </header>
 
-        <div class="grid gap-4 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:items-start">
-            <div class="order-1 rounded-3xl border border-white/60 bg-white/90 p-4 sm:p-6 shadow-xl backdrop-blur lg:sticky lg:top-6">
-                <div class="mb-5 space-y-2">
-                    <h2 class="text-lg sm:text-xl font-black text-slate-900">Novo cadastro</h2>
-                    <p class="text-sm text-slate-500">Preencha os dados do cliente exatamente como quer que apareçam na lista.</p>
-                </div>
-                
-                <form id="formCadastro" class="space-y-4">
-                    <div>
-                        <label for="nome" class="block text-sm font-semibold text-slate-700 mb-1">Nome completo do cliente</label>
-                        <input type="text" id="nome" required autocomplete="name" class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" placeholder="Ex: João da Silva">
-                        <p class="mt-1 text-xs text-slate-500">Digite o nome do cliente como você quer ver no painel.</p>
-                    </div>
-                    
-                    <div>
-                        <label for="telefone" class="block text-sm font-semibold text-slate-700 mb-1">Telefone principal do cliente</label>
-                        <input type="tel" id="telefone" required inputmode="numeric" autocomplete="tel" class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" placeholder="Ex: (11) 99999-0000">
-                        <p class="mt-1 text-xs text-slate-500">Use o número com DDD. O sistema remove máscara e usa só os dígitos.</p>
-                    </div>
+        <!-- ========================================== -->
+        <!-- ABA 1: VISÃO DO CLIENTE (CARTÃO VIP & GAMIFICAÇÃO) -->
+        <!-- ========================================== -->
+        <main id="secaoCliente" class="space-y-6">
+            <!-- Grid Superior: Cartão Virtual VIP 3D + Simulador de Compra -->
+            <div class="grid lg:grid-cols-12 gap-6 items-stretch">
+                <!-- CARTÃO VIRTUAL VIP DINÂMICO (COLUNA ESQUERDA) -->
+                <div class="lg:col-span-6 flex flex-col">
+                    <div id="cartaoVip" class="relative rounded-3xl p-6 sm:p-8 overflow-hidden shadow-card-vip transition-all duration-500 border border-white/10 flex-1 flex flex-col justify-between min-h-[300px]">
+                        <!-- Gradiente e Brilho do Cartão (atualizado dinamicamente pelo nível VIP) -->
+                        <div id="cartaoGradiente" class="absolute inset-0 bg-gradient-to-br from-amber-600 via-amber-800 to-slate-950 opacity-95"></div>
+                        <div class="vip-card-shine absolute inset-0 pointer-events-none"></div>
 
-                    <div class="rounded-2xl border border-amber-200 bg-amber-50 p-4">
-                        <label for="telefoneIndicador" class="block text-sm font-semibold text-amber-900 mb-1">Quem indicou? opcional</label>
-                        <input type="text" id="telefoneIndicador" class="w-full rounded-xl border border-amber-300 bg-white px-4 py-3 text-base outline-none transition placeholder:text-slate-400 focus:border-amber-500 focus:ring-4 focus:ring-amber-100" placeholder="Ex: Maria Oliveira ou (11) 98888-7777">
-                        <p class="mt-1 text-xs text-amber-800">Pode digitar nome ou telefone. Se houver nomes iguais, use o telefone para evitar dúvida.</p>
-                        <p class="mt-1 text-xs font-semibold text-amber-900">Aviso: se quem indicou ainda não estiver no banco de dados, o cadastro segue normalmente, mas sem bônus de indicação.</p>
-                    </div>
+                        <!-- Topo do Cartão: Logo, Chip e Nível VIP -->
+                        <div class="relative z-10 flex items-start justify-between">
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-7 h-7 rounded-lg bg-white/20 backdrop-blur flex items-center justify-center text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                    </div>
+                                    <span class="text-sm font-black tracking-widest text-white uppercase">Clube Fideliza+</span>
+                                </div>
+                                <div class="w-10 h-7 rounded-md bg-gradient-to-r from-yellow-200 to-yellow-500 border border-yellow-100/50 shadow-inner flex items-center justify-center opacity-90 mt-2">
+                                    <div class="w-8 h-4 border-t border-b border-yellow-700/40"></div>
+                                </div>
+                            </div>
 
-                    <button type="submit" class="w-full rounded-2xl bg-emerald-500 px-4 py-3 font-bold text-white shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-600 focus:outline-none focus:ring-4 focus:ring-emerald-200 mt-2">
-                        Cadastrar Cliente
-                    </button>
-                </form>
-
-                <div id="mensagemStatus" class="mt-4 hidden rounded-2xl border px-4 py-3 text-sm font-medium" aria-live="polite"></div>
-            </div>
-
-            <div class="order-2 rounded-3xl border border-white/60 bg-white/90 p-4 sm:p-6 shadow-xl backdrop-blur">
-                <div class="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between border-b border-slate-100 pb-5">
-                    <div>
-                        <h2 class="text-lg sm:text-xl font-black text-slate-900">Base de clientes e saldo</h2>
-                        <p class="text-sm text-slate-500">Lista rápida para consulta do atendimento.</p>
-                    </div>
-                    
-                    <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto shrink-0">
-                        <!-- Campo de Busca -->
-                        <div class="relative w-full sm:w-64">
-                            <input 
-                                type="text" 
-                                id="buscaCliente" 
-                                oninput="atualizarTela()"
-                                placeholder="Buscar cliente..." 
-                                class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 pl-10 text-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
-                            >
-                            <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                            <!-- Badge do Nível VIP -->
+                            <div id="badgeNivelVip" class="flex flex-col items-end">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-amber-200">Categoria</span>
+                                <div class="bg-amber-400 text-slate-950 font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider shadow-lg flex items-center gap-1.5 mt-0.5">
+                                    <span id="iconeNivelVip">🥇</span>
+                                    <span id="txtNivelVip">Nível Ouro</span>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Botão de Exportar -->
-                        <button 
-                            type="button" 
-                            onclick="exportarRelatorio()"
-                            class="inline-flex items-center justify-center gap-2 rounded-2xl bg-indigo-600 px-5 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-indigo-700 shadow-lg shadow-indigo-500/20 focus:outline-none focus:ring-4 focus:ring-indigo-100"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            Exportar CSV
-                        </button>
+                        <!-- Meio do Cartão: Saldo de Cashback e Pontos -->
+                        <div class="relative z-10 my-6 grid grid-cols-2 gap-4">
+                            <div>
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-white/70">Saldo Cashback</span>
+                                <div id="txtSaldoVip" class="text-2xl sm:text-3xl font-black text-white drop-shadow">
+                                    R$ 35,00
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-white/70">Pontuação Acumulada</span>
+                                <div id="txtPontosVip" class="text-2xl sm:text-3xl font-black text-amber-300 drop-shadow">
+                                    1.250 pts
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Base do Cartão: Nome do Titular e QR Code Interativo -->
+                        <div class="relative z-10 pt-4 border-t border-white/20 flex items-center justify-between">
+                            <div>
+                                <div id="txtNomeTitular" class="font-black text-white text-base sm:text-lg tracking-wide uppercase drop-shadow">
+                                    Mariana Costa
+                                </div>
+                                <div id="txtTelefoneTitular" class="text-xs text-white/80 font-mono tracking-wider">
+                                    (11) 98765-4321
+                                </div>
+                            </div>
+
+                            <!-- QR Code do Cliente (Gerado com SVG vetorial) -->
+                            <div class="bg-white p-1.5 rounded-xl shadow-lg flex items-center justify-center" title="Apresente este QR Code no caixa">
+                                <svg id="svgQrCode" class="w-12 h-12" viewBox="0 0 100 100" fill="currentColor">
+                                    <!-- Padrão QR Code Estilizado -->
+                                    <rect x="0" y="0" width="30" height="30" rx="4" fill="#0f172a" />
+                                    <rect x="6" y="6" width="18" height="18" rx="2" fill="#fff" />
+                                    <rect x="10" y="10" width="10" height="10" rx="1" fill="#0f172a" />
+
+                                    <rect x="70" y="0" width="30" height="30" rx="4" fill="#0f172a" />
+                                    <rect x="76" y="6" width="18" height="18" rx="2" fill="#fff" />
+                                    <rect x="80" y="10" width="10" height="10" rx="1" fill="#0f172a" />
+
+                                    <rect x="0" y="70" width="30" height="30" rx="4" fill="#0f172a" />
+                                    <rect x="6" y="76" width="18" height="18" rx="2" fill="#fff" />
+                                    <rect x="10" y="80" width="10" height="10" rx="1" fill="#0f172a" />
+
+                                    <!-- Pixels de dados -->
+                                    <rect x="40" y="10" width="8" height="8" fill="#0f172a" />
+                                    <rect x="52" y="10" width="8" height="8" fill="#0f172a" />
+                                    <rect x="40" y="24" width="8" height="8" fill="#0f172a" />
+                                    <rect x="40" y="40" width="20" height="20" rx="2" fill="#4f46e5" />
+                                    <rect x="70" y="40" width="8" height="8" fill="#0f172a" />
+                                    <rect x="82" y="52" width="8" height="8" fill="#0f172a" />
+                                    <rect x="40" y="70" width="8" height="8" fill="#0f172a" />
+                                    <rect x="52" y="82" width="8" height="8" fill="#0f172a" />
+                                    <rect x="70" y="70" width="20" height="20" fill="#0f172a" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Barra de Progresso para a Próxima Recompensa / Nível -->
+                    <div class="mt-4 bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2">
+                        <div class="flex justify-between items-center text-xs">
+                            <span id="txtProgressoTitulo" class="font-bold text-slate-300">Progresso para o Nível Diamante</span>
+                            <span id="txtProgressoPercent" class="font-black text-amber-400">62%</span>
+                        </div>
+                        <div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden p-0.5">
+                            <div id="barraProgresso" class="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full transition-all duration-700" style="width: 62%;"></div>
+                        </div>
+                        <p id="txtPontosFaltantes" class="text-[11px] text-slate-400">Faltam 750 pontos para você subir de categoria e destravar 10% de cashback!</p>
                     </div>
                 </div>
 
-                <div id="msgVazio" class="hidden rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center text-slate-500">
-                    Nenhum cliente cadastrado ainda.
-                </div>
+                <!-- SIMULADOR INTERATIVO DE COMPRAS & CARIMBOS (COLUNA DIREITA) -->
+                <div class="lg:col-span-6 bg-slate-950/80 rounded-3xl p-6 sm:p-7 border border-slate-800 shadow-xl flex flex-col justify-between gap-5">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            </span>
+                            <h3 class="text-lg font-black text-white">Simulador de Compras & Pontos</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Simule uma compra no balcão da loja e observe os carimbos sendo marcados na cartela, o saldo de cashback aumentando e o efeito sonoro de conquista.
+                        </p>
+                    </div>
 
-                <div id="listaClientesMobile" class="grid gap-3 md:hidden"></div>
+                    <!-- Botões Rápidos de Valor de Compra -->
+                    <div class="space-y-3">
+                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">Selecione ou digite o valor da compra:</label>
+                        <div class="grid grid-cols-4 gap-2">
+                            <button onclick="definirValorSimulador(30)" class="py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-bold text-slate-200 transition">R$ 30</button>
+                            <button onclick="definirValorSimulador(50)" class="py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-bold text-slate-200 transition">R$ 50</button>
+                            <button onclick="definirValorSimulador(100)" class="py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-bold text-indigo-400 transition">R$ 100</button>
+                            <button onclick="definirValorSimulador(200)" class="py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-bold text-amber-400 transition">R$ 200</button>
+                        </div>
 
-                <div class="hidden md:block overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-50 text-slate-500 text-sm uppercase tracking-wide">
-                                <th class="p-3 border-b">Nome</th>
-                                <th class="p-3 border-b">Telefone</th>
-                                <th class="p-3 border-b text-center">Indicações</th>
-                                <th class="p-3 border-b text-right">Saldo</th>
-                                <th class="p-3 border-b text-right">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody id="listaClientesDesktop" class="text-sm">
-                        </tbody>
-                    </table>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 font-bold text-sm">R$</span>
+                            <input
+                                type="number"
+                                id="inputValorCompra"
+                                value="50"
+                                min="1"
+                                step="5"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-2xl py-3 pl-11 pr-4 text-white font-bold text-base focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                                placeholder="Valor customizado"
+                            />
+                        </div>
+
+                        <!-- Regra de Bonificação Explicada -->
+                        <div class="bg-indigo-950/40 border border-indigo-900/60 p-3 rounded-2xl text-[11px] text-indigo-200 flex items-center justify-between">
+                            <span>✨ Cada R$ 25 = <strong>1 Carimbo</strong> na cartela + <strong>5% de Cashback</strong> direto!</span>
+                        </div>
+                    </div>
+
+                    <!-- Botão de Ação do Simulador -->
+                    <button
+                        onclick="executarSimulacaoCompra()"
+                        class="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-600 hover:to-teal-600 text-white font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-500/20 active:scale-95 transition-all flex items-center justify-center gap-2"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        Simular Compra & Carimbar
+                    </button>
                 </div>
             </div>
+
+            <!-- CARTELA DIGITAL DE 10 CARIMBOS (GAMIFICAÇÃO DE RETENÇÃO) -->
+            <section class="bg-slate-950 rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+                    <div>
+                        <div class="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full mb-1">
+                            ⭐ Cartela de Carimbos do Cliente
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-black text-white">
+                            Complete 10 Carimbos e Ganhe um Prêmio Exclusivo!
+                        </h3>
+                        <p class="text-xs text-slate-400">Cada compra registrada adiciona um carimbo na sua cartela digital.</p>
+                    </div>
+
+                    <div class="text-right sm:text-right">
+                        <span class="text-xs text-slate-400">Status da Cartela:</span>
+                        <div id="txtStatusCarimbos" class="text-xl font-black text-amber-400">8 / 10 Carimbados</div>
+                    </div>
+                </div>
+
+                <!-- Grid com os 10 Carimbos -->
+                <div id="gridCarimbos" class="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
+                    <!-- Renderizado dinamicamente via renderizarCarimbos() -->
+                </div>
+
+                <!-- Banner de Alerta de Carimbos Faltantes -->
+                <div id="alertaMetaCarimbos" class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-between text-xs text-amber-200">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl">🎁</span>
+                        <span>Faltam apenas <strong>2 carimbos</strong> para você desbloquear o <strong>Super Vale-Compras de R$ 50,00!</strong></span>
+                    </div>
+                    <button onclick="definirValorSimulador(50); executarSimulacaoCompra();" class="bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-xl hover:bg-amber-300 transition shrink-0">
+                        Completar Cartela Agora
+                    </button>
+                </div>
+            </section>
+
+            <!-- CATÁLOGO DE RECOMPENSAS RESGATÁVEIS (GERAÇÃO DE VOUCHER) -->
+            <section class="bg-slate-950/80 rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-6">
+                <div>
+                    <div class="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full mb-1">
+                        🏆 Recompensas Disponíveis
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-black text-white">
+                        Catálogo de Prêmios & Vouchers Oficiais
+                    </h3>
+                    <p class="text-xs text-slate-400">Escolha seu benefício e gere seu voucher com código de validação único.</p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Recompensa 1 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between gap-4 hover:border-indigo-500/50 transition">
+                        <div class="space-y-2">
+                            <span class="text-2xl">☕</span>
+                            <h4 class="font-black text-white text-base">Café Gourmet & Pão de Queijo</h4>
+                            <p class="text-xs text-slate-400">Cortesia especial para degustar na cafeteria parceira durante suas compras.</p>
+                            <div class="text-xs font-bold text-indigo-400">Requer: 100 pts (ou 2 carimbos)</div>
+                        </div>
+                        <button
+                            onclick="tentarResgateRecompensa('Café Gourmet & Pão de Queijo', 100)"
+                            class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider transition"
+                        >
+                            Resgatar Voucher
+                        </button>
+                    </div>
+
+                    <!-- Recompensa 2 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between gap-4 hover:border-indigo-500/50 transition">
+                        <div class="space-y-2">
+                            <span class="text-2xl">🎟️</span>
+                            <h4 class="font-black text-white text-base">Desconto de R$ 15 no Pedido</h4>
+                            <p class="text-xs text-slate-400">Desconto abatido direto no caixa para compras de qualquer departamento.</p>
+                            <div class="text-xs font-bold text-indigo-400">Requer: 250 pts (ou 4 carimbos)</div>
+                        </div>
+                        <button
+                            onclick="tentarResgateRecompensa('Desconto de R$ 15 no Pedido', 250)"
+                            class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider transition"
+                        >
+                            Resgatar Voucher
+                        </button>
+                    </div>
+
+                    <!-- Recompensa 3 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 flex flex-col justify-between gap-4 hover:border-indigo-500/50 transition">
+                        <div class="space-y-2">
+                            <span class="text-2xl">🎁</span>
+                            <h4 class="font-black text-white text-base">Brinde Exclusivo Utilidades</h4>
+                            <p class="text-xs text-slate-400">Item surpresa selecionado entre as novidades de utilidades para seu lar.</p>
+                            <div class="text-xs font-bold text-amber-400">Requer: 500 pts (ou 7 carimbos)</div>
+                        </div>
+                        <button
+                            onclick="tentarResgateRecompensa('Brinde Exclusivo Utilidades', 500)"
+                            class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider transition"
+                        >
+                            Resgatar Voucher
+                        </button>
+                    </div>
+
+                    <!-- Recompensa 4 (Super Prêmio) -->
+                    <div class="bg-gradient-to-b from-amber-950/60 to-slate-900 border border-amber-500/40 rounded-3xl p-5 flex flex-col justify-between gap-4 relative overflow-hidden shadow-glow-gold">
+                        <div class="absolute -top-6 -right-6 w-16 h-16 bg-amber-500/20 rounded-full blur-xl"></div>
+                        <div class="space-y-2 relative z-10">
+                            <span class="text-2xl">👑</span>
+                            <h4 class="font-black text-amber-300 text-base">Super Vale de R$ 50,00</h4>
+                            <p class="text-xs text-slate-300">Prêmio máximo ao completar os 10 carimbos da cartela ou 1.000 pontos!</p>
+                            <div class="text-xs font-black text-amber-400">10 Carimbos (Cartela Completa)</div>
+                        </div>
+                        <button
+                            onclick="tentarResgateRecompensa('Super Vale de R$ 50,00', 1000, true)"
+                            class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg transition"
+                        >
+                            Resgatar Super Prêmio
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ========================================== -->
+        <!-- ABA 2: PAINEL DO ESTABELECIMENTO / ADMIN -->
+        <!-- ========================================== -->
+        <section id="secaoAdmin" class="hidden space-y-6">
+            <!-- Métricas Gerais do Negócio -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-slate-950 rounded-3xl p-5 border border-slate-800">
+                    <p class="text-[11px] uppercase tracking-wider font-bold text-slate-400">Clientes Ativos</p>
+                    <p id="totalClientes" class="mt-2 text-2xl sm:text-3xl font-black text-white">0</p>
+                </div>
+                <div class="bg-slate-950 rounded-3xl p-5 border border-slate-800">
+                    <p class="text-[11px] uppercase tracking-wider font-bold text-slate-400">Cashback em Circulação</p>
+                    <p id="totalSaldo" class="mt-2 text-2xl sm:text-3xl font-black text-emerald-400">R$ 0,00</p>
+                </div>
+                <div class="bg-slate-950 rounded-3xl p-5 border border-slate-800">
+                    <p class="text-[11px] uppercase tracking-wider font-bold text-slate-400">Indicações Premiadas</p>
+                    <p id="totalIndicacoes" class="mt-2 text-2xl sm:text-3xl font-black text-indigo-400">0</p>
+                </div>
+                <div class="bg-slate-950 rounded-3xl p-5 border border-slate-800">
+                    <p class="text-[11px] uppercase tracking-wider font-bold text-slate-400">Vouchers Resgatados</p>
+                    <p id="totalResgatado" class="mt-2 text-2xl sm:text-3xl font-black text-amber-400">R$ 0,00</p>
+                </div>
+            </div>
+
+            <div class="grid gap-6 lg:grid-cols-12 items-start">
+                <!-- Formulário de Cadastro Rápido de Clientes (Coluna Esquerda) -->
+                <div class="lg:col-span-5 bg-slate-950 rounded-3xl p-6 border border-slate-800 shadow-xl space-y-4">
+                    <div>
+                        <h3 class="text-lg font-black text-white">Cadastrar Novo Cliente</h3>
+                        <p class="text-xs text-slate-400">Preencha o formulário para emitir um novo cartão VIP no balcão.</p>
+                    </div>
+
+                    <form id="formCadastro" onsubmit="cadastrarCliente(event)" class="space-y-3.5">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1">Nome Completo</label>
+                            <input
+                                type="text"
+                                id="cadNome"
+                                required
+                                placeholder="Ex: Fernanda Lima"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 mb-1">Telefone / WhatsApp (com DDD)</label>
+                            <input
+                                type="tel"
+                                id="cadTelefone"
+                                required
+                                oninput="aplicarMascaraTelefone(this)"
+                                placeholder="(11) 99999-0000"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono"
+                            />
+                        </div>
+
+                        <div class="bg-indigo-950/30 border border-indigo-900/60 p-3.5 rounded-2xl space-y-1.5">
+                            <label class="block text-xs font-bold text-indigo-300">Quem indicou? (Gera R$ 10 de bônus)</label>
+                            <input
+                                type="text"
+                                id="cadIndicador"
+                                placeholder="Nome ou telefone de quem indicou"
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            />
+                            <p class="text-[10px] text-indigo-200/80">O cliente indicador receberá automaticamente R$ 10,00 de crédito cashback.</p>
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-indigo-600/20 active:scale-95"
+                        >
+                            Salvar e Emitir Cartão VIP
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Tabela de Clientes e Saldo (Coluna Direita) -->
+                <div class="lg:col-span-7 bg-slate-950 rounded-3xl p-6 border border-slate-800 shadow-xl space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+                        <div>
+                            <h3 class="text-lg font-black text-white">Base de Clientes</h3>
+                            <p class="text-xs text-slate-400">Pesquise, consulte carimbos e gerencie o cashback.</p>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <input
+                                type="text"
+                                id="buscaCliente"
+                                oninput="atualizarTela()"
+                                placeholder="Buscar cliente..."
+                                class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-44"
+                            />
+                            <button
+                                onclick="exportarRelatorioCSV()"
+                                class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition flex items-center gap-1.5"
+                                title="Exportar para Excel"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                CSV
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Clientes -->
+                    <div id="listaClientesContainer" class="space-y-2.5 max-h-[460px] overflow-y-auto pr-1">
+                        <!-- Itens renderizados via atualizarTela() -->
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                        <button onclick="abrirModalZerarSistema()" class="text-red-400 hover:text-red-300 font-semibold">
+                            ⚠️ Redefinir para dados de demonstração
+                        </button>
+                        <span class="text-slate-500 text-[11px]">Dados salvos no navegador (LocalStorage)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER COM CRÉDITOS -->
+        <footer class="mt-8 bg-slate-950/60 rounded-3xl p-6 border border-slate-800/80 text-center text-xs text-slate-500 space-y-2">
+            <p class="font-bold text-slate-300">Felipe Junqueira Leite • Soluções em Tecnologia & Retenção de Varejo</p>
+            <p>Sistema Gamificado de Fidelidade com Carimbos Digitais, Vouchers e Cashback.</p>
+        </footer>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL DE VOUCHER / CUPOM DE RESGATE (OFICIAL) -->
+    <!-- ========================================== -->
+    <div id="modalVoucher" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+        <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-amber-500/40 rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl relative overflow-hidden text-center space-y-5 animate-stamp">
+            <div class="w-14 h-14 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center mx-auto shadow-lg shadow-amber-400/20 text-2xl font-black">
+                🎟️
+            </div>
+
+            <div class="space-y-1">
+                <span class="text-[10px] font-black uppercase tracking-widest text-amber-400">Cupom de Resgate Oficial</span>
+                <h3 id="txtVoucherTitulo" class="text-xl font-black text-white">Super Vale de R$ 50,00</h3>
+                <p id="txtVoucherCliente" class="text-xs text-slate-300">Emitido para: Mariana Costa</p>
+            </div>
+
+            <!-- Código do Cupom com Picote -->
+            <div class="bg-slate-900 p-4 rounded-2xl border-2 border-dashed border-amber-500/40 space-y-2">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Código de Validação Único:</span>
+                <div id="txtCodigoVoucher" class="text-2xl font-black text-amber-300 font-mono tracking-wider">
+                    FIDEL-9482-GOLD
+                </div>
+                <p class="text-[10px] text-slate-400">Apresente este código no caixa da loja para validar sua recompensa.</p>
+            </div>
+
+            <div class="flex items-center justify-between text-xs text-slate-400 px-2">
+                <span>Válido por 30 dias</span>
+                <span>•</span>
+                <span>Uso Único e Pessoal</span>
+            </div>
+
+            <!-- Ações do Modal de Voucher -->
+            <div class="grid grid-cols-2 gap-2 pt-2">
+                <button
+                    onclick="copiarCodigoVoucher()"
+                    class="py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition"
+                >
+                    Copiar Código
+                </button>
+                <button
+                    onclick="compartilharVoucherWhatsApp()"
+                    class="py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs transition flex items-center justify-center gap-1.5"
+                >
+                    Salvar no WhatsApp
+                </button>
+            </div>
+
+            <button
+                onclick="fecharModalVoucher()"
+                class="w-full py-2 text-xs font-semibold text-slate-400 hover:text-white transition"
+            >
+                Fechar
+            </button>
         </div>
+    </div>
 
-        <div id="modalResgate" class="fixed inset-0 z-50 hidden items-end justify-center bg-slate-950/70 p-3 sm:items-center">
-            <div class="w-full max-w-md rounded-3xl bg-white p-5 sm:p-6 shadow-2xl">
-                <div class="space-y-2">
-                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-600">Resgate de cashback</p>
-                    <h3 class="text-xl font-black text-slate-900">Definir valor do resgate</h3>
-                    <p id="textoResgateCliente" class="text-sm text-slate-600"></p>
-                    <p id="textoResgateSaldo" class="text-sm font-semibold text-slate-700"></p>
-                </div>
+    <!-- ========================================== -->
+    <!-- MODAL DE RESGATE DE SALDO CASHBACK (LOJISTA) -->
+    <!-- ========================================== -->
+    <div id="modalResgateCashback" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4">
+            <div>
+                <h4 class="font-black text-lg text-white">Resgatar Saldo Cashback</h4>
+                <p id="txtResgateCashbackInfo" class="text-xs text-slate-400 mt-0.5">Cliente: Mariana Costa</p>
+                <p id="txtResgateCashbackSaldo" class="text-sm font-bold text-emerald-400 mt-1">Saldo Disponível: R$ 35,00</p>
+            </div>
 
-                <div class="mt-4 space-y-2">
-                    <label for="valorResgate" class="block text-sm font-semibold text-slate-700">Valor a resgatar</label>
-                    <input id="valorResgate" type="text" inputmode="decimal" placeholder="Deixe em branco para resgatar tudo" class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-base outline-none transition placeholder:text-slate-400 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100">
-                    <p class="text-xs text-slate-500">Você pode resgatar uma parte do saldo ou usar o total. O saldo nunca fica negativo.</p>
-                </div>
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-300">Valor a Abater na Compra (R$):</label>
+                <input
+                    type="number"
+                    id="inputValorResgateCashback"
+                    step="0.01"
+                    placeholder="Deixe vazio para usar todo o saldo"
+                    class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                />
+            </div>
 
-                <div class="mt-5 flex flex-col gap-2 sm:flex-row">
-                    <button type="button" onclick="confirmarResgate()" class="flex-1 rounded-2xl bg-emerald-500 px-4 py-3 font-bold text-white transition hover:bg-emerald-600 focus:outline-none focus:ring-4 focus:ring-emerald-100">Confirmar resgate</button>
-                    <button type="button" onclick="fecharModalResgate()" class="flex-1 rounded-2xl bg-slate-100 px-4 py-3 font-bold text-slate-700 transition hover:bg-slate-200 focus:outline-none focus:ring-4 focus:ring-slate-100">Cancelar</button>
-                </div>
+            <div class="grid grid-cols-2 gap-2 pt-2">
+                <button
+                    onclick="fecharModalResgateCashback()"
+                    class="py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs"
+                >
+                    Cancelar
+                </button>
+                <button
+                    onclick="confirmarResgateCashback()"
+                    class="py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-lg shadow-emerald-500/20"
+                >
+                    Confirmar Abatimento
+                </button>
             </div>
         </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- MODAL DE CONFIRMAÇÃO ESTILIZADO (SEM ALERT/CONFIRM FEIO) -->
+    <!-- ========================================== -->
+    <div id="modalConfirmacao" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center space-y-4">
+            <div id="iconeModalConfirmacao" class="w-12 h-12 rounded-2xl bg-red-500/20 text-red-400 flex items-center justify-center mx-auto text-xl">
+                ⚠️
+            </div>
+            <div>
+                <h4 id="tituloModalConfirmacao" class="font-black text-lg text-white">Confirmação</h4>
+                <p id="textoModalConfirmacao" class="text-xs text-slate-400 mt-1">Deseja realmente executar esta ação?</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2 pt-2">
+                <button
+                    id="btnCancelarConfirmacao"
+                    onclick="fecharModalConfirmacao()"
+                    class="py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs"
+                >
+                    Cancelar
+                </button>
+                <button
+                    id="btnAcaoConfirmacao"
+                    class="py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs"
+                >
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- CONTAINER DE TOASTS ELEGANTES -->
+    <!-- ========================================== -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+    <!-- SCRIPT DE GAMIFICAÇÃO, AUDIO E REGRAS -->
     <script>
-        // Valor da recompensa por indicação
-        const VALOR_BONUS = 10.00;
+        // ==========================================
+        // 1. ÁUDIO SINTETIZADO NATIVO (Web Audio API)
+        // ==========================================
+        let audioCtx = null;
 
-        function normalizarTelefone(valor) {
-            return valor.replace(/\D/g, '');
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioContextClass) {
+                    audioCtx = new AudioContextClass();
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
         }
 
-        function normalizarNome(valor) {
-            return valor.trim().replace(/\s+/g, ' ').toLowerCase();
+        // Som de Carimbada
+        function tocarSomCarimbo() {
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(320, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.12);
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.15);
+            } catch(e) {}
         }
 
+        // Som de Moedas / Pontos
+        function tocarSomPontos() {
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+                const notas = [523.25, 659.25, 783.99]; // Dó, Mi, Sol
+                notas.forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.08);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime + idx * 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + idx * 0.08 + 0.2);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + idx * 0.08);
+                    osc.stop(ctx.currentTime + idx * 0.08 + 0.2);
+                });
+            } catch(e) {}
+        }
+
+        // Som de Celebração / Fanfarra Triunfante
+        function tocarSomCelebra() {
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+                // Fanfarra triunfante maior: G4, C5, E5, G5
+                const acordes = [
+                    { f: 392.00, t: 0.0, d: 0.12 },
+                    { f: 523.25, t: 0.12, d: 0.12 },
+                    { f: 659.25, t: 0.24, d: 0.15 },
+                    { f: 783.99, t: 0.39, d: 0.55 },
+                    { f: 1046.50, t: 0.45, d: 0.65 }
+                ];
+                acordes.forEach(nota => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(nota.f, ctx.currentTime + nota.t);
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime + nota.t);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + nota.t + nota.d);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + nota.t);
+                    osc.stop(ctx.currentTime + nota.t + nota.d);
+                });
+            } catch(e) {}
+        }
+
+        function tocarSomCelebraTest() {
+            tocarSomCelebra();
+            dispararConfetes();
+            mostrarToast("🔊 Teste de som & confetes ativado com sucesso!", "sucesso");
+        }
+
+        // ==========================================
+        // 2. MOTOR DE CONFETES NATIVO EM CANVAS
+        // ==========================================
+        function dispararConfetes() {
+            const canvas = document.getElementById('confetti-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const cores = ['#fbbf24', '#f59e0b', '#6366f1', '#10b981', '#ec4899', '#3b82f6'];
+            const particulas = [];
+            for (let i = 0; i < 90; i++) {
+                particulas.push({
+                    x: canvas.width / 2 + (Math.random() - 0.5) * 200,
+                    y: canvas.height * 0.45,
+                    vx: (Math.random() - 0.5) * 16,
+                    vy: -(Math.random() * 12 + 6),
+                    size: Math.random() * 8 + 4,
+                    color: cores[Math.floor(Math.random() * cores.length)],
+                    rot: Math.random() * 360,
+                    vrot: (Math.random() - 0.5) * 12,
+                    alpha: 1
+                });
+            }
+
+            let frames = 0;
+            function animar() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particulas.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.35; // gravidade
+                    p.rot += p.vrot;
+                    p.alpha -= 0.012;
+
+                    if (p.alpha > 0) {
+                        ctx.save();
+                        ctx.globalAlpha = p.alpha;
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate((p.rot * Math.PI) / 180);
+                        ctx.fillStyle = p.color;
+                        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                        ctx.restore();
+                    }
+                });
+
+                frames++;
+                if (frames < 90) {
+                    requestAnimationFrame(animar);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+            requestAnimationFrame(animar);
+        }
+
+        // ==========================================
+        // 3. TOASTS ELEGANTES (SEM ALERT)
+        // ==========================================
+        function mostrarToast(mensagem, tipo = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold text-white transition-all transform translate-y-2 border ${
+                tipo === 'sucesso' ? 'bg-slate-900 border-emerald-500/50' :
+                tipo === 'aviso' ? 'bg-slate-900 border-amber-500/50' :
+                tipo === 'erro' ? 'bg-slate-900 border-rose-500/50' : 'bg-slate-900 border-indigo-500/50'
+            }`;
+
+            const icones = {
+                sucesso: '✅',
+                aviso: '⚡',
+                erro: '❌',
+                info: 'ℹ️'
+            };
+
+            toast.innerHTML = `<span>${icones[tipo] || 'ℹ️'}</span><span class="flex-1">${mensagem}</span>`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2');
+                toast.classList.add('translate-y-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3800);
+        }
+
+        // ==========================================
+        // 4. BANCO DE DADOS & ESTADO LOCAL
+        // ==========================================
+        const VALOR_BONUS_INDICACAO = 10.00;
+
+        const CLIENTES_DEMO = [
+            {
+                nome: "Mariana Costa",
+                telefone: "11987654321",
+                saldo: 35.00,
+                pontos: 1250,
+                carimbos: 8,
+                indicacoes: 3,
+                resgates: 2,
+                totalResgatado: 30.00
+            },
+            {
+                nome: "Lucas Almeida",
+                telefone: "11976543210",
+                saldo: 15.00,
+                pontos: 480,
+                carimbos: 4,
+                indicacoes: 1,
+                resgates: 0,
+                totalResgatado: 0.00
+            },
+            {
+                nome: "Camila Fernandes",
+                telefone: "11965432109",
+                saldo: 80.00,
+                pontos: 2150,
+                carimbos: 10,
+                indicacoes: 5,
+                resgates: 3,
+                totalResgatado: 65.00
+            }
+        ];
+
+        function carregarClientes() {
+            try {
+                const salvos = JSON.parse(localStorage.getItem('sistemaFidelidade'));
+                if (Array.isArray(salvos) && salvos.length > 0) {
+                    return salvos.map(c => ({
+                        ...c,
+                        pontos: c.pontos !== undefined ? c.pontos : Math.round(Number(c.saldo || 0) * 35),
+                        carimbos: c.carimbos !== undefined ? c.carimbos : Math.min(10, Math.floor((c.saldo || 0) / 4) + 2)
+                    }));
+                }
+            } catch (e) {}
+            return [...CLIENTES_DEMO];
+        }
+
+        let clientes = carregarClientes();
+        let telefoneClienteAtivo = clientes[0]?.telefone || "11987654321";
+        let voucherGeradoAtual = null;
+
+        function salvarClientes() {
+            localStorage.setItem('sistemaFidelidade', JSON.stringify(clientes));
+        }
+
+        function obterClienteAtivo() {
+            return clientes.find(c => c.telefone === telefoneClienteAtivo) || clientes[0] || null;
+        }
+
+        // Máscara e Formatações
         function formatarMoeda(valor) {
             return Number(valor || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         }
 
-        function obterCliente(telefone) {
-            return clientes.find(cliente => cliente.telefone === telefone);
+        function formatarTelefone(telefone) {
+            const limpo = telefone.replace(/\D/g, '');
+            if (limpo.length === 11) {
+                return `(${limpo.slice(0,2)}) ${limpo.slice(2,7)}-${limpo.slice(7)}`;
+            } else if (limpo.length === 10) {
+                return `(${limpo.slice(0,2)}) ${limpo.slice(2,6)}-${limpo.slice(6)}`;
+            }
+            return telefone;
         }
 
-        const modalResgate = document.getElementById('modalResgate');
-        const textoResgateCliente = document.getElementById('textoResgateCliente');
-        const textoResgateSaldo = document.getElementById('textoResgateSaldo');
-        const valorResgateInput = document.getElementById('valorResgate');
-        let telefoneResgateAtual = null;
-
-        function abrirModalResgate(telefone) {
-            const cliente = obterCliente(telefone);
-            if (!cliente) {
-                mostrarMensagem('Cliente não encontrado para resgate.', 'erro');
-                return;
+        function aplicarMascaraTelefone(input) {
+            let v = input.value.replace(/\D/g, '');
+            if (v.length > 11) v = v.slice(0, 11);
+            if (v.length > 6) {
+                input.value = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+            } else if (v.length > 2) {
+                input.value = `(${v.slice(0,2)}) ${v.slice(2)}`;
+            } else if (v.length > 0) {
+                input.value = `(${v}`;
+            } else {
+                input.value = '';
             }
-
-            const saldoAtual = Number(cliente.saldo || 0);
-            if (saldoAtual <= 0) {
-                mostrarMensagem('Este cliente não possui saldo para resgate.', 'aviso');
-                return;
-            }
-
-            telefoneResgateAtual = telefone;
-            textoResgateCliente.textContent = `${cliente.nome} · ${cliente.telefone}`;
-            textoResgateSaldo.textContent = `Saldo disponível: ${formatarMoeda(saldoAtual)}`;
-            valorResgateInput.value = '';
-            modalResgate.classList.remove('hidden');
-            modalResgate.classList.add('flex');
-            setTimeout(() => valorResgateInput.focus(), 0);
         }
 
-        function fecharModalResgate() {
-            modalResgate.classList.add('hidden');
-            modalResgate.classList.remove('flex');
-            telefoneResgateAtual = null;
-            valorResgateInput.value = '';
+        // Cálculo de Nível VIP
+        function calcularNivelVip(pontos) {
+            if (pontos >= 2000) {
+                return {
+                    nome: "Nível Diamante",
+                    icone: "💎",
+                    badgeColor: "bg-cyan-400 text-slate-950",
+                    gradiente: "from-cyan-600 via-blue-900 to-slate-950",
+                    proximoNome: "Nível Máximo Atingido!",
+                    progressoPercent: 100,
+                    faltam: 0
+                };
+            } else if (pontos >= 1000) {
+                const progresso = Math.min(100, Math.round(((pontos - 1000) / 1000) * 100));
+                return {
+                    nome: "Nível Ouro",
+                    icone: "🥇",
+                    badgeColor: "bg-amber-400 text-slate-950",
+                    gradiente: "from-amber-600 via-amber-800 to-slate-950",
+                    proximoNome: "Nível Diamante",
+                    progressoPercent: progresso,
+                    faltam: 2000 - pontos
+                };
+            } else if (pontos >= 500) {
+                const progresso = Math.min(100, Math.round(((pontos - 500) / 500) * 100));
+                return {
+                    nome: "Nível Prata",
+                    icone: "🥈",
+                    badgeColor: "bg-slate-300 text-slate-950",
+                    gradiente: "from-slate-500 via-slate-700 to-slate-950",
+                    proximoNome: "Nível Ouro",
+                    progressoPercent: progresso,
+                    faltam: 1000 - pontos
+                };
+            } else {
+                const progresso = Math.min(100, Math.round((pontos / 500) * 100));
+                return {
+                    nome: "Nível Bronze",
+                    icone: "🥉",
+                    badgeColor: "bg-amber-700 text-white",
+                    gradiente: "from-amber-800 via-amber-950 to-slate-950",
+                    proximoNome: "Nível Prata",
+                    progressoPercent: progresso,
+                    faltam: 500 - pontos
+                };
+            }
         }
 
-        function confirmarResgate() {
-            if (!telefoneResgateAtual) {
-                fecharModalResgate();
+        // ==========================================
+        // 5. ATUALIZAÇÃO DA INTERFACE DO CLIENTE
+        // ==========================================
+        function atualizarInterfaceCliente() {
+            const cliente = obterClienteAtivo();
+            if (!cliente) return;
+
+            // Dados do Cartão
+            document.getElementById('txtNomeTitular').textContent = cliente.nome;
+            document.getElementById('txtTelefoneTitular').textContent = formatarTelefone(cliente.telefone);
+            document.getElementById('txtSaldoVip').textContent = formatarMoeda(cliente.saldo);
+            document.getElementById('txtPontosVip').textContent = `${cliente.pontos} pts`;
+
+            // Nível VIP e Estilização do Cartão
+            const vip = calcularNivelVip(cliente.pontos);
+            document.getElementById('txtNivelVip').textContent = vip.nome;
+            document.getElementById('iconeNivelVip').textContent = vip.icone;
+
+            const badgeElem = document.getElementById('badgeNivelVip').querySelector('div');
+            badgeElem.className = `${vip.badgeColor} font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider shadow-lg flex items-center gap-1.5 mt-0.5`;
+
+            const gradienteElem = document.getElementById('cartaoGradiente');
+            gradienteElem.className = `absolute inset-0 bg-gradient-to-br ${vip.gradiente} opacity-95 transition-all duration-700`;
+
+            // Barra de Progresso
+            document.getElementById('txtProgressoTitulo').textContent = `Progresso para o ${vip.proximoNome}`;
+            document.getElementById('txtProgressoPercent').textContent = `${vip.progressoPercent}%`;
+            document.getElementById('barraProgresso').style.width = `${vip.progressoPercent}%`;
+            if (vip.faltam > 0) {
+                document.getElementById('txtPontosFaltantes').textContent = `Faltam ${vip.faltam} pontos para você subir de categoria e destravar mais benefícios!`;
+            } else {
+                document.getElementById('txtPontosFaltantes').textContent = `Parabéns! Você alcançou o nível mais alto do clube com cashback dobrado!`;
+            }
+
+            // Renderizar Cartela de Carimbos
+            renderizarCarimbos(cliente.carimbos);
+        }
+
+        function renderizarCarimbos(qtdCarimbados) {
+            const grid = document.getElementById('gridCarimbos');
+            grid.innerHTML = '';
+
+            document.getElementById('txtStatusCarimbos').textContent = `${qtdCarimbados} / 10 Carimbados`;
+
+            const alerta = document.getElementById('alertaMetaCarimbos');
+            if (qtdCarimbados >= 10) {
+                alerta.className = "p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between text-xs text-emerald-200";
+                alerta.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl">🎉</span>
+                        <span><strong>Cartela Completa!</strong> Você tem direito ao <strong>Super Vale de R$ 50,00!</strong></span>
+                    </div>
+                    <button onclick="tentarResgateRecompensa('Super Vale de R$ 50,00', 1000, true)" class="bg-emerald-400 text-slate-950 font-bold px-3 py-1.5 rounded-xl hover:bg-emerald-300 transition shrink-0">
+                        Resgatar Agora
+                    </button>
+                `;
+            } else {
+                const faltam = 10 - qtdCarimbados;
+                alerta.className = "p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-between text-xs text-amber-200";
+                alerta.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl">🎁</span>
+                        <span>Faltam apenas <strong>${faltam} carimbo${faltam > 1 ? 's' : ''}</strong> para você desbloquear o <strong>Super Vale-Compras de R$ 50,00!</strong></span>
+                    </div>
+                    <button onclick="definirValorSimulador(50); executarSimulacaoCompra();" class="bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-xl hover:bg-amber-300 transition shrink-0">
+                        Completar Cartela
+                    </button>
+                `;
+            }
+
+            for (let i = 1; i <= 10; i++) {
+                const estaCarimbado = i <= qtdCarimbados;
+                const eSuperPremio = i === 10;
+                const slot = document.createElement('div');
+
+                if (estaCarimbado) {
+                    slot.className = `p-4 rounded-2xl border text-center flex flex-col items-center justify-center gap-1.5 transition-all ${
+                        eSuperPremio
+                            ? 'bg-amber-500/20 border-amber-400 text-amber-300 shadow-lg shadow-amber-500/20'
+                            : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
+                    }`;
+                    slot.innerHTML = `
+                        <div class="w-10 h-10 rounded-full ${eSuperPremio ? 'bg-amber-400 text-slate-950' : 'bg-emerald-500 text-white'} flex items-center justify-center font-black text-sm shadow">
+                            ✓
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider">${eSuperPremio ? 'Super Prêmio' : `Carimbo ${i}`}</span>
+                        <span class="text-[9px] opacity-75">Confirmado</span>
+                    `;
+                } else {
+                    slot.className = `p-4 rounded-2xl border border-slate-800 bg-slate-900/50 text-center flex flex-col items-center justify-center gap-1.5 opacity-60 hover:opacity-100 transition-all ${
+                        eSuperPremio ? 'border-amber-500/30 bg-amber-950/20' : ''
+                    }`;
+                    slot.innerHTML = `
+                        <div class="w-10 h-10 rounded-full border-2 border-dashed ${eSuperPremio ? 'border-amber-400 text-amber-300' : 'border-slate-700 text-slate-500'} flex items-center justify-center font-black text-sm">
+                            ${eSuperPremio ? '👑' : i}
+                        </div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">${eSuperPremio ? 'Prêmio Final' : `Slot ${i}`}</span>
+                        <span class="text-[9px] text-slate-500">Pendente</span>
+                    `;
+                }
+                grid.appendChild(slot);
+            }
+        }
+
+        // ==========================================
+        // 6. SIMULADOR DE COMPRAS & CARIMBOS
+        // ==========================================
+        function definirValorSimulador(val) {
+            document.getElementById('inputValorCompra').value = val;
+        }
+
+        function executarSimulacaoCompra() {
+            const input = document.getElementById('inputValorCompra');
+            const valor = parseFloat(input.value);
+
+            if (isNaN(valor) || valor <= 0) {
+                mostrarToast("Digite um valor válido de compra.", "aviso");
                 return;
             }
 
-            const cliente = obterCliente(telefoneResgateAtual);
-            if (!cliente) {
-                fecharModalResgate();
-                mostrarMensagem('Cliente não encontrado para resgate.', 'erro');
-                return;
-            }
+            const cliente = obterClienteAtivo();
+            if (!cliente) return;
 
-            const saldoAtual = Number(cliente.saldo || 0);
-            const resposta = valorResgateInput.value.trim();
-            const valorResgate = resposta === '' ? saldoAtual : Number(resposta.replace(',', '.'));
+            // Regra: cada R$ 25 dá 1 carimbo (máximo 10)
+            const novosCarimbosGanhos = Math.max(1, Math.floor(valor / 25));
+            const carimbosAnteriores = cliente.carimbos;
+            cliente.carimbos = Math.min(10, cliente.carimbos + novosCarimbosGanhos);
 
-            if (!Number.isFinite(valorResgate) || valorResgate <= 0) {
-                mostrarMensagem('Digite um valor de resgate válido.', 'erro');
-                return;
-            }
+            // Pontos: 1 real = 2 pontos
+            const novosPontos = Math.round(valor * 2);
+            cliente.pontos += novosPontos;
 
-            if (valorResgate > saldoAtual) {
-                mostrarMensagem('O valor do resgate não pode ser maior que o saldo disponível.', 'erro');
-                return;
-            }
+            // Cashback: 5% da compra
+            const cashbackGanho = Math.round((valor * 0.05) * 100) / 100;
+            cliente.saldo = Math.round((cliente.saldo + cashbackGanho) * 100) / 100;
 
-            cliente.saldo = Number((saldoAtual - valorResgate).toFixed(2));
-            cliente.resgates = Number(cliente.resgates || 0) + 1;
-            cliente.totalResgatado = Number(cliente.totalResgatado || 0) + valorResgate;
-
-            fecharModalResgate();
+            salvarClientes();
+            atualizarInterfaceCliente();
             atualizarTela();
-            mostrarMensagem(`Resgate realizado: ${cliente.nome} usou ${formatarMoeda(valorResgate)} de cashback.`, 'sucesso');
+
+            // Se atingiu o 10º carimbo ou subiu de nível, celebração total!
+            if (cliente.carimbos === 10 && carimbosAnteriores < 10) {
+                tocarSomCelebra();
+                dispararConfetes();
+                mostrarToast(`🎉 PARABÉNS! ${cliente.nome} completou a cartela de 10 carimbos e liberou o Super Vale!`, "sucesso");
+            } else {
+                tocarSomCarimbo();
+                tocarSomPontos();
+                mostrarToast(`🛒 Compra de ${formatarMoeda(valor)} registrada! +${novosCarimbosGanhos} carimbo(s), +${novosPontos} pts e ${formatarMoeda(cashbackGanho)} de cashback!`, "sucesso");
+            }
         }
 
-        function removerCliente(telefone) {
-            const cliente = obterCliente(telefone);
-            if (!cliente) {
-                mostrarMensagem('Cliente não encontrado para remoção.', 'erro');
+        // ==========================================
+        // 7. RESGATE DE RECOMPENSAS & EMISSÃO DE VOUCHER
+        // ==========================================
+        function tentarResgateRecompensa(titulo, pontosNecessarios, requerCartelaCompleta = false) {
+            const cliente = obterClienteAtivo();
+            if (!cliente) return;
+
+            if (requerCartelaCompleta && cliente.carimbos < 10) {
+                mostrarToast(`Você precisa completar os 10 carimbos para resgatar o Super Vale. Faltam ${10 - cliente.carimbos} carimbos.`, "aviso");
                 return;
             }
 
-            if (!confirm(`Remover ${cliente.nome}? Esta ação apaga o cadastro e não pode ser desfeita.`)) {
+            if (cliente.pontos < pontosNecessarios && !requerCartelaCompleta) {
+                mostrarToast(`Pontos insuficientes para "${titulo}". Você tem ${cliente.pontos} pts e precisa de ${pontosNecessarios} pts.`, "aviso");
                 return;
             }
 
-            clientes = clientes.filter(item => item.telefone !== telefone);
+            // Deduzir pontos ou zerar carimbos se foi super prêmio
+            if (requerCartelaCompleta) {
+                cliente.carimbos = 0; // Reinicia a cartela para um novo ciclo!
+                cliente.resgates = (cliente.resgates || 0) + 1;
+                cliente.totalResgatado = (cliente.totalResgatado || 0) + 50.00;
+            } else {
+                cliente.pontos -= pontosNecessarios;
+                cliente.resgates = (cliente.resgates || 0) + 1;
+            }
+
+            salvarClientes();
+            atualizarInterfaceCliente();
             atualizarTela();
-            mostrarMensagem(`Cliente ${cliente.nome} removido do sistema.`, 'info');
-        }
 
-        function mostrarMensagem(texto, tipo = 'info') {
-            const mensagemStatus = document.getElementById('mensagemStatus');
-            const estilos = {
-                sucesso: 'border-emerald-200 bg-emerald-50 text-emerald-900',
-                aviso: 'border-amber-200 bg-amber-50 text-amber-900',
-                erro: 'border-rose-200 bg-rose-50 text-rose-900',
-                info: 'border-slate-200 bg-slate-50 text-slate-700',
+            // Gerar Código Único de Validação do Voucher
+            const sufixo = Math.random().toString(36).substring(2, 6).toUpperCase();
+            const codigo = `FIDEL-${sufixo}-2026`;
+
+            voucherGeradoAtual = {
+                titulo,
+                clienteNome: cliente.nome,
+                clienteTelefone: cliente.telefone,
+                codigo,
+                data: new Date().toLocaleDateString('pt-BR')
             };
 
-            mensagemStatus.className = `mt-4 rounded-2xl border px-4 py-3 text-sm font-medium ${estilos[tipo] || estilos.info}`;
-            mensagemStatus.textContent = texto;
-            mensagemStatus.classList.remove('hidden');
+            // Abrir Modal de Voucher
+            document.getElementById('txtVoucherTitulo').textContent = titulo;
+            document.getElementById('txtVoucherCliente').textContent = `Emitido para: ${cliente.nome} · ${formatarTelefone(cliente.telefone)}`;
+            document.getElementById('txtCodigoVoucher').textContent = codigo;
+
+            const modal = document.getElementById('modalVoucher');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            tocarSomCelebra();
+            dispararConfetes();
+            mostrarToast(`Voucher para "${titulo}" emitido com sucesso!`, "sucesso");
         }
 
-        function carregarClientes() {
-            try {
-                const dados = JSON.parse(localStorage.getItem('sistemaFidelidade'));
-                return Array.isArray(dados) ? dados : [];
-            } catch (error) {
-                return [];
-            }
+        function fecharModalVoucher() {
+            const modal = document.getElementById('modalVoucher');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
         }
 
-        function encontrarIndicador(valor) {
-            const valorLimpo = valor.trim();
-            if (!valorLimpo) {
-                return null;
-            }
-
-            const telefone = normalizarTelefone(valorLimpo);
-            if (telefone) {
-                const porTelefone = clientes.find(cliente => cliente.telefone === telefone);
-                if (porTelefone) {
-                    return porTelefone;
-                }
-            }
-
-            const nomeNormalizado = normalizarNome(valorLimpo);
-            const porNome = clientes.filter(cliente => normalizarNome(cliente.nome) === nomeNormalizado);
-
-            if (porNome.length === 1) {
-                return porNome[0];
-            }
-
-            if (porNome.length > 1) {
-                alert('Há mais de um cliente com esse nome. Use o telefone para indicar com precisão.');
-            }
-
-            return null;
+        function copiarCodigoVoucher() {
+            if (!voucherGeradoAtual) return;
+            navigator.clipboard.writeText(voucherGeradoAtual.codigo);
+            mostrarToast(`Código ${voucherGeradoAtual.codigo} copiado!`, "sucesso");
         }
 
-        // Recupera dados salvos na memória do navegador ou cria um array vazio
-        let clientes = carregarClientes();
+        function compartilharVoucherWhatsApp() {
+            if (!voucherGeradoAtual) return;
+            const msg = `🎉 *MEU VOUCHER OFICIAL DO CLUBE FIDELIZA+*\n\n🏆 *Recompensa:* ${voucherGeradoAtual.titulo}\n👤 *Titular:* ${voucherGeradoAtual.clienteNome}\n🔑 *Código de Validação:* ${voucherGeradoAtual.codigo}\n📅 *Emitido em:* ${voucherGeradoAtual.data}\n\n_Apresente este voucher no balcão da loja para validação._`;
+            const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
 
-        const formCadastro = document.getElementById('formCadastro');
-        const listaClientesMobile = document.getElementById('listaClientesMobile');
-        const listaClientesDesktop = document.getElementById('listaClientesDesktop');
-        const msgVazio = document.getElementById('msgVazio');
-        const totalClientes = document.getElementById('totalClientes');
-        const totalSaldo = document.getElementById('totalSaldo');
-        const totalIndicacoes = document.getElementById('totalIndicacoes');
+        // ==========================================
+        // 8. PAINEL DO ESTABELECIMENTO / ADMIN
+        // ==========================================
+        function alternarAba(aba) {
+            const secaoCliente = document.getElementById('secaoCliente');
+            const secaoAdmin = document.getElementById('secaoAdmin');
+            const btnCliente = document.getElementById('tabBtnCliente');
+            const btnAdmin = document.getElementById('tabBtnAdmin');
 
-        // Função para atualizar a tela e salvar os dados
-        function atualizarTela() {
-            listaClientesMobile.innerHTML = '';
-            listaClientesDesktop.innerHTML = '';
-
-            const termoBusca = normalizarNome(document.getElementById('buscaCliente')?.value || '');
-
-            const clientesFiltrados = clientes.filter(cliente => {
-                if (!termoBusca) return true;
-                return normalizarNome(cliente.nome).includes(termoBusca) || 
-                       cliente.telefone.includes(termoBusca);
-            });
-
-            totalClientes.textContent = clientes.length.toString();
-
-            const saldoGeral = clientes.reduce((acumulado, cliente) => acumulado + Number(cliente.saldo || 0), 0);
-            const indicacoesGerais = clientes.reduce((acumulado, cliente) => acumulado + Number(cliente.indicacoes || 0), 0);
-            const resgatadoGeral = clientes.reduce((acumulado, cliente) => acumulado + Number(cliente.totalResgatado || 0), 0);
-
-            totalSaldo.textContent = formatarMoeda(saldoGeral);
-            totalIndicacoes.textContent = indicacoesGerais.toString();
-            document.getElementById('totalResgatado').textContent = formatarMoeda(resgatadoGeral);
-            
-            if (clientesFiltrados.length === 0) {
-                msgVazio.classList.remove('hidden');
-                if (termoBusca) {
-                    msgVazio.textContent = `Nenhum cliente encontrado para "${document.getElementById('buscaCliente').value}".`;
-                } else {
-                    msgVazio.textContent = 'Nenhum cliente cadastrado ainda.';
-                }
+            if (aba === 'cliente') {
+                secaoCliente.classList.remove('hidden');
+                secaoAdmin.classList.add('hidden');
+                btnCliente.className = "flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30";
+                btnAdmin.className = "flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white";
+                atualizarInterfaceCliente();
             } else {
-                msgVazio.classList.add('hidden');
-                
-                clientesFiltrados.forEach(cliente => {
-                    const saldoAtual = Number(cliente.saldo || 0);
-                    const saldoFormatado = formatarMoeda(saldoAtual);
-                    const corSaldo = Number(cliente.saldo || 0) > 0 ? 'text-emerald-700 font-bold' : 'text-slate-500';
-                    const indicacoesFormatadas = Number(cliente.indicacoes || 0);
-                    const resgatesFormatados = Number(cliente.resgates || 0);
-
-                    const mobileCard = document.createElement('article');
-                    mobileCard.className = 'rounded-2xl border border-slate-200 bg-white p-4 shadow-sm';
-                    mobileCard.innerHTML = `
-                        <div class="flex items-start justify-between gap-3">
-                            <div>
-                                <p class="text-base font-bold text-slate-900">${cliente.nome}</p>
-                                <p class="mt-1 text-sm text-slate-500">${cliente.telefone}</p>
-                            </div>
-                            <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs font-bold text-indigo-800">${indicacoesFormatadas} indicações</span>
-                        </div>
-                        <div class="mt-4 flex items-center justify-between border-t border-slate-100 pt-3">
-                            <span class="text-xs font-semibold uppercase tracking-wide text-slate-400">Saldo cashback</span>
-                            <span class="text-sm ${corSaldo}">${saldoFormatado}</span>
-                        </div>
-                        <div class="mt-3 grid grid-cols-2 gap-2">
-                            <button type="button" onclick="abrirModalResgate('${cliente.telefone}')" class="rounded-xl bg-emerald-500 px-3 py-2 text-xs font-bold text-white transition hover:bg-emerald-600 focus:outline-none focus:ring-4 focus:ring-emerald-100 ${saldoAtual <= 0 ? 'opacity-50 pointer-events-none' : ''}">Resgatar</button>
-                            <button type="button" onclick="removerCliente('${cliente.telefone}')" class="rounded-xl bg-rose-500 px-3 py-2 text-xs font-bold text-white transition hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-100">Remover</button>
-                        </div>
-                        <p class="mt-2 text-[11px] text-slate-500">Resgates: ${resgatesFormatados}</p>
-                    `;
-                    listaClientesMobile.appendChild(mobileCard);
-
-                    const tr = document.createElement('tr');
-                    tr.className = "border-b hover:bg-slate-50 transition-colors";
-                    tr.innerHTML = `
-                        <td class="p-3 font-medium text-slate-800">${cliente.nome}</td>
-                        <td class="p-3 text-slate-500">${cliente.telefone}</td>
-                        <td class="p-3 text-center"><span class="bg-indigo-100 text-indigo-800 py-1 px-2 rounded-full text-xs font-bold">${indicacoesFormatadas}</span></td>
-                        <td class="p-3 text-right ${corSaldo}">${saldoFormatado}</td>
-                        <td class="p-3 text-right">
-                            <div class="flex justify-end gap-2">
-                                <button type="button" onclick="abrirModalResgate('${cliente.telefone}')" class="rounded-lg bg-emerald-500 px-3 py-2 text-xs font-bold text-white transition hover:bg-emerald-600 focus:outline-none focus:ring-4 focus:ring-emerald-100 ${saldoAtual <= 0 ? 'opacity-50 pointer-events-none' : ''}">Resgatar</button>
-                                <button type="button" onclick="removerCliente('${cliente.telefone}')" class="rounded-lg bg-rose-500 px-3 py-2 text-xs font-bold text-white transition hover:bg-rose-600 focus:outline-none focus:ring-4 focus:ring-rose-100">Remover</button>
-                            </div>
-                            <p class="mt-2 text-[11px] text-slate-500">Resgates: ${resgatesFormatados}</p>
-                        </td>
-                    `;
-                    listaClientesDesktop.appendChild(tr);
-                });
-            }
-
-            // Salva o banco de dados atualizado no navegador
-            localStorage.setItem('sistemaFidelidade', JSON.stringify(clientes));
-        }
-
-        // Evento de submit do formulário
-        formCadastro.addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita recarregar a página
-
-            const nome = document.getElementById('nome').value.trim();
-            const telefone = normalizarTelefone(document.getElementById('telefone').value);
-            const telefoneIndicador = document.getElementById('telefoneIndicador').value;
-
-            if (!nome || !telefone) {
-                mostrarMensagem('Preencha nome e telefone com dados válidos.', 'erro');
-                return;
-            }
-
-            if (telefone.length < 10) {
-                mostrarMensagem('O telefone precisa ter DDD e número para ficar mais fácil localizar o cliente.', 'erro');
-                return;
-            }
-
-            // Verifica se o cliente já existe pelo telefone
-            const clienteExiste = clientes.find(c => c.telefone === telefone);
-            if (clienteExiste) {
-                mostrarMensagem('Erro: este telefone já está cadastrado.', 'erro');
-                return;
-            }
-
-            // Lógica de Bonificação da Indicação
-            if (telefoneIndicador.trim()) {
-                const indicador = encontrarIndicador(telefoneIndicador);
-
-                if (indicador && indicador.telefone === telefone) {
-                    mostrarMensagem('Aviso: um cliente não pode se indicar com o próprio cadastro.', 'aviso');
-                    return;
-                }
-
-                if (indicador) {
-                    indicador.saldo += VALOR_BONUS;
-                    indicador.indicacoes += 1;
-                    mostrarMensagem(`Sucesso: ${indicador.nome} recebeu R$ 10,00 de cashback pela indicação.`, 'sucesso');
-                } else {
-                    mostrarMensagem('Aviso: o indicador não foi encontrado no sistema. Cadastro feito sem bônus.', 'aviso');
-                }
-            } else {
-                mostrarMensagem('Cliente cadastrado sem indicação.', 'info');
-            }
-
-            // Adiciona o novo cliente
-            clientes.push({
-                nome: nome,
-                telefone: telefone,
-                indicacoes: 0,
-                saldo: 0.00,
-                resgates: 0,
-                totalResgatado: 0
-            });
-
-            // Limpa form e atualiza
-            formCadastro.reset();
-            atualizarTela();
-            document.getElementById('nome').focus();
-        });
-
-        // Função para demonstração (Zerar Banco)
-        function limparDados() {
-            if(confirm("Tem certeza que deseja apagar todos os clientes?")) {
-                clientes = [];
+                secaoCliente.classList.add('hidden');
+                secaoAdmin.classList.remove('hidden');
+                btnAdmin.className = "flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30";
+                btnCliente.className = "flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-400 hover:text-white";
                 atualizarTela();
-                mostrarMensagem('Sistema zerado com sucesso.', 'info');
             }
         }
 
-        // Função para exportação de dados em CSV estruturado (compatível com Excel)
-        function exportarRelatorio() {
-            if (clientes.length === 0) {
-                mostrarMensagem('Nenhum cliente cadastrado para exportação.', 'erro');
+        function preencherSeletorClientes() {
+            const seletor = document.getElementById('seletorClienteAtivo');
+            seletor.innerHTML = '';
+            clientes.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c.telefone;
+                opt.textContent = `${c.nome} (${formatarTelefone(c.telefone)})`;
+                if (c.telefone === telefoneClienteAtivo) {
+                    opt.selected = true;
+                }
+                seletor.appendChild(opt);
+            });
+        }
+
+        function mudarClienteAtivo(tel) {
+            telefoneClienteAtivo = tel;
+            atualizarInterfaceCliente();
+            mostrarToast(`Visualizando cartão de "${obterClienteAtivo()?.nome}"`, "info");
+        }
+
+        function cadastrarCliente(e) {
+            e.preventDefault();
+            const nome = document.getElementById('cadNome').value.trim();
+            const telefoneFormatado = document.getElementById('cadTelefone').value.trim();
+            const telefone = telefoneFormatado.replace(/\D/g, '');
+            const indicadorTexto = document.getElementById('cadIndicador').value.trim();
+
+            if (!nome || telefone.length < 10) {
+                mostrarToast("Informe nome e telefone com DDD válidos.", "aviso");
                 return;
             }
 
-            // Cabeçalho da tabela com ponto-e-vírgula
-            let conteudoCsv = "Nome;Telefone;Indicações;Saldo Cashback (R$);Resgates Realizados;Total Cashback Resgatado (R$)\n";
+            // Verificar duplicidade
+            if (clientes.some(c => c.telefone === telefone)) {
+                mostrarToast("Este telefone já está cadastrado no sistema.", "erro");
+                return;
+            }
 
-            // Linhas dos clientes com números em formato brasileiro (vírgula decimal)
-            clientes.forEach(cliente => {
-                const saldo = Number(cliente.saldo || 0).toFixed(2).replace('.', ',');
-                const totalResgatado = Number(cliente.totalResgatado || 0).toFixed(2).replace('.', ',');
-                conteudoCsv += `${cliente.nome};${cliente.telefone};${cliente.indicacoes};${saldo};${cliente.resgates || 0};${totalResgatado}\n`;
-            });
+            // Lógica de Bônus de Indicação
+            let indicadorEncontrado = null;
+            if (indicadorTexto) {
+                const telIndicador = indicadorTexto.replace(/\D/g, '');
+                indicadorEncontrado = clientes.find(c => c.telefone === telIndicador) ||
+                    clientes.find(c => c.nome.toLowerCase() === indicadorTexto.toLowerCase());
 
-            // Cria o blob binário com a marcação BOM (\uFEFF) para forçar o Excel a abrir em UTF-8
-            const blob = new Blob(["\uFEFF" + conteudoCsv], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.setAttribute("href", url);
-            link.setAttribute("download", `relatorio_fidelidade_${new Date().toISOString().slice(0,10)}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+                if (indicadorEncontrado) {
+                    indicadorEncontrado.saldo = Math.round((indicadorEncontrado.saldo + VALOR_BONUS_INDICACAO) * 100) / 100;
+                    indicadorEncontrado.indicacoes = (indicadorEncontrado.indicacoes || 0) + 1;
+                    mostrarToast(`🎁 ${indicadorEncontrado.nome} recebeu R$ 10,00 pela indicação!`, "sucesso");
+                } else {
+                    mostrarToast("Indicador não encontrado no sistema. Cadastro realizado sem bônus.", "aviso");
+                }
+            }
 
-            mostrarMensagem('Relatório CSV exportado com sucesso!', 'sucesso');
+            const novoCliente = {
+                nome,
+                telefone,
+                saldo: 0.00,
+                pontos: 100, // Bônus de boas-vindas
+                carimbos: 1, // 1º carimbo grátis de boas-vindas!
+                indicacoes: 0,
+                resgates: 0,
+                totalResgatado: 0.00
+            };
+
+            clientes.unshift(novoCliente);
+            telefoneClienteAtivo = novoCliente.telefone;
+            salvarClientes();
+
+            document.getElementById('formCadastro').reset();
+            preencherSeletorClientes();
+            atualizarInterfaceCliente();
+            atualizarTela();
+
+            tocarSomPontos();
+            mostrarToast(`Cliente ${nome} cadastrado com sucesso! Cartão VIP gerado.`, "sucesso");
         }
 
-        modalResgate.addEventListener('click', function(event) {
-            if (event.target === modalResgate) {
-                fecharModalResgate();
-            }
-        });
+        // Resgate de Saldo Cashback no Balcão
+        let telefoneParaResgateCashback = null;
 
-        valorResgateInput.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                confirmarResgate();
+        function abrirModalResgateCashback(telefone) {
+            const cliente = clientes.find(c => c.telefone === telefone);
+            if (!cliente) return;
+            if (cliente.saldo <= 0) {
+                mostrarToast("Este cliente não possui saldo de cashback.", "aviso");
+                return;
             }
 
-            if (event.key === 'Escape') {
-                fecharModalResgate();
-            }
-        });
+            telefoneParaResgateCashback = telefone;
+            document.getElementById('txtResgateCashbackInfo').textContent = `Cliente: ${cliente.nome} (${formatarTelefone(cliente.telefone)})`;
+            document.getElementById('txtResgateCashbackSaldo').textContent = `Saldo Disponível: ${formatarMoeda(cliente.saldo)}`;
+            document.getElementById('inputValorResgateCashback').value = '';
 
-        // Renderiza na primeira vez que abre
+            const modal = document.getElementById('modalResgateCashback');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function fecharModalResgateCashback() {
+            const modal = document.getElementById('modalResgateCashback');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            telefoneParaResgateCashback = null;
+        }
+
+        function confirmarResgateCashback() {
+            if (!telefoneParaResgateCashback) return;
+            const cliente = clientes.find(c => c.telefone === telefoneParaResgateCashback);
+            if (!cliente) return;
+
+            const input = document.getElementById('inputValorResgateCashback');
+            const valorInformado = input.value.trim() ? parseFloat(input.value) : cliente.saldo;
+
+            if (isNaN(valorInformado) || valorInformado <= 0 || valorInformado > cliente.saldo) {
+                mostrarToast("Digite um valor válido de abatimento dentro do saldo disponível.", "aviso");
+                return;
+            }
+
+            cliente.saldo = Math.round((cliente.saldo - valorInformado) * 100) / 100;
+            cliente.totalResgatado = (cliente.totalResgatado || 0) + valorInformado;
+            cliente.resgates = (cliente.resgates || 0) + 1;
+
+            salvarClientes();
+            fecharModalResgateCashback();
+            atualizarTela();
+            atualizarInterfaceCliente();
+
+            tocarSomPontos();
+            mostrarToast(`Abatimento de ${formatarMoeda(valorInformado)} aplicado para ${cliente.nome}!`, "sucesso");
+        }
+
+        // Remoção com Modal Estilizado (Sem confirm() feio)
+        function solicitarRemocaoCliente(telefone) {
+            const cliente = clientes.find(c => c.telefone === telefone);
+            if (!cliente) return;
+
+            abrirModalConfirmacao(
+                "Remover Cliente",
+                `Tem certeza que deseja apagar o cadastro de ${cliente.nome}? Esta ação apagará os carimbos e saldo e não pode ser desfeita.`,
+                () => {
+                    clientes = clientes.filter(c => c.telefone !== telefone);
+                    if (telefoneClienteAtivo === telefone) {
+                        telefoneClienteAtivo = clientes[0]?.telefone || "";
+                    }
+                    salvarClientes();
+                    preencherSeletorClientes();
+                    atualizarTela();
+                    atualizarInterfaceCliente();
+                    mostrarToast(`Cliente ${cliente.nome} removido.`, "info");
+                }
+            );
+        }
+
+        function abrirModalZerarSistema() {
+            abrirModalConfirmacao(
+                "Redefinir Demonstração",
+                "Deseja restaurar a base para os 3 clientes de exemplo e zerar os dados criados?",
+                () => {
+                    clientes = [...CLIENTES_DEMO];
+                    telefoneClienteAtivo = clientes[0].telefone;
+                    salvarClientes();
+                    preencherSeletorClientes();
+                    atualizarTela();
+                    atualizarInterfaceCliente();
+                    mostrarToast("Base restaurada com sucesso!", "sucesso");
+                }
+            );
+        }
+
+        function abrirModalConfirmacao(titulo, texto, callback) {
+            document.getElementById('tituloModalConfirmacao').textContent = titulo;
+            document.getElementById('textoModalConfirmacao').textContent = texto;
+            const btn = document.getElementById('btnAcaoConfirmacao');
+
+            btn.onclick = () => {
+                fecharModalConfirmacao();
+                callback();
+            };
+
+            const modal = document.getElementById('modalConfirmacao');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function fecharModalConfirmacao() {
+            const modal = document.getElementById('modalConfirmacao');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Exportação CSV Estruturada
+        function exportarRelatorioCSV() {
+            if (clientes.length === 0) {
+                mostrarToast("Nenhum cliente cadastrado para exportação.", "aviso");
+                return;
+            }
+
+            let csv = "Nome;Telefone;Nível VIP;Carimbos;Pontos;Saldo Cashback (R$);Indicações;Total Resgatado (R$)\n";
+            clientes.forEach(c => {
+                const vip = calcularNivelVip(c.pontos);
+                const saldo = Number(c.saldo || 0).toFixed(2).replace('.', ',');
+                const resgatado = Number(c.totalResgatado || 0).toFixed(2).replace('.', ',');
+                csv += `"${c.nome}";"${c.telefone}";"${vip.nome}";${c.carimbos};${c.pontos};${saldo};${c.indicacoes || 0};${resgatado}\n`;
+            });
+
+            const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `relatorio_fidelidade_${new Date().toISOString().slice(0,10)}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            mostrarToast("Relatório CSV exportado com sucesso!", "sucesso");
+        }
+
+        // Atualização dos Totais e Lista de Clientes
+        function atualizarTela() {
+            // Totais
+            const totalCli = clientes.length;
+            const totalSld = clientes.reduce((acc, c) => acc + Number(c.saldo || 0), 0);
+            const totalInd = clientes.reduce((acc, c) => acc + Number(c.indicacoes || 0), 0);
+            const totalRes = clientes.reduce((acc, c) => acc + Number(c.totalResgatado || 0), 0);
+
+            document.getElementById('totalClientes').textContent = totalCli.toString();
+            document.getElementById('totalSaldo').textContent = formatarMoeda(totalSld);
+            document.getElementById('totalIndicacoes').textContent = totalInd.toString();
+            document.getElementById('totalResgatado').textContent = formatarMoeda(totalRes);
+
+            // Filtro de Busca
+            const termo = document.getElementById('buscaCliente')?.value.toLowerCase().trim() || "";
+            const filtrados = clientes.filter(c => !termo || c.nome.toLowerCase().includes(termo) || c.telefone.includes(termo));
+
+            const container = document.getElementById('listaClientesContainer');
+            container.innerHTML = '';
+
+            if (filtrados.length === 0) {
+                container.innerHTML = `
+                    <div class="py-8 text-center text-slate-500 text-xs">
+                        Nenhum cliente localizado para "${termo}".
+                    </div>
+                `;
+                return;
+            }
+
+            filtrados.forEach(c => {
+                const vip = calcularNivelVip(c.pontos);
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-slate-700 transition";
+
+                card.innerHTML = `
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-black text-white text-sm">${c.nome}</span>
+                            <span class="${vip.badgeColor} text-[10px] font-bold px-2 py-0.5 rounded-full">${vip.nome}</span>
+                        </div>
+                        <div class="text-xs text-slate-400 flex items-center gap-3">
+                            <span class="font-mono">${formatarTelefone(c.telefone)}</span>
+                            <span>•</span>
+                            <span class="text-amber-400 font-semibold">${c.carimbos}/10 Carimbos</span>
+                            <span>•</span>
+                            <span class="text-indigo-400 font-semibold">${c.pontos} pts</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-800">
+                        <div class="text-left sm:text-right mr-2">
+                            <span class="text-[10px] uppercase font-bold text-slate-500">Saldo Cashback</span>
+                            <div class="text-sm font-black text-emerald-400">${formatarMoeda(c.saldo)}</div>
+                        </div>
+
+                        <div class="flex items-center gap-1.5">
+                            <button
+                                onclick="mudarClienteAtivo('${c.telefone}'); alternarAba('cliente');"
+                                class="px-2.5 py-1.5 rounded-xl bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white text-xs font-bold transition"
+                                title="Visualizar Cartão VIP do Cliente"
+                            >
+                                💳 Cartão
+                            </button>
+                            <button
+                                onclick="abrirModalResgateCashback('${c.telefone}')"
+                                class="px-2.5 py-1.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white text-xs font-bold transition ${c.saldo <= 0 ? 'opacity-40 pointer-events-none' : ''}"
+                                title="Abater saldo em compras"
+                            >
+                                Resgatar
+                            </button>
+                            <button
+                                onclick="solicitarRemocaoCliente('${c.telefone}')"
+                                class="p-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500 text-rose-400 hover:text-white transition"
+                                title="Remover cliente"
+                            >
+                                🗑️
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Inicialização
+        preencherSeletorClientes();
+        atualizarInterfaceCliente();
         atualizarTela();
     </script>
-    <footer class="mt-6 rounded-3xl border border-white/60 bg-white/80 px-4 py-6 text-center shadow backdrop-blur">
-      <p class="text-base font-black text-indigo-700">Felipe Junqueira Leite</p>
-      <p class="mt-1 text-sm text-slate-500">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
-      <div class="mt-3 flex flex-wrap justify-center gap-2">
-        <span class="rounded-full bg-indigo-600 px-3 py-1 text-xs font-bold text-white">HTML5</span>
-        <span class="rounded-full bg-indigo-600 px-3 py-1 text-xs font-bold text-white">CSS3</span>
-        <span class="rounded-full bg-indigo-600 px-3 py-1 text-xs font-bold text-white">JavaScript</span>
-        <span class="rounded-full bg-indigo-600 px-3 py-1 text-xs font-bold text-white">Mobile‑First</span>
-        <span class="rounded-full bg-indigo-600 px-3 py-1 text-xs font-bold text-white">SEO</span>
-        <span class="rounded-full bg-indigo-600 px-3 py-1 text-xs font-bold text-white">UX/UI</span>
-      </div>
-      <p class="mt-3 text-xs text-slate-400">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
-    </footer>
 </body>
 </html>

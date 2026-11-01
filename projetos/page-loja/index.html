@@ -1,766 +1,1636 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bazar Centro - Landing Page Premium</title>
-    
+    <title>Bazar Centro | Vitrine Oficial de Ofertas & Utilidades</title>
+    <meta name="description" content="O maior mix de utilidades domésticas, eletrônicos, papelaria e decoração no centro da cidade. Ofertas relâmpago, estacionamento grátis e atendimento rápido no WhatsApp.">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
+
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- React and Babel -->
+    <!-- React 18 & Babel -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- Framer Motion -->
-    <script src="https://unpkg.com/framer-motion@11.11.17/dist/framer-motion.js"></script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
                     },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        },
+                        emerald: {
+                            500: '#10b981',
+                            600: '#059669'
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 8px 30px rgba(0,0,0,0.06)',
+                        'card': '0 12px 35px -8px rgba(15, 23, 42, 0.08)',
+                        'glow': '0 0 25px rgba(37, 99, 235, 0.35)'
+                    }
                 }
             }
         }
     </script>
 
     <style>
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) skewX(-12deg); }
-            100% { transform: translateX(100%) skewX(-12deg); }
+        /* Animações e ajustes de UI */
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.02); }
         }
-        .animate-shimmer {
-            animation: shimmer 2s infinite;
+        @keyframes radar-ping {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.4); opacity: 0.3; }
+            100% { transform: scale(1.8); opacity: 0; }
         }
-        body {
-            font-family: 'Inter', sans-serif;
+        .animate-radar {
+            animation: radar-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        .pulse-badge {
+            animation: pulse-subtle 2.5s infinite ease-in-out;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
         }
     </style>
 </head>
-<body class="bg-[#FAFAFA] text-slate-900 overflow-x-hidden">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-orange-500 selection:text-white custom-scrollbar">
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useMemo, useRef } = React;
 
-        // Custom Inline SVG Icons
-        const Icon = ({ children, className = "w-6 h-6", viewBox = "0 0 24 24" }) => (
-            <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                viewBox={viewBox} 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                className={className}
-            >
+        const WHATSAPP_NUMERO = "5511983909578";
+        const WHATSAPP_FORMATADO = "(11) 98390-9578";
+        const ENDERECO_LOJA = "Rua do Comércio, 450 - Centro Histórico, São Paulo - SP";
+
+        // Ícones em SVG
+        const Icon = ({ children, className = "w-5 h-5", viewBox = "0 0 24 24" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox={viewBox} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                 {children}
             </svg>
         );
 
-        const ShoppingBag = (props) => (
-            <Icon {...props}>
-                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
-            </Icon>
-        );
+        const Icons = {
+            ShoppingBag: (props) => (
+                <Icon {...props}><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></Icon>
+            ),
+            Zap: (props) => (
+                <Icon {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></Icon>
+            ),
+            Flame: (props) => (
+                <Icon {...props}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></Icon>
+            ),
+            Clock: (props) => (
+                <Icon {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></Icon>
+            ),
+            MapPin: (props) => (
+                <Icon {...props}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></Icon>
+            ),
+            Search: (props) => (
+                <Icon {...props}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></Icon>
+            ),
+            CheckCircle: (props) => (
+                <Icon {...props}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></Icon>
+            ),
+            Star: (props) => (
+                <Icon {...props}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></Icon>
+            ),
+            Truck: (props) => (
+                <Icon {...props}><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></Icon>
+            ),
+            Shield: (props) => (
+                <Icon {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></Icon>
+            ),
+            Car: (props) => (
+                <Icon {...props}><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H7.5a1 1 0 0 0-.8.4L4 11l-5.16.86A1 1 0 0 0-2 12.85V16h3"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></Icon>
+            ),
+            X: (props) => (
+                <Icon {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></Icon>
+            ),
+            Eye: (props) => (
+                <Icon {...props}><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></Icon>
+            ),
+            Copy: (props) => (
+                <Icon {...props}><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></Icon>
+            ),
+            WhatsApp: (props) => (
+                <svg viewBox="0 0 24 24" fill="currentColor" className={props.className || "w-5 h-5"}>
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+            )
+        };
 
-        const Wrench = (props) => (
-            <Icon {...props}>
-                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-            </Icon>
-        );
+        // Dados dos Produtos em Promoção com Categorias e Selos
+        const PRODUTOS_INICIAIS = [
+            // UTILIDADES
+            {
+                id: "util-1",
+                nome: "Conjunto Cerâmica Antiaderente MasterChef 5 Pcs",
+                departamento: "Utilidades",
+                precoOriginal: 379.90,
+                precoPromocional: 249.90,
+                descontoPercentual: 34,
+                selo: "-34% OFF",
+                badgeDestaque: "Mais Vendido",
+                avaliacao: 4.9,
+                avaliacoesQtd: 184,
+                imagem: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&q=80&w=600",
+                descricao: "Revestimento cerâmico triplo livre de metais pesados. Cabos térmicos com toque aveludado e fundo de indução rápida.",
+                especificacoes: [
+                    "1 Caçarola 24cm com tampa de vidro",
+                    "1 Panela 20cm com saída de vapor",
+                    "1 Panela 16cm para molhos",
+                    "1 Frigideira Wok 24cm",
+                    "1 Espátula de silicone resistente a 220°C"
+                ],
+                estoque: 7
+            },
+            {
+                id: "util-2",
+                nome: "Balança Digital Gourmet Alta Precisão 10kg",
+                departamento: "Utilidades",
+                precoOriginal: 59.90,
+                precoPromocional: 39.90,
+                descontoPercentual: 33,
+                selo: "-33% OFF",
+                badgeDestaque: "Essencial",
+                avaliacao: 4.8,
+                avaliacoesQtd: 92,
+                imagem: "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&q=80&w=600",
+                descricao: "Display LCD iluminado, função tara inteligente e medição precisa em gramas, onças e mililitros.",
+                especificacoes: [
+                    "Capacidade de 1g até 10.000g",
+                    "Superfície fácil de higienizar",
+                    "Desligamento automático inteligente",
+                    "Acompanha 2 pilhas AAA inclusas"
+                ],
+                estoque: 14
+            },
+            {
+                id: "util-3",
+                nome: "Kit 6 Potes Herméticos Vidro com Tampa Bambu",
+                departamento: "Utilidades",
+                precoOriginal: 129.90,
+                precoPromocional: 89.90,
+                descontoPercentual: 30,
+                selo: "-30% OFF",
+                badgeDestaque: "Tendência",
+                avaliacao: 5.0,
+                avaliacoesQtd: 67,
+                imagem: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&q=80&w=600",
+                descricao: "Vidro borossilicato de alta resistência térmica e anel de silicone atóxico que bloqueia umidade e conserva temperos por muito mais tempo.",
+                especificacoes: [
+                    "Tamanhos: 2x 1.200ml, 2x 800ml, 2x 450ml",
+                    "Tampas ecológicas em bambu antibacteriano",
+                    "Livre de BPA e odores",
+                    "Compatível com geladeira e lava-louças"
+                ],
+                estoque: 9
+            },
+            {
+                id: "util-4",
+                nome: "Garrafa Térmica Inteligente Vacuum LED 500ml",
+                departamento: "Utilidades",
+                precoOriginal: 79.90,
+                precoPromocional: 49.90,
+                descontoPercentual: 38,
+                selo: "-38% OFF",
+                badgeDestaque: "Praticidade",
+                avaliacao: 4.7,
+                avaliacoesQtd: 110,
+                imagem: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=600",
+                descricao: "Sensor touch com display LED que mostra a temperatura do líquido na tampa. Mantém quente por 12h ou gelado por até 24h.",
+                especificacoes: [
+                    "Aço Inox 304 de grau cirúrgico",
+                    "Vedação 100% à prova de vazamentos",
+                    "Filtro interno para chás e infusões",
+                    "Bateria de longa duração integrada"
+                ],
+                estoque: 16
+            },
 
-        const Utensils = (props) => (
-            <Icon {...props}>
-                <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
-            </Icon>
-        );
+            // ELETRÔNICOS
+            {
+                id: "elet-1",
+                nome: "Parafusadeira Sem Fio Impacto 21V com Maleta",
+                departamento: "Eletrônicos",
+                precoOriginal: 299.90,
+                precoPromocional: 199.90,
+                descontoPercentual: 33,
+                selo: "-33% OFF",
+                badgeDestaque: "Alta Potência",
+                avaliacao: 4.9,
+                avaliacoesQtd: 215,
+                imagem: "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&q=80&w=600",
+                descricao: "Motor de alto torque com 25 ajustes, modo impacto para alvenaria, luz LED frontal e kit completo com 24 acessórios.",
+                especificacoes: [
+                    "2 Baterias de Lítio 21V inclusas",
+                    "Carregador bivolt inteligente turbo",
+                    "Mandril metálico de aperto rápido 10mm",
+                    "Maleta reforçada para transporte"
+                ],
+                estoque: 5
+            },
+            {
+                id: "elet-2",
+                nome: "Caixa de Som Portátil Bluetooth Pro 20W RMS",
+                departamento: "Eletrônicos",
+                precoOriginal: 199.90,
+                precoPromocional: 139.90,
+                descontoPercentual: 30,
+                selo: "-30% OFF",
+                badgeDestaque: "Som Imersivo",
+                avaliacao: 4.8,
+                avaliacoesQtd: 88,
+                imagem: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&q=80&w=600",
+                descricao: "Graves reforçados com radiador passivo duplo, certificação IPX6 resistente à água e autonomia para até 12 horas contínuas.",
+                especificacoes: [
+                    "Conexão Bluetooth 5.3 estável até 15m",
+                    "Entradas: Bluetooth, MicroSD, USB e P2",
+                    "Função TWS (conecte 2 caixas juntas)",
+                    "Microfone embutido para chamadas viva-voz"
+                ],
+                estoque: 11
+            },
+            {
+                id: "elet-3",
+                nome: "Fone Sem Fio TWS Stereo com Cancelamento Ativo",
+                departamento: "Eletrônicos",
+                precoOriginal: 129.90,
+                precoPromocional: 79.90,
+                descontoPercentual: 38,
+                selo: "-38% OFF",
+                badgeDestaque: "Campeão de Vendas",
+                avaliacao: 4.8,
+                avaliacoesQtd: 142,
+                imagem: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&q=80&w=600",
+                descricao: "Áudio HD com drivers dinâmicos de 13mm, estojo com display digital de carga e isolamento acústico ambiental ENC.",
+                especificacoes: [
+                    "Até 28h de reprodução com o estojo",
+                    "Controles touch personalizáveis",
+                    "Latência ultra-baixa de 45ms para jogos e vídeos",
+                    "Conexão instantânea ao abrir o estojo"
+                ],
+                estoque: 19
+            },
+            {
+                id: "elet-4",
+                nome: "Estação Carregador Por Indução 3 em 1 Fast",
+                departamento: "Eletrônicos",
+                precoOriginal: 169.90,
+                precoPromocional: 119.90,
+                descontoPercentual: 29,
+                selo: "-29% OFF",
+                badgeDestaque: "Organização",
+                avaliacao: 4.7,
+                avaliacoesQtd: 53,
+                imagem: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&q=80&w=600",
+                descricao: "Carregue Celular, Fones e Smartwatch simultaneamente em uma única tomada com proteção térmica contra sobrecarga.",
+                especificacoes: [
+                    "Potência de carregamento rápida até 15W",
+                    "Compatível com iPhone, Samsung e Xiaomi",
+                    "Design dobrável excelente para viagens",
+                    "Luz indicadora sutil para não atrapalhar o sono"
+                ],
+                estoque: 8
+            },
 
-        const Pencil = (props) => (
-            <Icon {...props}>
-                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/>
-            </Icon>
-        );
+            // PAPELARIA
+            {
+                id: "pap-1",
+                nome: "Kit Canetas Ponta Fina Colecionável 24 Cores",
+                departamento: "Papelaria",
+                precoOriginal: 54.90,
+                precoPromocional: 34.90,
+                descontoPercentual: 36,
+                selo: "-36% OFF",
+                badgeDestaque: "Escrita Macia",
+                avaliacao: 4.9,
+                avaliacoesQtd: 230,
+                imagem: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=600",
+                descricao: "Ponta japonesa 0.4mm com tinta de secagem instantânea que não transpassa folhas de 75g. Estojo estojo cristal portátil.",
+                especificacoes: [
+                    "24 tonalidades exclusivas",
+                    "Tinta atóxica e sem cheiro forte",
+                    "Corpo ergonômico triangular",
+                    "Ideal para resumos, lettering e bullet journal"
+                ],
+                estoque: 25
+            },
+            {
+                id: "pap-2",
+                nome: "Caderno Universitário Inteligente Reposicionável",
+                departamento: "Papelaria",
+                precoOriginal: 99.90,
+                precoPromocional: 69.90,
+                descontoPercentual: 30,
+                selo: "-30% OFF",
+                badgeDestaque: "Inovador",
+                avaliacao: 5.0,
+                avaliacoesQtd: 175,
+                imagem: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=600",
+                descricao: "Tire e coloque folhas sempre que quiser! Capa dura com acabamento premium soft-touch e elástico reforçado.",
+                especificacoes: [
+                    "80 folhas pautadas gramatura 90g (não borra)",
+                    "4 divisórias com abas organizadoras",
+                    "Bolsa plástica interna para documentos",
+                    "Suporte elástico para caneta integrado"
+                ],
+                estoque: 13
+            },
+            {
+                id: "pap-3",
+                nome: "Planner Produtividade Anual Executivo Não Datado",
+                departamento: "Papelaria",
+                precoOriginal: 74.90,
+                precoPromocional: 49.90,
+                descontoPercentual: 33,
+                selo: "-33% OFF",
+                badgeDestaque: "Foco Total",
+                avaliacao: 4.8,
+                avaliacoesQtd: 62,
+                imagem: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=600",
+                descricao: "Estrutura moderna para metas mensais, controle financeiro pessoal, hábitos saudáveis e visão semanal em duas páginas.",
+                especificacoes: [
+                    "Capa em couro sintético nobre com gravação hot-stamping",
+                    "Fita marcadora em cetim duplo",
+                    "Comece em qualquer época do ano",
+                    "192 páginas em papel pólen 80g anti-reflexo"
+                ],
+                estoque: 10
+            },
+            {
+                id: "pap-4",
+                nome: "Kit Marca-Texto Tons Pastel Vintage (6 Cores)",
+                departamento: "Papelaria",
+                precoOriginal: 39.90,
+                precoPromocional: 24.90,
+                descontoPercentual: 38,
+                selo: "-38% OFF",
+                badgeDestaque: "Esgotando",
+                avaliacao: 4.9,
+                avaliacoesQtd: 198,
+                imagem: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=600",
+                descricao: "Cores suaves e estéticas para destacar informações sem poluir a leitura ou manchar o verso da página.",
+                especificacoes: [
+                    "Tons: Lavanda, Menta, Pêssego, Amarelo Claro, Rosa Bebê e Céu",
+                    "Ponta chanfrada versátil (1mm a 4mm)",
+                    "Secagem em 3 segundos",
+                    "Tampa com trava hermética para maior durabilidade"
+                ],
+                estoque: 31
+            },
 
-        const MapPin = (props) => (
-            <Icon {...props}>
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
-            </Icon>
-        );
-
-        const Clock = (props) => (
-            <Icon {...props}>
-                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-            </Icon>
-        );
-
-        const CheckCircle2 = (props) => (
-            <Icon {...props}>
-                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"/><path d="m9 12 2 2 4-4"/>
-            </Icon>
-        );
-
-        const Star = (props) => (
-            <Icon {...props}>
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-            </Icon>
-        );
-
-        const ShieldCheck = (props) => (
-            <Icon {...props}>
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/>
-            </Icon>
-        );
-
-        const Truck = (props) => (
-            <Icon {...props}>
-                <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-2.235-2.767A1 1 0 0 0 16.74 9H14"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>
-            </Icon>
-        );
-
-        const MessageCircle = (props) => (
-            <Icon {...props}>
-                <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
-            </Icon>
-        );
-
-        const Phone = (props) => (
-            <Icon {...props}>
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </Icon>
-        );
-
-        // Robust Proxy for Framer Motion
-        const motion = new Proxy({}, {
-            get: (target, prop) => {
-                const globalMotion = (window.Motion && window.Motion.motion) || (window.FramerMotion && window.FramerMotion.motion);
-                if (globalMotion && globalMotion[prop]) return globalMotion[prop];
-                // Fallback to standard HTML elements if motion is not loaded
-                return ({ children, whileHover, whileTap, whileInView, viewport, initial, animate, transition, ...props }) => {
-                    const Tag = prop;
-                    return <Tag {...props}>{children}</Tag>;
-                };
+            // DECORAÇÃO
+            {
+                id: "dec-1",
+                nome: "Luminária Articulada Minimalista Arquitetura",
+                departamento: "Decoração",
+                precoOriginal: 139.90,
+                precoPromocional: 89.90,
+                descontoPercentual: 35,
+                selo: "-35% OFF",
+                badgeDestaque: "Design Premiado",
+                avaliacao: 4.9,
+                avaliacoesQtd: 115,
+                imagem: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600",
+                descricao: "Corpo metálico com molas de alta precisão e rotação de 360°. Base pesada estável e garra de fixação em bordas de mesa inclusas.",
+                especificacoes: [
+                    "Bocal padrão E27 compatível com LED bivolt",
+                    "Interruptor no cabo de 1,5 metros",
+                    "Pintura eletrostática fosca anti-risco",
+                    "Altura regulável até 65cm"
+                ],
+                estoque: 6
+            },
+            {
+                id: "dec-2",
+                nome: "Difusor e Umidificador Ultrassônico Chama 3D",
+                departamento: "Decoração",
+                precoOriginal: 119.90,
+                precoPromocional: 79.90,
+                descontoPercentual: 33,
+                selo: "-33% OFF",
+                badgeDestaque: "Ambiente Zen",
+                avaliacao: 4.8,
+                avaliacoesQtd: 140,
+                imagem: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&q=80&w=600",
+                descricao: "Combina iluminação LED de fogo artificial com névoa fria aromática. Silencioso (< 20dB) com desligamento de segurança sem água.",
+                especificacoes: [
+                    "Capacidade de 200ml com autonomia de até 8h",
+                    "Compatível com óleos essenciais puros",
+                    "2 intensidades de brilho da chama",
+                    "Alimentação USB Tipo-C universal"
+                ],
+                estoque: 14
+            },
+            {
+                id: "dec-3",
+                nome: "Espelho Redondo Adnet 50cm Alça Couro Legítimo",
+                departamento: "Decoração",
+                precoOriginal: 179.90,
+                precoPromocional: 119.90,
+                descontoPercentual: 33,
+                selo: "-33% OFF",
+                badgeDestaque: "Sofisticação",
+                avaliacao: 5.0,
+                avaliacoesQtd: 79,
+                imagem: "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&q=80&w=600",
+                descricao: "Vidro cristal 3mm de primeira linha sem distorção. Aro de alumínio com pintura fosca e alça em fita de couro sintético reforçada.",
+                especificacoes: [
+                    "Diâmetro total: 50 cm",
+                    "Acompanha pino suporte de parede cromado com parafuso",
+                    "Ideal para banheiros, lavabos, halls e salas",
+                    "Fácil instalação em menos de 5 minutos"
+                ],
+                estoque: 4
+            },
+            {
+                id: "dec-4",
+                nome: "Vaso de Cerâmica Nórdico Minimalista Off-White",
+                departamento: "Decoração",
+                precoOriginal: 89.90,
+                precoPromocional: 59.90,
+                descontoPercentual: 33,
+                selo: "-33% OFF",
+                badgeDestaque: "Estilo Escandinavo",
+                avaliacao: 4.7,
+                avaliacoesQtd: 48,
+                imagem: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&q=80&w=600",
+                descricao: "Acabamento fosco texturizado artesanal. Perfeito para flores secas, pampas grass ou como escultura decorativa solo.",
+                especificacoes: [
+                    "Altura: 21 cm / Largura: 14 cm",
+                    "Cerâmica de alta temperatura com feltro na base",
+                    "Não risca móveis de madeira ou vidro",
+                    "Resistente à umidade"
+                ],
+                estoque: 12
             }
-        });
+        ];
 
+        // Componente Principal
         function App() {
-            const whatsappNumber = "5511983909578";
-            const mapLink = "https://www.google.com/maps/search/?api=1&query=Avenida+Paulista,+São+Paulo";
+            // Estado de busca e filtros
+            const [busca, setBusca] = useState("");
+            const [departamentoAtivo, setDepartamentoAtivo] = useState("Todos");
+            const [ordenacao, setOrdenacao] = useState("destaque");
 
-            const [searchQuery, setSearchQuery] = useState("");
-            const [selectedCategory, setSelectedCategory] = useState("Todos");
+            // Modal de Detalhes do Produto
+            const [produtoSelecionado, setProdutoSelecionado] = useState(null);
+            const [quantidadeModal, setQuantidadeModal] = useState(1);
 
-            const openWhatsApp = (message) => {
-                const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-                window.open(url, '_blank', 'noopener,noreferrer');
+            // Sacola de Compras Interativa
+            const [sacola, setSacola] = useState([]);
+            const [sacolaAberta, setSacolaAberta] = useState(false);
+
+            // Toasts elegantes
+            const [toasts, setToasts] = useState([]);
+
+            // Timer da Oferta Relâmpago (Contagem regressiva de hoje até meia-noite ou 4h restantes)
+            const [tempoRestante, setTempoRestante] = useState({ horas: "03", minutos: "47", segundos: "22" });
+
+            useEffect(() => {
+                const calcularTempo = () => {
+                    const agora = new Date();
+                    const fimDoDia = new Date();
+                    fimDoDia.setHours(23, 59, 59, 999);
+                    const diferenca = fimDoDia - agora;
+
+                    if (diferenca <= 0) {
+                        setTempoRestante({ horas: "00", minutos: "00", segundos: "00" });
+                        return;
+                    }
+
+                    const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+                    const minutos = Math.floor((diferenca / 1000 / 60) % 60);
+                    const segundos = Math.floor((diferenca / 1000) % 60);
+
+                    setTempoRestante({
+                        horas: String(horas).padStart(2, "0"),
+                        minutos: String(minutos).padStart(2, "0"),
+                        segundos: String(segundos).padStart(2, "0")
+                    });
+                };
+
+                calcularTempo();
+                const intervalo = setInterval(calcularTempo, 1000);
+                return () => clearInterval(intervalo);
+            }, []);
+
+            // Função para disparar Toast
+            const showToast = (mensagem, tipo = "sucesso") => {
+                const id = Date.now() + Math.random();
+                setToasts(prev => [...prev, { id, mensagem, tipo }]);
+                setTimeout(() => {
+                    setToasts(prev => prev.filter(t => t.id !== id));
+                }, 3800);
             };
 
-            const categories = [
-                { title: "Brinquedos", icon: <ShoppingBag className="w-8 h-8" />, color: "bg-orange-100 text-orange-500", hover: "group-hover:bg-orange-500" },
-                { title: "Cozinha", icon: <Utensils className="w-8 h-8" />, color: "bg-blue-100 text-blue-600", hover: "group-hover:bg-blue-600" },
-                { title: "Ferramentas", icon: <Wrench className="w-8 h-8" />, color: "bg-orange-100 text-orange-500", hover: "group-hover:bg-orange-500" },
-                { title: "Papelaria", icon: <Pencil className="w-8 h-8" />, color: "bg-blue-100 text-blue-600", hover: "group-hover:bg-blue-600" },
-            ];
+            // Filtragem e Ordenação
+            const produtosFiltrados = useMemo(() => {
+                let resultado = PRODUTOS_INICIAIS.filter(p => {
+                    const combinaDepto = departamentoAtivo === "Todos" || p.departamento === departamentoAtivo;
+                    const termo = busca.toLowerCase().trim();
+                    const combinaBusca = !termo || p.nome.toLowerCase().includes(termo) || p.descricao.toLowerCase().includes(termo);
+                    return combinaDepto && combinaBusca;
+                });
 
-            const products = [
-                {
-                    id: "tabuleiro",
-                    name: "Jogo de Tabuleiro Clássico",
-                    price: 79.90,
-                    category: "Brinquedos",
-                    badge: "Família",
-                    desc: "Diversão garantida para todas as idades.",
-                    image: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?auto=format&fit=crop&q=80&w=400"
-                },
-                {
-                    id: "controle-remoto",
-                    name: "Carrinho de Controle Remoto",
-                    price: 119.90,
-                    category: "Brinquedos",
-                    badge: "Alta Velocidade",
-                    desc: "Bateria recarregável e tração nas quatro rodas.",
-                    image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&q=80&w=400"
-                },
-                {
-                    id: "panelas",
-                    name: "Conjunto de Panelas Cerâmica (4 Peças)",
-                    price: 249.90,
-                    category: "Cozinha",
-                    badge: "Mais Vendido",
-                    desc: "Revestimento antiaderente cerâmico premium.",
-                    image: "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&q=80&w=400"
-                },
-                {
-                    id: "balanca",
-                    name: "Balança Digital de Cozinha",
-                    price: 39.90,
-                    category: "Cozinha",
-                    badge: "Precisão",
-                    desc: "Capacidade até 10kg com função tara.",
-                    image: "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&q=80&w=400"
-                },
-                {
-                    id: "chaves",
-                    name: "Jogo de Chaves de Fenda (12 Peças)",
-                    price: 59.90,
-                    category: "Ferramentas",
-                    badge: "Aço Cromo",
-                    desc: "Pontas magnetizadas e cabo ergonômico.",
-                    image: "https://images.unsplash.com/photo-1534224039826-c7a0dea0e66a?auto=format&fit=crop&q=80&w=400"
-                },
-                {
-                    id: "parafusadeira",
-                    name: "Parafusadeira Sem Fio 12V",
-                    price: 189.90,
-                    category: "Ferramentas",
-                    badge: "Promoção",
-                    desc: "Controle de torque e maleta organizadora.",
-                    image: "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&q=80&w=400"
-                },
-                {
-                    id: "caderno",
-                    name: "Caderno Universitário Capa Dura",
-                    price: 19.90,
-                    category: "Papelaria",
-                    badge: "Volta às Aulas",
-                    desc: "10 matérias com bolsa interna para papéis.",
-                    image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=400"
-                },
-                {
-                    id: "canetas",
-                    name: "Kit Canetas Coloridas Gel (12 Cores)",
-                    price: 29.90,
-                    category: "Papelaria",
-                    badge: "Escrita Macia",
-                    desc: "Secagem rápida com cores vibrantes.",
-                    image: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=400"
+                if (ordenacao === "menor-preco") {
+                    resultado.sort((a, b) => a.precoPromocional - b.precoPromocional);
+                } else if (ordenacao === "maior-desconto") {
+                    resultado.sort((a, b) => b.descontoPercentual - a.descontoPercentual);
+                } else if (ordenacao === "avaliacao") {
+                    resultado.sort((a, b) => b.avaliacao - a.avaliacao);
                 }
-            ];
+                return resultado;
+            }, [busca, departamentoAtivo, ordenacao]);
 
-            const benefits = [
-                { 
-                    title: "Melhor Preço", 
-                    desc: "Cobrimos ofertas da região com produtos de qualidade garantida.", 
-                    icon: <ShieldCheck className="w-6 h-6" /> 
-                },
-                { 
-                    title: "Variedade Real", 
-                    desc: "Milhares de itens em estoque para todas as suas necessidades.", 
-                    icon: <ShoppingBag className="w-6 h-6" /> 
-                },
-                { 
-                    title: "Entrega Rápida", 
-                    desc: "Peça pelo WhatsApp e receba em casa no mesmo dia (consulte taxas).", 
-                    icon: <Truck className="w-6 h-6" /> 
-                }
-            ];
-
-            const testimonials = [
-                { name: "Maria Silva", text: "Sempre encontro o que preciso. Atendimento nota 10!", role: "Cliente fiel" },
-                { name: "João Pereira", text: "As ferramentas são de ótima qualidade e o preço é justo.", role: "Morador do Centro" },
-                { name: "Ana Costa", text: "Melhor papelaria para o material escolar dos meus filhos.", role: "Mãe de 2" },
-            ];
-
-            const filteredProducts = products.filter(product => {
-                const matchesCategory = selectedCategory === "Todos" || product.category === selectedCategory;
-                const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                      product.desc.toLowerCase().includes(searchQuery.toLowerCase());
-                return matchesCategory && matchesSearch;
-            });
-
-            const fadeIn = {
-                initial: { opacity: 0, y: 20 },
-                whileInView: { opacity: 1, y: 0 },
-                viewport: { once: true },
-                transition: { duration: 0.6 }
+            // Ações de WhatsApp
+            const abrirWhatsApp = (mensagem) => {
+                const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
+                window.open(url, "_blank", "noopener,noreferrer");
             };
 
-            const stagger = {
-                initial: { opacity: 0 },
-                whileInView: { opacity: 1 },
-                viewport: { once: true },
-                transition: { staggerChildren: 0.1 }
+            const pedirProdutoWhatsApp = (produto, qtd = 1) => {
+                const total = (produto.precoPromocional * qtd).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                const msg = `Olá, Bazar Centro! Vi esta oferta no site oficial e gostaria de reservar:\n\n🛍️ *${produto.nome}*\n📦 *Quantidade:* ${qtd} un.\n💰 *Preço Promocional:* R$ ${produto.precoPromocional.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n💵 *Subtotal:* R$ ${total}\n\nVocês têm disponível para retirada imediata ou entrega no meu endereço?`;
+                abrirWhatsApp(msg);
+                showToast(`Iniciando pedido de "${produto.nome}" no WhatsApp!`, "sucesso");
+            };
+
+            // Manipulação da Sacola
+            const adicionarASacola = (produto, qtd = 1) => {
+                setSacola(prev => {
+                    const existente = prev.find(item => item.id === produto.id);
+                    if (existente) {
+                        return prev.map(item => item.id === produto.id ? { ...item, quantidade: item.quantidade + qtd } : item);
+                    }
+                    return [...prev, { ...produto, quantidade: qtd }];
+                });
+                showToast(`+${qtd} "${produto.nome}" adicionado à sacola!`, "sucesso");
+            };
+
+            const alterarQuantidadeSacola = (id, delta) => {
+                setSacola(prev => prev.map(item => {
+                    if (item.id === id) {
+                        const novaQtd = item.quantidade + delta;
+                        return novaQtd > 0 ? { ...item, quantidade: novaQtd } : null;
+                    }
+                    return item;
+                }).filter(Boolean));
+            };
+
+            const removerDaSacola = (id) => {
+                setSacola(prev => prev.filter(item => item.id !== id));
+                showToast("Item removido da sacola.", "info");
+            };
+
+            const totalSacola = useMemo(() => {
+                return sacola.reduce((acc, item) => acc + (item.precoPromocional * item.quantidade), 0);
+            }, [sacola]);
+
+            const quantidadeItensSacola = useMemo(() => {
+                return sacola.reduce((acc, item) => acc + item.quantidade, 0);
+            }, [sacola]);
+
+            const finalizarPedidoSacolaWhatsApp = () => {
+                if (sacola.length === 0) return;
+                let lista = sacola.map((item, idx) => `• ${item.quantidade}x ${item.nome} — R$ ${(item.precoPromocional * item.quantidade).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`).join('\n');
+                const totalFormatado = totalSacola.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                const msg = `Olá, Bazar Centro! Gostaria de fechar meu pedido feito pelo site:\n\n🛒 *Itens da Sacola:*\n${lista}\n\n💳 *Valor Total das Ofertas:* R$ ${totalFormatado}\n\nPoderiam me informar sobre as opções de pagamento (PIX/Cartão) e frete/retirada?`;
+                abrirWhatsApp(msg);
+                showToast("Encaminhando sacola com os itens para o WhatsApp!", "sucesso");
+            };
+
+            const copiarTexto = (texto, rotulo = "Informação copiada!") => {
+                navigator.clipboard.writeText(texto);
+                showToast(rotulo, "sucesso");
             };
 
             return (
-                <div className="min-h-screen bg-[#FAFAFA] flex flex-col font-sans text-slate-900 overflow-x-hidden selection:bg-orange-200">
-                    {/* Header */}
-                    <header className="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
-                        <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
-                            <motion.div 
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                className="flex items-center gap-1.5 md:gap-2 shrink-0"
-                            >
-                                <div className="bg-blue-600 p-1.5 rounded-lg">
-                                    <ShoppingBag className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800">
+                    {/* Top Bar Promocional de Alta Conversão */}
+                    <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white text-xs py-2 px-4 border-b border-blue-900/40">
+                        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+                            <div className="flex items-center gap-2 font-medium">
+                                <span className="inline-flex items-center gap-1 bg-amber-500 text-slate-950 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full">
+                                    <Icons.Flame className="w-3 h-3" /> Mega Feirão
+                                </span>
+                                <span>Descontos de até <strong>50% OFF</strong> em Utilidades, Eletrônicos & Decoração no Centro!</span>
+                            </div>
+                            <div className="flex items-center gap-4 text-slate-300 text-[11px]">
+                                <span className="flex items-center gap-1 text-emerald-400">
+                                    <Icons.Car className="w-3.5 h-3.5" /> Estacionamento Gratuito
+                                </span>
+                                <span className="hidden md:inline text-slate-500">•</span>
+                                <span className="hidden md:inline flex items-center gap-1">
+                                    <Icons.Clock className="w-3.5 h-3.5 text-blue-400" /> Aberto hoje até às 19h
+                                </span>
+                                <button 
+                                    onClick={() => copiarTexto(ENDERECO_LOJA, "Endereço copiado para o mapa!")}
+                                    className="hover:text-white underline underline-offset-2 transition"
+                                >
+                                    Rua do Comércio, 450
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Header Principal */}
+                    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm transition-all">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+                            {/* Logo */}
+                            <a href="#" className="flex items-center gap-3 shrink-0 group">
+                                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-lg shadow-blue-500/30 group-hover:scale-105 transition duration-300">
+                                    <Icons.ShoppingBag className="w-6 h-6" />
                                 </div>
-                                <h1 className="text-lg md:text-xl font-bold tracking-tight text-slate-800">
-                                    Bazar<span className="text-orange-500">Centro</span>
-                                </h1>
-                            </motion.div>
-                            
-                            <motion.a
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                href={`https://wa.me/${whatsappNumber}?text=Olá,%20vi%20o%20site%20e%20gostaria%20de%20fazer%20um%20pedido!`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="bg-green-500 text-white p-2.5 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-bold shadow-lg shadow-green-500/20 hover:bg-green-600 transition-all active:scale-95 flex items-center gap-2"
-                            >
-                                <MessageCircle className="w-5 h-5 md:w-4 md:h-4" />
-                                <span className="hidden md:inline">Falar no WhatsApp</span>
-                            </motion.a>
+                                <div>
+                                    <div className="text-2xl font-black tracking-tight text-slate-900 leading-none">
+                                        Bazar<span className="text-orange-500">Centro</span>
+                                    </div>
+                                    <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Desde 2012 • Loja & Varejo</span>
+                                </div>
+                            </a>
+
+                            {/* Barra de Busca Desktop */}
+                            <div className="hidden md:flex flex-1 max-w-md mx-6 relative">
+                                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                    <Icons.Search className="w-4 h-4" />
+                                </div>
+                                <input
+                                    type="text"
+                                    value={busca}
+                                    onChange={(e) => setBusca(e.target.value)}
+                                    placeholder="Buscar por panela, ferramentas, fone, caderno..."
+                                    className="w-full pl-10 pr-9 py-2.5 rounded-full border border-slate-200 bg-slate-50 focus:bg-white text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-inner"
+                                />
+                                {busca && (
+                                    <button
+                                        onClick={() => setBusca("")}
+                                        className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
+                                    >
+                                        <Icons.X className="w-4 h-4" />
+                                    </button>
+                                )}
+                            </div>
+
+                            {/* Ações do Topo */}
+                            <div className="flex items-center gap-2 sm:gap-3">
+                                {/* Botão Sacola */}
+                                <button
+                                    onClick={() => setSacolaAberta(true)}
+                                    className="relative p-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition shadow-sm hover:border-slate-300 flex items-center gap-2"
+                                    aria-label="Abrir sacola de compras"
+                                >
+                                    <Icons.ShoppingBag className="w-5 h-5 text-slate-800" />
+                                    <span className="hidden sm:inline font-bold text-xs text-slate-800">Minha Sacola</span>
+                                    {quantidadeItensSacola > 0 && (
+                                        <span className="bg-orange-500 text-white text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center animate-bounce">
+                                            {quantidadeItensSacola}
+                                        </span>
+                                    )}
+                                </button>
+
+                                {/* Botão WhatsApp Direto */}
+                                <button
+                                    onClick={() => abrirWhatsApp("Olá! Vi a vitrine online do Bazar Centro e gostaria de falar com um atendente agora.")}
+                                    className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-bold px-4 py-2.5 rounded-2xl text-xs sm:text-sm shadow-md shadow-emerald-500/25 transition-all"
+                                >
+                                    <Icons.WhatsApp className="w-4 h-4 fill-white" />
+                                    <span className="hidden sm:inline">Chamar Atendente</span>
+                                    <span className="sm:hidden">WhatsApp</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Barra de Busca Mobile */}
+                        <div className="md:hidden px-4 pb-3">
+                            <div className="relative">
+                                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                                    <Icons.Search className="w-4 h-4" />
+                                </div>
+                                <input
+                                    type="text"
+                                    value={busca}
+                                    onChange={(e) => setBusca(e.target.value)}
+                                    placeholder="Buscar nas ofertas do dia..."
+                                    className="w-full pl-10 pr-9 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                                />
+                                {busca && (
+                                    <button
+                                        onClick={() => setBusca("")}
+                                        className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400"
+                                    >
+                                        <Icons.X className="w-4 h-4" />
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     </header>
 
-                    <main>
-                        {/* Hero Section */}
-                        <section className="relative pt-12 pb-24 md:pt-32 md:pb-48 px-6 overflow-hidden">
-                            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-50 via-transparent to-transparent opacity-70"></div>
-                                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>
-                            
-                            <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center text-center md:text-left">
-                                <div>
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ duration: 0.5 }}
-                                        className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6 md:mb-8 border border-orange-200"
-                                    >
-                                        <Star className="w-3.5 h-3.5 fill-current" />
-                                        Sua casa merece o melhor
-                                    </motion.div>
+                    <main className="flex-1">
+                        {/* HERO / BANNER DE DESTAQUE COM TIMER REGRESSIVO DE OFERTA RELÂMPAGO ATIVO */}
+                        <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white pt-8 pb-14 md:py-16">
+                            {/* Efeitos de Fundo */}
+                            <div className="absolute -top-32 -right-32 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+                            <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-orange-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
-                                    <motion.h2 
-                                        initial={{ opacity: 0, y: 30 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.2, duration: 0.7 }}
-                                        className="text-4xl md:text-7xl lg:text-8xl font-[900] text-slate-900 leading-[1.1] md:leading-[1.05] tracking-tight mb-6 md:mb-8"
-                                    >
-                                        Tudo para sua casa em <br />
-                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">um só lugar.</span>
-                                    </motion.h2>
-
-                                    <motion.p 
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.4, duration: 0.7 }}
-                                        className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto md:mx-0 mb-12 leading-relaxed"
-                                    >
-                                        Desde utilidades domésticas a presentes e ferramentas. Qualidade, preço justo e o suporte que você precisa.
-                                    </motion.p>
-
-                                    <motion.div 
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.6, duration: 0.7 }}
-                                        className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4"
-                                    >
-                                        <button
-                                            type="button"
-                                            onClick={() => openWhatsApp('Olá! Vi o site e gostaria de fazer um pedido.')}
-                                            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-black py-6 px-12 rounded-2xl shadow-2xl shadow-green-500/40 transition-all hover:scale-105 active:scale-95 group relative overflow-hidden"
-                                        >
-                                            <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></div>
-                                            <MessageCircle className="w-7 h-7 animate-bounce" />
-                                            <span className="text-xl">Comprar pelo WhatsApp</span>
-                                        </button>
-
-                                        <a
-                                            href={mapLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white hover:bg-slate-50 text-slate-700 font-bold py-6 px-8 rounded-2xl border border-slate-200 shadow-lg transition-all hover:scale-105 active:scale-95"
-                                        >
-                                            <MapPin className="w-6 h-6 text-blue-600" />
-                                            Ver localização
-                                        </a>
-                                    </motion.div>
-                                </div>
-
-                                <motion.div 
-                                    initial={{ opacity: 0, x: 50 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.8, duration: 0.7 }}
-                                    className="hidden md:block relative group lg:pl-12"
-                                >
-                                    <div className="absolute inset-0 bg-blue-600 rounded-[3rem] rotate-3 group-hover:rotate-6 transition-transform blur-2xl opacity-10"></div>
-                                    <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white group-hover:scale-[1.02] transition-transform duration-500">
-                                        <img 
-                                            src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800" 
-                                            alt="Produtos para casa e organização" 
-                                            className="w-full h-[500px] object-cover"
-                                        />
-                                    </div>
-                                    
-                                    <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-xl animate-bounce duration-[3000ms] flex items-center gap-4">
-                                        <div className="bg-orange-100 p-3 rounded-xl">
-                                            <Star className="w-6 h-6 text-orange-500 fill-current" />
+                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                                {/* Cabeçalho do Banner com Badge e Timer */}
+                                <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/10 mb-8 text-center md:text-left">
+                                    <div className="space-y-2">
+                                        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 text-slate-950 text-xs font-black uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-lg pulse-badge">
+                                            <Icons.Zap className="w-4 h-4 fill-current" />
+                                            Oferta Relâmpago Exclusiva
                                         </div>
-                                        <div>
-                                            <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Loja Nota</p>
-                                            <p className="text-xl font-black text-slate-800">4.9 / 5.0</p>
-                                        </div>
+                                        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white">
+                                            Economia de Verdade no <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-200">Coração da Cidade</span>
+                                        </h1>
+                                        <p className="text-slate-300 text-sm sm:text-base max-w-xl font-body">
+                                            Preços especiais de atacado direto para o varejo. Pegue na loja hoje mesmo ou peça pelo WhatsApp.
+                                        </p>
                                     </div>
-                                </motion.div>
-                            </div>
-                        </section>
 
-                        {/* Benefits Section */}
-                        <section id="beneficios" className="py-24 bg-white border-y border-slate-100 px-6 font-sans">
-                            <div className="max-w-6xl mx-auto">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                                    {benefits.map((benefit, i) => (
-                                        <motion.div 
-                                            key={i}
-                                            {...fadeIn}
-                                            transition={{ delay: i * 0.1 }}
-                                            className="flex flex-col items-center md:items-start text-center md:text-left gap-4"
-                                        >
-                                            <div className="bg-blue-50 p-4 rounded-2xl text-blue-600">
-                                                {benefit.icon}
+                                    {/* Timer Regressivo Ativo */}
+                                    <div className="bg-white/5 border border-white/15 backdrop-blur-md rounded-3xl p-4 sm:p-5 flex flex-col items-center gap-2 shadow-2xl">
+                                        <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase tracking-widest">
+                                            <Icons.Clock className="w-4 h-4 animate-spin text-amber-400 duration-1000" />
+                                            As ofertas relâmpago encerram em:
+                                        </div>
+                                        <div className="flex items-center gap-2 sm:gap-3">
+                                            <div className="flex flex-col items-center">
+                                                <div className="bg-slate-900 border border-amber-500/30 text-amber-400 font-black text-2xl sm:text-3xl px-3 py-2 rounded-2xl min-w-[54px] text-center shadow-inner">
+                                                    {tempoRestante.horas}
+                                                </div>
+                                                <span className="text-[10px] uppercase font-bold text-slate-400 mt-1">Horas</span>
                                             </div>
-                                            <h3 className="text-xl font-bold text-slate-900">{benefit.title}</h3>
-                                            <p className="text-slate-500 leading-relaxed font-light">{benefit.desc}</p>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* Categories Section */}
-                        <section id="categorias" className="py-32 px-6">
-                            <div className="max-w-6xl mx-auto">
-                                <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-                                    <div className="space-y-4">
-                                        <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">O que você <br /><span className="text-blue-600 underline decoration-blue-100 underline-offset-8">encontra aqui</span></h3>
-                                        <p className="text-slate-500 text-lg">Produtos selecionados para facilitar seu dia a dia.</p>
-                                    </div>
-                                </div>
-                                
-                                <motion.div 
-                                    {...stagger}
-                                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-                                >
-                                    {categories.map((cat, i) => (
-                                        <motion.div 
-                                            variants={fadeIn}
-                                            key={i}
-                                            className="group bg-white p-8 rounded-[2rem] border border-slate-100 hover:border-blue-200 transition-all hover:shadow-2xl hover:shadow-blue-500/5 flex flex-col items-center text-center gap-6"
-                                        >
-                                            <div className={`${cat.color} p-6 rounded-3xl transition-colors ${cat.hover} group-hover:text-white`}>
-                                                {cat.icon}
+                                            <span className="text-2xl font-black text-amber-400 mb-4">:</span>
+                                            <div className="flex flex-col items-center">
+                                                <div className="bg-slate-900 border border-amber-500/30 text-amber-400 font-black text-2xl sm:text-3xl px-3 py-2 rounded-2xl min-w-[54px] text-center shadow-inner">
+                                                    {tempoRestante.minutos}
+                                                </div>
+                                                <span className="text-[10px] uppercase font-bold text-slate-400 mt-1">Minutos</span>
                                             </div>
-                                            <h4 className="text-xl font-bold text-slate-800">{cat.title}</h4>
-                                            <p className="text-slate-400 text-sm font-medium transition-colors uppercase tracking-widest">Qualidade Premium</p>
-                                        </motion.div>
-                                    ))}
-                                </motion.div>
-                            </div>
-                        </section>
-
-                        {/* Vitrine de Produtos Destaque */}
-                        <section id="produtos" className="py-24 bg-[#FAFAFA] border-t border-slate-100 px-6 font-sans">
-                            <div className="max-w-6xl mx-auto">
-                                {/* Cabeçalho com Filtros e Busca */}
-                                <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 gap-8">
-                                    <div className="space-y-4">
-                                        <h3 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-                                            Nossos Produtos <br />
-                                            <span className="text-blue-600 underline decoration-blue-100 underline-offset-8">em Destaque</span>
-                                        </h3>
-                                        <p className="text-slate-500 text-lg">Busque por nome ou filtre por categorias.</p>
-                                    </div>
-                                    
-                                    {/* Barra de Busca */}
-                                    <div className="relative w-full lg:max-w-xs shrink-0">
-                                        <input 
-                                            type="text" 
-                                            value={searchQuery}
-                                            onChange={(e) => setSearchQuery(e.target.value)}
-                                            placeholder="Buscar produto..."
-                                            className="w-full bg-white border border-slate-200 rounded-2xl px-5 py-4 pl-12 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600/10 focus:border-blue-600 shadow-sm transition-all"
-                                        />
-                                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                            <span className="text-2xl font-black text-amber-400 mb-4">:</span>
+                                            <div className="flex flex-col items-center">
+                                                <div className="bg-slate-900 border border-amber-500/30 text-amber-400 font-black text-2xl sm:text-3xl px-3 py-2 rounded-2xl min-w-[54px] text-center shadow-inner animate-pulse">
+                                                    {tempoRestante.segundos}
+                                                </div>
+                                                <span className="text-[10px] uppercase font-bold text-slate-400 mt-1">Segundos</span>
+                                            </div>
                                         </div>
-                                        {searchQuery && (
-                                            <button 
-                                                onClick={() => setSearchQuery("")}
-                                                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                                            >
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
-                                            </button>
-                                        )}
                                     </div>
                                 </div>
 
-                                {/* Filtros de Categorias */}
-                                <div className="flex flex-wrap gap-3 mb-12">
-                                    {["Todos", "Brinquedos", "Cozinha", "Ferramentas", "Papelaria"].map(category => (
-                                        <button
-                                            key={category}
-                                            onClick={() => setSelectedCategory(category)}
-                                            className={`px-6 py-3 rounded-full text-sm font-bold transition-all shadow-sm ${
-                                                selectedCategory === category
-                                                    ? "bg-blue-600 text-white shadow-blue-500/10"
-                                                    : "bg-white text-slate-600 hover:bg-slate-50 border border-slate-100"
-                                            }`}
-                                        >
-                                            {category}
-                                        </button>
-                                    ))}
-                                </div>
+                                {/* Card do Produto Estrela da Oferta Relâmpago */}
+                                <div className="bg-gradient-to-r from-slate-900/90 to-slate-800/80 border border-white/10 rounded-3xl p-6 sm:p-8 backdrop-blur-xl shadow-2xl grid md:grid-cols-12 gap-8 items-center">
+                                    <div className="md:col-span-5 relative group">
+                                        <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-slate-800 relative shadow-lg">
+                                            <img
+                                                src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&q=80&w=700"
+                                                alt="Conjunto Cerâmica MasterChef"
+                                                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                                            />
+                                            <div className="absolute top-3 left-3 bg-red-600 text-white font-black text-xs uppercase px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1">
+                                                <Icons.Flame className="w-3.5 h-3.5" /> -40% DE DESCONTO
+                                            </div>
+                                            <div className="absolute bottom-3 left-3 bg-slate-950/80 backdrop-blur text-white text-[11px] font-semibold px-3 py-1 rounded-xl">
+                                                🔥 84% reservado das unidades
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                {/* Grade de Produtos */}
-                                {filteredProducts.length > 0 ? (
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                                        {filteredProducts.map(product => (
-                                            <motion.div 
-                                                key={product.id}
-                                                layout
-                                                initial={{ opacity: 0, scale: 0.9 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                transition={{ duration: 0.3 }}
-                                                className="bg-white rounded-[2rem] border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
-                                            >
-                                                {/* Imagem do Produto */}
-                                                <div className="relative aspect-video overflow-hidden bg-slate-50">
-                                                    <img 
-                                                        src={product.image} 
-                                                        alt={product.name} 
-                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                                    />
-                                                    <span className="absolute top-4 left-4 bg-orange-500 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md">
-                                                        {product.badge}
+                                    <div className="md:col-span-7 flex flex-col justify-between gap-5">
+                                        <div className="space-y-2">
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-md">
+                                                    Destaque Absoluto do Dia
+                                                </span>
+                                                <div className="flex items-center text-amber-400 text-xs">
+                                                    <Icons.Star className="w-3.5 h-3.5 fill-current" />
+                                                    <span className="font-bold ml-1 text-white">4.9</span>
+                                                    <span className="text-slate-400 ml-1">(184 avaliações)</span>
+                                                </div>
+                                            </div>
+                                            <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight">
+                                                Conjunto Cerâmica Antiaderente MasterChef Titanium (5 Peças)
+                                            </h2>
+                                            <p className="text-slate-300 text-sm font-body leading-relaxed">
+                                                Cozinhe sem óleo com tecnologia cerâmica alemã livre de toxinas. O conjunto mais cobiçado da nossa loja com garantia de procedência.
+                                            </p>
+                                        </div>
+
+                                        {/* Barra de Progresso de Estoque */}
+                                        <div className="space-y-1.5 bg-white/5 p-3 rounded-2xl border border-white/5">
+                                            <div className="flex justify-between text-xs font-semibold">
+                                                <span className="text-slate-300">Vendido: 42 de 50 unidades</span>
+                                                <span className="text-amber-400 font-bold">Restam apenas 8 un.!</span>
+                                            </div>
+                                            <div className="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden">
+                                                <div className="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full w-[84%] animate-pulse"></div>
+                                            </div>
+                                        </div>
+
+                                        {/* Preços e Ações */}
+                                        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pt-2">
+                                            <div>
+                                                <span className="text-xs text-slate-400 line-through">De: R$ 379,90</span>
+                                                <div className="flex items-baseline gap-2">
+                                                    <span className="text-sm font-bold text-slate-400">Por apenas</span>
+                                                    <span className="text-3xl sm:text-4xl font-black text-emerald-400">
+                                                        R$ 249,90
+                                                    </span>
+                                                    <span className="text-xs font-bold text-emerald-300 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-800/40">
+                                                        Economia de R$ 130,00
                                                     </span>
                                                 </div>
+                                            </div>
 
-                                                {/* Detalhes do Produto */}
-                                                <div className="p-6 flex-1 flex flex-col justify-between gap-6">
-                                                    <div className="space-y-2">
-                                                        <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">{product.category}</span>
-                                                        <h4 className="font-extrabold text-slate-800 text-lg leading-tight group-hover:text-blue-600 transition-colors">
-                                                            {product.name}
-                                                        </h4>
-                                                        <p className="text-slate-400 text-sm font-light leading-relaxed">
-                                                            {product.desc}
-                                                        </p>
-                                                    </div>
+                                            <div className="flex items-center gap-3">
+                                                <button
+                                                    onClick={() => {
+                                                        const p = PRODUTOS_INICIAIS[0];
+                                                        setProdutoSelecionado(p);
+                                                        setQuantidadeModal(1);
+                                                    }}
+                                                    className="px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm transition flex items-center gap-1.5"
+                                                >
+                                                    <Icons.Eye className="w-4 h-4" /> Detalhes
+                                                </button>
 
-                                                    <div className="space-y-4 pt-4 border-t border-slate-50">
-                                                        <div className="flex items-baseline gap-1">
-                                                            <span className="text-xs font-bold text-slate-400">R$</span>
-                                                            <span className="text-2xl font-black text-slate-800">
-                                                                {product.price.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                                                            </span>
-                                                        </div>
+                                                <button
+                                                    onClick={() => pedirProdutoWhatsApp(PRODUTOS_INICIAIS[0])}
+                                                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black px-6 py-3.5 rounded-2xl text-sm shadow-xl shadow-emerald-500/30 hover:scale-105 active:scale-95 transition-all"
+                                                >
+                                                    <Icons.WhatsApp className="w-4 h-4 fill-white" />
+                                                    Garantir no WhatsApp
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
 
-                                                        <button 
-                                                            onClick={() => openWhatsApp(`Olá! Gostaria de comprar o seguinte item que vi no site do Bazar Centro:\n• ${product.name} (R$ ${product.price.toLocaleString("pt-BR", { minimumFractionDigits: 2 })})\n\nVocês têm esse produto em estoque?`)}
-                                                            className="w-full inline-flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold py-3.5 px-4 rounded-xl text-sm transition-all group-hover:shadow-lg group-hover:shadow-green-500/10"
-                                                        >
-                                                            <MessageCircle className="w-4 h-4" />
-                                                            Pedir no WhatsApp
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </motion.div>
-                                        ))}
+                        {/* Pilares de Confiança / Benefícios da Loja */}
+                        <section className="bg-white border-b border-slate-200/80 py-6">
+                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                    <div className="flex items-center gap-3.5">
+                                        <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                                            <Icons.Car className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900 text-sm">Estacionamento Grátis</h4>
+                                            <p className="text-xs text-slate-500">Convênio no local p/ clientes</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-3.5">
+                                        <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                                            <Icons.Truck className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900 text-sm">Entrega Rápida Express</h4>
+                                            <p className="text-xs text-slate-500">Receba no mesmo dia no Centro</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-3.5">
+                                        <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                                            <Icons.Shield className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900 text-sm">Garantia e Procedência</h4>
+                                            <p className="text-xs text-slate-500">Troca fácil e nota fiscal</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-3.5">
+                                        <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                                            <Icons.WhatsApp className="w-6 h-6 fill-purple-600" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-900 text-sm">Atendimento Humano</h4>
+                                            <p className="text-xs text-slate-500">Equipe pronta no WhatsApp</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* SEÇÃO PRINCIPAL DE VITRINE DE PRODUTOS & FILTROS POR DEPARTAMENTO */}
+                        <section id="vitrine" className="py-12 sm:py-16">
+                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                {/* Título da Seção */}
+                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+                                    <div>
+                                        <div className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full mb-2">
+                                            <Icons.ShoppingBag className="w-3.5 h-3.5" /> Catálogo Atualizado
+                                        </div>
+                                        <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                                            Nossas Melhores Ofertas em Promoção
+                                        </h3>
+                                        <p className="text-slate-500 text-sm mt-1 font-body">
+                                            Filtre pelo departamento desejado ou encontre o que precisa para sua casa.
+                                        </p>
+                                    </div>
+
+                                    {/* Ordenação */}
+                                    <div className="flex items-center gap-2">
+                                        <label htmlFor="ordem" className="text-xs font-semibold text-slate-500 shrink-0">Ordenar por:</label>
+                                        <select
+                                            id="ordem"
+                                            value={ordenacao}
+                                            onChange={(e) => setOrdenacao(e.target.value)}
+                                            className="bg-white border border-slate-200 text-xs font-bold rounded-xl px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                                        >
+                                            <option value="destaque">Mais Populares</option>
+                                            <option value="menor-preco">Menor Preço</option>
+                                            <option value="maior-desconto">Maior % Desconto</option>
+                                            <option value="avaliacao">Melhor Avaliação</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {/* Filtros por Departamento (Tabs) */}
+                                <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 custom-scrollbar">
+                                    {["Todos", "Utilidades", "Eletrônicos", "Papelaria", "Decoração"].map((depto) => {
+                                        const ativo = departamentoAtivo === depto;
+                                        return (
+                                            <button
+                                                key={depto}
+                                                onClick={() => setDepartamentoAtivo(depto)}
+                                                className={`px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold tracking-tight whitespace-nowrap transition-all shadow-sm ${
+                                                    ativo
+                                                        ? "bg-slate-900 text-white shadow-slate-900/20 scale-105"
+                                                        : "bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200"
+                                                }`}
+                                            >
+                                                {depto === "Todos" ? "✨ Ver Todos" : depto}
+                                                <span className="ml-2 text-[11px] opacity-70">
+                                                    ({depto === "Todos" ? PRODUTOS_INICIAIS.length : PRODUTOS_INICIAIS.filter(p => p.departamento === depto).length})
+                                                </span>
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+
+                                {/* Feedback caso busca não encontre nada */}
+                                {produtosFiltrados.length === 0 ? (
+                                    <div className="bg-white rounded-3xl border border-dashed border-slate-300 p-12 text-center max-w-md mx-auto my-8 space-y-4">
+                                        <div className="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
+                                            <Icons.Search className="w-8 h-8" />
+                                        </div>
+                                        <h4 className="text-lg font-bold text-slate-800">Nenhum produto encontrado</h4>
+                                        <p className="text-xs text-slate-500">Não localizamos itens para "{busca}" neste filtro de categoria.</p>
+                                        <button
+                                            onClick={() => { setBusca(""); setDepartamentoAtivo("Todos"); }}
+                                            className="px-5 py-2.5 bg-blue-600 text-white text-xs font-bold rounded-xl shadow transition hover:bg-blue-700"
+                                        >
+                                            Limpar Filtros e Ver Todos
+                                        </button>
                                     </div>
                                 ) : (
-                                    /* Estado de Busca Vazio */
-                                    <motion.div 
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        className="text-center py-20 bg-white rounded-[2rem] border border-slate-100 p-8 max-w-md mx-auto"
-                                    >
-                                        <div className="bg-slate-50 p-6 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 text-slate-400">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-                                        </div>
-                                        <h4 className="text-xl font-bold text-slate-800 mb-2">Nenhum produto encontrado</h4>
-                                        <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                                            Não encontramos produtos correspondentes ao termo "{searchQuery}" nesta categoria.
-                                        </p>
-                                        <button 
-                                            onClick={() => { setSearchQuery(""); setSelectedCategory("Todos"); }}
-                                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition-all shadow-md shadow-blue-500/10"
-                                        >
-                                            Limpar Filtros
-                                        </button>
-                                    </motion.div>
+                                    /* Grid de Produtos */
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                        {produtosFiltrados.map((produto) => {
+                                            const economia = (produto.precoOriginal - produto.precoPromocional).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+                                            return (
+                                                <article
+                                                    key={produto.id}
+                                                    className="bg-white rounded-3xl border border-slate-200/90 hover:border-blue-400 overflow-hidden shadow-sm hover:shadow-card transition-all duration-300 flex flex-col group relative"
+                                                >
+                                                    {/* Imagem com Selos */}
+                                                    <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+                                                        <img
+                                                            src={produto.imagem}
+                                                            alt={produto.nome}
+                                                            className="w-full h-full object-cover group-hover:scale-108 transition duration-500"
+                                                            loading="lazy"
+                                                        />
+
+                                                        {/* Selo de Desconto Chamativo */}
+                                                        <div className="absolute top-3 left-3 bg-red-600 text-white font-black text-xs px-2.5 py-1 rounded-xl shadow-md tracking-wider">
+                                                            {produto.selo}
+                                                        </div>
+
+                                                        {/* Badge de Destaque */}
+                                                        <div className="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-xl">
+                                                            {produto.badgeDestaque}
+                                                        </div>
+
+                                                        {/* Botão Hover de Ver Detalhes Rápido */}
+                                                        <button
+                                                            onClick={() => {
+                                                                setProdutoSelecionado(produto);
+                                                                setQuantidadeModal(1);
+                                                            }}
+                                                            className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-bold text-xs backdrop-blur-xs"
+                                                            aria-label={`Ver detalhes de ${produto.nome}`}
+                                                        >
+                                                            <div className="bg-white text-slate-900 px-4 py-2 rounded-xl font-bold flex items-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition">
+                                                                <Icons.Eye className="w-4 h-4 text-blue-600" />
+                                                                Ver Especificações
+                                                            </div>
+                                                        </button>
+                                                    </div>
+
+                                                    {/* Conteúdo do Card */}
+                                                    <div className="p-5 flex-1 flex flex-col justify-between gap-4">
+                                                        <div className="space-y-1.5">
+                                                            <div className="flex items-center justify-between text-xs">
+                                                                <span className="font-bold text-blue-600 uppercase tracking-wider text-[10px]">
+                                                                    {produto.departamento}
+                                                                </span>
+                                                                <div className="flex items-center text-amber-500 gap-1 font-semibold text-[11px]">
+                                                                    <Icons.Star className="w-3 h-3 fill-current" />
+                                                                    <span>{produto.avaliacao}</span>
+                                                                    <span className="text-slate-400">({produto.avaliacoesQtd})</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <h4 
+                                                                onClick={() => {
+                                                                    setProdutoSelecionado(produto);
+                                                                    setQuantidadeModal(1);
+                                                                }}
+                                                                className="font-bold text-slate-800 text-base leading-snug line-clamp-2 cursor-pointer hover:text-blue-600 transition"
+                                                            >
+                                                                {produto.nome}
+                                                            </h4>
+
+                                                            <p className="text-slate-500 text-xs line-clamp-2 font-body leading-relaxed">
+                                                                {produto.descricao}
+                                                            </p>
+                                                        </div>
+
+                                                        {/* Preço e Botão de Ação */}
+                                                        <div className="space-y-3 pt-3 border-t border-slate-100">
+                                                            <div>
+                                                                <div className="flex items-baseline gap-2">
+                                                                    <span className="text-xs text-slate-400 line-through">
+                                                                        De R$ {produto.precoOriginal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                                                    </span>
+                                                                    <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
+                                                                        Econ. R$ {economia}
+                                                                    </span>
+                                                                </div>
+                                                                <div className="flex items-baseline gap-1 mt-0.5">
+                                                                    <span className="text-xs font-bold text-slate-500">R$</span>
+                                                                    <span className="text-2xl font-black text-slate-900">
+                                                                        {produto.precoPromocional.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                                                    </span>
+                                                                    <span className="text-[10px] font-semibold text-slate-500 ml-1">à vista</span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="grid grid-cols-5 gap-2">
+                                                                <button
+                                                                    onClick={() => adicionarASacola(produto, 1)}
+                                                                    title="Adicionar à sacola"
+                                                                    className="col-span-2 py-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold flex items-center justify-center gap-1 transition"
+                                                                >
+                                                                    <Icons.ShoppingBag className="w-3.5 h-3.5 text-slate-600" />
+                                                                    Sacola
+                                                                </button>
+
+                                                                <button
+                                                                    onClick={() => pedirProdutoWhatsApp(produto)}
+                                                                    className="col-span-3 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20 transition"
+                                                                >
+                                                                    <Icons.WhatsApp className="w-3.5 h-3.5 fill-white" />
+                                                                    Pedir Agora
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            );
+                                        })}
+                                    </div>
                                 )}
                             </div>
                         </section>
 
-                        {/* Local Highlights */}
-                        <section className="py-24 bg-slate-900 text-white overflow-hidden relative">
-                            <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-                                <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-blue-500 rounded-full blur-[120px]"></div>
-                                <div className="absolute bottom-[-10%] left-[-10%] w-96 h-96 bg-orange-500 rounded-full blur-[120px]"></div>
-                            </div>
-
-                            <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
-                                <motion.div {...fadeIn}>
-                                    <h3 className="text-4xl md:text-6xl font-black mb-8 leading-tight">Mais que uma loja, parte da <span className="text-orange-400">nossa comunidade.</span></h3>
-                                    <p className="text-slate-400 text-lg mb-10 leading-relaxed">Estamos localizados no coração da cidade há mais de 10 anos, trazendo tradição e inovação para o seu lar.</p>
-                                    
-                                    <ul className="space-y-6">
-                                        {[
-                                            "Atendimento humanizado e especializado",
-                                            "Facilidade de pagamento em até 6x",
-                                            "Clube de benefícios para moradores locais"
-                                        ].map((item, i) => (
-                                            <li key={i} className="flex items-center gap-4 text-slate-300">
-                                                <CheckCircle2 className="w-6 h-6 text-green-400 shrink-0" />
-                                                <span className="font-medium text-lg">{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </motion.div>
-
-                                <motion.div 
-                                    {...fadeIn}
-                                    className="relative aspect-square"
-                                >
-                                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-orange-500/20 rounded-[3rem] blur-xl"></div>
-                                    <div className="relative h-full overflow-hidden rounded-[3rem] border border-slate-700 group shadow-2xl shadow-blue-500/10">
-                                        <img 
-                                            src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&q=80&w=800" 
-                                            alt="Loja Local" 
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent p-8 md:p-12 flex flex-col justify-end text-center md:text-left">
-                                            <h4 className="text-2xl font-bold mb-2">Economize hoje mesmo!</h4>
-                                            <p className="text-slate-300 mb-6">Venha nos visitar ou peça online.</p>
-                                            <div className="flex justify-center md:justify-start gap-4">
-                                                <div className="bg-white/10 backdrop-blur-md px-6 py-3 rounded-2xl font-bold italic text-white/90">#OrgulhoLocal</div>
-                                            </div>
-                                        </div>
+                        {/* SEÇÃO DE LOCALIZAÇÃO INTEGRADA (MAPA SIMULADO COM ROTAS, HORÁRIO E ESTACIONAMENTO) */}
+                        <section id="localizacao" className="py-16 bg-white border-t border-slate-200/80">
+                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <div className="text-center max-w-2xl mx-auto mb-12">
+                                    <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-full mb-3">
+                                        <Icons.MapPin className="w-3.5 h-3.5" /> Venha nos Visitar
                                     </div>
-                                </motion.div>
-                            </div>
-                        </section>
-
-                        {/* Testimonials */}
-                        <section className="py-32 px-6">
-                            <div className="max-w-6xl mx-auto">
-                                <div className="text-center mb-20">
-                                    <h3 className="text-4xl font-black text-slate-800 mb-4">O que dizem nossos <span className="text-blue-600">vizinhos</span></h3>
-                                    <p className="text-slate-500">Milhares de famílias confiam no Bazar Centro.</p>
-                                </div>
-
-                                <div className="grid md:grid-cols-3 gap-8">
-                                    {testimonials.map((t, i) => (
-                                        <motion.div 
-                                            key={i}
-                                            {...fadeIn}
-                                            transition={{ delay: i * 0.1 }}
-                                            className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm relative"
-                                        >
-                                            <div className="flex gap-1 mb-6 text-orange-400">
-                                                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
-                                            </div>
-                                            <p className="text-slate-700 text-lg italic mb-8 leading-relaxed">"{t.text}"</p>
-                                            <div>
-                                                <p className="font-bold text-slate-900">{t.name}</p>
-                                                <p className="text-slate-400 text-sm uppercase tracking-wider">{t.role}</p>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* CTA Section */}
-                        <section className="py-20 px-6">
-                            <motion.div 
-                                {...fadeIn}
-                                className="max-w-6xl mx-auto bg-blue-600 rounded-[3rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-2xl shadow-blue-500/20"
-                            >
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                                <div className="relative z-10">
-                                    <h3 className="text-4xl md:text-6xl font-black mb-8">Precisando de algo <br />agora mesmo?</h3>
-                                    <p className="text-blue-100 text-xl max-w-xl mx-auto mb-12 opacity-80">Nosso time está online para te atender e tirar todas as suas dúvidas pelo WhatsApp.</p>
-                                        <button
-                                            type="button"
-                                            onClick={() => openWhatsApp('Olá! Quero atendimento pelo WhatsApp.')}
-                                            className="inline-flex items-center justify-center gap-3 bg-white text-blue-600 font-black py-5 px-12 rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-xl"
-                                        >
-                                        <Phone className="w-6 h-6" />
-                                        Chamar agora
-                                        </button>
-                                </div>
-                            </motion.div>
-                        </section>
-                    </main>
-
-                    {/* Footer */}
-                    <footer id="localizacao" className="bg-white border-t border-slate-100 pt-24 pb-12 px-6">
-                        <div className="max-w-6xl mx-auto">
-                            <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
-                                <div className="md:col-span-2 space-y-6">
-                                    <div className="flex items-center gap-2">
-                                        <div className="bg-blue-600 p-1.5 rounded-lg">
-                                            <ShoppingBag className="w-5 h-5 text-white" />
-                                        </div>
-                                        <h1 className="text-2xl font-bold tracking-tight text-slate-800">
-                                            Bazar<span className="text-orange-500">Centro</span>
-                                        </h1>
-                                    </div>
-                                    <p className="text-slate-500 text-lg leading-relaxed max-w-md">
-                                        Oferecemos soluções para sua casa, escritório e diversão com o carinho que só uma loja local tem.
+                                    <h3 className="text-3xl font-black text-slate-900 tracking-tight">
+                                        Localização Privilegiada no Centro
+                                    </h3>
+                                    <p className="text-slate-500 text-sm mt-2 font-body">
+                                        Fácil acesso pelas principais avenidas, com estacionamento conveniado gratuito para nossos clientes e retirada expressa em loja.
                                     </p>
                                 </div>
 
-                                <div className="space-y-6">
-                                    <h4 className="font-black text-sm uppercase tracking-widest text-slate-400">Atendimento</h4>
-                                    <div className="space-y-4">
-                                        <div className="flex gap-4 items-start">
-                                            <MapPin className="w-6 h-6 text-blue-600 shrink-0" />
+                                <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+                                    {/* Cartões de Informações & Conveniências */}
+                                    <div className="lg:col-span-5 flex flex-col justify-between gap-4">
+                                        {/* Card Endereço e Rota */}
+                                        <div className="bg-slate-50 rounded-3xl p-6 border border-slate-200 space-y-4">
+                                            <div className="flex items-start gap-4">
+                                                <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-blue-500/20">
+                                                    <Icons.MapPin className="w-6 h-6" />
+                                                </div>
+                                                <div className="flex-1">
+                                                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-100/60 px-2 py-0.5 rounded">
+                                                        Loja Física Principal
+                                                    </span>
+                                                    <h4 className="font-black text-slate-900 text-lg mt-1">Bazar Centro - Matriz</h4>
+                                                    <p className="text-slate-600 text-sm font-body mt-0.5">{ENDERECO_LOJA}</p>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-200">
+                                                <a
+                                                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ENDERECO_LOJA)}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-sm"
+                                                >
+                                                    <Icons.MapPin className="w-3.5 h-3.5" /> Abrir no Google Maps
+                                                </a>
+                                                <a
+                                                    href={`https://waze.com/ul?q=${encodeURIComponent(ENDERECO_LOJA)}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition"
+                                                >
+                                                    Traçar no Waze
+                                                </a>
+                                                <button
+                                                    onClick={() => copiarTexto(ENDERECO_LOJA, "Endereço copiado para área de transferência!")}
+                                                    className="inline-flex items-center gap-1.5 bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 text-xs font-bold px-3 py-2.5 rounded-xl transition"
+                                                >
+                                                    <Icons.Copy className="w-3.5 h-3.5" /> Copiar
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {/* Card Estacionamento Gratuito */}
+                                        <div className="bg-emerald-50/80 rounded-3xl p-6 border border-emerald-200 flex items-start gap-4">
+                                            <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-emerald-500/20">
+                                                <Icons.Car className="w-6 h-6" />
+                                            </div>
                                             <div>
-                                                <p className="font-bold text-slate-800">Rua Fictícia das Flores, 123</p>
-                                                <p className="text-slate-500">Centro, São Paulo - SP</p>
-                                                <a href={mapLink} className="text-blue-600 text-sm font-bold mt-2 inline-block">Abrir no Mapa</a>
+                                                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-200/60 px-2 py-0.5 rounded">
+                                                    Comodidade Sem Custo
+                                                </span>
+                                                <h4 className="font-bold text-slate-900 text-base mt-1">Estacionamento Conveniado Gratuito</h4>
+                                                <p className="text-slate-600 text-xs font-body mt-1 leading-relaxed">
+                                                    Vagas cobertas e monitoradas logo ao lado da loja (Nº 470). Ganhe 2 horas de cortesia ao realizar compras de qualquer valor em nossa loja.
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {/* Card Horário de Funcionamento */}
+                                        <div className="bg-slate-50 rounded-3xl p-6 border border-slate-200 flex items-start gap-4">
+                                            <div className="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-md shadow-amber-500/20">
+                                                <Icons.Clock className="w-6 h-6" />
+                                            </div>
+                                            <div className="flex-1 space-y-1">
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-200/60 px-2 py-0.5 rounded">
+                                                        Horário de Atendimento
+                                                    </span>
+                                                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
+                                                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Aberto Agora
+                                                    </span>
+                                                </div>
+                                                <div className="text-xs text-slate-700 space-y-0.5 pt-1">
+                                                    <p className="flex justify-between"><strong>Segunda a Sexta:</strong> <span>08:00 às 19:00</span></p>
+                                                    <p className="flex justify-between"><strong>Sábado:</strong> <span>08:30 às 18:00</span></p>
+                                                    <p className="flex justify-between text-slate-500"><strong>Domingos e Feriados:</strong> <span>09:00 às 14:00</span></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="space-y-6">
-                                    <h4 className="font-black text-sm uppercase tracking-widest text-slate-400">Horários</h4>
-                                    <div className="space-y-4">
-                                        <div className="flex gap-4 items-start text-slate-500">
-                                            <Clock className="w-6 h-6 text-blue-600 shrink-0" />
-                                            <div>
-                                                <p><span className="font-bold text-slate-800">Seg - Sáb:</span> 08h às 18h</p>
-                                                <p><span className="font-bold text-slate-800">Dom:</span> Fechado</p>
+                                    {/* Mapa Simulado com Rotas Interativas e Visual Moderno */}
+                                    <div className="lg:col-span-7 bg-slate-950 rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden flex flex-col justify-between shadow-2xl border border-slate-800 min-h-[420px]">
+                                        {/* Grade vetorial simulada de ruas */}
+                                        <div className="absolute inset-0 opacity-20 pointer-events-none">
+                                            <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <pattern id="grid-pattern" width="60" height="60" patternUnits="userSpaceOnUse">
+                                                        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#60a5fa" strokeWidth="1" />
+                                                    </pattern>
+                                                </defs>
+                                                <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+                                                {/* Ruas simuladas */}
+                                                <path d="M 0 120 Q 200 150 500 120 T 1000 100" fill="none" stroke="#3b82f6" strokeWidth="6" strokeDasharray="12,6" />
+                                                <path d="M 250 0 L 250 800" fill="none" stroke="#f59e0b" strokeWidth="4" />
+                                                <path d="M 0 320 L 1000 320" fill="none" stroke="#10b981" strokeWidth="5" />
+                                            </svg>
+                                        </div>
+
+                                        {/* Cabeçalho do Mapa Simulado */}
+                                        <div className="relative z-10 flex flex-wrap items-center justify-between gap-3">
+                                            <div className="bg-slate-900/90 border border-slate-700/80 backdrop-blur px-3.5 py-1.5 rounded-2xl flex items-center gap-2">
+                                                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                                <span className="text-xs font-bold text-slate-200">Radar de Trânsito: Fluindo sem lentidão</span>
+                                            </div>
+                                            <span className="text-[11px] font-bold text-slate-400 bg-white/5 px-2.5 py-1 rounded-xl">
+                                                A 300m da Estação Central do Metrô
+                                            </span>
+                                        </div>
+
+                                        {/* Pin Central Pulsante no Mapa */}
+                                        <div className="relative z-10 py-12 flex flex-col items-center justify-center text-center">
+                                            <div className="relative">
+                                                {/* Efeito Radar */}
+                                                <div className="absolute inset-0 rounded-full bg-blue-500 animate-radar"></div>
+                                                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 border-4 border-white flex items-center justify-center text-white shadow-2xl relative z-10">
+                                                    <Icons.ShoppingBag className="w-8 h-8" />
+                                                </div>
+                                            </div>
+                                            <div className="mt-4 bg-slate-900/95 border border-blue-500/40 backdrop-blur-md px-5 py-3 rounded-2xl shadow-xl max-w-xs">
+                                                <h5 className="font-black text-base text-white">Bazar Centro - Loja Oficial</h5>
+                                                <p className="text-xs text-slate-300 font-body">Rua do Comércio, 450 (ao lado das Lojas Americanas)</p>
+                                                <div className="mt-2 text-[11px] text-amber-400 font-semibold flex items-center justify-center gap-1">
+                                                    <Icons.Car className="w-3.5 h-3.5" /> Vagas livres no estacionamento
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Rodapé com Guias de Rota Rápida */}
+                                        <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 gap-3 bg-slate-900/80 border border-slate-800 p-3 rounded-2xl backdrop-blur">
+                                            <div className="text-center p-2 rounded-xl bg-white/5">
+                                                <p className="text-[10px] text-slate-400 font-bold uppercase">De Metrô</p>
+                                                <p className="text-xs font-bold text-white mt-0.5">3 min a pé</p>
+                                            </div>
+                                            <div className="text-center p-2 rounded-xl bg-white/5">
+                                                <p className="text-[10px] text-slate-400 font-bold uppercase">De Carro</p>
+                                                <p className="text-xs font-bold text-emerald-400 mt-0.5">Estacionamento no Local</p>
+                                            </div>
+                                            <div className="col-span-2 sm:col-span-1 text-center p-2 rounded-xl bg-white/5">
+                                                <p className="text-[10px] text-slate-400 font-bold uppercase">Retirada Balcão</p>
+                                                <p className="text-xs font-bold text-amber-400 mt-0.5">Pronto em 30 min</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </section>
 
-                            <div className="pt-12 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-400 text-sm">
-                                <div className="text-center md:text-left">
-                                    <p className="font-medium text-slate-600">Desenvolvido por Felipe Junqueira Leite</p>
-                                    <p className="italic opacity-70">Produto Piloto • Landing Page de Alta Conversão</p>
+                        {/* CTA BANNER FINAL DE ATENDIMENTO WHATSAPP */}
+                        <section className="py-16 bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-800 text-white relative overflow-hidden">
+                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-6">
+                                <span className="inline-flex items-center gap-2 bg-white/10 text-white text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full backdrop-blur border border-white/20">
+                                    <Icons.WhatsApp className="w-4 h-4 fill-white" />
+                                    Atendimento Online Especializado
+                                </span>
+                                <h3 className="text-3xl sm:text-5xl font-black tracking-tight max-w-3xl mx-auto leading-tight">
+                                    Não encontrou o que procura? <br />
+                                    Consulte nosso estoque de <span className="underline decoration-amber-400 underline-offset-8">+2.000 itens!</span>
+                                </h3>
+                                <p className="text-blue-100 text-base max-w-xl mx-auto font-body">
+                                    Nossa equipe no balcão responde em poucos minutos. Tire fotos, consulte medidas e combine a entrega expressa.
+                                </p>
+                                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+                                    <button
+                                        onClick={() => abrirWhatsApp("Olá! Vi o site e gostaria de saber se vocês têm determinado produto em estoque no Bazar Centro.")}
+                                        className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white font-black py-4 px-8 rounded-2xl shadow-xl shadow-emerald-950/20 text-base transition hover:scale-105 active:scale-95"
+                                    >
+                                        <Icons.WhatsApp className="w-6 h-6 fill-white" />
+                                        Falar com Vendedor no WhatsApp
+                                    </button>
+                                    <button
+                                        onClick={() => copiarTexto(WHATSAPP_FORMATADO, "Número do WhatsApp copiado!")}
+                                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold py-4 px-6 rounded-2xl border border-white/20 text-sm transition"
+                                    >
+                                        <Icons.Copy className="w-4 h-4" />
+                                        {WHATSAPP_FORMATADO}
+                                    </button>
                                 </div>
-                                <p>&copy; {new Date().getFullYear()} Bazar e Utilidades Centro.</p>
+                            </div>
+                        </section>
+                    </main>
+
+                    {/* Footer Oficial */}
+                    <footer className="bg-slate-900 text-slate-400 text-xs py-12 border-t border-slate-800">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                            <div className="space-y-3 md:col-span-1">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold">
+                                        <Icons.ShoppingBag className="w-4 h-4" />
+                                    </div>
+                                    <span className="text-lg font-black text-white">Bazar<span className="text-orange-500">Centro</span></span>
+                                </div>
+                                <p className="text-xs text-slate-400 font-body leading-relaxed">
+                                    Tradição e variedade real no centro comercial. Tudo o que você precisa para utilidades, ferramentas, escritório e decoração com preço justo.
+                                </p>
+                            </div>
+
+                            <div className="space-y-2">
+                                <h5 className="font-bold text-white text-sm">Departamentos</h5>
+                                <ul className="space-y-1.5 text-xs">
+                                    <li><button onClick={() => { setDepartamentoAtivo("Utilidades"); window.scrollTo({ top: 700, behavior: 'smooth' }); }} className="hover:text-white transition">Utilidades Domésticas</button></li>
+                                    <li><button onClick={() => { setDepartamentoAtivo("Eletrônicos"); window.scrollTo({ top: 700, behavior: 'smooth' }); }} className="hover:text-white transition">Eletrônicos & Ferramentas</button></li>
+                                    <li><button onClick={() => { setDepartamentoAtivo("Papelaria"); window.scrollTo({ top: 700, behavior: 'smooth' }); }} className="hover:text-white transition">Papelaria & Escritório</button></li>
+                                    <li><button onClick={() => { setDepartamentoAtivo("Decoração"); window.scrollTo({ top: 700, behavior: 'smooth' }); }} className="hover:text-white transition">Decoração & Lar</button></li>
+                                </ul>
+                            </div>
+
+                            <div className="space-y-2">
+                                <h5 className="font-bold text-white text-sm">Atendimento & Endereço</h5>
+                                <p className="text-xs leading-relaxed text-slate-300">
+                                    {ENDERECO_LOJA}<br />
+                                    WhatsApp: {WHATSAPP_FORMATADO}<br />
+                                    Seg - Sex: 08h às 19h | Sáb: 08h30 às 18h
+                                </p>
+                            </div>
+
+                            <div className="space-y-2">
+                                <h5 className="font-bold text-white text-sm">Formas de Pagamento</h5>
+                                <p className="text-xs text-slate-400 leading-relaxed">
+                                    PIX com desconto imediato, Cartões de Crédito em até 6x sem juros, Débito e Dinheiro na retirada ou entrega.
+                                </p>
                             </div>
                         </div>
+
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-[11px]">
+                            <p>© {new Date().getFullYear()} Bazar e Utilidades Centro. Todos os direitos reservados.</p>
+                            <p>Desenvolvido por Felipe Junqueira Leite • Modelo de Alta Conversão</p>
+                        </div>
                     </footer>
+
+                    {/* MODAL DE DETALHES DO PRODUTO FLUIDO E MODERNO */}
+                    {produtoSelecionado && (
+                        <div 
+                            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-fadeIn"
+                            onClick={() => setProdutoSelecionado(null)}
+                        >
+                            <div 
+                                className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar border border-slate-100 p-6 sm:p-8 relative"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                {/* Botão Fechar */}
+                                <button
+                                    onClick={() => setProdutoSelecionado(null)}
+                                    className="absolute top-5 right-5 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition"
+                                    aria-label="Fechar modal"
+                                >
+                                    <Icons.X className="w-5 h-5" />
+                                </button>
+
+                                <div className="grid sm:grid-cols-2 gap-6 items-start">
+                                    {/* Imagem do Produto no Modal */}
+                                    <div className="relative aspect-square rounded-2xl overflow-hidden bg-slate-100 border border-slate-200">
+                                        <img
+                                            src={produtoSelecionado.imagem}
+                                            alt={produtoSelecionado.nome}
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <div className="absolute top-3 left-3 bg-red-600 text-white font-black text-xs px-2.5 py-1 rounded-xl shadow">
+                                            {produtoSelecionado.selo}
+                                        </div>
+                                    </div>
+
+                                    {/* Informações Completas */}
+                                    <div className="space-y-4">
+                                        <div>
+                                            <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-2 py-0.5 rounded">
+                                                {produtoSelecionado.departamento}
+                                            </span>
+                                            <h3 className="text-xl font-black text-slate-900 mt-1 leading-snug">
+                                                {produtoSelecionado.nome}
+                                            </h3>
+                                            <div className="flex items-center gap-1.5 text-xs text-amber-500 mt-1">
+                                                <Icons.Star className="w-3.5 h-3.5 fill-current" />
+                                                <span className="font-bold text-slate-800">{produtoSelecionado.avaliacao}</span>
+                                                <span className="text-slate-400">({produtoSelecionado.avaliacoesQtd} clientes satisfeitos)</span>
+                                            </div>
+                                        </div>
+
+                                        <p className="text-slate-600 text-xs font-body leading-relaxed">
+                                            {produtoSelecionado.descricao}
+                                        </p>
+
+                                        {/* Especificações Técnicas */}
+                                        <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 space-y-1.5">
+                                            <h5 className="font-bold text-xs text-slate-800 uppercase tracking-wider">O que acompanha:</h5>
+                                            <ul className="text-xs text-slate-600 space-y-1 font-body">
+                                                {produtoSelecionado.especificacoes.map((item, idx) => (
+                                                    <li key={idx} className="flex items-start gap-1.5">
+                                                        <Icons.CheckCircle className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                                                        <span>{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+
+                                        {/* Preço e Quantidade */}
+                                        <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+                                            <div>
+                                                <span className="text-xs text-slate-400 line-through">
+                                                    De R$ {produtoSelecionado.precoOriginal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                                </span>
+                                                <div className="text-2xl font-black text-slate-900">
+                                                    R$ {produtoSelecionado.precoPromocional.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                                </div>
+                                            </div>
+
+                                            {/* Seletor de Quantidade */}
+                                            <div className="flex items-center border border-slate-200 rounded-xl bg-slate-50">
+                                                <button
+                                                    onClick={() => setQuantidadeModal(q => Math.max(1, q - 1))}
+                                                    className="px-3 py-1.5 text-slate-600 hover:text-slate-900 font-bold"
+                                                >
+                                                    -
+                                                </button>
+                                                <span className="px-3 text-sm font-bold text-slate-800">{quantidadeModal}</span>
+                                                <button
+                                                    onClick={() => setQuantidadeModal(q => q + 1)}
+                                                    className="px-3 py-1.5 text-slate-600 hover:text-slate-900 font-bold"
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {/* Botões do Modal */}
+                                        <div className="grid grid-cols-2 gap-2 pt-2">
+                                            <button
+                                                onClick={() => {
+                                                    adicionarASacola(produtoSelecionado, quantidadeModal);
+                                                    setProdutoSelecionado(null);
+                                                }}
+                                                className="py-3 rounded-xl border border-slate-300 hover:bg-slate-100 font-bold text-xs text-slate-700 transition"
+                                            >
+                                                + Adicionar à Sacola
+                                            </button>
+
+                                            <button
+                                                onClick={() => {
+                                                    pedirProdutoWhatsApp(produtoSelecionado, quantidadeModal);
+                                                    setProdutoSelecionado(null);
+                                                }}
+                                                className="py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 font-black text-xs text-white shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-1.5 transition"
+                                            >
+                                                <Icons.WhatsApp className="w-4 h-4 fill-white" />
+                                                Pedir no WhatsApp
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* DRAWER / SACOLA DE COMPRAS LATERAL */}
+                    {sacolaAberta && (
+                        <div 
+                            className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex justify-end"
+                            onClick={() => setSacolaAberta(false)}
+                        >
+                            <div 
+                                className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between p-6 animate-slideLeft"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <div className="space-y-4">
+                                    <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                                        <div className="flex items-center gap-2">
+                                            <Icons.ShoppingBag className="w-5 h-5 text-blue-600" />
+                                            <h4 className="font-black text-lg text-slate-900">Minha Sacola de Ofertas</h4>
+                                        </div>
+                                        <button
+                                            onClick={() => setSacolaAberta(false)}
+                                            className="p-1.5 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-600"
+                                        >
+                                            <Icons.X className="w-5 h-5" />
+                                        </button>
+                                    </div>
+
+                                    {/* Lista de Itens na Sacola */}
+                                    <div className="overflow-y-auto max-h-[60vh] space-y-3 custom-scrollbar pr-1">
+                                        {sacola.length === 0 ? (
+                                            <div className="py-12 text-center text-slate-400 space-y-3">
+                                                <Icons.ShoppingBag className="w-12 h-12 mx-auto text-slate-300 stroke-[1.5]" />
+                                                <p className="text-sm font-semibold">Sua sacola está vazia.</p>
+                                                <p className="text-xs text-slate-400">Navegue pelas promoções e adicione os itens que desejar!</p>
+                                            </div>
+                                        ) : (
+                                            sacola.map((item) => (
+                                                <div key={item.id} className="flex items-center gap-3 p-3 rounded-2xl border border-slate-100 bg-slate-50/70">
+                                                    <img src={item.imagem} alt={item.nome} className="w-14 h-14 rounded-xl object-cover shrink-0" />
+                                                    <div className="flex-1 min-w-0">
+                                                        <h5 className="font-bold text-xs text-slate-800 truncate">{item.nome}</h5>
+                                                        <p className="text-xs font-black text-emerald-600 mt-0.5">
+                                                            R$ {(item.precoPromocional * item.quantidade).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                                        </p>
+                                                        <div className="flex items-center gap-2 mt-1.5">
+                                                            <div className="flex items-center border border-slate-200 rounded-lg bg-white text-xs">
+                                                                <button onClick={() => alterarQuantidadeSacola(item.id, -1)} className="px-2 py-0.5 text-slate-500 font-bold">-</button>
+                                                                <span className="px-2 font-bold text-slate-700">{item.quantidade}</span>
+                                                                <button onClick={() => alterarQuantidadeSacola(item.id, 1)} className="px-2 py-0.5 text-slate-500 font-bold">+</button>
+                                                            </div>
+                                                            <button 
+                                                                onClick={() => removerDaSacola(item.id)}
+                                                                className="text-[10px] text-red-500 hover:underline font-semibold ml-auto"
+                                                            >
+                                                                Remover
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Resumo e Checkout pelo WhatsApp */}
+                                <div className="pt-4 border-t border-slate-100 space-y-3">
+                                    <div className="flex justify-between items-center text-sm font-semibold">
+                                        <span className="text-slate-500">Subtotal Promocional:</span>
+                                        <span className="text-xl font-black text-slate-900">
+                                            R$ {totalSacola.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                                        </span>
+                                    </div>
+                                    <p className="text-[11px] text-slate-400">
+                                        * Validação de estoque e cálculo de entrega feitos diretamente pelo WhatsApp.
+                                    </p>
+                                    <button
+                                        disabled={sacola.length === 0}
+                                        onClick={finalizarPedidoSacolaWhatsApp}
+                                        className="w-full py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 disabled:pointer-events-none text-white font-black text-sm flex items-center justify-center gap-2 shadow-xl shadow-emerald-500/25 transition active:scale-95"
+                                    >
+                                        <Icons.WhatsApp className="w-5 h-5 fill-white" />
+                                        Enviar Pedido para o WhatsApp
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* BOTÃO FLUTUANTE DO WHATSAPP COM RADAR & TOOLTIP */}
+                    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
+                        <div className="hidden sm:flex items-center gap-2 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-xl border border-slate-700">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                            Atendimento online no WhatsApp
+                        </div>
+                        <button
+                            onClick={() => abrirWhatsApp("Olá! Vi a vitrine do Bazar Centro e gostaria de atendimento.")}
+                            className="w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center shadow-2xl shadow-emerald-500/40 hover:scale-110 active:scale-95 transition-all duration-300 group"
+                            aria-label="Atendimento rápido pelo WhatsApp"
+                        >
+                            <Icons.WhatsApp className="w-7 h-7 fill-white group-hover:rotate-12 transition duration-300" />
+                        </button>
+                    </div>
+
+                    {/* CONTAINER DE TOASTS ELEGANTES (SEM NENHUM ALERT) */}
+                    <div className="fixed bottom-6 left-6 z-50 flex flex-col gap-2 max-w-sm pointer-events-none">
+                        {toasts.map((toast) => (
+                            <div
+                                key={toast.id}
+                                className={`pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold transition-all transform translate-y-0 ${
+                                    toast.tipo === "sucesso"
+                                        ? "bg-slate-900 text-white border border-emerald-500/40"
+                                        : "bg-slate-900 text-white border border-blue-500/40"
+                                }`}
+                            >
+                                <Icons.CheckCircle className={`w-4 h-4 shrink-0 ${toast.tipo === 'sucesso' ? 'text-emerald-400' : 'text-blue-400'}`} />
+                                <span className="flex-1 font-body">{toast.mensagem}</span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             );
         }

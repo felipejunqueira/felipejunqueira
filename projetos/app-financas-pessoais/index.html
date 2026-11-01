@@ -3,147 +3,2269 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nexo Finance | App de Finanças Pessoais</title>
-  <meta name="description" content="Nexo Finance — controle diário, metas de economia e painel inteligente para organizar sua vida financeira." />
+  <title>Nexo Finance | Plataforma Inteligente de Finanças Pessoais</title>
+  <meta name="description" content="Nexo Finance — Dashboard inteligente de finanças pessoais, controle diário de receitas, despesas, investimentos e metas financeiras com tecnologia de ponta." />
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
   <style>
-    :root{--ink:#052e16;--muted:#166534;--line:#86efac;--card:#fff;--brand:#15803d;--brand2:#16a34a}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:linear-gradient(160deg,#dcfce7,#ecfccb);min-height:100vh}
-    .wrap{width:min(1120px,calc(100% - 1.5rem));margin:1.2rem auto 3rem}
-    .hero{background:#ffffffdd;border:1px solid #ffffffa8;border-radius:20px;overflow:hidden;box-shadow:0 17px 42px #14532d26}
-    .hero-img{height:200px;background:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80') center/cover}
-    @media(min-width:640px){.hero-img{height:280px}}
-    .hero-body{padding:1.2rem}
-    @media(min-width:640px){.hero-body{padding:1.4rem 1.8rem}}
-    h1{margin:0 0 .5rem;font:700 clamp(2rem,5vw,3rem) Syne,sans-serif;line-height:1.15}
-    .lead{color:var(--muted);max-width:76ch;line-height:1.65}
-    .meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
-    .badge{border:1px solid #4ade80;background:#f0fdf4;padding:.4rem .75rem;border-radius:999px;font-size:.82rem;font-weight:700}
-    .tabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem}
-    .tab-btn{border:1px solid var(--line);background:#fff;padding:.5rem .9rem;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;transition:.2s ease}
-    .tab-btn:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-1px)}
-    .tab-btn.active{background:var(--brand);color:#f0fdf4;border-color:var(--brand)}
-    .panel{display:none;padding:1rem 0}
-    .panel.active{display:block;animation:fadeUp .28s ease}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    .grid{display:grid;grid-template-columns:1fr;gap:.8rem}
-    @media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem;transition:.2s ease}
-    .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px #14532d18}
-    .card h3{margin:0 0 .4rem;font-size:1rem;color:var(--brand)}
-    .card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
-    .plan-price{font-size:1.5rem;font-weight:800;color:var(--brand);display:block;margin:.4rem 0 .2rem}
-    .plan-free .plan-price{color:#15803d}
-    .plan-best{border-color:var(--brand);box-shadow:0 0 0 2px var(--brand)20}
-    .gallery{display:grid;grid-template-columns:1fr;gap:.7rem}
-    @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
-    .gallery img{width:100%;height:180px;object-fit:cover;border-radius:14px;border:1px solid var(--line);transition:.2s ease}
-    .gallery img:hover{transform:scale(1.03)}
-    .cta{background:linear-gradient(130deg,var(--brand),var(--brand2));color:#f0fdf4;padding:1.2rem 1.4rem;border-radius:16px;margin-top:1.2rem}
-    .cta a{display:inline-block;margin-top:.5rem;background:#f0fdf4;color:#14532d;text-decoration:none;padding:.65rem 1.2rem;border-radius:999px;font-weight:800;font-size:.9rem;transition:.2s ease}
-    .cta a:hover{transform:translateY(-2px);box-shadow:0 6px 18px #14532d44}
-    .footer{margin-top:2rem;border-top:1px solid var(--line);padding:2rem 1.2rem;text-align:center;background:#ffffffb0;border-radius:0 0 20px 20px}
-    .footer-name{margin:0 0 .2rem;font-size:1.1rem;font-weight:800;color:var(--brand)}
-    .footer-role{margin:0 0 .9rem;font-size:.85rem;color:var(--muted)}
-    .footer-badges{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:.9rem}
-    .cert{background:var(--brand);color:#f0fdf4;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:999px}
-    .footer-copy{margin:0;font-size:.78rem;color:var(--muted)}
+    :root {
+      --bg: #07090e;
+      --bg-surface: #0e131f;
+      --bg-card: rgba(17, 24, 39, 0.7);
+      --bg-card-hover: rgba(24, 33, 53, 0.85);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(99, 102, 241, 0.5);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --brand: #10b981;
+      --brand-glow: rgba(16, 185, 129, 0.25);
+      --accent-purple: #6366f1;
+      --accent-purple-glow: rgba(99, 102, 241, 0.25);
+      --accent-cyan: #06b6d4;
+      --accent-rose: #f43f5e;
+      --accent-amber: #f59e0b;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border);
+      --shadow-glow: 0 0 25px var(--brand-glow);
+      --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
+        radial-gradient(ellipse 60% 40% at 90% 20%, rgba(16, 185, 129, 0.1), transparent),
+        radial-gradient(circle at 10% 80%, rgba(6, 182, 212, 0.08), transparent);
+      background-attachment: fixed;
+    }
+
+    /* Container */
+    .container {
+      width: min(1200px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 0 0.5rem;
+    }
+
+    /* Header / Navbar */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(7, 9, 14, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-purple), var(--brand));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px var(--brand-glow);
+    }
+
+    .brand-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: #fff;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 1.8rem;
+    }
+
+    @media (min-width: 860px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fff;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #042f2e;
+      font-weight: 800;
+      box-shadow: 0 4px 16px var(--brand-glow);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 22px rgba(16, 185, 129, 0.4);
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, var(--accent-purple), #4f46e5);
+      color: #fff;
+      box-shadow: 0 4px 16px var(--accent-purple-glow);
+    }
+
+    .btn-accent:hover {
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .btn-sm {
+      padding: 0.45rem 0.85rem;
+      font-size: 0.8rem;
+    }
+
+    .btn-icon {
+      padding: 0.5rem;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-icon:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-success {
+      background: rgba(16, 185, 129, 0.12);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-danger {
+      background: rgba(244, 63, 94, 0.12);
+      color: #fb7185;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .badge-purple {
+      background: rgba(99, 102, 241, 0.12);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .badge-cyan {
+      background: rgba(6, 182, 212, 0.12);
+      color: #67e8f9;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 2.8rem 0 1.5rem;
+      text-align: center;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #c7d2fe;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-pill .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.1rem, 5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      max-width: 22ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #ffffff 30%, #34d399 70%, #6366f1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-lead {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 62ch;
+      margin: 0 auto 1.8rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    /* Cards & Stats Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 600px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .kpi-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.3rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.15);
+      background: var(--bg-card-hover);
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      transition: var(--transition);
+    }
+
+    .kpi-card.saldo::before { background: linear-gradient(90deg, #6366f1, #10b981); }
+    .kpi-card.receita::before { background: #10b981; }
+    .kpi-card.despesa::before { background: #f43f5e; }
+    .kpi-card.invest::before { background: #06b6d4; }
+
+    .kpi-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+
+    .kpi-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .kpi-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .kpi-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .kpi-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+      font-feature-settings: 'tnum';
+    }
+
+    .kpi-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    /* Dashboard Main Interactive Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (min-width: 960px) {
+      .dashboard-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+    }
+
+    .panel-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .panel-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .panel-title svg {
+      width: 20px;
+      height: 20px;
+      color: var(--brand);
+    }
+
+    /* Charts UI */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .bar-chart-svg {
+      width: 100%;
+      height: 220px;
+      overflow: visible;
+    }
+
+    .bar-rect {
+      transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1), y 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+      cursor: pointer;
+    }
+
+    .bar-rect:hover {
+      filter: brightness(1.2);
+    }
+
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    /* Donut Chart Layout */
+    .donut-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 520px) {
+      .donut-wrapper {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+      }
+    }
+
+    .donut-svg-box {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      flex-shrink: 0;
+    }
+
+    .donut-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .donut-circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.05);
+      stroke-width: 20;
+    }
+
+    .donut-segment {
+      fill: none;
+      stroke-width: 20;
+      transition: stroke-dasharray 0.6s cubic-bezier(0.16, 1, 0.3, 1), stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.2s;
+      cursor: pointer;
+    }
+
+    .donut-segment:hover {
+      stroke-width: 24;
+      filter: brightness(1.15);
+    }
+
+    .donut-center-info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .donut-center-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .donut-center-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .category-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      width: 100%;
+      max-width: 240px;
+    }
+
+    .cat-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: var(--transition);
+    }
+
+    .cat-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .cat-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cat-color {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .cat-val {
+      font-weight: 700;
+      color: var(--text-main);
+      font-feature-settings: 'tnum';
+    }
+
+    /* Transactions Section */
+    .transactions-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 2.5rem;
+    }
+
+    .tx-toolbar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .tx-toolbar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .tx-filters {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .filter-btn.active {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: rgba(99, 102, 241, 0.5);
+      color: #c7d2fe;
+    }
+
+    .tx-search-box {
+      position: relative;
+      min-width: 240px;
+    }
+
+    .tx-search-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.85rem 0.45rem 2.2rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      color: #fff;
+      outline: none;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .tx-search-input:focus {
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    .tx-search-icon {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    /* Transaction Table */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tx-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    .tx-table th {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-dim);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .tx-table td {
+      padding: 0.95rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .tx-table tr {
+      transition: var(--transition);
+    }
+
+    .tx-table tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .tx-item-desc {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .tx-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    .tx-meta-title {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .tx-meta-sub {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .tx-amount {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-feature-settings: 'tnum';
+      font-size: 0.95rem;
+    }
+
+    .tx-amount.pos {
+      color: #34d399;
+    }
+
+    .tx-amount.neg {
+      color: #fb7185;
+    }
+
+    /* Goals / Metas Section */
+    .goals-section {
+      margin-bottom: 2.8rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-lead {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 50ch;
+      margin: 0 auto;
+    }
+
+    .goals-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .goals-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .goal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+
+    .goal-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .goal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .goal-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+    }
+
+    .goal-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin: 0.6rem 0;
+    }
+
+    .goal-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width 0.8s ease;
+    }
+
+    .goal-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Plans Section */
+    .plans-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (min-width: 860px) {
+      .plans-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .plan-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.8rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      box-shadow: var(--shadow-card);
+    }
+
+    .plan-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .plan-card.featured {
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.12) 0%, rgba(17, 24, 39, 0.85) 100%);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 10px 35px -5px rgba(99, 102, 241, 0.25);
+    }
+
+    .featured-tag {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--accent-purple), var(--brand));
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.25rem 0.85rem;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .plan-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .plan-desc {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .plan-price-box {
+      margin-bottom: 1.5rem;
+    }
+
+    .plan-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .plan-period {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.8rem;
+      flex-grow: 1;
+    }
+
+    .plan-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .plan-feature-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--brand);
+      flex-shrink: 0;
+    }
+
+    /* FAQ Details */
+    .faq-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .faq-item[open] {
+      border-color: rgba(99, 102, 241, 0.35);
+      background: var(--bg-card-hover);
+    }
+
+    .faq-summary {
+      padding: 1.1rem 1.3rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      color: var(--text-main);
+      list-style: none;
+    }
+
+    .faq-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.25s ease;
+      color: var(--text-muted);
+    }
+
+    .faq-item[open] .faq-icon {
+      transform: rotate(180deg);
+      color: var(--brand);
+    }
+
+    .faq-content {
+      padding: 0 1.3rem 1.2rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
+      background: rgba(10, 14, 23, 0.7);
+      padding: 3rem 0 2rem;
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-author {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .footer-role {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .footer-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .tech-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* Modal Dialog */
+    dialog:modal {
+      overscroll-behavior: contain;
+    }
+
+    dialog::backdrop {
+      overflow: hidden;
+      overscroll-behavior: contain;
+      background: rgba(3, 5, 9, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .modal-box {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: #0d121e;
+      color: var(--text-main);
+      padding: 1.8rem;
+      width: min(480px, calc(100% - 2rem));
+      margin: auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .type-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .type-btn {
+      padding: 0.55rem;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-family: inherit;
+    }
+
+    .type-btn.active.despesa {
+      background: rgba(244, 63, 94, 0.2);
+      color: #fb7185;
+      border: 1px solid rgba(244, 63, 94, 0.4);
+    }
+
+    .type-btn.active.receita {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .input-field,
+    .select-field {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.9rem;
+      color: #fff;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .input-field:focus,
+    .select-field:focus {
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      pointer-events: none;
+    }
+
+    .toast {
+      pointer-events: auto;
+      background: #111827;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 0.85rem 1.2rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      max-width: 380px;
+    }
+
+    .toast.success {
+      border-left: 4px solid #10b981;
+    }
+
+    .toast.info {
+      border-left: 4px solid var(--accent-purple);
+    }
+
+    .toast.danger {
+      border-left: 4px solid var(--accent-rose);
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(20px) scale(0.95); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    @keyframes toastOut {
+      from { transform: translateY(0) scale(1); opacity: 1; }
+      to { transform: translateY(20px) scale(0.95); opacity: 0; }
+    }
   </style>
 </head>
 <body>
-  <main class="wrap">
+
+  <!-- Top Navbar -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="brand-logo" aria-label="Nexo Finance Página Inicial">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+            <polyline points="16 7 22 7 22 13"></polyline>
+          </svg>
+        </div>
+        <span>Nexo<span style="color:var(--brand)">.</span>Finance</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegação Principal">
+        <a href="#dashboard" class="nav-link active">Painel Ao Vivo</a>
+        <a href="#transacoes" class="nav-link">Lançamentos</a>
+        <a href="#metas" class="nav-link">Metas & Planejamento</a>
+        <a href="#planos" class="nav-link">Planos</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="btn btn-primary btn-sm" id="btn-open-modal" aria-haspopup="dialog">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Nova Transação
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="dashboard">
+    <!-- Hero / Intro -->
     <section class="hero">
-      <div class="hero-img"></div>
-      <div class="hero-body">
-        <h1>Nexo Finance</h1>
-        <p class="lead">Página de apresentação para app de finanças pessoais com proposta clara: sair do improviso e construir previsibilidade. O projeto destaca controle de gastos, metas, relatórios e alertas inteligentes.</p>
-        <div class="meta">
-          <span class="badge">📊 Controle Diário</span>
-          <span class="badge">🎯 Metas de Economia</span>
-          <span class="badge">🤖 Painel Inteligente</span>
-        </div>
+      <div class="hero-pill">
+        <span class="pulse-dot"></span>
+        SaaS Financeiro de Alta Performance • Versão 3.4
+      </div>
+      <h1>Controle suas finanças com <span class="text-gradient">precisão e inteligência</span></h1>
+      <p class="hero-lead">
+        Elimine planilhas manuais. Tenha visão 360° do seu fluxo de caixa, rentabilidade de investimentos e metas orçamentárias com métricas atualizadas em tempo real.
+      </p>
 
-        <nav class="tabs" aria-label="Seções">
-          <button class="tab-btn active" data-tab="visao">Visão Geral</button>
-          <button class="tab-btn" data-tab="features">Funcionalidades</button>
-          <button class="tab-btn" data-tab="galeria">Telas</button>
-          <button class="tab-btn" data-tab="planos">Planos</button>
-          <button class="tab-btn" data-tab="faq">FAQ</button>
-        </nav>
-
-        <section class="panel active" id="visao">
-          <div class="grid">
-            <article class="card"><h3>🔍 Diagnóstico</h3><p>Resumo automático para mostrar para onde o dinheiro está indo.</p></article>
-            <article class="card"><h3>✅ Ação</h3><p>Metas práticas com notificações que realmente ajudam no dia a dia.</p></article>
-            <article class="card"><h3>📈 Evolução</h3><p>Histórico mensal para comparar comportamento e consolidar hábitos.</p></article>
-          </div>
-        </section>
-
-        <section class="panel" id="features">
-          <div class="grid">
-            <article class="card"><h3>💸 Entradas e Saídas</h3><p>Lançamento rápido por categoria, conta e forma de pagamento.</p></article>
-            <article class="card"><h3>🔔 Alertas</h3><p>Contas a vencer, limite de categoria e metas em risco.</p></article>
-            <article class="card"><h3>📊 Relatórios</h3><p>Gráficos simples para entender gasto fixo, variável e sobra.</p></article>
-          </div>
-        </section>
-
-        <section class="panel" id="galeria">
-          <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="Dashboard financeiro" />
-            <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=900&q=80" alt="Análise de gastos" />
-            <img src="https://images.unsplash.com/photo-1579621970795-87facc2f976d?auto=format&fit=crop&w=900&q=80" alt="Planejamento financeiro" />
-          </div>
-        </section>
-
-        <section class="panel" id="planos">
-          <div class="grid">
-            <article class="card plan-free"><h3>🆓 Free</h3><span class="plan-price">R$ 0/mês</span><p>Controle básico, 1 conta e relatório mensal simplificado.</p></article>
-            <article class="card plan-best"><h3>⭐ Plus</h3><span class="plan-price">R$ 14,90/mês</span><p>Contas ilimitadas, metas e alertas personalizados.</p></article>
-            <article class="card"><h3>🚀 Pro</h3><span class="plan-price">R$ 29,90/mês</span><p>Projeção anual, exportação e acompanhamento inteligente.</p></article>
-          </div>
-        </section>
-
-        <section class="panel" id="faq">
-          <div class="grid">
-            <article class="card"><h3>🔒 Segurança</h3><p>Dados protegidos com criptografia e boas práticas de acesso.</p></article>
-            <article class="card"><h3>🔄 Sincronização</h3><p>Disponível em web e celular com atualização em tempo real.</p></article>
-            <article class="card"><h3>⚡ Começo Rápido</h3><p>Onboarding em 5 minutos para iniciar sem fricção.</p></article>
-          </div>
-        </section>
-
-        <div class="cta">
-          <strong>Quer finalmente ter controle real do seu dinheiro? 💰</strong><br />
-          <a href="#">Criar conta grátis</a>
-        </div>
+      <div class="hero-cta">
+        <button type="button" class="btn btn-primary" id="btn-hero-add">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Adicionar Transação de Teste
+        </button>
+        <a href="#planos" class="btn btn-secondary">Explorar Planos</a>
       </div>
     </section>
 
-    <footer class="footer">
-      <p class="footer-name">Felipe Junqueira Leite</p>
-      <p class="footer-role">Desenvolvedor Web · Criação de Sites e Sistemas para Negócios</p>
-      <div class="footer-badges">
-        <span class="cert">HTML5</span>
-        <span class="cert">CSS3</span>
-        <span class="cert">JavaScript</span>
-        <span class="cert">Mobile‑First</span>
-        <span class="cert">SEO</span>
-        <span class="cert">UX/UI</span>
+    <!-- KPI Summary Cards (4 Cards) -->
+    <section class="kpi-grid" aria-label="Resumo Financeiro">
+      <!-- Card 1: Saldo Consolidado -->
+      <article class="kpi-card saldo">
+        <div class="kpi-header">
+          <span class="kpi-title">Saldo Consolidado</span>
+          <div class="kpi-icon" style="color: #6366f1;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="3"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+          </div>
+        </div>
+        <div class="kpi-value" id="kpi-saldo">R$ 28.450,80</div>
+        <div class="kpi-footer">
+          <span class="badge badge-success">+14,2% vs mês anterior</span>
+          <span>4 contas sincronizadas</span>
+        </div>
+      </article>
+
+      <!-- Card 2: Receitas do Mês -->
+      <article class="kpi-card receita">
+        <div class="kpi-header">
+          <span class="kpi-title">Receitas do Mês</span>
+          <div class="kpi-icon" style="color: #10b981;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          </div>
+        </div>
+        <div class="kpi-value" id="kpi-receitas" style="color: #34d399;">R$ 14.820,00</div>
+        <div class="kpi-footer">
+          <span class="badge badge-success">98% atingido</span>
+          <span id="kpi-receitas-count">3 entradas</span>
+        </div>
+      </article>
+
+      <!-- Card 3: Despesas do Mês -->
+      <article class="kpi-card despesa">
+        <div class="kpi-header">
+          <span class="kpi-title">Despesas Totais</span>
+          <div class="kpi-icon" style="color: #f43f5e;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
+          </div>
+        </div>
+        <div class="kpi-value" id="kpi-despesas" style="color: #fb7185;">R$ 6.340,50</div>
+        <div class="kpi-footer">
+          <span class="badge badge-danger">43% do teto mensal</span>
+          <span id="kpi-despesas-count">6 saídas</span>
+        </div>
+      </article>
+
+      <!-- Card 4: Rendimentos & Investimentos -->
+      <article class="kpi-card invest">
+        <div class="kpi-header">
+          <span class="kpi-title">Rendimento Investido</span>
+          <div class="kpi-icon" style="color: #06b6d4;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M16 8l-8 8"></path><path d="M12 8h4v4"></path></svg>
+          </div>
+        </div>
+        <div class="kpi-value" id="kpi-invest" style="color: #67e8f9;">R$ 1.970,30</div>
+        <div class="kpi-footer">
+          <span class="badge badge-cyan">+1,85% a.m. CDI+</span>
+          <span>Total: R$ 84.500</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- Interactive Charts Grid (Bar + Donut) -->
+    <section class="dashboard-grid">
+      <!-- Left: Monthly Flow SVG Bar Chart -->
+      <article class="panel-card">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><rect x="7" y="10" width="3" height="8" rx="1"></rect><rect x="14" y="6" width="3" height="12" rx="1"></rect></svg>
+            Evolução Mensal: Receitas vs Despesas
+          </h2>
+          <span class="badge badge-purple">Últimos 6 Meses</span>
+        </div>
+
+        <div class="chart-container">
+          <!-- Responsive dynamic SVG Chart -->
+          <svg class="bar-chart-svg" viewBox="0 0 540 210" id="monthly-bar-chart" aria-label="Gráfico de barras de fluxo financeiro">
+            <defs>
+              <linearGradient id="recGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#10b981" />
+                <stop offset="100%" stop-color="#059669" />
+              </linearGradient>
+              <linearGradient id="despGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f43f5e" />
+                <stop offset="100%" stop-color="#be123c" />
+              </linearGradient>
+            </defs>
+
+            <!-- Guide grid lines -->
+            <line x1="40" y1="30" x2="520" y2="30" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />
+            <text x="32" y="34" fill="#64748b" font-size="10" text-anchor="end">15k</text>
+
+            <line x1="40" y1="80" x2="520" y2="80" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />
+            <text x="32" y="84" fill="#64748b" font-size="10" text-anchor="end">10k</text>
+
+            <line x1="40" y1="130" x2="520" y2="130" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />
+            <text x="32" y="134" fill="#64748b" font-size="10" text-anchor="end">5k</text>
+
+            <line x1="40" y1="175" x2="520" y2="175" stroke="rgba(255,255,255,0.12)" />
+
+            <!-- Bars groups (Mai a Out) -->
+            <!-- Mai -->
+            <rect class="bar-rect" x="65" y="85" width="16" height="90" rx="3" fill="url(#recGrad)"><title>Mai Receitas: R$ 9.800</title></rect>
+            <rect class="bar-rect" x="85" y="125" width="16" height="50" rx="3" fill="url(#despGrad)"><title>Mai Despesas: R$ 5.200</title></rect>
+            <text x="83" y="194" fill="#94a3b8" font-size="11" text-anchor="middle">Mai</text>
+
+            <!-- Jun -->
+            <rect class="bar-rect" x="145" y="70" width="16" height="105" rx="3" fill="url(#recGrad)"><title>Jun Receitas: R$ 11.200</title></rect>
+            <rect class="bar-rect" x="165" y="120" width="16" height="55" rx="3" fill="url(#despGrad)"><title>Jun Despesas: R$ 5.800</title></rect>
+            <text x="163" y="194" fill="#94a3b8" font-size="11" text-anchor="middle">Jun</text>
+
+            <!-- Jul -->
+            <rect class="bar-rect" x="225" y="65" width="16" height="110" rx="3" fill="url(#recGrad)"><title>Jul Receitas: R$ 12.000</title></rect>
+            <rect class="bar-rect" x="245" y="115" width="16" height="60" rx="3" fill="url(#despGrad)"><title>Jul Despesas: R$ 6.100</title></rect>
+            <text x="243" y="194" fill="#94a3b8" font-size="11" text-anchor="middle">Jul</text>
+
+            <!-- Ago -->
+            <rect class="bar-rect" x="305" y="60" width="16" height="115" rx="3" fill="url(#recGrad)"><title>Ago Receitas: R$ 12.500</title></rect>
+            <rect class="bar-rect" x="325" y="122" width="16" height="53" rx="3" fill="url(#despGrad)"><title>Ago Despesas: R$ 5.400</title></rect>
+            <text x="323" y="194" fill="#94a3b8" font-size="11" text-anchor="middle">Ago</text>
+
+            <!-- Set -->
+            <rect class="bar-rect" x="385" y="50" width="16" height="125" rx="3" fill="url(#recGrad)"><title>Set Receitas: R$ 13.400</title></rect>
+            <rect class="bar-rect" x="405" y="118" width="16" height="57" rx="3" fill="url(#despGrad)"><title>Set Despesas: R$ 5.900</title></rect>
+            <text x="403" y="194" fill="#94a3b8" font-size="11" text-anchor="middle">Set</text>
+
+            <!-- Out (Current month - dynamic update target) -->
+            <rect class="bar-rect" id="bar-current-rec" x="465" y="38" width="16" height="137" rx="3" fill="url(#recGrad)"><title>Out Receitas: R$ 14.820</title></rect>
+            <rect class="bar-rect" id="bar-current-desp" x="485" y="112" width="16" height="63" rx="3" fill="url(#despGrad)"><title>Out Despesas: R$ 6.340</title></rect>
+            <text x="483" y="194" fill="#34d399" font-weight="700" font-size="11" text-anchor="middle">Out (Atual)</text>
+          </svg>
+
+          <div class="chart-legend">
+            <div class="legend-item">
+              <span class="legend-dot" style="background:#10b981;"></span>
+              <span>Receitas Recebidas</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot" style="background:#f43f5e;"></span>
+              <span>Despesas Executadas</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Right: Donut Chart Category Breakdown -->
+      <article class="panel-card">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 10 10h-10z"></path></svg>
+            Gastos por Categoria
+          </h2>
+          <span class="badge badge-cyan">Mês Atual</span>
+        </div>
+
+        <div class="donut-wrapper">
+          <div class="donut-svg-box">
+            <svg class="donut-svg" viewBox="0 0 120 120" id="donut-svg">
+              <circle class="donut-circle-bg" cx="60" cy="60" r="45"></circle>
+              <!-- Segments calculated via JS -->
+              <g id="donut-segments-group"></g>
+            </svg>
+            <div class="donut-center-info">
+              <div class="donut-center-label">Total Gasto</div>
+              <div class="donut-center-val" id="donut-total-label">R$ 6.340</div>
+            </div>
+          </div>
+
+          <div class="category-list" id="category-legend-list">
+            <!-- Dynamically populated categories -->
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Transactions List & Toolbar -->
+    <section class="transactions-card" id="transacoes">
+      <div class="panel-header">
+        <div>
+          <h2 class="panel-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            Extrato de Lançamentos
+          </h2>
+          <p style="font-size: 0.82rem; color: var(--text-dim); margin-top: 0.2rem;">Lançamentos recentes, conciliações e filtros automáticos.</p>
+        </div>
+
+        <button type="button" class="btn btn-primary btn-sm" id="btn-add-table">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Novo Lançamento
+        </button>
       </div>
-      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Todos os direitos reservados</p>
-    </footer>
+
+      <!-- Toolbar -->
+      <div class="tx-toolbar">
+        <div class="tx-filters">
+          <button type="button" class="filter-btn active" data-filter="all">Todos</button>
+          <button type="button" class="filter-btn" data-filter="receita">Receitas (+)</button>
+          <button type="button" class="filter-btn" data-filter="despesa">Despesas (-)</button>
+        </div>
+
+        <div class="tx-search-box">
+          <svg class="tx-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="search" class="tx-search-input" id="tx-search" placeholder="Buscar por descrição ou categoria..." aria-label="Pesquisar lançamentos" />
+        </div>
+      </div>
+
+      <!-- Table View -->
+      <div class="table-container">
+        <table class="tx-table" aria-label="Tabela de Lançamentos">
+          <thead>
+            <tr>
+              <th>Transação</th>
+              <th>Categoria</th>
+              <th>Data</th>
+              <th>Status</th>
+              <th style="text-align: right;">Valor</th>
+              <th style="text-align: center;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tx-tbody">
+            <!-- Injected by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Goals & Planning Section -->
+    <section class="goals-section" id="metas">
+      <div class="section-header">
+        <h2 class="section-title">Metas e Projeções Financeiras</h2>
+        <p class="section-lead">Acompanhe em tempo real a evolução dos seus objetivos patrimoniais com alocação inteligente de aportes mensais.</p>
+      </div>
+
+      <div class="goals-grid">
+        <article class="goal-card">
+          <div class="goal-top">
+            <span class="goal-name">🛡️ Reserva de Emergência</span>
+            <span class="badge badge-success">85% Concluído</span>
+          </div>
+          <div class="goal-bar-bg">
+            <div class="goal-bar-fill" style="width: 85%; background: linear-gradient(90deg, #10b981, #059669);"></div>
+          </div>
+          <div class="goal-meta">
+            <span>Acumulado: R$ 42.500</span>
+            <span>Meta: R$ 50.000</span>
+          </div>
+        </article>
+
+        <article class="goal-card">
+          <div class="goal-top">
+            <span class="goal-name">✈️ Viagem Internacional</span>
+            <span class="badge badge-purple">62% Concluído</span>
+          </div>
+          <div class="goal-bar-bg">
+            <div class="goal-bar-fill" style="width: 62%; background: linear-gradient(90deg, #6366f1, #8b5cf6);"></div>
+          </div>
+          <div class="goal-meta">
+            <span>Acumulado: R$ 15.500</span>
+            <span>Meta: R$ 25.000</span>
+          </div>
+        </article>
+
+        <article class="goal-card">
+          <div class="goal-top">
+            <span class="goal-name">📈 Liberdade Financeira 2030</span>
+            <span class="badge badge-cyan">38% Concluído</span>
+          </div>
+          <div class="goal-bar-bg">
+            <div class="goal-bar-fill" style="width: 38%; background: linear-gradient(90deg, #06b6d4, #0284c7);"></div>
+          </div>
+          <div class="goal-meta">
+            <span>Acumulado: R$ 190.000</span>
+            <span>Meta: R$ 500.000</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SaaS Plans & Pricing -->
+    <section class="plans-section" id="planos">
+      <div class="section-header">
+        <h2 class="section-title">Planos Transparentes para Cada Fase</h2>
+        <p class="section-lead">Comece gratuitamente e desbloqueie conexões bancárias ilimitadas e inteligência preditiva conforme seu patrimônio expande.</p>
+      </div>
+
+      <div class="plans-grid">
+        <!-- Free Plan -->
+        <article class="plan-card">
+          <h3 class="plan-title">Plano Start</h3>
+          <p class="plan-desc">Essencial para quem quer organizar entradas e saídas sem complexidade.</p>
+          <div class="plan-price-box">
+            <span class="plan-price">R$ 0</span>
+            <span class="plan-period">/mês para sempre</span>
+          </div>
+          <ul class="plan-features">
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Até 1 conta bancária</li>
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Extrato e categorização manual</li>
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Relatório mensal básico</li>
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> 1 meta de economia</li>
+          </ul>
+          <button type="button" class="btn btn-secondary demo-plan-btn" data-plan="Start Gratuito">Criar Conta Grátis</button>
+        </article>
+
+        <!-- Plus Plan (Featured) -->
+        <article class="plan-card featured">
+          <span class="featured-tag">Mais Escolhido</span>
+          <h3 class="plan-title">Plano Plus ⭐</h3>
+          <p class="plan-desc">Ideal para quem busca sincronização automática e controle avançado de cartões.</p>
+          <div class="plan-price-box">
+            <span class="plan-price">R$ 14,90</span>
+            <span class="plan-period">/mês no plano anual</span>
+          </div>
+          <ul class="plan-features">
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> <strong>Contas e cartões ilimitados</strong></li>
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Open Finance automático</li>
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Alertas preditivos no WhatsApp</li>
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Metas ilimitadas e tags customizadas</li>
+          </ul>
+          <button type="button" class="btn btn-primary demo-plan-btn" data-plan="Plus">Começar Teste de 14 Dias</button>
+        </article>
+
+        <!-- Pro Plan -->
+        <article class="plan-card">
+          <h3 class="plan-title">Plano Wealth Pro</h3>
+          <p class="plan-desc">Para investidores, autônomos e pessoas com múltiplos fluxos de renda.</p>
+          <div class="plan-price-box">
+            <span class="plan-price">R$ 29,90</span>
+            <span class="plan-period">/mês</span>
+          </div>
+          <ul class="plan-features">
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Tudo do Plano Plus</li>
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Consolidação de Carteiras de Investimentos</li>
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Planejamento Tributário / IR Automático</li>
+            <li class="plan-feature-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Suporte prioritário via WhatsApp</li>
+          </ul>
+          <button type="button" class="btn btn-secondary demo-plan-btn" data-plan="Wealth Pro">Assinar Wealth Pro</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="faq-section" id="faq">
+      <div class="section-header">
+        <h2 class="section-title">Perguntas Frequentes</h2>
+        <p class="section-lead">Tudo o que você precisa saber sobre segurança, sincronização e privacidade.</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-summary">
+            Como funciona a segurança e privacidade dos meus dados bancários?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="faq-content">
+            Utilizamos criptografia ponta a ponta (AES-256 e TLS 1.3), o mesmo padrão de segurança dos maiores bancos internacionais. Apenas você tem acesso visual aos dados. Nossos sistemas operam via Open Finance regulamentado pelo Banco Central, em modo estritamente somente-leitura.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Posso exportar meus dados para planilhas Excel ou relatórios PDF?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="faq-content">
+            Sim! Em qualquer momento você pode exportar relatórios completos nos formatos CSV, XLSX e PDF executivo, contendo métricas categorizadas, gráficos e evolução patrimonial.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            O aplicativo funciona no celular e tablet?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="faq-content">
+            Sim, o Nexo Finance é um Progressive Web App (PWA) 100% responsivo e otimizado para iOS e Android. Você pode instalar o atalho direto na tela inicial do seu celular sem ocupar espaço de armazenamento pesado.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Posso cancelar minha assinatura a qualquer momento?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="faq-content">
+            Sem pegadinhas ou fidelidade. O cancelamento pode ser feito em 1 clique direto na página de configurações da sua conta, mantendo o acesso até o fim do ciclo vigente.
+          </div>
+        </details>
+      </div>
+    </section>
   </main>
+
+  <!-- Interactive Modal for Adding Transaction -->
+  <dialog id="modal-transaction" aria-labelledby="modal-tx-title" closedby="any">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-tx-title">Novo Lançamento</h2>
+        <button type="button" class="btn-icon" id="btn-close-modal" aria-label="Fechar janela">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <form class="modal-form" id="form-transaction">
+        <!-- Type: Receita vs Despesa -->
+        <div class="form-group">
+          <label class="form-label">Tipo de Operação</label>
+          <div class="type-toggle">
+            <button type="button" class="type-btn despesa active" id="type-despesa">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline></svg>
+              Despesa
+            </button>
+            <button type="button" class="type-btn receita" id="type-receita">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline></svg>
+              Receita
+            </button>
+          </div>
+          <input type="hidden" id="tx-type-input" value="despesa" />
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label class="form-label" for="tx-desc">Descrição do Lançamento</label>
+          <input type="text" class="input-field" id="tx-desc" placeholder="Ex: Supermercado, Salário, Academia..." required autofocus />
+        </div>
+
+        <!-- Value & Date -->
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="tx-val">Valor (R$)</label>
+            <input type="number" step="0.01" min="0.01" class="input-field" id="tx-val" placeholder="0,00" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tx-date">Data</label>
+            <input type="date" class="input-field" id="tx-date" required />
+          </div>
+        </div>
+
+        <!-- Category & Status -->
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="tx-cat">Categoria</label>
+            <select class="select-field" id="tx-cat" required>
+              <option value="Alimentação">Alimentação</option>
+              <option value="Moradia">Moradia</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Saúde">Saúde</option>
+              <option value="Salário">Salário / Trabalho</option>
+              <option value="Investimentos">Investimentos</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="tx-status">Status</label>
+            <select class="select-field" id="tx-status" required>
+              <option value="Concluído">Concluído</option>
+              <option value="Pendente">Pendente</option>
+              <option value="Agendado">Agendado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar Lançamento</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Professional Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-author">Felipe Junqueira Leite</p>
+      <p class="footer-role">Desenvolvedor Frontend & Engenheiro de Software · Soluções Digitais para Negócios</p>
+      <div class="footer-badges">
+        <span class="tech-pill">HTML5 Moderno</span>
+        <span class="tech-pill">CSS Custom Properties</span>
+        <span class="tech-pill">SVG Reativo</span>
+        <span class="tech-pill">ES6+ Vanilla</span>
+        <span class="tech-pill">Mobile-First</span>
+        <span class="tech-pill">Acessibilidade WCAG</span>
+        <span class="tech-pill">Dark Theme</span>
+      </div>
+      <p class="footer-copy">© 2025 Felipe Junqueira Leite — Nexo Finance. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript -->
   <script>
-    const tabs=[...document.querySelectorAll('.tab-btn')];
-    const panels=[...document.querySelectorAll('.panel')];
-    tabs.forEach(btn=>btn.addEventListener('click',()=>{
-      tabs.forEach(b=>b.classList.remove('active'));
-      panels.forEach(p=>p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.tab).classList.add('active');
-    }));
+    (function () {
+      'use strict';
+
+      // Initial State
+      let transactions = [
+        { id: 1, type: 'receita', desc: 'Salário & Dividendos Tech', cat: 'Salário', date: '2025-10-05', status: 'Concluído', amount: 12500.00, icon: '💼' },
+        { id: 2, type: 'receita', desc: 'Consultoria Freelance UI/UX', cat: 'Salário', date: '2025-10-12', status: 'Concluído', amount: 2320.00, icon: '💻' },
+        { id: 3, type: 'despesa', desc: 'Aluguel & Condomínio', cat: 'Moradia', date: '2025-10-08', status: 'Concluído', amount: 2200.00, icon: '🏠' },
+        { id: 4, type: 'despesa', desc: 'Supermercado Mensal Pão de Açúcar', cat: 'Alimentação', date: '2025-10-14', status: 'Concluído', amount: 1450.50, icon: '🛒' },
+        { id: 5, type: 'despesa', desc: 'Aporte Tesouro Selic & FIIs', cat: 'Investimentos', date: '2025-10-16', status: 'Concluído', amount: 1200.00, icon: '📈' },
+        { id: 6, type: 'despesa', desc: 'Combustível e Estacionamento', cat: 'Transporte', date: '2025-10-18', status: 'Concluído', amount: 480.00, icon: '⛽' },
+        { id: 7, type: 'despesa', desc: 'Jantar Restaurante Varanda', cat: 'Lazer', date: '2025-10-21', status: 'Concluído', amount: 560.00, icon: '🍽️' },
+        { id: 8, type: 'despesa', desc: 'Farmácia & Vitaminas', cat: 'Saúde', date: '2025-10-24', status: 'Concluído', amount: 450.00, icon: '💊' }
+      ];
+
+      const categoryColors = {
+        'Alimentação': '#f59e0b',
+        'Moradia': '#6366f1',
+        'Transporte': '#06b6d4',
+        'Lazer': '#ec4899',
+        'Saúde': '#10b981',
+        'Salário': '#34d399',
+        'Investimentos': '#8b5cf6',
+        'Outros': '#94a3b8'
+      };
+
+      const categoryIcons = {
+        'Alimentação': '🛒',
+        'Moradia': '🏠',
+        'Transporte': '🚗',
+        'Lazer': '🎉',
+        'Saúde': '🩺',
+        'Salário': '💰',
+        'Investimentos': '📈',
+        'Outros': '📦'
+      };
+
+      // DOM Elements
+      const kpiSaldo = document.getElementById('kpi-saldo');
+      const kpiReceitas = document.getElementById('kpi-receitas');
+      const kpiDespesas = document.getElementById('kpi-despesas');
+      const kpiReceitasCount = document.getElementById('kpi-receitas-count');
+      const kpiDespesasCount = document.getElementById('kpi-despesas-count');
+      const txTbody = document.getElementById('tx-tbody');
+      const txSearch = document.getElementById('tx-search');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const modal = document.getElementById('modal-transaction');
+      const btnOpenModal = document.getElementById('btn-open-modal');
+      const btnHeroAdd = document.getElementById('btn-hero-add');
+      const btnAddTable = document.getElementById('btn-add-table');
+      const btnCloseModal = document.getElementById('btn-close-modal');
+      const btnCancelModal = document.getElementById('btn-cancel-modal');
+      const formTx = document.getElementById('form-transaction');
+      const typeDespesa = document.getElementById('type-despesa');
+      const typeReceita = document.getElementById('type-receita');
+      const txTypeInput = document.getElementById('tx-type-input');
+      const txDate = document.getElementById('tx-date');
+      const donutSegmentsGroup = document.getElementById('donut-segments-group');
+      const donutTotalLabel = document.getElementById('donut-total-label');
+      const categoryLegendList = document.getElementById('category-legend-list');
+      const barCurrentRec = document.getElementById('bar-current-rec');
+      const barCurrentDesp = document.getElementById('bar-current-desp');
+
+      // Set today's date in form
+      if (txDate) {
+        txDate.value = new Date().toISOString().split('T')[0];
+      }
+
+      // Format currency
+      function fmt(val) {
+        return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      }
+
+      // Show elegant toast
+      window.showToast = function (message, type = 'success') {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        let iconSvg = '';
+        if (type === 'success') {
+          iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+        } else if (type === 'danger') {
+          iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`;
+        } else {
+          iconSvg = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`;
+        }
+
+        toast.innerHTML = `${iconSvg} <span>${message}</span>`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.animation = 'toastOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+          setTimeout(() => toast.remove(), 300);
+        }, 3600);
+      };
+
+      // Calculate Metrics and Re-render UI
+      function renderAll() {
+        let totalReceitas = 0;
+        let totalDespesas = 0;
+        let countRec = 0;
+        let countDesp = 0;
+        const catMap = {};
+
+        transactions.forEach(t => {
+          if (t.type === 'receita') {
+            totalReceitas += t.amount;
+            countRec++;
+          } else {
+            totalDespesas += t.amount;
+            countDesp++;
+            catMap[t.cat] = (catMap[t.cat] || 0) + t.amount;
+          }
+        });
+
+        const initialBalance = 19971.30;
+        const consolidatedSaldo = initialBalance + totalReceitas - totalDespesas;
+
+        // Update KPI text
+        kpiSaldo.textContent = fmt(consolidatedSaldo);
+        kpiReceitas.textContent = fmt(totalReceitas);
+        kpiDespesas.textContent = fmt(totalDespesas);
+        kpiReceitasCount.textContent = `${countRec} entrada${countRec !== 1 ? 's' : ''}`;
+        kpiDespesasCount.textContent = `${countDesp} saída${countDesp !== 1 ? 's' : ''}`;
+        donutTotalLabel.textContent = fmt(totalDespesas);
+
+        // Update current month bars in SVG
+        if (barCurrentRec && barCurrentDesp) {
+          // Height scale: 15k is ~140px
+          const recH = Math.min(145, Math.max(20, (totalReceitas / 16000) * 140));
+          const despH = Math.min(145, Math.max(20, (totalDespesas / 16000) * 140));
+          barCurrentRec.setAttribute('height', recH);
+          barCurrentRec.setAttribute('y', 175 - recH);
+          barCurrentRec.querySelector('title').textContent = `Out Receitas: ${fmt(totalReceitas)}`;
+
+          barCurrentDesp.setAttribute('height', despH);
+          barCurrentDesp.setAttribute('y', 175 - despH);
+          barCurrentDesp.querySelector('title').textContent = `Out Despesas: ${fmt(totalDespesas)}`;
+        }
+
+        // Render Donut Chart & Category Legend
+        renderDonut(catMap, totalDespesas);
+
+        // Render Transactions Table
+        renderTable();
+      }
+
+      function renderDonut(catMap, totalDespesas) {
+        donutSegmentsGroup.innerHTML = '';
+        categoryLegendList.innerHTML = '';
+
+        const circumference = 2 * Math.PI * 45; // ~282.74
+        let accumulatedPercent = 0;
+
+        const entries = Object.entries(catMap).sort((a, b) => b[1] - a[1]);
+
+        if (entries.length === 0 || totalDespesas <= 0) {
+          categoryLegendList.innerHTML = `<div style="font-size:0.82rem; color:var(--text-dim);">Nenhuma despesa registrada neste período.</div>`;
+          return;
+        }
+
+        entries.forEach(([cat, val]) => {
+          const percent = val / totalDespesas;
+          const strokeLength = percent * circumference;
+          const strokeDashoffset = -accumulatedPercent * circumference;
+          const color = categoryColors[cat] || '#94a3b8';
+
+          // SVG Segment
+          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          circle.setAttribute('class', 'donut-segment');
+          circle.setAttribute('cx', '60');
+          circle.setAttribute('cy', '60');
+          circle.setAttribute('r', '45');
+          circle.setAttribute('stroke', color);
+          circle.setAttribute('stroke-dasharray', `${strokeLength} ${circumference}`);
+          circle.setAttribute('stroke-dashoffset', strokeDashoffset);
+          
+          const titleEl = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+          titleEl.textContent = `${cat}: ${fmt(val)} (${Math.round(percent * 100)}%)`;
+          circle.appendChild(titleEl);
+          donutSegmentsGroup.appendChild(circle);
+
+          accumulatedPercent += percent;
+
+          // Legend list item
+          const item = document.createElement('div');
+          item.className = 'cat-item';
+          item.innerHTML = `
+            <div class="cat-info">
+              <span class="cat-color" style="background:${color}"></span>
+              <span>${cat}</span>
+            </div>
+            <div class="cat-val">${fmt(val)} <span style="font-size:0.75rem; color:var(--text-dim);">(${Math.round(percent * 100)}%)</span></div>
+          `;
+          categoryLegendList.appendChild(item);
+        });
+      }
+
+      let currentFilter = 'all';
+      let currentQuery = '';
+
+      function renderTable() {
+        txTbody.innerHTML = '';
+
+        const filtered = transactions.filter(t => {
+          if (currentFilter === 'receita' && t.type !== 'receita') return false;
+          if (currentFilter === 'despesa' && t.type !== 'despesa') return false;
+          if (currentQuery) {
+            const q = currentQuery.toLowerCase();
+            const inDesc = t.desc.toLowerCase().includes(q);
+            const inCat = t.cat.toLowerCase().includes(q);
+            if (!inDesc && !inCat) return false;
+          }
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td colspan="6" style="text-align:center; padding:2rem; color:var(--text-dim);">Nenhuma transação encontrada para este filtro.</td>`;
+          txTbody.appendChild(row);
+          return;
+        }
+
+        filtered.forEach(t => {
+          const row = document.createElement('tr');
+          const isRec = t.type === 'receita';
+          const icon = t.icon || categoryIcons[t.cat] || '💳';
+          const badgeClass = t.status === 'Concluído' ? 'badge-success' : (t.status === 'Agendado' ? 'badge-purple' : 'badge-cyan');
+          const dateFmt = new Date(t.date + 'T12:00:00').toLocaleDateString('pt-BR');
+
+          row.innerHTML = `
+            <td>
+              <div class="tx-item-desc">
+                <div class="tx-avatar" style="background:${isRec ? 'rgba(16,185,129,0.15)' : 'rgba(244,63,94,0.15)'}">
+                  ${icon}
+                </div>
+                <div>
+                  <div class="tx-meta-title">${escapeHtml(t.desc)}</div>
+                  <div class="tx-meta-sub">${isRec ? 'Entrada bancária' : 'Débito / Cartão'}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="badge" style="background:rgba(255,255,255,0.06); color:var(--text-main); border:1px solid rgba(255,255,255,0.1);">
+                ${escapeHtml(t.cat)}
+              </span>
+            </td>
+            <td style="color:var(--text-muted); font-size:0.84rem;">${dateFmt}</td>
+            <td>
+              <span class="badge ${badgeClass}">${escapeHtml(t.status)}</span>
+            </td>
+            <td style="text-align:right;">
+              <span class="tx-amount ${isRec ? 'pos' : 'neg'}">
+                ${isRec ? '+' : '-'} ${fmt(t.amount)}
+              </span>
+            </td>
+            <td style="text-align:center;">
+              <button type="button" class="btn-icon delete-btn" data-id="${t.id}" title="Excluir lançamento" aria-label="Excluir transação ${escapeHtml(t.desc)}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
+            </td>
+          `;
+
+          txTbody.appendChild(row);
+        });
+
+        // Add delete handlers
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = Number(btn.getAttribute('data-id'));
+            const target = transactions.find(x => x.id === id);
+            transactions = transactions.filter(x => x.id !== id);
+            renderAll();
+            showToast(`Lançamento "${target ? target.desc : ''}" removido com sucesso!`, 'info');
+          });
+        });
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      // Filter events
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.filter;
+          renderTable();
+        });
+      });
+
+      // Search input event
+      if (txSearch) {
+        txSearch.addEventListener('input', (e) => {
+          currentQuery = e.target.value.trim();
+          renderTable();
+        });
+      }
+
+      // Modal Dialog Controls
+      function openModal(defaultType = 'despesa') {
+        setType(defaultType);
+        formTx.reset();
+        if (txDate) txDate.value = new Date().toISOString().split('T')[0];
+        setType(defaultType);
+        if (typeof modal.showModal === 'function') {
+          modal.showModal();
+        } else {
+          modal.setAttribute('open', '');
+        }
+      }
+
+      function closeModal() {
+        if (typeof modal.close === 'function') {
+          modal.close();
+        } else {
+          modal.removeAttribute('open');
+        }
+      }
+
+      if (btnOpenModal) btnOpenModal.addEventListener('click', () => openModal('despesa'));
+      if (btnHeroAdd) btnHeroAdd.addEventListener('click', () => openModal('despesa'));
+      if (btnAddTable) btnAddTable.addEventListener('click', () => openModal('despesa'));
+      if (btnCloseModal) btnCloseModal.addEventListener('click', closeModal);
+      if (btnCancelModal) btnCancelModal.addEventListener('click', closeModal);
+
+      // Light dismiss for dialog
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          const rect = modal.getBoundingClientRect();
+          const isInDialog = (
+            rect.top <= e.clientY &&
+            e.clientY <= rect.top + rect.height &&
+            rect.left <= e.clientX &&
+            e.clientX <= rect.left + rect.width
+          );
+          if (!isInDialog) {
+            closeModal();
+          }
+        });
+      }
+
+      // Type Toggle (Receita vs Despesa)
+      function setType(type) {
+        txTypeInput.value = type;
+        if (type === 'receita') {
+          typeReceita.classList.add('active');
+          typeDespesa.classList.remove('active');
+          document.getElementById('tx-cat').value = 'Salário';
+        } else {
+          typeDespesa.classList.add('active');
+          typeReceita.classList.remove('active');
+          document.getElementById('tx-cat').value = 'Alimentação';
+        }
+      }
+
+      if (typeDespesa) typeDespesa.addEventListener('click', () => setType('despesa'));
+      if (typeReceita) typeReceita.addEventListener('click', () => setType('receita'));
+
+      // Form submission
+      if (formTx) {
+        formTx.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const desc = document.getElementById('tx-desc').value.trim();
+          const val = parseFloat(document.getElementById('tx-val').value);
+          const date = document.getElementById('tx-date').value;
+          const cat = document.getElementById('tx-cat').value;
+          const status = document.getElementById('tx-status').value;
+          const type = txTypeInput.value;
+
+          if (!desc || isNaN(val) || val <= 0) {
+            showToast('Por favor, informe uma descrição válida e um valor positivo.', 'danger');
+            return;
+          }
+
+          const newTx = {
+            id: Date.now(),
+            type,
+            desc,
+            cat,
+            date: date || new Date().toISOString().split('T')[0],
+            status,
+            amount: val,
+            icon: categoryIcons[cat] || '💳'
+          };
+
+          transactions.unshift(newTx);
+          renderAll();
+          closeModal();
+          showToast(`Lançamento "${desc}" registrado com sucesso!`, 'success');
+        });
+      }
+
+      // Plan Buttons click simulation
+      document.querySelectorAll('.demo-plan-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const plan = btn.getAttribute('data-plan');
+          showToast(`Simulação iniciada para o ${plan}! Ambiente de demonstração ativo.`, 'info');
+        });
+      });
+
+      // Initial Render
+      renderAll();
+    })();
   </script>
 </body>
 </html>

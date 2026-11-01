@@ -1,33 +1,97 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PDV Caixa Express | Sistema de Frente de Caixa</title>
-  <meta name="description" content="PDV Caixa Express — Sistema ágil de ponto de venda para supermercados, mercearias e comércios locais.">
+  <title>PDV Caixa Express • Frente de Caixa Ágil</title>
+  <meta name="description" content="Sistema profissional e ágil de frente de caixa (PDV) para mercados, mercearias e comércios locais.">
 
+  <!-- Preconnect & Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
+    /* =====================================================================
+       DESIGN SYSTEM - TEMA CLARO & ESCURO DINÂMICO
+       ===================================================================== */
     :root {
-      --bg: #0f172a;
-      --panel: #1e293b;
-      --panel-light: #334155;
+      --bg: #090d16;
+      --bg-surface: #0f172a;
+      --bg-card: #1e293b;
+      --bg-card-hover: #273549;
+      --bg-input: #0b1120;
+      
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --border: rgba(255, 255, 255, 0.1);
+      --border-focus: #3b82f6;
+
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
-      --green: #16a34a;
-      --green-hover: #15803d;
-      --amber: #d97706;
-      --text: #f8fafc;
-      --text-dim: #94a3b8;
-      --border: rgba(255, 255, 255, 0.08);
-      --radius: 10px;
+      --primary-light: rgba(37, 99, 235, 0.18);
+      
+      --success: #10b981;
+      --success-hover: #059669;
+      --success-bg: rgba(16, 185, 129, 0.15);
+
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --danger-bg: rgba(239, 68, 68, 0.15);
+
+      --warning: #f59e0b;
+      --warning-bg: rgba(245, 158, 11, 0.15);
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      --font-mono: 'Chivo Mono', monospace;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    [data-theme="light"] {
+      --bg: #f1f5f9;
+      --bg-surface: #ffffff;
+      --bg-card: #f8fafc;
+      --bg-card-hover: #e2e8f0;
+      --bg-input: #ffffff;
+
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #94a3b8;
+
+      --border: rgba(0, 0, 0, 0.12);
+      --border-focus: #2563eb;
+
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: rgba(37, 99, 235, 0.1);
+
+      --success: #059669;
+      --success-hover: #047857;
+      --success-bg: rgba(5, 150, 105, 0.1);
+
+      --danger: #dc2626;
+      --danger-hover: #b91c1c;
+      --danger-bg: rgba(220, 38, 38, 0.1);
+
+      --warning: #d97706;
+      --warning-bg: rgba(217, 119, 6, 0.1);
+
+      --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg);
@@ -35,544 +99,2372 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
-    /* Top Bar */
-    .pos-top {
-      background: #020617;
+    /* Scrollbars suaves */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-dim);
+    }
+
+    /* =====================================================================
+       CABEÇALHO PROFISSIONAL DE OPERADOR
+       ===================================================================== */
+    .pos-header {
+      background: var(--bg-surface);
       border-bottom: 1px solid var(--border);
-      padding: 0.75rem 1.5rem;
+      padding: 0.65rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
       gap: 1rem;
+      z-index: 20;
     }
-    .pos-brand {
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--primary), #60a5fa);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .brand-info h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .brand-info p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .status-area {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .status-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 10px var(--success);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .clock-box {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      background: var(--bg-card);
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-icon {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-icon:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+    }
+
+    /* =====================================================================
+       BARRA DE ATALHOS RÁPIDOS DO OPERADOR
+       ===================================================================== */
+    .shortcuts-bar {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.45rem 1.5rem;
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      font-weight: 800;
-      font-size: 1.15rem;
-      letter-spacing: -0.01em;
-    }
-    .pos-status {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      font-size: 0.9rem;
-      color: var(--text-dim);
-    }
-    .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 10px #22c55e;
-      display: inline-block;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-size: 0.75rem;
     }
 
-    /* Layout Principal */
-    .pos-container {
+    .shortcut-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s;
+    }
+
+    .shortcut-chip:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--text);
+    }
+
+    .kbd {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 0.7rem;
+      color: var(--text);
+    }
+
+    /* =====================================================================
+       LAYOUT PRINCIPAL DO PDV (GRID RESPONSIVO)
+       ===================================================================== */
+    .pos-main {
       flex: 1;
       display: grid;
-      grid-template-columns: 1.25fr 0.95fr;
+      grid-template-columns: 1.15fr 0.95fr;
       gap: 1.25rem;
       padding: 1.25rem;
-      max-width: 1400px;
+      max-width: 1600px;
       margin: 0 auto;
       width: 100%;
     }
 
-    /* Painel Esquerdo: Produtos e Busca */
-    .left-panel {
+    /* Painel Esquerdo: Busca, Produtos Rápidos & Teclado Virtual */
+    .left-col {
       display: flex;
       flex-direction: column;
       gap: 1.25rem;
     }
-    .search-box {
-      background: var(--panel);
+
+    .search-panel {
+      background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem;
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .search-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
       display: flex;
-      gap: 0.75rem;
+      justify-content: space-between;
+    }
+
+    .search-input-wrap {
+      position: relative;
+      display: flex;
       align-items: center;
     }
-    .search-input {
-      flex: 1;
-      background: #0f172a;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      color: #ffffff;
-      font-family: inherit;
-      font-size: 1.05rem;
-    }
-    .search-input:focus { outline: none; border-color: var(--primary); }
 
-    .quick-grid {
-      background: var(--panel);
+    .search-icon-left {
+      position: absolute;
+      left: 1rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .pos-input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem 0.85rem 3rem;
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .pos-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--primary-light);
+    }
+
+    /* Dropdown de Autocomplete Instantâneo */
+    .autocomplete-list {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      z-index: 30;
+      max-height: 240px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .autocomplete-item {
+      padding: 0.65rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+
+    .autocomplete-item:hover, .autocomplete-item.selected {
+      background: var(--primary-light);
+    }
+
+    .autocomplete-item-name {
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .autocomplete-item-code {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    .autocomplete-item-price {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      color: var(--success);
+    }
+
+    /* Grid de Produtos de Atalho Rápido */
+    .quick-section {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow);
       flex: 1;
       display: flex;
       flex-direction: column;
     }
-    .quick-grid h3 {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      color: var(--text-dim);
+
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .buttons-grid {
+
+    .quick-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 0.75rem;
+      gap: 0.65rem;
+      overflow-y: auto;
+      max-height: 240px;
+      padding-right: 4px;
     }
-    .quick-btn {
-      background: #0f172a;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      padding: 0.9rem 0.6rem;
-      color: #ffffff;
+
+    .product-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.5rem;
+      color: var(--text);
       cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      transition: all 0.15s;
+      gap: 0.35rem;
+      text-align: center;
+      transition: all 0.15s ease;
+      user-select: none;
     }
-    .quick-btn:hover {
-      background: rgba(37, 99, 235, 0.15);
+
+    .product-btn:hover {
+      background: var(--bg-card-hover);
       border-color: var(--primary);
       transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
-    .quick-btn:active {
+
+    .product-btn:active {
       transform: scale(0.96);
     }
-    .quick-btn-name {
-      font-size: 0.88rem;
-      font-weight: 600;
-      text-align: center;
+
+    .product-btn-icon {
+      color: var(--primary);
     }
 
-    /* Painel Direito: Cupom e Fechamento */
-    .right-panel {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      display: flex;
-      flex-direction: column;
+    .product-btn-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 100%;
       overflow: hidden;
-    }
-    .receipt-header {
-      background: #020617;
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .receipt-title {
-      font-family: 'Chivo Mono', monospace;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text-dim);
-    }
-    .receipt-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1rem 1.25rem;
-      font-family: 'Chivo Mono', monospace;
-      font-size: 0.92rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      min-height: 250px;
-    }
-    .receipt-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
-      padding-bottom: 0.4rem;
-    }
-    .item-left {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .btn-qty {
-      background: #334155;
-      color: #fff;
-      border: none;
-      width: 22px;
-      height: 22px;
-      border-radius: 4px;
-      cursor: pointer;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    /* Display de Total Digital */
-    .total-display-box {
-      background: #020617;
-      border-top: 1px solid var(--border);
-      padding: 1.25rem;
-      text-align: right;
-    }
-    .total-label {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-      margin-bottom: 0.2rem;
-    }
-    .total-value {
-      font-family: 'Chivo Mono', monospace;
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: #4ade80;
+    .product-btn-price {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--success);
     }
 
-    /* Pagamento & Finalização */
-    .checkout-actions {
-      padding: 1.25rem;
-      background: var(--panel);
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+    /* Teclado Numérico Virtual Touch (Numpad) */
+    .numpad-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow);
     }
-    .payment-methods {
+
+    .numpad-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0.5rem;
     }
-    .btn-pay {
-      background: #0f172a;
+
+    .numpad-btn {
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      color: var(--text-dim);
-      padding: 0.65rem 0.4rem;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .btn-pay.active, .btn-pay:hover {
-      background: var(--primary);
-      color: #ffffff;
-      border-color: var(--primary);
-    }
-    .btn-finish-sale {
-      background: var(--green);
-      color: #ffffff;
-      border: none;
-      padding: 1.1rem;
-      border-radius: var(--radius);
-      font-family: inherit;
-      font-weight: 800;
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 0.5rem;
+      font-family: var(--font-mono);
       font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
-      transition: background 0.2s;
+      transition: all 0.1s;
+      user-select: none;
     }
-    .btn-finish-sale:hover { background: var(--green-hover); }
 
-    /* Modal Comprovante */
-    .receipt-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 100;
-      display: none;
+    .numpad-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+    }
+
+    .numpad-btn:active {
+      background: var(--primary);
+      color: #fff;
+      transform: scale(0.95);
+    }
+
+    .numpad-btn.btn-action {
+      background: rgba(239, 68, 68, 0.12);
+      color: var(--danger);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .numpad-btn.btn-action:hover {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .numpad-btn.btn-enter {
+      grid-column: span 2;
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .numpad-btn.btn-enter:hover {
+      background: var(--primary-hover);
+    }
+
+    /* =====================================================================
+       PAINEL DIREITO: CUPOM EM TEMPO REAL & FECHAMENTO DE VENDA
+       ===================================================================== */
+    .right-col {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .receipt-header-bar {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .receipt-number {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-cancel-sale {
+      background: transparent;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--danger);
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: all 0.15s;
+    }
+
+    .btn-cancel-sale:hover {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    /* Lista de Itens do Cupom */
+    .receipt-items-table {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.5rem 1rem;
+      min-height: 280px;
+      max-height: 380px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .empty-cart-message {
+      margin: auto;
+      text-align: center;
+      color: var(--text-dim);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 2rem 1rem;
+    }
+
+    .receipt-row {
+      display: grid;
+      grid-template-columns: 28px 1fr 100px 90px 32px;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.4rem;
+      border-bottom: 1px dashed var(--border);
+      border-radius: 6px;
+      transition: background 0.12s;
+    }
+
+    .receipt-row:hover {
+      background: var(--bg-card);
+    }
+
+    .row-index {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .row-desc {
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .row-qty-controls {
+      display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1rem;
-    }
-    .receipt-modal.open { display: flex; }
-    .receipt-paper {
-      background: #ffffff;
-      color: #000000;
-      width: 100%;
-      max-width: 380px;
-      padding: 2rem 1.5rem;
-      border-radius: 6px;
-      font-family: 'Chivo Mono', monospace;
-      font-size: 0.88rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-    .btn-new-sale {
-      width: 100%;
-      background: #000000;
-      color: #ffffff;
-      border: none;
-      padding: 0.9rem;
-      margin-top: 1.5rem;
-      font-family: inherit;
-      font-weight: 700;
-      cursor: pointer;
-      border-radius: 6px;
+      gap: 0.25rem;
     }
 
-    @media (max-width: 860px) {
-      .pos-container { grid-template-columns: 1fr; }
+    .btn-qty {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.1s;
+    }
+
+    .btn-qty:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .row-unit-price {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .row-total-price {
+      font-weight: 800;
+      color: var(--text);
+      text-align: right;
+    }
+
+    .btn-del-item {
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s;
+    }
+
+    .btn-del-item:hover {
+      color: var(--danger);
+    }
+
+    /* Totalizadores Grandes e Visíveis (Estilo Display Digital) */
+    .total-display-panel {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .totals-breakdown {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.65rem;
+    }
+
+    .breakdown-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .breakdown-label {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+    }
+
+    .breakdown-value {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-muted);
+    }
+
+    .main-total-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 0.25rem;
+    }
+
+    .main-total-label {
+      font-size: 0.85rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+
+    .main-total-value {
+      font-family: var(--font-mono);
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--success);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+    }
+
+    /* Ações de Fechamento */
+    .checkout-footer {
+      padding: 1.25rem;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .btn-finish {
+      background: linear-gradient(135deg, var(--success), #059669);
+      color: #ffffff;
+      border: none;
+      padding: 1.15rem;
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+      transition: all 0.15s ease;
+    }
+
+    .btn-finish:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .btn-finish:active {
+      transform: scale(0.98);
+    }
+
+    /* =====================================================================
+       MODAL DE FECHAMENTO DE VENDA (CHECKOUT DIALOG)
+       ===================================================================== */
+    dialog {
+      border: none;
+      padding: 0;
+      background: transparent;
+      max-width: 100vw;
+      max-height: 100vh;
+      color: inherit;
+      margin: auto;
+    }
+
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 500px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .modal-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+
+    .payment-options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.6rem;
+    }
+
+    .pay-btn {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 0.65rem;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.15s;
+    }
+
+    .pay-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+    }
+
+    .pay-btn.active {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: #3b82f6;
+    }
+
+    .cash-calculator {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .quick-cash-row {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .chip-cash {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.35rem 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .chip-cash:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+
+    .troco-display-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.5rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .troco-label {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .troco-value {
+      font-family: var(--font-mono);
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--success);
+    }
+
+    /* =====================================================================
+       CUPOM FISCAL TÉRMICO REALISTA (ESTILO SAT / NFC-E)
+       ===================================================================== */
+    .receipt-paper-wrapper {
+      background: #ffffff;
+      color: #111827;
+      max-width: 400px;
+      width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      line-height: 1.35;
+      padding: 1.5rem 1.25rem;
+      position: relative;
+    }
+
+    /* Borda serrilhada superior e inferior no cupom térmico */
+    .receipt-paper-wrapper::before,
+    .receipt-paper-wrapper::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: radial-gradient(circle, transparent, transparent 50%, #ffffff 50%, #ffffff 100%);
+      background-size: 12px 12px;
+    }
+    .receipt-paper-wrapper::before {
+      top: -6px;
+      transform: rotate(180deg);
+    }
+    .receipt-paper-wrapper::after {
+      bottom: -6px;
+    }
+
+    .thermal-header {
+      text-align: center;
+      border-bottom: 1px dashed #4b5563;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .thermal-store-name {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .thermal-items {
+      border-bottom: 1px dashed #4b5563;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .thermal-item-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+    }
+
+    .thermal-totals {
+      border-bottom: 1px dashed #4b5563;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .thermal-row-bold {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 0.95rem;
+      margin-top: 0.35rem;
+    }
+
+    .thermal-footer {
+      text-align: center;
+      font-size: 0.68rem;
+      color: #374151;
+    }
+
+    .receipt-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .btn-receipt-action {
+      padding: 0.75rem;
+      border-radius: var(--radius-sm);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border: none;
+      transition: all 0.15s;
+    }
+
+    .btn-print {
+      background: #111827;
+      color: #ffffff;
+    }
+    .btn-print:hover { background: #000000; }
+
+    .btn-whatsapp-receipt {
+      background: #16a34a;
+      color: #ffffff;
+    }
+    .btn-whatsapp-receipt:hover { background: #15803d; }
+
+    .btn-new-sale-full {
+      grid-column: span 2;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 0.9rem;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      margin-top: 0.4rem;
+    }
+
+    /* =====================================================================
+       NOTIFICAÇÕES TOAST
+       ===================================================================== */
+    .toast-container {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+      max-width: 360px;
+      width: 100%;
+    }
+
+    .toast {
+      pointer-events: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: all 0.25s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast-success { border-left: 4px solid var(--success); }
+    .toast-danger { border-left: 4px solid var(--danger); }
+    .toast-warning { border-left: 4px solid var(--warning); }
+
+    /* =====================================================================
+       OTIMIZAÇÃO PARA IMPRESSÃO TÉRMICA (PRINT STYLES)
+       ===================================================================== */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #modal-receipt, #modal-receipt * {
+        visibility: visible !important;
+      }
+      #modal-receipt {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 80mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+      }
+      .receipt-paper-wrapper {
+        box-shadow: none !important;
+        max-width: 80mm !important;
+        width: 80mm !important;
+        padding: 4mm !important;
+        color: #000 !important;
+      }
+      .receipt-paper-wrapper::before,
+      .receipt-paper-wrapper::after,
+      .receipt-actions {
+        display: none !important;
+      }
+    }
+
+    /* Responsividade */
+    @media (max-width: 1024px) {
+      .pos-main {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header class="pos-top">
-    <div class="pos-brand">
-      <i data-lucide="calculator" style="color: #60a5fa; width: 22px; height: 22px;"></i>
-      <span>MERCADINHO SÃO MATEUS • CAIXA 01</span>
+  <!-- Top Bar com Status de Caixa e Operador -->
+  <header class="pos-header">
+    <div class="brand-area">
+      <div class="brand-icon">
+        <i data-lucide="store" style="width: 22px; height: 22px;"></i>
+      </div>
+      <div class="brand-info">
+        <h1>MERCADINHO SÃO MATEUS</h1>
+        <p>Terminal 01 • Operador: Felipe Junqueira</p>
+      </div>
     </div>
-    <div class="pos-status">
-      <div><span class="status-dot"></span> Caixa Livre / Aberto</div>
-      <div id="clock-display">14:00:00</div>
+
+    <div class="status-area">
+      <div class="status-badge">
+        <span class="status-pulse"></span>
+        <span id="pos-status-text">CAIXA ABERTO / LIVRE</span>
+      </div>
+
+      <div class="clock-box" id="pos-clock">14:00:00</div>
+
+      <div class="header-actions">
+        <!-- Botão de Som Mudo / Ativo -->
+        <button class="btn-icon" id="btn-toggle-sound" onclick="toggleSound()" aria-label="Ligar ou Desligar Som do Leitor" title="Som do Leitor [Ativo]">
+          <i data-lucide="volume-2" id="sound-icon" style="width: 18px; height: 18px;"></i>
+        </button>
+
+        <!-- Alternador Dark / Light Mode -->
+        <button class="btn-icon" id="btn-toggle-theme" onclick="toggleTheme()" aria-label="Alternar Tema Claro e Escuro" title="Alternar Tema (F9)">
+          <i data-lucide="moon" id="theme-icon" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main class="pos-container">
+  <!-- Barra Superior de Teclas de Atalho Rápido -->
+  <nav class="shortcuts-bar" aria-label="Atalhos Rápidos de Operação">
+    <button type="button" class="shortcut-chip" onclick="focusSearch()">
+      <span class="kbd">F2</span> Buscar / Leitor
+    </button>
+    <button type="button" class="shortcut-chip" onclick="openDiscountModal()">
+      <span class="kbd">F3</span> Desconto (R$)
+    </button>
+    <button type="button" class="shortcut-chip" onclick="openCheckoutModal()">
+      <span class="kbd">F4</span> Finalizar Venda
+    </button>
+    <button type="button" class="shortcut-chip" onclick="cancelLastItem()">
+      <span class="kbd">F7</span> Estornar Último Item
+    </button>
+    <button type="button" class="shortcut-chip" onclick="confirmCancelSale()">
+      <span class="kbd">F8</span> Cancelar Venda
+    </button>
+    <button type="button" class="shortcut-chip" onclick="toggleTheme()">
+      <span class="kbd">F9</span> Tema
+    </button>
+    <span style="color: var(--text-dim); margin-left: auto; font-size: 0.7rem; font-weight: 600;">
+      Dica: Digite <code style="color: var(--warning); font-family: var(--font-mono);">3*CÓDIGO</code> para multiplicar unidades
+    </span>
+  </nav>
 
-    <!-- Painel Esquerdo -->
-    <section class="left-panel">
-      <div class="search-box">
-        <i data-lucide="barcode" style="color: var(--text-dim); width: 24px; height: 24px;"></i>
-        <input type="text" class="search-input" id="barcode-input" placeholder="Digite o nome do produto ou clique nos botões rápidos..." onkeyup="handleSearch(event)">
-      </div>
+  <!-- Container Principal do PDV -->
+  <main class="pos-main">
 
-      <div class="quick-grid">
-        <h3>Atalhos Rápidos de Venda</h3>
-        <div class="buttons-grid" id="quick-buttons">
-          <!-- Botões serão gerados via JS -->
+    <!-- COLUNA ESQUERDA: Busca, Produtos Rápidos & Numpad -->
+    <section class="left-col" aria-label="Entrada de Produtos">
+      
+      <!-- Caixa de Busca Instantânea & Leitor de Código de Barras -->
+      <div class="search-panel">
+        <div class="search-label">
+          <span>Código de Barras ou Nome do Produto</span>
+          <span style="color: var(--primary); font-weight: 800;">[F2 ou Enter para Inserir]</span>
+        </div>
+
+        <div class="search-input-wrap">
+          <i data-lucide="barcode" class="search-icon-left" style="width: 24px; height: 24px;"></i>
+          <input 
+            type="text" 
+            id="barcode-input" 
+            class="pos-input" 
+            placeholder="Passe o leitor ou digite (Ex: 789... ou Café)"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+            oninput="handleSearchInput(this.value)"
+            onkeydown="handleSearchKey(event)"
+          >
+          <!-- Dropdown Autocomplete Instantâneo -->
+          <div class="autocomplete-list" id="autocomplete-dropdown"></div>
         </div>
       </div>
+
+      <!-- Atalhos Rápidos de Venda (Grade de Produtos Frequentes) -->
+      <div class="quick-section">
+        <div class="section-title">
+          <span>Itens Rápidos de Alta Rotação (Clique para Adicionar)</span>
+          <span style="font-size: 0.7rem; color: var(--text-dim);" id="quick-items-count">16 itens</span>
+        </div>
+        <div class="quick-grid" id="quick-grid-container">
+          <!-- Renderizado via JS -->
+        </div>
+      </div>
+
+      <!-- Teclado Numérico Touch Integrado (Numpad) -->
+      <div class="numpad-container">
+        <div class="section-title">
+          <span>Teclado Numérico de Apoio</span>
+          <span style="font-size: 0.7rem; color: var(--text-dim);">Touch & Mouse</span>
+        </div>
+        <div class="numpad-grid">
+          <button type="button" class="numpad-btn" onclick="pressNumpad('7')">7</button>
+          <button type="button" class="numpad-btn" onclick="pressNumpad('8')">8</button>
+          <button type="button" class="numpad-btn" onclick="pressNumpad('9')">9</button>
+          <button type="button" class="numpad-btn btn-action" onclick="pressNumpad('C')" title="Limpar campo">C</button>
+
+          <button type="button" class="numpad-btn" onclick="pressNumpad('4')">4</button>
+          <button type="button" class="numpad-btn" onclick="pressNumpad('5')">5</button>
+          <button type="button" class="numpad-btn" onclick="pressNumpad('6')">6</button>
+          <button type="button" class="numpad-btn" onclick="pressNumpad('*')" title="Multiplicar">*</button>
+
+          <button type="button" class="numpad-btn" onclick="pressNumpad('1')">1</button>
+          <button type="button" class="numpad-btn" onclick="pressNumpad('2')">2</button>
+          <button type="button" class="numpad-btn" onclick="pressNumpad('3')">3</button>
+          <button type="button" class="numpad-btn" onclick="pressNumpad('DEL')" title="Apagar último dígito">⌫</button>
+
+          <button type="button" class="numpad-btn" onclick="pressNumpad('0')">0</button>
+          <button type="button" class="numpad-btn" onclick="pressNumpad('00')">00</button>
+          <button type="button" class="numpad-btn btn-enter" onclick="pressNumpad('ENTER')">ENTER (ADICIONAR)</button>
+        </div>
+      </div>
+
     </section>
 
-    <!-- Painel Direito: Cupom Fiscal Virtual -->
-    <section class="right-panel">
-      <div class="receipt-header">
-        <div class="receipt-title">CUPOM DE VENDA #0492</div>
-        <button onclick="clearCart()" style="background:transparent; border:none; color:#ef4444; font-size:0.85rem; font-weight:700; cursor:pointer;">
-          CANCELAR VENDA
+    <!-- COLUNA DIREITA: Cupom em Tempo Real & Totalizadores -->
+    <section class="right-col" aria-label="Cupom Fiscal em Andamento">
+      
+      <!-- Cabeçalho do Cupom -->
+      <div class="receipt-header-bar">
+        <div class="receipt-number">
+          <i data-lucide="receipt" style="width: 16px; height: 16px; color: var(--primary);"></i>
+          <span id="current-sale-number">CUPOM FISCAL #0842</span>
+        </div>
+
+        <button type="button" class="btn-cancel-sale" onclick="confirmCancelSale()" title="Cancelar venda inteira (F8)">
+          <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+          CANCELAR (F8)
         </button>
       </div>
 
-      <div class="receipt-items" id="receipt-list">
-        <div style="text-align: center; color: var(--text-dim); margin: auto;">
-          Nenhum item registrado ainda.<br>Passe o leitor ou clique nos botões.
+      <!-- Tabela com Itens Registrados -->
+      <div class="receipt-items-table" id="receipt-table-body">
+        <div class="empty-cart-message">
+          <i data-lucide="shopping-bag" style="width: 44px; height: 44px; opacity: 0.35;"></i>
+          <p style="font-weight: 700; font-size: 0.95rem;">Nenhum produto registrado no caixa</p>
+          <span style="font-size: 0.78rem;">Passe o código de barras, digite o nome ou clique nos botões rápidos.</span>
         </div>
       </div>
 
-      <div class="total-display-box">
-        <div class="total-label">Total de Itens Registrados</div>
-        <div class="total-value" id="items-count-display">0 ITENS</div>
-      </div>
-
-      <div class="checkout-actions">
-        <div class="payment-methods">
-          <button class="btn-pay active" onclick="setPayment('DINHEIRO', this)">DINHEIRO</button>
-          <button class="btn-pay" onclick="setPayment('PIX', this)">PIX</button>
-          <button class="btn-pay" onclick="setPayment('DÉBITO', this)">DÉBITO</button>
-          <button class="btn-pay" onclick="setPayment('CRÉDITO', this)">CRÉDITO</button>
+      <!-- Totalizadores Grandes (Estilo Painel Digital) -->
+      <div class="total-display-panel">
+        <div class="totals-breakdown">
+          <div class="breakdown-box">
+            <span class="breakdown-label">Itens Totais</span>
+            <span class="breakdown-value" id="disp-total-items">0 un.</span>
+          </div>
+          <div class="breakdown-box">
+            <span class="breakdown-label">Subtotal</span>
+            <span class="breakdown-value" id="disp-subtotal">R$ 0,00</span>
+          </div>
+          <div class="breakdown-box">
+            <span class="breakdown-label" style="display: flex; align-items: center; justify-content: space-between;">
+              <span>Desconto</span>
+              <a href="javascript:void(0)" onclick="openDiscountModal()" style="color: var(--primary); text-decoration: none; font-size: 0.65rem;">[F3]</a>
+            </span>
+            <span class="breakdown-value" id="disp-discount" style="color: var(--danger);">- R$ 0,00</span>
+          </div>
         </div>
 
-        <button class="btn-finish-sale" onclick="finishSale()">
-          <i data-lucide="check-circle-2" style="width: 22px; height: 22px;"></i>
-          CONFIRMAR & FINALIZAR VENDA
+        <div class="main-total-box">
+          <div>
+            <div class="main-total-label">Total a Pagar</div>
+            <div style="font-size: 0.75rem; color: var(--text-dim); font-weight: 600;">Valores expressos em Reais (BRL)</div>
+          </div>
+          <div class="main-total-value" id="disp-main-total">R$ 0,00</div>
+        </div>
+      </div>
+
+      <!-- Ações do Rodapé -->
+      <div class="checkout-footer">
+        <button type="button" class="btn-finish" onclick="openCheckoutModal()">
+          <i data-lucide="check-circle" style="width: 24px; height: 24px;"></i>
+          FINALIZAR VENDA (F4)
         </button>
       </div>
+
     </section>
 
   </main>
 
-  <!-- Modal Comprovante Fiscal -->
-  <div class="receipt-modal" id="modal-receipt">
-    <div class="receipt-paper">
-      <div style="text-align: center; border-bottom: 1px dashed #000; padding-bottom: 0.75rem; margin-bottom: 0.75rem;">
-        <strong>MERCADINHO SÃO MATEUS</strong><br>
-        CNPJ: 12.345.678/0001-90<br>
-        São Paulo - SP<br>
-        --------------------------------<br>
-        EXTRATO DE VENDA AO CONSUMIDOR
+  <!-- =====================================================================
+       MODAL DE FINALIZAÇÃO E PAGAMENTO (NATIVE DIALOG)
+       ===================================================================== -->
+  <dialog id="modal-checkout" closedby="any" aria-labelledby="checkout-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="checkout-title">
+          <i data-lucide="credit-card" style="width: 20px; height: 20px; color: var(--primary);"></i>
+          Finalizar Venda • Pagamento
+        </h3>
+        <button type="button" class="btn-icon" onclick="closeCheckoutModal()" aria-label="Fechar Modal">
+          <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+        </button>
       </div>
 
-      <div id="printed-items-list" style="margin-bottom: 0.75rem;"></div>
+      <div class="modal-body">
+        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+          <span style="font-weight: 700; font-size: 0.9rem;">Total a Pagar:</span>
+          <span style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 900; color: var(--success);" id="modal-pay-total">R$ 0,00</span>
+        </div>
 
-      <div style="border-top: 1px dashed #000; padding-top: 0.5rem; text-align: right;">
-        <strong id="printed-total">TOTAL: 0 ITENS</strong><br>
-        <span id="printed-payment" style="font-size: 0.8rem;">FORMA: DINHEIRO</span>
+        <div>
+          <label style="display: block; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.45rem;">
+            Selecione a Forma de Pagamento
+          </label>
+          <div class="payment-options-grid">
+            <button type="button" class="pay-btn active" data-pay="DINHEIRO" onclick="selectPaymentMethod('DINHEIRO')">
+              <i data-lucide="banknote" style="width: 20px; height: 20px;"></i>
+              Dinheiro
+            </button>
+            <button type="button" class="pay-btn" data-pay="PIX" onclick="selectPaymentMethod('PIX')">
+              <i data-lucide="qr-code" style="width: 20px; height: 20px;"></i>
+              PIX Instantâneo
+            </button>
+            <button type="button" class="pay-btn" data-pay="DÉBITO" onclick="selectPaymentMethod('DÉBITO')">
+              <i data-lucide="credit-card" style="width: 20px; height: 20px;"></i>
+              Cartão Débito
+            </button>
+            <button type="button" class="pay-btn" data-pay="CRÉDITO" onclick="selectPaymentMethod('CRÉDITO')">
+              <i data-lucide="credit-card" style="width: 20px; height: 20px;"></i>
+              Cartão Crédito
+            </button>
+          </div>
+        </div>
+
+        <!-- Calculadora de Troco Dinâmica (Ativa no Dinheiro) -->
+        <div id="cash-calculator-box" class="cash-calculator">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label for="cash-received-input" style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim);">
+              Valor Recebido do Cliente (R$)
+            </label>
+            <div class="quick-cash-row">
+              <button type="button" class="chip-cash" onclick="setCashAmount(10)">R$ 10</button>
+              <button type="button" class="chip-cash" onclick="setCashAmount(20)">R$ 20</button>
+              <button type="button" class="chip-cash" onclick="setCashAmount(50)">R$ 50</button>
+              <button type="button" class="chip-cash" onclick="setCashAmount(100)">R$ 100</button>
+              <button type="button" class="chip-cash" onclick="setCashExact()">Exato</button>
+            </div>
+          </div>
+
+          <input 
+            type="number" 
+            id="cash-received-input" 
+            step="0.01" 
+            min="0"
+            class="pos-input" 
+            style="font-size: 1.3rem; padding: 0.65rem 0.85rem;"
+            placeholder="0,00"
+            oninput="calculateChange()"
+          >
+
+          <div class="troco-display-row">
+            <div>
+              <div class="troco-label">Troco a Devolver</div>
+              <div id="troco-status-msg" style="font-size: 0.72rem; color: var(--text-dim); font-weight: 600;">Aguardando valor...</div>
+            </div>
+            <div class="troco-value" id="cash-change-value">R$ 0,00</div>
+          </div>
+        </div>
+
+        <!-- CPF na Nota (Opcional) -->
+        <div>
+          <label for="cpf-nota-input" style="display: block; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.35rem;">
+            CPF na Nota (Opcional)
+          </label>
+          <input 
+            type="text" 
+            id="cpf-nota-input" 
+            class="pos-input" 
+            style="font-size: 0.95rem; padding: 0.55rem 0.85rem;"
+            placeholder="000.000.000-00"
+            maxlength="14"
+            oninput="maskCPF(this)"
+          >
+        </div>
+
+        <!-- Botão Confirmar Emissão -->
+        <button type="button" class="btn-finish" style="width: 100%; padding: 1rem;" onclick="processSaleCompletion()">
+          <i data-lucide="printer" style="width: 22px; height: 22px;"></i>
+          CONFIRMAR & EMITIR CUPOM FISCAL
+        </button>
+
       </div>
-
-      <div style="text-align: center; margin-top: 1rem; font-size: 0.75rem;">
-        Obrigado pela preferência!<br>Volte sempre!
-      </div>
-
-      <button class="btn-new-sale" onclick="closeReceiptModal()">
-        INICIAR NOVA VENDA (ESC)
-      </button>
     </div>
-  </div>
+  </dialog>
 
+  <!-- =====================================================================
+       MODAL DE DESCONTO (F3)
+       ===================================================================== -->
+  <dialog id="modal-discount" closedby="any" aria-labelledby="discount-title">
+    <div class="modal-box" style="max-width: 380px;">
+      <div class="modal-header">
+        <h3 id="discount-title">
+          <i data-lucide="percent" style="width: 18px; height: 18px; color: var(--warning);"></i>
+          Aplicar Desconto na Venda
+        </h3>
+        <button type="button" class="btn-icon" onclick="closeDiscountModal()" aria-label="Fechar Modal">
+          <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <label for="discount-value-input" style="display: block; font-size: 0.78rem; font-weight: 800; color: var(--text-dim);">
+          Valor do Desconto em Reais (R$)
+        </label>
+        <input 
+          type="number" 
+          id="discount-value-input" 
+          class="pos-input" 
+          step="0.50" 
+          min="0" 
+          placeholder="Ex: 5.00"
+          style="font-size: 1.3rem;"
+        >
+
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" class="btn-finish" style="flex: 1; padding: 0.85rem; background: var(--primary);" onclick="applyDiscount()">
+            Confirmar Desconto
+          </button>
+          <button type="button" class="btn-icon" style="width: auto; padding: 0 1rem; height: auto;" onclick="clearDiscount()">
+            Zerar
+          </button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- =====================================================================
+       MODAL DE CONFIRMAÇÃO DE CANCELAMENTO (SUBSTITUI CONFIRM FEIO)
+       ===================================================================== -->
+  <dialog id="modal-confirm-cancel" closedby="any" aria-labelledby="confirm-cancel-title">
+    <div class="modal-box" style="max-width: 400px; text-align: center;">
+      <div class="modal-body" style="padding: 2rem 1.5rem; gap: 1rem;">
+        <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--danger-bg); color: var(--danger); display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+          <i data-lucide="alert-triangle" style="width: 28px; height: 28px;"></i>
+        </div>
+        <div>
+          <h3 id="confirm-cancel-title" style="font-size: 1.15rem; font-weight: 800; margin-bottom: 0.35rem;">
+            Cancelar Venda Atual?
+          </h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">
+            Todos os itens registrados no cupom serão removidos permanentemente.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 0.5rem;">
+          <button type="button" class="btn-icon" style="width: 100%; height: 44px; font-weight: 800;" onclick="closeConfirmCancelModal()">
+            Voltar
+          </button>
+          <button type="button" class="btn-finish" style="background: var(--danger); padding: 0.75rem;" onclick="executeSaleCancellation()">
+            Sim, Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- =====================================================================
+       MODAL DE CUPOM FISCAL TÉRMICO EMITIDO
+       ===================================================================== -->
+  <dialog id="modal-receipt" closedby="any" aria-labelledby="receipt-title">
+    <div class="receipt-paper-wrapper">
+      
+      <!-- Cabeçalho SAT / NFC-e -->
+      <div class="thermal-header">
+        <div class="thermal-store-name">MERCADINHO SÃO MATEUS LTDA</div>
+        <div>CNPJ: 12.345.678/0001-90 • IE: 112.443.556.778</div>
+        <div>AV. PRINCIPAL, 1420 - SÃO MATEUS - SÃO PAULO/SP</div>
+        <div style="margin-top: 0.35rem; font-weight: 800;">
+          EXTRATO Nº <span id="th-cupom-id">0842</span> • NFC-e / SAT
+        </div>
+        <div id="th-datetime" style="font-size: 0.7rem; color: #4b5563;">31/10/2026 14:30:15</div>
+        <div id="th-cpf-display" style="font-size: 0.7rem; font-weight: 700; margin-top: 0.2rem;">CONSUMIDOR: NÃO IDENTIFICADO</div>
+      </div>
+
+      <!-- Tabela de Itens Impressos -->
+      <div class="thermal-items" id="th-items-container">
+        <!-- Inserido dinamicamente -->
+      </div>
+
+      <!-- Totais do Cupom -->
+      <div class="thermal-totals">
+        <div class="thermal-item-row">
+          <span>QTD. TOTAL DE ITENS:</span>
+          <span id="th-total-items-count" style="font-weight: 700;">0</span>
+        </div>
+        <div class="thermal-item-row">
+          <span>SUBTOTAL:</span>
+          <span id="th-subtotal">R$ 0,00</span>
+        </div>
+        <div class="thermal-item-row" id="th-discount-row">
+          <span>DESCONTO:</span>
+          <span id="th-discount" style="font-weight: 700;">- R$ 0,00</span>
+        </div>
+        <div class="thermal-row-bold">
+          <span>TOTAL A PAGAR:</span>
+          <span id="th-grand-total">R$ 0,00</span>
+        </div>
+        <div class="thermal-item-row" style="margin-top: 0.4rem;">
+          <span>FORMA PGTO (<span id="th-payment-method">DINHEIRO</span>):</span>
+          <span id="th-paid-amount" style="font-weight: 700;">R$ 0,00</span>
+        </div>
+        <div class="thermal-item-row" id="th-change-row">
+          <span>TROCO:</span>
+          <span id="th-change-amount" style="font-weight: 700;">R$ 0,00</span>
+        </div>
+      </div>
+
+      <!-- Rodapé Fiscal & QR Code Mock -->
+      <div class="thermal-footer">
+        <p style="font-weight: 700; margin-bottom: 0.35rem;">Tributos Totais Incidentes (Lei 12.741/12): ~14.85%</p>
+        <p style="font-size: 0.65rem; word-break: break-all; margin-bottom: 0.5rem;">
+          CHAVE DE ACESSO:<br>
+          <span style="font-family: var(--font-mono); font-weight: 700;">3526 1012 3456 7800 0190 6500 1000 0084 2198 7654 3210</span>
+        </p>
+
+        <!-- QR Code Visual SVG -->
+        <div style="display: flex; justify-content: center; margin: 0.6rem 0;">
+          <svg width="84" height="84" viewBox="0 0 100 100" fill="#000">
+            <rect width="100" height="100" fill="#fff"/>
+            <rect x="10" y="10" width="25" height="25" fill="#000"/>
+            <rect x="15" y="15" width="15" height="15" fill="#fff"/>
+            <rect x="18" y="18" width="9" height="9" fill="#000"/>
+            <rect x="65" y="10" width="25" height="25" fill="#000"/>
+            <rect x="70" y="15" width="15" height="15" fill="#fff"/>
+            <rect x="73" y="18" width="9" height="9" fill="#000"/>
+            <rect x="10" y="65" width="25" height="25" fill="#000"/>
+            <rect x="15" y="70" width="15" height="15" fill="#fff"/>
+            <rect x="18" y="73" width="9" height="9" fill="#000"/>
+            <rect x="42" y="15" width="6" height="6" fill="#000"/>
+            <rect x="52" y="25" width="6" height="6" fill="#000"/>
+            <rect x="42" y="42" width="16" height="16" fill="#000"/>
+            <rect x="65" y="45" width="8" height="8" fill="#000"/>
+            <rect x="80" y="65" width="10" height="10" fill="#000"/>
+            <rect x="45" y="75" width="12" height="12" fill="#000"/>
+          </svg>
+        </div>
+
+        <p>Consulte pela Chave de Acesso em:<br>https://www.fazenda.sp.gov.br/nfce/consulta</p>
+        <p style="font-weight: 800; margin-top: 0.5rem;">OBRIGADO PELA PREFERÊNCIA! VOLTE SEMPRE!</p>
+      </div>
+
+      <!-- Ações do Cupom (Ocultas na Impressão) -->
+      <div class="receipt-actions">
+        <button type="button" class="btn-receipt-action btn-print" onclick="window.print()">
+          <i data-lucide="printer" style="width: 16px; height: 16px;"></i>
+          Imprimir Cupom
+        </button>
+
+        <button type="button" class="btn-receipt-action btn-whatsapp-receipt" onclick="shareReceiptWhatsApp()">
+          <i data-lucide="send" style="width: 16px; height: 16px;"></i>
+          Enviar WhatsApp
+        </button>
+
+        <button type="button" class="btn-new-sale-full" onclick="startNewSale()">
+          INICIAR NOVA VENDA (F2 / ENTER)
+        </button>
+      </div>
+
+    </div>
+  </dialog>
+
+  <!-- Container de Notificações Toast -->
+  <div class="toast-container" id="toast-shelf" aria-live="polite"></div>
+
+  <!-- =====================================================================
+       LÓGICA JAVASCRIPT DO SISTEMA PDV
+       ===================================================================== -->
   <script>
-    lucide.createIcons();
-
-    // Relógio
-    setInterval(() => {
-      const now = new Date();
-      document.getElementById('clock-display').textContent = now.toLocaleTimeString('pt-BR');
-    }, 1000);
-
-    // Lista de Produtos Rápidos
+    // -------------------------------------------------------------
+    // CATÁLOGO DE PRODUTOS PROFISSIONAL COM CÓDIGOS EAN E PREÇOS
+    // -------------------------------------------------------------
     const catalog = [
-      { name: 'Pão Francês 1kg', icon: 'croissant' },
-      { name: 'Leite Integral 1L', icon: 'milk' },
-      { name: 'Café Tradicional', icon: 'coffee' },
-      { name: 'Arroz Tipo 1 (5kg)', icon: 'package' },
-      { name: 'Feijão Carioca 1kg', icon: 'package' },
-      { name: 'Açúcar Refinado 1kg', icon: 'package' },
-      { name: 'Óleo de Soja 900ml', icon: 'droplet' },
-      { name: 'Refrigerante 2L', icon: 'cup-soda' },
-      { name: 'Dúzia de Ovos', icon: 'egg' },
-      { name: 'Detergente Líquido', icon: 'sparkles' },
-      { name: 'Sabão em Pó 1kg', icon: 'sparkles' },
-      { name: 'Biscoito Recheado', icon: 'cookie' }
+      { ean: '78910001', name: 'Pão Francês Tradicional (kg)', price: 14.90, unit: 'KG', icon: 'croissant', cat: 'Padaria' },
+      { ean: '78910002', name: 'Leite Integral 1L Piracanjuba', price: 5.49, unit: 'UN', icon: 'milk', cat: 'Laticínios' },
+      { ean: '78910003', name: 'Café Melitta Tradicional 500g', price: 18.90, unit: 'UN', icon: 'coffee', cat: 'Mercearia' },
+      { ean: '78910004', name: 'Arroz Tipo 1 Camil 5kg', price: 29.90, unit: 'UN', icon: 'package', cat: 'Mercearia' },
+      { ean: '78910005', name: 'Feijão Carioca Kicaldo 1kg', price: 8.70, unit: 'UN', icon: 'package', cat: 'Mercearia' },
+      { ean: '78910006', name: 'Açúcar Refinado União 1kg', price: 4.89, unit: 'UN', icon: 'package', cat: 'Mercearia' },
+      { ean: '78910007', name: 'Óleo de Soja Soya 900ml', price: 6.99, unit: 'UN', icon: 'droplet', cat: 'Mercearia' },
+      { ean: '78910008', name: 'Coca-Cola Original 2L', price: 10.50, unit: 'UN', icon: 'cup-soda', cat: 'Bebidas' },
+      { ean: '78910009', name: 'Dúzia de Ovos Brancos Grandes', price: 12.90, unit: 'DZ', icon: 'egg', cat: 'Hortifrúti' },
+      { ean: '78910010', name: 'Detergente Ypê Neutro 500ml', price: 2.79, unit: 'UN', icon: 'sparkles', cat: 'Limpeza' },
+      { ean: '78910011', name: 'Sabão em Pó Omo Lavagem 1.6kg', price: 22.90, unit: 'UN', icon: 'sparkles', cat: 'Limpeza' },
+      { ean: '78910012', name: 'Biscoito Recheado Oreo 90g', price: 4.20, unit: 'UN', icon: 'cookie', cat: 'Doces' },
+      { ean: '78910013', name: 'Queijo Mussarela Fatiado 200g', price: 11.50, unit: 'UN', icon: 'cheese', cat: 'Frios' },
+      { ean: '78910014', name: 'Presunto Cozido Sadia 200g', price: 8.90, unit: 'UN', icon: 'ham', cat: 'Frios' },
+      { ean: '78910015', name: 'Manteiga com Sal Aviação 200g', price: 13.80, unit: 'UN', icon: 'utensils', cat: 'Laticínios' },
+      { ean: '78910016', name: 'Água Mineral Crystal Sem Gás 500ml', price: 2.50, unit: 'UN', icon: 'glass-water', cat: 'Bebidas' }
     ];
 
-    const quickBox = document.getElementById('quick-buttons');
-    catalog.forEach(p => {
-      const btn = document.createElement('button');
-      btn.className = 'quick-btn';
-      btn.innerHTML = `<i data-lucide="${p.icon}" style="width:24px; height:24px; color:#60a5fa;"></i><span class="quick-btn-name">${p.name}</span>`;
-      btn.onclick = () => addProduct(p.name);
-      quickBox.appendChild(btn);
-    });
-    lucide.createIcons();
-
-    // Carrinho
+    // -------------------------------------------------------------
+    // ESTADO DO PDV
+    // -------------------------------------------------------------
     let cart = [];
+    let saleNumber = 842;
     let selectedPayment = 'DINHEIRO';
+    let discountValue = 0;
+    let soundEnabled = true;
+    let currentTheme = localStorage.getItem('pdv_theme') || 'dark';
 
-    // Som de Bipe (Web Audio API)
-    function playBeep() {
+    // -------------------------------------------------------------
+    // WEB AUDIO API - EFEITOS SONOROS SINTETIZADOS
+    // -------------------------------------------------------------
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // Bipe clássico de scanner leitor de código de barras
+    function playBarcodeBeep() {
+      if (!soundEnabled) return;
       try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(2200, ctx.currentTime);
+
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+
         osc.connect(gain);
-        gain.connect(audioCtx.destination);
+        gain.connect(ctx.destination);
+
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.08);
+        osc.stop(ctx.currentTime + 0.06);
       } catch (e) {}
     }
 
-    function addProduct(name) {
-      playBeep();
-      const existing = cart.find(i => i.name === name);
-      if (existing) {
-        existing.qty += 1;
+    // Bipe harmônico duplo de sucesso ao finalizar venda
+    function playSuccessChime() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        [1200, 1600].forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const startTime = ctx.currentTime + (idx * 0.09);
+
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, startTime);
+
+          gain.gain.setValueAtTime(0.14, startTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.12);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(startTime);
+          osc.stop(startTime + 0.12);
+        });
+      } catch (e) {}
+    }
+
+    // Bipe suave de erro/atenção
+    function playErrorBeep() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(320, ctx.currentTime);
+
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 0.15);
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const btn = document.getElementById('btn-toggle-sound');
+      const icon = document.getElementById('sound-icon');
+      if (soundEnabled) {
+        icon.setAttribute('data-lucide', 'volume-2');
+        btn.title = 'Som do Leitor [Ativo]';
+        showToast('Som do leitor ativado', 'success');
+        playBarcodeBeep();
       } else {
-        cart.push({ name, qty: 1 });
+        icon.setAttribute('data-lucide', 'volume-x');
+        btn.title = 'Som do Leitor [Mudo]';
+        showToast('Som do leitor silenciado', 'warning');
       }
-      renderCart();
+      lucide.createIcons();
     }
 
-    function changeQty(name, delta) {
-      const item = cart.find(i => i.name === name);
-      if (!item) return;
-      item.qty += delta;
-      if (item.qty <= 0) {
-        cart = cart.filter(i => i.name !== name);
-      }
-      renderCart();
+    // -------------------------------------------------------------
+    // SISTEMA TOAST MODERNO
+    // -------------------------------------------------------------
+    function showToast(message, type = 'success') {
+      const shelf = document.getElementById('toast-shelf');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+
+      const iconName = type === 'success' ? 'check-circle' : type === 'danger' ? 'alert-circle' : 'info';
+      toast.innerHTML = `<i data-lucide="${iconName}" style="width:18px; height:18px; shrink-0;"></i><span>${message}</span>`;
+      shelf.appendChild(toast);
+      lucide.createIcons();
+
+      requestAnimationFrame(() => toast.classList.add('show'));
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 250);
+      }, 2800);
     }
 
-    function clearCart() {
-      if (cart.length === 0) return;
-      if (confirm('Deseja realmente cancelar a venda atual?')) {
-        cart = [];
-        renderCart();
-      }
+    // -------------------------------------------------------------
+    // FORMATAÇÃO DE MOEDA (BRL)
+    // -------------------------------------------------------------
+    function formatMoney(val) {
+      return Number(val).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     }
 
-    function renderCart() {
-      const list = document.getElementById('receipt-list');
-      const countDisplay = document.getElementById('items-count-display');
+    // -------------------------------------------------------------
+    // TEMA DARK / LIGHT COM PERSISTÊNCIA
+    // -------------------------------------------------------------
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('pdv_theme', theme);
+      const icon = document.getElementById('theme-icon');
+      if (theme === 'light') {
+        icon.setAttribute('data-lucide', 'sun');
+      } else {
+        icon.setAttribute('data-lucide', 'moon');
+      }
+      lucide.createIcons();
+    }
 
-      const totalItems = cart.reduce((acc, i) => acc + i.qty, 0);
-      countDisplay.textContent = totalItems + (totalItems === 1 ? ' ITEM' : ' ITENS');
+    function toggleTheme() {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(currentTheme);
+      showToast(`Tema ${currentTheme === 'dark' ? 'Escuro' : 'Claro'} ativado`);
+    }
 
-      if (cart.length === 0) {
-        list.innerHTML = `<div style="text-align: center; color: var(--text-dim); margin: auto;">Nenhum item registrado ainda.<br>Passe o leitor ou clique nos botões.</div>`;
+    // -------------------------------------------------------------
+    // RENDERIZAÇÃO DA GRADE DE PRODUTOS RÁPIDOS
+    // -------------------------------------------------------------
+    function renderQuickGrid() {
+      const container = document.getElementById('quick-grid-container');
+      container.innerHTML = catalog.map(p => `
+        <button type="button" class="product-btn" onclick="addProductByEan('${p.ean}')" title="${p.name} • ${formatMoney(p.price)}">
+          <i data-lucide="${p.icon || 'package'}" class="product-btn-icon" style="width: 22px; height: 22px;"></i>
+          <span class="product-btn-name">${p.name}</span>
+          <span class="product-btn-price">${formatMoney(p.price)}</span>
+        </button>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // -------------------------------------------------------------
+    // BUSCA INSTANTÂNEA & AUTOCOMPLETE
+    // -------------------------------------------------------------
+    function handleSearchInput(val) {
+      const dropdown = document.getElementById('autocomplete-dropdown');
+      const clean = val.trim().toLowerCase();
+
+      // Se contém multiplicador (ex: "3*leite"), extrai o termo
+      const term = clean.includes('*') ? clean.split('*')[1] : clean;
+
+      if (!term || term.length < 2) {
+        dropdown.style.display = 'none';
         return;
       }
 
-      list.innerHTML = cart.map((item, idx) => `
-        <div class="receipt-row">
-          <div class="item-left">
-            <span>#${String(idx + 1).padStart(2, '0')}</span>
-            <span>${item.name}</span>
+      const matches = catalog.filter(p => 
+        p.name.toLowerCase().includes(term) || p.ean.includes(term)
+      ).slice(0, 5);
+
+      if (matches.length === 0) {
+        dropdown.style.display = 'none';
+        return;
+      }
+
+      dropdown.innerHTML = matches.map(p => `
+        <div class="autocomplete-item" onclick="selectAutocomplete('${p.ean}')">
+          <div>
+            <div class="autocomplete-item-name">${p.name}</div>
+            <div class="autocomplete-item-code">EAN: ${p.ean} • ${p.cat}</div>
           </div>
-          <div style="display: flex; align-items: center; gap: 0.4rem;">
-            <button class="btn-qty" onclick="changeQty('${item.name}', -1)">-</button>
-            <span>x${item.qty}</span>
-            <button class="btn-qty" onclick="changeQty('${item.name}', 1)">+</button>
-          </div>
+          <div class="autocomplete-item-price">${formatMoney(p.price)}</div>
         </div>
       `).join('');
+
+      dropdown.style.display = 'block';
     }
 
-    function setPayment(method, btn) {
-      selectedPayment = method;
-      document.querySelectorAll('.btn-pay').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+    function selectAutocomplete(ean) {
+      const input = document.getElementById('barcode-input');
+      const val = input.value.trim();
+      let multiplier = 1;
+
+      if (val.includes('*')) {
+        const parsed = parseInt(val.split('*')[0], 10);
+        if (!isNaN(parsed) && parsed > 0) multiplier = parsed;
+      }
+
+      addProductByEan(ean, multiplier);
+      input.value = '';
+      document.getElementById('autocomplete-dropdown').style.display = 'none';
+      focusSearch();
     }
 
-    function handleSearch(e) {
+    function handleSearchKey(e) {
       if (e.key === 'Enter') {
-        const val = e.target.value.trim();
-        if (val) {
-          addProduct(val);
-          e.target.value = '';
+        e.preventDefault();
+        const input = document.getElementById('barcode-input');
+        const val = input.value.trim();
+
+        if (!val) {
+          // Se pressionar Enter vazio, tenta abrir modal de pagamento se houver itens
+          if (cart.length > 0) openCheckoutModal();
+          return;
         }
+
+        let qty = 1;
+        let query = val;
+
+        // Padrão de PDV: QUANTIDADE * CÓDIGO (ex: 5*78910002 ou 3*leite)
+        if (val.includes('*')) {
+          const parts = val.split('*');
+          const parsedQty = parseFloat(parts[0].replace(',', '.'));
+          if (!isNaN(parsedQty) && parsedQty > 0) {
+            qty = parsedQty;
+          }
+          query = parts[1].trim();
+        }
+
+        // Procura por EAN ou por Nome
+        const found = catalog.find(p => p.ean === query || p.name.toLowerCase().includes(query.toLowerCase()));
+
+        if (found) {
+          addProductByEan(found.ean, qty);
+          input.value = '';
+          document.getElementById('autocomplete-dropdown').style.display = 'none';
+        } else {
+          playErrorBeep();
+          showToast(`Produto "${query}" não encontrado!`, 'danger');
+        }
+      } else if (e.key === 'Escape') {
+        document.getElementById('autocomplete-dropdown').style.display = 'none';
       }
     }
 
-    function finishSale() {
+    function focusSearch() {
+      const input = document.getElementById('barcode-input');
+      input.focus();
+      input.select();
+    }
+
+    // -------------------------------------------------------------
+    // ADIÇÃO E MANIPULAÇÃO DE ITENS NO CARRINHO
+    // -------------------------------------------------------------
+    function addProductByEan(ean, qty = 1) {
+      const prod = catalog.find(p => p.ean === ean);
+      if (!prod) return;
+
+      playBarcodeBeep();
+
+      const existing = cart.find(i => i.ean === ean);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({
+          ean: prod.ean,
+          name: prod.name,
+          price: prod.price,
+          unit: prod.unit,
+          qty: qty
+        });
+      }
+
+      renderCart();
+      showToast(`${qty}x ${prod.name} adicionado`, 'success');
+    }
+
+    function changeItemQty(index, delta) {
+      if (!cart[index]) return;
+
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        const removed = cart.splice(index, 1)[0];
+        showToast(`${removed.name} removido da venda`, 'warning');
+      } else {
+        playBarcodeBeep();
+      }
+
+      renderCart();
+    }
+
+    function deleteItem(index) {
+      if (!cart[index]) return;
+      const removed = cart.splice(index, 1)[0];
+      showToast(`${removed.name} excluído`, 'warning');
+      renderCart();
+    }
+
+    function cancelLastItem() {
       if (cart.length === 0) {
-        alert('Nenhum produto foi registrado no caixa ainda!');
+        showToast('Nenhum item para estornar!', 'warning');
+        return;
+      }
+      const removed = cart.pop();
+      playBarcodeBeep();
+      showToast(`Último item estornado: ${removed.name}`, 'warning');
+      renderCart();
+    }
+
+    // -------------------------------------------------------------
+    // RENDERIZAÇÃO DO CUPOM FISCAL EM TEMPO REAL
+    // -------------------------------------------------------------
+    function renderCart() {
+      const table = document.getElementById('receipt-table-body');
+      const dispTotalItems = document.getElementById('disp-total-items');
+      const dispSubtotal = document.getElementById('disp-subtotal');
+      const dispDiscount = document.getElementById('disp-discount');
+      const dispMainTotal = document.getElementById('disp-main-total');
+      const statusText = document.getElementById('pos-status-text');
+
+      const totalItems = cart.reduce((acc, i) => acc + i.qty, 0);
+      const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const grandTotal = Math.max(0, subtotal - discountValue);
+
+      dispTotalItems.textContent = `${totalItems} un.`;
+      dispSubtotal.textContent = formatMoney(subtotal);
+      dispDiscount.textContent = discountValue > 0 ? `- ${formatMoney(discountValue)}` : `- R$ 0,00`;
+      dispMainTotal.textContent = formatMoney(grandTotal);
+
+      if (cart.length > 0) {
+        statusText.textContent = `EM ATENDIMENTO (${totalItems} ITENS)`;
+      } else {
+        statusText.textContent = 'CAIXA ABERTO / LIVRE';
+      }
+
+      if (cart.length === 0) {
+        table.innerHTML = `
+          <div class="empty-cart-message">
+            <i data-lucide="shopping-bag" style="width: 44px; height: 44px; opacity: 0.35;"></i>
+            <p style="font-weight: 700; font-size: 0.95rem;">Nenhum produto registrado no caixa</p>
+            <span style="font-size: 0.78rem;">Passe o código de barras, digite o nome ou clique nos botões rápidos.</span>
+          </div>
+        `;
+        lucide.createIcons();
         return;
       }
 
-      const totalItems = cart.reduce((acc, i) => acc + i.qty, 0);
-      document.getElementById('printed-total').textContent = `TOTAL DE ITENS: ${totalItems}`;
-      document.getElementById('printed-payment').textContent = `FORMA DE PAGAMENTO: ${selectedPayment}`;
-
-      document.getElementById('printed-items-list').innerHTML = cart.map(i => `
-        <div style="display:flex; justify-content:space-between; margin-bottom: 0.2rem;">
-          <span>${i.name}</span>
-          <span>x${i.qty}</span>
+      table.innerHTML = cart.map((item, idx) => `
+        <div class="receipt-row">
+          <span class="row-index">#${String(idx + 1).padStart(2, '0')}</span>
+          <div class="row-desc" title="${item.name}">${item.name}</div>
+          <div class="row-qty-controls">
+            <button type="button" class="btn-qty" onclick="changeItemQty(${idx}, -1)" aria-label="Diminuir">-</button>
+            <span style="font-weight: 800; min-width: 28px; text-align: center;">${item.qty}</span>
+            <button type="button" class="btn-qty" onclick="changeItemQty(${idx}, 1)" aria-label="Aumentar">+</button>
+          </div>
+          <div class="row-total-price">${formatMoney(item.price * item.qty)}</div>
+          <button type="button" class="btn-del-item" onclick="deleteItem(${idx})" title="Remover item">
+            <i data-lucide="x" style="width: 16px; height: 16px;"></i>
+          </button>
         </div>
       `).join('');
 
-      document.getElementById('modal-receipt').classList.add('open');
+      lucide.createIcons();
+      // Scroll automático para o último item registrado
+      table.scrollTop = table.scrollHeight;
     }
 
-    function closeReceiptModal() {
-      document.getElementById('modal-receipt').classList.remove('open');
-      cart = [];
-      renderCart();
+    // -------------------------------------------------------------
+    // TECLADO NUMÉRICO TOUCH (NUMPAD ACTIONS)
+    // -------------------------------------------------------------
+    function pressNumpad(key) {
+      const input = document.getElementById('barcode-input');
+      if (key === 'C') {
+        input.value = '';
+      } else if (key === 'DEL') {
+        input.value = input.value.slice(0, -1);
+      } else if (key === 'ENTER') {
+        const ev = new KeyboardEvent('keydown', { key: 'Enter' });
+        input.dispatchEvent(ev);
+        handleSearchKey(ev);
+        return;
+      } else {
+        input.value += key;
+        handleSearchInput(input.value);
+      }
+      focusSearch();
     }
+
+    // -------------------------------------------------------------
+    // CANCELAMENTO DE VENDA ELEGANTE (SEM CONFIRM FEIO)
+    // -------------------------------------------------------------
+    function confirmCancelSale() {
+      if (cart.length === 0) {
+        showToast('Não há venda em andamento para cancelar!', 'warning');
+        return;
+      }
+      const modal = document.getElementById('modal-confirm-cancel');
+      modal.showModal();
+    }
+
+    function closeConfirmCancelModal() {
+      document.getElementById('modal-confirm-cancel').close();
+      focusSearch();
+    }
+
+    function executeSaleCancellation() {
+      cart = [];
+      discountValue = 0;
+      renderCart();
+      closeConfirmCancelModal();
+      playErrorBeep();
+      showToast('Venda cancelada com sucesso!', 'danger');
+    }
+
+    // -------------------------------------------------------------
+    // MODAL DE DESCONTO (F3)
+    // -------------------------------------------------------------
+    function openDiscountModal() {
+      if (cart.length === 0) {
+        showToast('Registre produtos antes de aplicar desconto!', 'warning');
+        return;
+      }
+      const modal = document.getElementById('modal-discount');
+      const input = document.getElementById('discount-value-input');
+      input.value = discountValue > 0 ? discountValue : '';
+      modal.showModal();
+      setTimeout(() => input.focus(), 50);
+    }
+
+    function closeDiscountModal() {
+      document.getElementById('modal-discount').close();
+      focusSearch();
+    }
+
+    function applyDiscount() {
+      const input = document.getElementById('discount-value-input');
+      const val = parseFloat(input.value.replace(',', '.'));
+      const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+
+      if (isNaN(val) || val < 0) {
+        showToast('Informe um valor de desconto válido!', 'warning');
+        return;
+      }
+
+      if (val >= subtotal) {
+        showToast('O desconto não pode ser maior ou igual ao subtotal!', 'danger');
+        return;
+      }
+
+      discountValue = val;
+      renderCart();
+      closeDiscountModal();
+      showToast(`Desconto de ${formatMoney(val)} aplicado!`, 'success');
+    }
+
+    function clearDiscount() {
+      discountValue = 0;
+      renderCart();
+      closeDiscountModal();
+      showToast('Desconto removido.', 'info');
+    }
+
+    // -------------------------------------------------------------
+    // MODAL DE FINALIZAÇÃO & FORMA DE PAGAMENTO (F4)
+    // -------------------------------------------------------------
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        playErrorBeep();
+        showToast('Nenhum item registrado no caixa!', 'warning');
+        return;
+      }
+
+      const modal = document.getElementById('modal-checkout');
+      const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const grandTotal = Math.max(0, subtotal - discountValue);
+
+      document.getElementById('modal-pay-total').textContent = formatMoney(grandTotal);
+
+      // Resetar calculadora de dinheiro
+      document.getElementById('cash-received-input').value = grandTotal.toFixed(2);
+      selectPaymentMethod('DINHEIRO');
+      calculateChange();
+
+      modal.showModal();
+      setTimeout(() => document.getElementById('cash-received-input').focus(), 80);
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('modal-checkout').close();
+      focusSearch();
+    }
+
+    function selectPaymentMethod(method) {
+      selectedPayment = method;
+      document.querySelectorAll('.pay-btn').forEach(btn => {
+        if (btn.dataset.pay === method) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const cashBox = document.getElementById('cash-calculator-box');
+      if (method === 'DINHEIRO') {
+        cashBox.style.display = 'flex';
+      } else {
+        cashBox.style.display = 'none';
+      }
+    }
+
+    function setCashAmount(val) {
+      const input = document.getElementById('cash-received-input');
+      input.value = val.toFixed(2);
+      calculateChange();
+    }
+
+    function setCashExact() {
+      const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const grandTotal = Math.max(0, subtotal - discountValue);
+      setCashAmount(grandTotal);
+    }
+
+    function calculateChange() {
+      const input = document.getElementById('cash-received-input');
+      const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const grandTotal = Math.max(0, subtotal - discountValue);
+
+      const received = parseFloat(input.value.replace(',', '.')) || 0;
+      const change = received - grandTotal;
+
+      const changeValDisplay = document.getElementById('cash-change-value');
+      const statusMsg = document.getElementById('troco-status-msg');
+
+      if (received >= grandTotal) {
+        changeValDisplay.textContent = formatMoney(change);
+        changeValDisplay.style.color = 'var(--success)';
+        statusMsg.textContent = change === 0 ? '✓ Pagamento Exato' : '✓ Troco a devolver';
+      } else {
+        const falta = grandTotal - received;
+        changeValDisplay.textContent = formatMoney(falta);
+        changeValDisplay.style.color = 'var(--danger)';
+        statusMsg.textContent = '✕ Falta dinheiro!';
+      }
+    }
+
+    function maskCPF(input) {
+      let v = input.value.replace(/\D/g, '');
+      if (v.length > 11) v = v.slice(0, 11);
+      if (v.length > 9) {
+        input.value = `${v.slice(0, 3)}.${v.slice(3, 6)}.${v.slice(6, 9)}-${v.slice(9)}`;
+      } else if (v.length > 6) {
+        input.value = `${v.slice(0, 3)}.${v.slice(3, 6)}.${v.slice(6)}`;
+      } else if (v.length > 3) {
+        input.value = `${v.slice(0, 3)}.${v.slice(3)}`;
+      } else {
+        input.value = v;
+      }
+    }
+
+    // -------------------------------------------------------------
+    // EMISSÃO DO CUPOM FISCAL TÉRMICO
+    // -------------------------------------------------------------
+    function processSaleCompletion() {
+      const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const grandTotal = Math.max(0, subtotal - discountValue);
+      const cashInput = document.getElementById('cash-received-input');
+      const received = parseFloat(cashInput.value.replace(',', '.')) || 0;
+
+      if (selectedPayment === 'DINHEIRO' && received < grandTotal) {
+        playErrorBeep();
+        showToast('O valor recebido é menor que o total da venda!', 'danger');
+        cashInput.focus();
+        return;
+      }
+
+      playSuccessChime();
+
+      // Fechar modal de pagamento
+      document.getElementById('modal-checkout').close();
+
+      // Preencher dados do Cupom Térmico
+      document.getElementById('th-cupom-id').textContent = String(saleNumber).padStart(4, '0');
+      document.getElementById('th-datetime').textContent = new Date().toLocaleString('pt-BR');
+      
+      const cpf = document.getElementById('cpf-nota-input').value.trim();
+      document.getElementById('th-cpf-display').textContent = cpf ? `CONSUMIDOR CPF: ${cpf}` : 'CONSUMIDOR: NÃO IDENTIFICADO';
+
+      const totalItems = cart.reduce((acc, i) => acc + i.qty, 0);
+      document.getElementById('th-total-items-count').textContent = totalItems;
+      document.getElementById('th-subtotal').textContent = formatMoney(subtotal);
+
+      const discountRow = document.getElementById('th-discount-row');
+      if (discountValue > 0) {
+        discountRow.style.display = 'flex';
+        document.getElementById('th-discount').textContent = `- ${formatMoney(discountValue)}`;
+      } else {
+        discountRow.style.display = 'none';
+      }
+
+      document.getElementById('th-grand-total').textContent = formatMoney(grandTotal);
+      document.getElementById('th-payment-method').textContent = selectedPayment;
+
+      const changeRow = document.getElementById('th-change-row');
+      if (selectedPayment === 'DINHEIRO') {
+        const change = Math.max(0, received - grandTotal);
+        document.getElementById('th-paid-amount').textContent = formatMoney(received);
+        changeRow.style.display = 'flex';
+        document.getElementById('th-change-amount').textContent = formatMoney(change);
+      } else {
+        document.getElementById('th-paid-amount').textContent = formatMoney(grandTotal);
+        changeRow.style.display = 'none';
+      }
+
+      // Renderizar itens impressos
+      document.getElementById('th-items-container').innerHTML = cart.map((item, idx) => `
+        <div class="thermal-item-row">
+          <span>${String(idx + 1).padStart(2, '0')} ${item.name}</span>
+        </div>
+        <div class="thermal-item-row" style="font-size: 0.7rem; color: #4b5563; padding-left: 0.8rem; margin-bottom: 0.35rem;">
+          <span>${item.qty} ${item.unit} x ${formatMoney(item.price)}</span>
+          <span style="font-weight: 700; color: #111827;">${formatMoney(item.price * item.qty)}</span>
+        </div>
+      `).join('');
+
+      // Abrir Modal de Cupom Térmico
+      document.getElementById('modal-receipt').showModal();
+      showToast('Venda finalizada com sucesso!', 'success');
+    }
+
+    function shareReceiptWhatsApp() {
+      const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const grandTotal = Math.max(0, subtotal - discountValue);
+      const now = new Date().toLocaleString('pt-BR');
+
+      let msg = `🧾 *MERCADINHO SÃO MATEUS - COMPROVANTE FISCAL* 🧾\n`;
+      msg += `Cupom Nº: *#${String(saleNumber).padStart(4, '0')}*\n`;
+      msg += `Data/Hora: ${now}\n`;
+      msg += `-----------------------------------------\n`;
+      
+      cart.forEach((item, idx) => {
+        msg += `${idx + 1}. *${item.name}*\n`;
+        msg += `   ${item.qty}x ${formatMoney(item.price)} = *${formatMoney(item.price * item.qty)}*\n`;
+      });
+
+      msg += `-----------------------------------------\n`;
+      msg += `💵 Subtotal: ${formatMoney(subtotal)}\n`;
+      if (discountValue > 0) {
+        msg += `🏷️ Desconto: - ${formatMoney(discountValue)}\n`;
+      }
+      msg += `💰 *TOTAL PAGO: ${formatMoney(grandTotal)}*\n`;
+      msg += `💳 Forma: ${selectedPayment}\n`;
+      msg += `-----------------------------------------\n`;
+      msg += `Agradecemos a sua preferência! Volte sempre! ✨`;
+
+      const url = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+      showToast('Comprovante gerado para WhatsApp!');
+    }
+
+    function startNewSale() {
+      document.getElementById('modal-receipt').close();
+      cart = [];
+      discountValue = 0;
+      saleNumber++;
+      document.getElementById('current-sale-number').textContent = `CUPOM FISCAL #${String(saleNumber).padStart(4, '0')}`;
+      renderCart();
+      focusSearch();
+    }
+
+    // -------------------------------------------------------------
+    // TECLADO DE ATALHOS GLOBAIS (F2, F3, F4, F7, F8, F9, ESC)
+    // -------------------------------------------------------------
+    window.addEventListener('keydown', (e) => {
+      // F2: Buscar / Leitor
+      if (e.key === 'F2') {
+        e.preventDefault();
+        focusSearch();
+      }
+      // F3: Desconto
+      else if (e.key === 'F3') {
+        e.preventDefault();
+        openDiscountModal();
+      }
+      // F4: Finalizar Venda
+      else if (e.key === 'F4') {
+        e.preventDefault();
+        openCheckoutModal();
+      }
+      // F7: Estornar último item
+      else if (e.key === 'F7') {
+        e.preventDefault();
+        cancelLastItem();
+      }
+      // F8: Cancelar Venda
+      else if (e.key === 'F8') {
+        e.preventDefault();
+        confirmCancelSale();
+      }
+      // F9: Alternar Tema
+      else if (e.key === 'F9') {
+        e.preventDefault();
+        toggleTheme();
+      }
+      // ESC: Fechar modais
+      else if (e.key === 'Escape') {
+        const modals = ['modal-checkout', 'modal-discount', 'modal-confirm-cancel', 'modal-receipt'];
+        modals.forEach(id => {
+          const m = document.getElementById(id);
+          if (m && m.open) m.close();
+        });
+        focusSearch();
+      }
+    });
+
+    // -------------------------------------------------------------
+    // FALLBACK LIGHT-DISMISS PARA DIALOGS (MODERN WEB GUIDANCE)
+    // -------------------------------------------------------------
+    function setupLightDismiss(dialogEl) {
+      if (!('closedBy' in HTMLDialogElement.prototype)) {
+        dialogEl.addEventListener('click', (event) => {
+          if (event.target !== dialogEl) return;
+          const rect = dialogEl.getBoundingClientRect();
+          const isDialogContent = (
+            rect.top <= event.clientY &&
+            event.clientY <= rect.top + rect.height &&
+            rect.left <= event.clientX &&
+            event.clientX <= rect.left + rect.width
+          );
+          if (isDialogContent) return;
+          dialogEl.close();
+        });
+      }
+    }
+
+    // -------------------------------------------------------------
+    // INICIALIZAÇÃO DO PDV
+    // -------------------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      // Aplicar tema salvo
+      applyTheme(currentTheme);
+
+      // Iniciar relógio do operador
+      setInterval(() => {
+        document.getElementById('pos-clock').textContent = new Date().toLocaleTimeString('pt-BR');
+      }, 1000);
+
+      // Renderizar produtos rápidos e carrinho
+      renderQuickGrid();
+      renderCart();
+
+      // Configurar light-dismiss em todos os modais
+      ['modal-checkout', 'modal-discount', 'modal-confirm-cancel', 'modal-receipt'].forEach(id => {
+        setupLightDismiss(document.getElementById(id));
+      });
+
+      // Foco automático no leitor
+      focusSearch();
+    });
   </script>
 </body>
 </html>
